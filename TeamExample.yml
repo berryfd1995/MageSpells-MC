@@ -1,0 +1,6 @@
+Leader: "L2_Envy(UUID)"
+Officer: "SomeoneSpecial(UUID)"
+Members:
+    -Someone(UUID)
+    -Someone2(UUID)
+    -Someone3(UUID)

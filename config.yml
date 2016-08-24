@@ -1,0 +1,52 @@
+Settings:
+    GameplaySettings:
+        #Allows for players to gain levels in MageSpells.
+        #True: Players will need a required level to use wands/spells
+        #False: All Spells and Wands will be available to users.
+        EnableLeveling: True
+        #Experience gained from killing these things.
+        MobExperience:
+            ZOMBIE: 10
+            SPIDER: 40
+        ExpFromPlayers: 50
+        #Number on left = Rank, Number on Right = EXP required
+        LevelSystem:
+            1: 0
+            2: 100
+            3: 200
+            4: 500
+            5: 1000
+            6: 2000
+            7: 5000
+            8: 10000
+            9: 20000
+            10: 40000
+
+        #Enable this if you would like for players to need to learn spells before use.
+        #True: Players required to learn a spell before use.
+        #False: All spells will be avaliable to players when found.
+        EnableLearning: True
+
+        #
+
+        #
+
+        #
+
+    TeamSettings:
+        #Enabling this means users can create their own teams.
+        UserCreatesTeam: True
+    MaxManaAmount: 100
+    ManaRegenRate: 3
+    DisplayExactValue: true
+    Colors:
+        InactiveMana: "&f"
+        ActiveMana: "&b"
+        LowMana: "&c"
+        ManaBrackets: "&6"
+        ChargeStatusBar: "&e"
+        ChargeLeftBar: "&c"
+        ChargeBracket: "&6"
+        CooldownStatusBar: "&2"
+        CooldownLeftBar: "&a"
+        CooldownBracket: "&6"

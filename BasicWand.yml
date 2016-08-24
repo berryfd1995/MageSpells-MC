@@ -1,0 +1,5 @@
+Name: "&9Ice BattleStaff"
+RequiredLevelToCraft: 1
+RequiredLevelToUse: 1
+Wand_Material: STICK
+Recipe: AIR,AIR,AIR,AIR,HEART_OF_ICE,AIR,AIR,STICK,AIR

@@ -1,0 +1,3 @@
+Normal - Shoots straight
+Homing - Homes in on the closest target.
+(More coming soon!)
