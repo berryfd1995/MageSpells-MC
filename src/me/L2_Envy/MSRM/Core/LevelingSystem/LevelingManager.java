@@ -79,7 +79,6 @@ public class LevelingManager {
         playerObject.setRank(getRank(playerObject.getExperience()));
     }
     public void giveExperience(PlayerObject playerObject, EntityType entityType){
-        System.out.println(getExperience(entityType));
         playerObject.addExperience(getExperience(entityType));
         playerObject.setRank(getRank(playerObject.getExperience()));
     }

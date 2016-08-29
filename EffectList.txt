@@ -1,3 +1,6 @@
 Normal - Shoots straight
 Homing - Homes in on the closest target.
+Fire - Set your enemies on fire!
+Lightning - Strike Enemies down with the power of thor!
+Explode - Creates an explosion!
 (More coming soon!)

@@ -116,8 +116,8 @@ public class SpellConfig {
             boolean affectself = config.getBoolean("AffectSelf");
             boolean affectenemy = config.getBoolean("AffectEnemy");
             boolean affectteammates = config.getBoolean("AffectTeammates");
-            String spelleffectname = config.getString("SpecialEffect");
             ItemStack spellbook = main.utils.getItemStack("Enchanted_Book", displayname, lore);
+            String spelleffectname = config.getString("SpecialEffect");
             SpellEffect spelleffect;
             if(main.mageSpellsManager.spellEffectManager.hasSpellEffect(spelleffectname)){
                 spelleffect = main.mageSpellsManager.spellEffectManager.getSpellEffect(spelleffectname);

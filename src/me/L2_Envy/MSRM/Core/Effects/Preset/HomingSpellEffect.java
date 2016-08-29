@@ -1,7 +1,6 @@
 package me.L2_Envy.MSRM.Core.Effects.Preset;
 
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
-import me.L2_Envy.MSRM.PluginManager.APIHooks.VaultPkg.VaultAPI;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -13,18 +12,19 @@ import org.bukkit.util.Vector;
  * Created by Daniel on 7/27/2016.
  */
 public class HomingSpellEffect implements SpellEffect{
-    private String name = "homing";
+    private String name = "Homing";
     private Vector vector;
     private Location spelllocation;
     public void Run(Location location){
-        /*Location location1 = getClosestEntity();
+        Location location1 = getClosestEntity();
         if(location1 != null){
-            vector =  location1.toVector().subtract(spelllocation.toVector());
+            vector =  location1.toVector().subtract(spelllocation.toVector()).multiply(2);
+            vector.normalize();
             spelllocation.add(vector);
         }else {
             spelllocation.add(vector);
-        }*/
-        spelllocation.add(vector);
+        }
+        //spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
 

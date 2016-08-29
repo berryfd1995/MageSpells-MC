@@ -22,7 +22,6 @@ Teams can now be created or destroyed easier. -- No more messy and confusing per
 
 What is next?
 This is not a complete build. So these features will not be avaliable.
-SpellEffect
 API
 Vault Integration
 Messages
@@ -32,5 +31,10 @@ Custom Item Effects soon!
 More Spell Effects soon!
 
 Change log:
--Admins can now give players wands and spells
--fixed loading in spells and wands on first load
+-Added new spell effects
+Homing
+Lightning
+Explode
+Fire
+
+(MORE TO COME!)

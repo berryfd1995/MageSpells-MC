@@ -32,6 +32,7 @@ public class SpellContactManager {
                 for (LivingEntity livingEntity : getNearbyEntites(activeSpellObject, activeSpellObject.getSprayradius())) {
                     //particle
                     if (mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
+                        activeSpellObject.getSpellEffect().onHit(livingEntity);
                         mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, livingEntity.getLocation().clone());
                         //potion affect
                         mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
@@ -44,6 +45,7 @@ public class SpellContactManager {
                 if (boltHit(activeSpellObject)) {
                     for (LivingEntity livingEntity : getNearbyEntitesBolt(activeSpellObject, activeSpellObject.getBoltradius())) {
                         if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
+                            activeSpellObject.getSpellEffect().onHit(livingEntity);
                             mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, livingEntity.getLocation().clone());
                             //potion affect
                             mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
@@ -72,6 +74,7 @@ public class SpellContactManager {
                mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, activeSpellObject.getLocation().clone());
                for (LivingEntity livingEntity : getNearbyEntites(activeSpellObject, activeSpellObject.getAuraradius())) {
                    if (mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
+                       activeSpellObject.getSpellEffect().onHit(livingEntity);
                        mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, livingEntity.getLocation().clone());
                        //potion
                        mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
@@ -145,6 +148,7 @@ public class SpellContactManager {
     }
     public void attackEntityBolt(ActiveSpellObject activeSpellObject, LivingEntity livingEntity){
         if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
+            activeSpellObject.getSpellEffect().onHit(livingEntity);
             mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
             //damage
             mageSpellsManager.damageEffectManager.doDamage(activeSpellObject, livingEntity, true, false, false);

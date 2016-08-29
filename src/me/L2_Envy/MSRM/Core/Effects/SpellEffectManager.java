@@ -1,7 +1,6 @@
 package me.L2_Envy.MSRM.Core.Effects;
 
-import me.L2_Envy.MSRM.Core.Effects.Preset.HomingSpellEffect;
-import me.L2_Envy.MSRM.Core.Effects.Preset.NormalEffect;
+import me.L2_Envy.MSRM.Core.Effects.Preset.*;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 
@@ -18,6 +17,9 @@ public class SpellEffectManager {
         spellEffects = new ArrayList<>();
         spellEffects.add(new HomingSpellEffect());
         spellEffects.add(new NormalEffect());
+        spellEffects.add(new Fire());
+        spellEffects.add(new Lightning());
+        spellEffects.add(new Explode());
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
@@ -30,7 +32,7 @@ public class SpellEffectManager {
     }
     public boolean hasSpellEffect(String spellEffect){
         for(SpellEffect spellEffect1 : spellEffects){
-            if(spellEffect1.getName().equalsIgnoreCase(spellEffect)){
+            if(spellEffect1.getName().equalsIgnoreCase(spellEffect.toLowerCase())){
                 return true;
             }
         }
@@ -38,7 +40,7 @@ public class SpellEffectManager {
     }
     public SpellEffect getSpellEffect(String spellEffect){
         for(SpellEffect spellEffect1 : spellEffects){
-            if(spellEffect1.getName().equalsIgnoreCase(spellEffect)){
+            if(spellEffect1.getName().equalsIgnoreCase(spellEffect.toLowerCase())){
                 return spellEffect1;
             }
         }
