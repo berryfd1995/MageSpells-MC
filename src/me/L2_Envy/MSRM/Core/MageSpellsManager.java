@@ -47,7 +47,7 @@ public class MageSpellsManager {
     public SpellManager spellManager;
     public TeamManager teamManager;
     public WandManager wandManager;
-
+    private boolean nodesystemenabled;
     public MageSpellsManager(){
         bindingManager = new BindingManager();
         castingManager = new CastingManager();
@@ -102,6 +102,12 @@ public class MageSpellsManager {
     public boolean InitilizePlugin(){
 
         return true;
+    }
+    public boolean isNodeSystemEnabled(){
+        return nodesystemenabled;
+    }
+    public void setNodeSystemEnabled(boolean enabled){
+        this.nodesystemenabled = enabled;
     }
 
 }

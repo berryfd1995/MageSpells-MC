@@ -29,8 +29,10 @@ public class CastingManager {
     public void castSpell(Player player, PlayerObject playerObject, SpellObject spellObject, WandObject wandObject){
         if(!playerObject.isOnCooldown()&&playerObject.isReadytocast() && !playerObject.isCharging() &&
                 (!mageSpellsManager.levelingManager.isLevelingEnabled() ||(playerObject.getLevel() >= spellObject.getRequiredLevelToCast() &&
-                playerObject.getLevel() >= wandObject.getRequiredleveltouse())) &&
-                mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(player.getLocation())) {
+                playerObject.getLevel() >= wandObject.getRequiredleveltouse()))
+                && (!mageSpellsManager.isNodeSystemEnabled() ||( player.hasPermission("magespells.wand." + wandObject.getWandnode())
+                && player.hasPermission("magespells.spell" + spellObject.getSpellNode()) && wandObject.isSpellCompatible(spellObject.getSpellNode())))
+                && mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(player.getLocation())) {
             if(mageSpellsManager.manaManager.hasAtLeastMana(playerObject, spellObject.getManacost())) {
                 if(spellObject.isItemcostenabled()) {
                     if(hasItemCost(player, spellObject)) {

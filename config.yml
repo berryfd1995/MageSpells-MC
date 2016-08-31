@@ -26,12 +26,16 @@ Settings:
         #True: Players required to learn a spell before use.
         #False: All spells will be avaliable to players when found.
         EnableLearning: True
+        #Ebale this if you wish players to learn via spell books by right clicking them. if not, it will remain command based.
+        EnableSpellBookLearning: True
+        #Enable this if you wish for players to learn wands by right clicking them.
+        EnableWandLearning: true
 
-        #
 
-        #
-
-        #
+        #This will enable nodes. via permission system. Players must have the permission magespells.spell.<node> to use spells.
+        #and magespells.wand.<node> to use wands. AS WELL AS for wands and spells to be bound. the wand must have the spell node in its
+        #compatibility list.
+        EnableNodeSystem: true
 
     TeamSettings:
         #Enabling this means users can create their own teams.

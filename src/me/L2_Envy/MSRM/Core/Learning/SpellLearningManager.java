@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 public class SpellLearningManager {
     public MageSpellsManager mageSpellsManager;
     private boolean enablelearning;
-
+    private boolean enablespellbooklearning;
     public SpellLearningManager() {
 
     }
@@ -32,11 +32,35 @@ public class SpellLearningManager {
         enablelearning = enabled;
     }
 
+    public boolean isSpellBookLearningEnabled(){
+        return enablespellbooklearning;
+    }
+
+    public void setEnableSpellBookLearning(boolean enable){
+        this.enablespellbooklearning = enable;
+    }
+
     public void learnSpell(Player sender,PlayerObject senderObj) {
         if (mageSpellsManager.spellBookManager.isSpellBook(sender.getInventory().getItemInMainHand())) {
             senderObj.teachSpell(mageSpellsManager.spellBookManager.getSpellFromBook(sender.getInventory().getItemInMainHand()));
         } else if (mageSpellsManager.spellBookManager.isSpellBook(sender.getInventory().getItemInOffHand())){
             senderObj.teachSpell(mageSpellsManager.spellBookManager.getSpellFromBook(sender.getInventory().getItemInOffHand()));
+        }
+    }
+    public boolean learnSpell(PlayerObject playerObject, SpellObject spellObject){
+        if(!playerObject.knowsSpell(spellObject)){
+            playerObject.teachSpell(spellObject);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public boolean learnWand(PlayerObject playerObject, WandObject wandObject){
+        if(!playerObject.knowsWand(wandObject)){
+            playerObject.teachWand(wandObject);
+            return true;
+        }else{
+            return false;
         }
     }
 

@@ -3,3 +3,17 @@ RequiredLevelToCraft: 1
 RequiredLevelToUse: 1
 Wand_Material: STICK
 Recipe: AIR,AIR,AIR,AIR,HEART_OF_ICE,AIR,AIR,STICK,AIR
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        SILVERFISH:
+            Chance: 10.0
+        ENDERMAN:
+            Chance: 10.0
+WandNode: "ice"
+CompatibleSpellNodeList:
+    -ice
+    -water
+    -snow
+    -heal

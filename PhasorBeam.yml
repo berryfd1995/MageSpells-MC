@@ -19,6 +19,7 @@ MoneyCost: 0
 Cooldown: 2
 ChargeTime: 1
 TravelDistance: 25
+SpellNode: "mystic"
 RequiredLevelToBind: 1
 RequiredLevelToCast: 1
 RequiredLevelToDrop: 1

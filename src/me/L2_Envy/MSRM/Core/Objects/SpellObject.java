@@ -18,6 +18,7 @@ public class SpellObject{
     private String name;
     private String displayname;
     private String lore;
+    private String spellnode;
     private boolean boltenabled;
     private int boltradius;
     private double boltdamage;
@@ -53,9 +54,10 @@ public class SpellObject{
     private boolean itemcostenabled;
     private HashMap<ItemStack, Integer> itemcost;
 
-    public SpellObject(String name, String displayname, String lore, boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled, int auratime, int auraradius, double auradamage,boolean sprayenabled, int sprayradius, double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime, int traveldistance, int requiredleveltobind,int requiredleveltocast, int requiredleveltodrop,boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates, ItemStack spellbook, SpellEffect spellEffect, Sound sound, float soundvolume, float soundpitch, ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled, HashMap<ItemStack, Integer> itemcost){
+    public SpellObject(String name, String displayname, String spellnode, String lore, boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled, int auratime, int auraradius, double auradamage,boolean sprayenabled, int sprayradius, double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime, int traveldistance, int requiredleveltobind,int requiredleveltocast, int requiredleveltodrop,boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates, ItemStack spellbook, SpellEffect spellEffect, Sound sound, float soundvolume, float soundpitch, ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled, HashMap<ItemStack, Integer> itemcost){
         this.name = name;
         this.displayname = displayname;
+        this.spellnode = spellnode;
         this.lore = lore;
         this.boltenabled = boltenabled;
         this.boltradius = boltradius;
@@ -234,6 +236,10 @@ public class SpellObject{
 
     public HashMap<ItemStack, Integer> getItemcost() {
         return itemcost;
+    }
+
+    public String getSpellNode(){
+        return spellnode.toLowerCase();
     }
 
     public static class CompId implements Comparator<SpellObject> {

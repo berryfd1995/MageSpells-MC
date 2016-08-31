@@ -93,6 +93,7 @@ public class SpellConfig {
         try {
             String displayname = main.utils.colorize(config.getString("DisplayName"));
             String lore = main.utils.colorize(config.getString("Lore"));
+            String spellnode = config.getString("SpellNode");
             boolean boltenabled = config.getBoolean("Bolt.Enabled");
             int boltradius = config.getInt("Bolt.DamageRadius");
             double boltdamage = config.getDouble("Bolt.BoltDamage");
@@ -191,7 +192,7 @@ public class SpellConfig {
                     }
                 }
             }
-            return new SpellObject(spellName,displayname,lore,boltenabled,boltradius,boltdamage,auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,requiredleveltobind,requiredleveltocast,requiredleveltodrop,affectsmobs,affectself,affectenemy,affectteammates,spellbook,spelleffect,sound,soundvolume,soundpitch,particleObjects,potionEffects,mobdropsenabled,mobDrops,itemcostsenabled,itemcost);
+            return new SpellObject(spellName,displayname,spellnode,lore,boltenabled,boltradius,boltdamage,auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,requiredleveltobind,requiredleveltocast,requiredleveltodrop,affectsmobs,affectself,affectenemy,affectteammates,spellbook,spelleffect,sound,soundvolume,soundpitch,particleObjects,potionEffects,mobdropsenabled,mobDrops,itemcostsenabled,itemcost);
             /**
             int count = 0;
             double damage = config.getDouble(path + ".Damage");

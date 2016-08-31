@@ -130,7 +130,9 @@ public class BindingMenu {
                 if(itemStack.getType() != Material.AIR) {
                     for (SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()) {
                         if (itemStack.equals(spellObject.getSpellbook())) {
-                            if((playerObject.getLevel() >= spellObject.getRequiredLevelToBind() || !mageSpellsManager.levelingManager.isLevelingEnabled()) && (!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsSpell(spellObject))) {
+                            if((playerObject.getLevel() >= spellObject.getRequiredLevelToBind() || !mageSpellsManager.levelingManager.isLevelingEnabled())
+                                    && (!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsSpell(spellObject))
+                                    &&(!mageSpellsManager.isNodeSystemEnabled() || player.hasPermission("magespells.spell" + spellObject.getSpellNode()))) {
                                 ItemStack itemStack1 = itemStack.clone();
                                 itemStack1.setAmount(1);
                                 if (!spellbooks.contains(itemStack1)) {
@@ -153,7 +155,11 @@ public class BindingMenu {
                 if (itemStack.getType() != Material.AIR) {
                     WandObject wandObject = mageSpellsManager.wandManager.getWandFromItem(itemStack);
                     if(wandObject != null){
-                        if(((playerObject.getLevel() >= wandObject.getRequiredleveltobind() && spellObject.getRequiredLevelToBind() <= wandObject.getRequiredleveltobind()) || !mageSpellsManager.spellLearningManager.isLearningEnabled()) &&(!mageSpellsManager.levelingManager.isLevelingEnabled() || playerObject.knowsWand(wandObject))) {
+                        if(((playerObject.getLevel() >= wandObject.getRequiredleveltobind() && spellObject.getRequiredLevelToBind()
+                                <= wandObject.getRequiredleveltobind()) ||!mageSpellsManager.levelingManager.isLevelingEnabled())
+                                &&(!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsWand(wandObject))
+                                && (!mageSpellsManager.isNodeSystemEnabled() ||( player.hasPermission("magespells.wand." + wandObject.getWandnode())
+                                && player.hasPermission("magespells.spell" + spellObject.getSpellNode()) && wandObject.isSpellCompatible(spellObject.getSpellNode())))) {
                             ItemStack itemStack1 = itemStack.clone();
                             itemStack1.setAmount(1);
                             if (!wands.contains(itemStack1)) {

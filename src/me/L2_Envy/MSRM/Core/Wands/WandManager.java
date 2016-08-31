@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM.Core.Wands;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
@@ -15,6 +16,7 @@ import java.util.Collections;
 public class WandManager {
     public MageSpellsManager mageSpellsManager;
     private ArrayList<WandObject> wandObjects;
+    private boolean wandlearningenabled;
     public WandManager(){
         wandObjects = new ArrayList<>();
     }
@@ -30,6 +32,12 @@ public class WandManager {
             sortWands();
         }
     }
+    public void setEnableWandLearning(boolean enable){
+        this.wandlearningenabled = enable;
+    }
+    public boolean isWandLearningEnabled(){
+        return wandlearningenabled;
+    }
     public void removeWandObject(WandObject wandObject){
         if(!wandObjects.contains(wandObject)){
             wandObjects.remove(wandObject);
@@ -38,6 +46,9 @@ public class WandManager {
     public void sortWands() {
         Collections.sort(wandObjects, new WandObject.CompId());
         mageSpellsManager.wandUI.resortWandPages(wandObjects);
+    }
+    public ArrayList<WandObject> getWandObjects(){
+        return wandObjects;
     }
     public boolean isWand(ItemStack itemStack){
         if(itemStack.hasItemMeta()) {
@@ -59,6 +70,13 @@ public class WandManager {
             }else if(!itemStack1.getItemMeta().hasLore() && !itemStack2.getItemMeta().hasLore()){
                 return true;
             }
+        }
+        return false;
+    }
+    public boolean isSameWandIgnoreAmountAndLore(ItemStack itemStack1, ItemStack itemStack2){
+        if(itemStack1.getItemMeta().getDisplayName().equals(itemStack2.getItemMeta().getDisplayName()) &&
+                itemStack1.getType().equals(itemStack2.getType())){
+            return true;
         }
         return false;
     }

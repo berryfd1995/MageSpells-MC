@@ -5,12 +5,14 @@ import me.L2_Envy.MSRM.Main;
 import org.apache.commons.io.FilenameUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
@@ -92,7 +94,28 @@ public class WandConfig {
             ItemStack wand = main.utils.getItemStack(wandtype, displayname);
             String[] materials = wandrecipe.split(",");
             ShapedRecipe shapedRecipe = main.utils.loadRecipie(materials, wand);
-            return new WandObject(wandName,displayname,requiredleveltocraft,requiredleveltouse,requiredleveltobind,wand, shapedRecipe);
+            boolean mobdropsenabled = config.getBoolean("MobDrops.Settings.Enable");
+            HashMap<EntityType, Double> mobDrops = new HashMap<>();
+            if(mobdropsenabled){
+                for(String mobtype : config.getConfigurationSection("MobDrops.Drops.").getKeys(false)){
+                    EntityType entityType;
+                    try {
+                        entityType = EntityType.valueOf(mobtype.toUpperCase());
+                    } catch (Exception e) {
+                        entityType = null;
+                    }
+                    if (entityType != null) {
+                        double chance = config.getDouble("MobDrops.Drops." + mobtype + ".Chance");
+                        mobDrops.put(entityType, chance);
+                    } else {
+                        System.out.println("Could not register mob: " + mobtype);
+                        System.out.println("Please make sure it is a valid mob!");
+                    }
+                }
+            }
+            String wandnode = config.getString("WandNode");
+            List<String> compatiblespells = config.getStringList("CompatibleSpellNodeList");
+            return new WandObject(wandName,displayname,requiredleveltocraft,requiredleveltouse,requiredleveltobind,wand, shapedRecipe,mobdropsenabled, mobDrops, wandnode, compatiblespells);
         }catch(Exception ex) {
             return null;
         }
