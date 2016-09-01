@@ -58,6 +58,7 @@ public class HelpMenu {
                     player.sendMessage(ChatColor.BLUE + "/mage spawnspellbook <spellname> <player> --" + ChatColor.GREEN + "Spawn a spell book from specified spell name.");
                     player.sendMessage(ChatColor.BLUE + "/mage learnwand <player> <wandname> --" + ChatColor.GREEN + "Teach a wand to a player. (Unlocks wand)");
                     player.sendMessage(ChatColor.BLUE + "/mage learnspell <player> <spellname> --" + ChatColor.GREEN + "Teach a spell to a player. (Unlocks Spell)");
+                    player.sendMessage(ChatColor.BLUE + "/mage learnall <player> --" + ChatColor.GREEN + "Teach a player all spells and wands");
                 }else{
                     player.sendMessage(ChatColor.BLUE + "You need to be an admin to see this page!");
                 }

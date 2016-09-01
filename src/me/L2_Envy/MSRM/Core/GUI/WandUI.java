@@ -48,46 +48,50 @@ public class WandUI {
             Inventory inventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Wand Menu - Page: " + page);
             inventory.setItem(0, mageSpellsManager.main.utils.getItemStack("EMERALD", "&cPrevious Page"));
             inventory.setItem(8, mageSpellsManager.main.utils.getItemStack("EMERALD", "&cNext Page"));
-            if(wandpages != null || !wandpages.isEmpty()) {
-                for (int i = 0; i < wandpages.get(page).size(); i++) {//slot to item ex 0<9
-                    WandObject wandObject = wandpages.get(page).get(i);
-                    if (playerObject.getLevel() >= wandObject.getRequiredleveltouse() && playerObject.knowsWand(wandObject)) {
-                        String lore = "&6Required Level: " + wandObject.getRequiredleveltocraft() + "/&6Crafting Recipe:/";
-                        lore = lore + ("&6[1][2][3]/");
-                        lore = lore + ("&6[4][5][6]/");
-                        lore = lore + ("&6[7][8][9]/");
-                        int count = 1;
-                        for (String s : wandObject.getShapedRecipe().getShape()) {
-                            for (int j = 0; j < 3; j++) {
-                                for (Character c : wandObject.getShapedRecipe().getIngredientMap().keySet()) {
-                                    if (c.equals(s.charAt(j))) {
-                                        ItemStack is = wandObject.getShapedRecipe().getIngredientMap().get(c);
-                                        if (is != null) {
-                                            if (is.hasItemMeta()) {
-                                                if (is.getItemMeta().hasDisplayName()) {
-                                                    lore = lore + ("&6" + count + ": &b" + is.getItemMeta().getDisplayName() + "/");
+            if(wandpages != null) {
+                if(!wandpages.isEmpty()) {
+                    for (int i = 0; i < wandpages.get(page).size(); i++) {//slot to item ex 0<9
+                        WandObject wandObject = wandpages.get(page).get(i);
+                        if ((playerObject.getLevel() >= wandObject.getRequiredleveltouse() || !mageSpellsManager.levelingManager.isLevelingEnabled())
+                                && (!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsWand(wandObject))
+                                && (!mageSpellsManager.isNodeSystemEnabled() || (player.hasPermission("magespells.wand." + wandObject.getWandnode())))) {
+                            String lore = "&6Required Level: " + wandObject.getRequiredleveltocraft() + "/&6Crafting Recipe:/";
+                            lore = lore + ("&6[1][2][3]/");
+                            lore = lore + ("&6[4][5][6]/");
+                            lore = lore + ("&6[7][8][9]/");
+                            int count = 1;
+                            for (String s : wandObject.getShapedRecipe().getShape()) {
+                                for (int j = 0; j < 3; j++) {
+                                    for (Character c : wandObject.getShapedRecipe().getIngredientMap().keySet()) {
+                                        if (c.equals(s.charAt(j))) {
+                                            ItemStack is = wandObject.getShapedRecipe().getIngredientMap().get(c);
+                                            if (is != null) {
+                                                if (is.hasItemMeta()) {
+                                                    if (is.getItemMeta().hasDisplayName()) {
+                                                        lore = lore + ("&6" + count + ": &b" + is.getItemMeta().getDisplayName() + "/");
+                                                    } else {
+                                                        lore = lore + ("&6" + count + ": &b" + ItemNames.lookup(is) + "/");
+                                                    }
                                                 } else {
                                                     lore = lore + ("&6" + count + ": &b" + ItemNames.lookup(is) + "/");
                                                 }
+                                                count++;
                                             } else {
-                                                lore = lore + ("&6" + count + ": &b" + ItemNames.lookup(is) + "/");
+                                                lore = lore + ("&6" + count + ": &bNothing/");
+                                                count++;
                                             }
-                                            count++;
-                                        } else {
-                                            lore = lore + ("&6" + count + ": &bNothing/");
-                                            count++;
                                         }
                                     }
                                 }
                             }
+                            inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack(wandObject.getWandItemStack().getType().toString(),
+                                    wandObject.getDisplayname(), lore));
+                        } else {
+                            inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack(
+                                    "STAINED_GLASS_PANE-15", wandObject.getDisplayname(),
+                                    "&6Required Level: " + wandObject.getRequiredleveltouse()
+                                            + "/&4You have not discovered this wand yet!"));
                         }
-                        inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack(wandObject.getWandItemStack().getType().toString(),
-                                wandObject.getDisplayname(), lore));
-                    } else {
-                        inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack(
-                                "STAINED_GLASS_PANE-15", wandObject.getDisplayname(),
-                                "&6Required Level: " + wandObject.getRequiredleveltouse()
-                                        + "/&4You have not discovered this wand yet!"));
                     }
                 }
             }
@@ -142,27 +146,32 @@ public class WandUI {
         return 0;
     }
     public void resortWandPages(ArrayList<WandObject> wandObjects){
-        int maxpages = wandObjects.size() /7;
-        int lastpageamount = wandObjects.size() %7;
-        if(lastpageamount > 0){
-            maxpages +=1;
-        }
-        //i = page #
-        //j = item in page 1-7
-        for(int i = 0; i < maxpages; i++){
-            ArrayList<WandObject> wandObjectArrayList = new ArrayList<>();
-            if(i != maxpages-1){
-                for(int j = 0; j <7; j++){
-                    int s = j + j*i;
-                    wandObjectArrayList.add(wandObjects.get(s));
+        if(!wandObjects.isEmpty()) {
+            wandpages = new HashMap<>();
+            int maxpages = wandObjects.size() / 7;
+            int lastpageamount = wandObjects.size() % 7;
+            if (lastpageamount > 0) {
+                maxpages += 1;
+            }else if(lastpageamount == 0){
+                lastpageamount = 7;
+            }
+            //i = page #
+            //j = item in page 1-7
+            for (int i = 0; i < maxpages; i++) {
+                ArrayList<WandObject> wandObjectArrayList = new ArrayList<>();
+                if (i != maxpages - 1) {
+                    for (int j = 0; j < 7; j++) {
+                        int s = j + j * i;
+                        wandObjectArrayList.add(wandObjects.get(s));
+                    }
+                    wandpages.put(i + 1, wandObjectArrayList);
+                } else {
+                    for (int j = 0; j < lastpageamount; j++) {
+                        int s = j + 7 * i;
+                        wandObjectArrayList.add(wandObjects.get(s));
+                    }
+                    wandpages.put(i + 1, wandObjectArrayList);
                 }
-                wandpages.put(i+1, wandObjectArrayList);
-            }else{
-                for(int j = 0; j <lastpageamount; j++){
-                    int s = j + 7*i;
-                    wandObjectArrayList.add(wandObjects.get(s));
-                }
-                wandpages.put(i+1, wandObjectArrayList);
             }
         }
     }

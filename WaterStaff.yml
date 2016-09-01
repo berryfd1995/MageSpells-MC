@@ -1,0 +1,20 @@
+Name: "&bWater Staff"
+RequiredLevelToCraft: 2
+RequiredLevelToUse: 2
+RequiredLevelToBind: 2
+Wand_Material: STICK
+Recipe: AIR,AIR,AIR,AIR,DIAMOND,AIR,AIR,STICK,AIR
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        SQUID:
+            Chance: 10.0
+        SNOWMAN:
+            Chance: 10.0
+WandNode: "water"
+CompatibleSpellNodeList:
+    - water
+    - ice
+    - snow
+    - heal

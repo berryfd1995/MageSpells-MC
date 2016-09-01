@@ -50,16 +50,18 @@ public class CustomItemConfig {
         } else {
             main.logger.info("Creating Custom Items Folder...");
             location.mkdirs();
-            firstLoad();
+            firstLoad("Blood.yml");
+            firstLoad("Heart_Of_Ice.yml");
+            loadCustomItemConfigs();
         }
     }
-    public void firstLoad() {
+    public void firstLoad(String item) {
         try {
             String home = getClass().getProtectionDomain()
                     .getCodeSource().getLocation()
                     .getPath().replaceAll("%20", " ");
             JarFile jar = new JarFile(home);
-            ZipEntry entry = jar.getEntry("Heart_Of_Ice.yml");
+            ZipEntry entry = jar.getEntry(item);
             File efile = new File("plugins/MageSpellsRemastered/CustomItems/", entry.getName());
 
             InputStream in =

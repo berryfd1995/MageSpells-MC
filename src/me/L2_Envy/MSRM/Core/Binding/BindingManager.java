@@ -19,7 +19,6 @@ import java.util.Arrays;
 public class BindingManager {
     public MageSpellsManager mageSpellsManager;
     public BindingManager(){
-
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;

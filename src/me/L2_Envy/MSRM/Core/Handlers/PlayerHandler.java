@@ -7,6 +7,7 @@ import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import me.L2_Envy.MSRM.Main;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -76,10 +77,12 @@ public class PlayerHandler implements Listener{
                                 }
                                 player.getInventory().setContents(itemStacks);
                                 player.updateInventory();
+                                player.sendMessage(ChatColor.GREEN + "You have learned a new spell!");
                             }
                         }
                     }
-                }else if(mageSpellsManager.wandManager.isWandLearningEnabled()){
+                }
+                if(mageSpellsManager.wandManager.isWandLearningEnabled()){
                     WandObject wandObject = mageSpellsManager.wandManager.getWandFromItem(itemStack);
                     if(wandObject != null){
                         if(mageSpellsManager.mageManager.isMage(player)){
@@ -106,6 +109,7 @@ public class PlayerHandler implements Listener{
                                 }
                                 player.getInventory().setContents(itemStacks);
                                 player.updateInventory();
+                                player.sendMessage(ChatColor.GREEN + "You have learned a new wand!");
                             }
                         }
                     }

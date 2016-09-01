@@ -1,19 +1,13 @@
-Name: "&9Ice BattleStaff"
+Name: "Basic Wand"
 RequiredLevelToCraft: 1
 RequiredLevelToUse: 1
+RequiredLevelToBind: 1
 Wand_Material: STICK
-Recipe: AIR,AIR,AIR,AIR,HEART_OF_ICE,AIR,AIR,STICK,AIR
+Recipe: AIR,AIR,AIR,AIR,AIR,AIR,AIR,STICK,AIR
 MobDrops:
     Settings:
-        Enable: True
+        Enable: False
     Drops:
-        SILVERFISH:
-            Chance: 10.0
-        ENDERMAN:
-            Chance: 10.0
-WandNode: "ice"
+WandNode: "basic"
 CompatibleSpellNodeList:
-    -ice
-    -water
-    -snow
-    -heal
+    - basic

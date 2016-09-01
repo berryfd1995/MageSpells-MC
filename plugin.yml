@@ -1,5 +1,5 @@
 name: MageSpellsRemastered
-version: 2.0.3-SNAPSHOT
+version: 2.0.5-SNAPSHOT
 description: Delve into the black magics of minecraft!
 author: L2_Envy
 main: me.L2_Envy.MSRM.Main
@@ -10,3 +10,25 @@ commands:
         aliases: [magespells, ms]
         description: Command menu for MageSpells Remastered.
         usage: /<command>
+permissions:
+   magespells.*:
+      description: Gives access to all MageSpell features.
+      children:
+        magespells.mage: true
+        magespells.spell: true
+        magespells.wand: true
+   magespells.spell.*:
+      children:
+        magespells.spell: true
+   magespells.wand.*:
+      children:
+        magespells.wand: true
+   magespells.mage:
+      description: Enables mana bar for mages.
+      default: op
+   magespells.spell:
+      description: Specific per spell
+      default: op
+   magespells.wand:
+      description: Specific per wand
+      default: op

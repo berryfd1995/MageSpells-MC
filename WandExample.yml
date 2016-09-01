@@ -1,6 +1,7 @@
 Name: "&9Basic Wand"
 RequiredLevelToCraft: 1
 RequiredLevelToUse: 1
+RequiredLevelToBind: 1
 Wand_Material: STICK
 Recipe: GLOWSTONE_DUST,REDSTONE,GLOWSTONE_DUST,AIR,STICK,AIR,AIR,STICK,AIR
 MobDrops:
@@ -12,8 +13,9 @@ MobDrops:
         ENDERMAN:
             Chance: 10.0
 WandNode: "ice"
+
 CompatibleSpellNodeList:
-    -ice
-    -water
-    -snow
-    -heal
+    - ice
+    - water
+    - snow
+    - heal

@@ -49,37 +49,41 @@ public class SpellUI {
             Inventory inventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Spell Menu - Page: " + page);
             inventory.setItem(0, mageSpellsManager.main.utils.getItemStack("EMERALD", "&cPrevious Page"));
             inventory.setItem(8, mageSpellsManager.main.utils.getItemStack("EMERALD", "&cNext Page"));
-            if(spellpages != null || !spellpages.isEmpty()) {
-                for (int i = 0; i < spellpages.get(page).size(); i++) {//slot to item ex 0<9
-                    SpellObject spellObject = spellpages.get(page).get(i);
-                    if (playerObject.getLevel() >= spellObject.getRequiredLevelToCast() && playerObject.knowsSpell(spellObject)) {
-                        String lore = spellObject.getLore() + "/&6BoltDamage: " + spellObject.getBoltdamage()
-                                + "/&6AuraDamage: " + spellObject.getAuradamage()
-                                + "/&6SprayDamage: " + spellObject.getSpraydamage()
-                                + "/&6Armor Piercing: " + spellObject.getArmorpiercing()
-                                + "/&6Mana Cost: " + spellObject.getManacost()
-                                + "/&6Money Cost: " + spellObject.getMoneycost()
-                                + "/&6Charge Time: " + spellObject.getChargetime()
-                                + "/&6Cooldown Time: " + spellObject.getCooldown()
-                                + "/&6Special Effect: " + spellObject.getSpellEffect().getName()
-                                + "/&6Required Level: " + spellObject.getRequiredLevelToCast();
-                        if (spellObject.isItemcostenabled()) {
-                            lore = lore + "/&6Item Cost: ";
-                            for (ItemStack itemStack : spellObject.getItemcost().keySet()) {
-                                if (mageSpellsManager.main.utils.itemStackIsCustomItem(itemStack)) {
-                                    lore = lore + "/&6" + itemStack.getItemMeta().getDisplayName() + " x" + spellObject.getItemcost().get(itemStack);
-                                } else {
-                                    lore = lore + "/&6" + ItemNames.lookup(itemStack) + " x" + spellObject.getItemcost().get(itemStack);
+            if(spellpages != null) {
+                if (!spellpages.isEmpty()) {
+                    for (int i = 0; i < spellpages.get(page).size(); i++) {//slot to item ex 0<9
+                        SpellObject spellObject = spellpages.get(page).get(i);
+                        if ((playerObject.getLevel() >= spellObject.getRequiredLevelToCast() || !mageSpellsManager.levelingManager.isLevelingEnabled())
+                                && (!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsSpell(spellObject))
+                                && (!mageSpellsManager.isNodeSystemEnabled() || player.hasPermission("magespells.spell." + spellObject.getSpellNode()))) {
+                            String lore = spellObject.getLore() + "/&6BoltDamage: " + spellObject.getBoltdamage()
+                                    + "/&6AuraDamage: " + spellObject.getAuradamage()
+                                    + "/&6SprayDamage: " + spellObject.getSpraydamage()
+                                    + "/&6Armor Piercing: " + spellObject.getArmorpiercing()
+                                    + "/&6Mana Cost: " + spellObject.getManacost()
+                                    + "/&6Money Cost: " + spellObject.getMoneycost()
+                                    + "/&6Charge Time: " + spellObject.getChargetime()
+                                    + "/&6Cooldown Time: " + spellObject.getCooldown()
+                                    + "/&6Special Effect: " + spellObject.getSpellEffect().getName()
+                                    + "/&6Required Level: " + spellObject.getRequiredLevelToCast();
+                            if (spellObject.isItemcostenabled()) {
+                                lore = lore + "/&6Item Cost: ";
+                                for (ItemStack itemStack : spellObject.getItemcost().keySet()) {
+                                    if (mageSpellsManager.main.utils.itemStackIsCustomItem(itemStack)) {
+                                        lore = lore + "/&6" + itemStack.getItemMeta().getDisplayName() + " x" + spellObject.getItemcost().get(itemStack);
+                                    } else {
+                                        lore = lore + "/&6" + ItemNames.lookup(itemStack) + " x" + spellObject.getItemcost().get(itemStack);
+                                    }
                                 }
                             }
-                        }
-                        inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack("NETHER_STAR", spellObject.getDisplayname(), lore));
+                            inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack("NETHER_STAR", spellObject.getDisplayname(), lore));
 
-                        //Add Item Cost
-                    } else {
-                        inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-15", spellObject.getDisplayname(),
-                                spellObject.getLore() + "/&6Required Level: " + spellObject.getRequiredLevelToCast()
-                                        + "/&4You have not learned this spell yet!"));
+                            //Add Item Cost
+                        } else {
+                            inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-15", spellObject.getDisplayname(),
+                                    spellObject.getLore() + "/&6Required Level: " + spellObject.getRequiredLevelToCast()
+                                            + "/&4You have not learned this spell yet!"));
+                        }
                     }
                 }
             }
@@ -126,7 +130,6 @@ public class SpellUI {
                 }
             }
         }else{
-            System.out.println("Equals 0");
         }
     }
     public int getPage(Player player){
@@ -136,10 +139,13 @@ public class SpellUI {
         return 0;
     }
     public void resortSpellPages(ArrayList<SpellObject> spellObjects){
+        spellpages = new HashMap<>();
         int maxpages = spellObjects.size() /7;
         int lastpageamount = spellObjects.size() %7;
         if(lastpageamount > 0){
             maxpages +=1;
+        }else if(lastpageamount == 0){
+            lastpageamount = 7;
         }
         //i = page #
         //j = item in page 1-7

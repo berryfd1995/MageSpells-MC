@@ -1,0 +1,20 @@
+Name: "&6Light Staff"
+RequiredLevelToCraft: 3
+RequiredLevelToUse: 3
+RequiredLevelToBind: 3
+Wand_Material: NETHER_STAR
+Recipe: AIR,AIR,AIR,AIR,NETHER_STAR,AIR,AIR,STICK,AIR
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        BLAZE:
+            Chance: 1.0
+        WOLF:
+            Chance: 1.0
+WandNode: "light"
+CompatibleSpellNodeList:
+    - sun
+    - light
+    - ray
+    - heal

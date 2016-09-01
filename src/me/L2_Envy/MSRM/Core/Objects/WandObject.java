@@ -20,7 +20,7 @@ public class WandObject{
     private String wandname;
     private String displayname;
     private String wandnode;
-    private List<String> compatiblespellnodes;
+    private ArrayList<String> compatiblespellnodes;
     private int requiredleveltocraft;
     private int requiredleveltouse;
     private int requiredleveltobind;
@@ -28,7 +28,7 @@ public class WandObject{
     private ShapedRecipe shapedRecipe;
     private boolean mobdropsenabled;
     private HashMap<EntityType, Double> mobDrops;
-    public WandObject(String wandname, String displayname, int requiredleveltocraft, int requiredleveltouse, int requiredleveltobind, ItemStack wandItemStack, ShapedRecipe shapedRecipe, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, String wandnode, List<String> compatiblespells){
+    public WandObject(String wandname, String displayname, int requiredleveltocraft, int requiredleveltouse, int requiredleveltobind, ItemStack wandItemStack, ShapedRecipe shapedRecipe, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, String wandnode, ArrayList<String> compatiblespells){
         this.wandname = wandname;
         this.displayname = displayname;
         this.requiredleveltocraft = requiredleveltocraft;
@@ -73,12 +73,6 @@ public class WandObject{
     public ShapedRecipe getShapedRecipe(){
         return shapedRecipe;
     }
-    public static class CompId implements Comparator<WandObject> {
-        @Override
-        public int compare(WandObject arg0, WandObject arg1) {
-            return arg0.getWandName().compareTo(arg1.getWandName());
-        }
-    }
     public String getWandnode(){
         return wandnode.toLowerCase();
     }
@@ -89,5 +83,11 @@ public class WandObject{
             }
         }
         return false;
+    }
+    public static class CompId implements Comparator<WandObject> {
+        @Override
+        public int compare(WandObject arg0, WandObject arg1) {
+            return arg0.getWandName().compareTo(arg1.getWandName());
+        }
     }
 }

@@ -1,0 +1,5 @@
+Name: "&4Blood"
+Lore: "&cA pool of blood from your enemies"
+Material: "REDSTONE"
+Recipe: "AIR,REDSTONE,AIR,REDSTONE,AIR,REDSTONE,AIR,REDSTONE,AIR"
+RequiredLevel: 3

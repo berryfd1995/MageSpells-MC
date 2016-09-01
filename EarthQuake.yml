@@ -1,0 +1,68 @@
+DisplayName: "&2Earthquake"
+Lore: "Make the ground tremble at your will"
+Bolt:
+    Enabled: false
+    DamageRadius: 1
+    BoltDamage: 5
+Aura:
+    Enabled: true
+    ActiveTime: 7
+    AuraRadius: 30
+    AuraDamage: 3
+Spray:
+    Enabled: false
+    SprayRadius: 5
+    SprayDamage: 1
+ArmorPiercing: 20
+ManaCost: 40
+MoneyCost: 0
+Cooldown: 10
+ChargeTime: 5
+TravelDistance: 0
+SpellNode: "earth"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "normal"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    VILLAGER_ANGRY:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    VILLAGER_ANGRY:
+        Amount: 50
+        offSetX: 3
+        offSetY: 3
+        offSetZ: 3
+        Speed: 0.5
+PotionEffects:
+    BLINDNESS:
+        Duration: 1
+        Amplification: 2
+    CONFUSION:
+        Duration: 1
+        Amplification: 2
+    SLOW:
+        Duration: 2
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        SILVERFISH:
+            Chance: 1.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        STONE: 64
+        DIRT: 32

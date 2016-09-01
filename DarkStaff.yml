@@ -1,0 +1,17 @@
+Name: "&8Dark Staff"
+RequiredLevelToCraft: 3
+RequiredLevelToUse: 3
+RequiredLevelToBind: 3
+Wand_Material: BONE
+Recipe: AIR,AIR,AIR,AIR,WOOL-15,AIR,AIR,STICK,AIR
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        ENDERMAN:
+            Chance: 1.0
+WandNode: "dark"
+CompatibleSpellNodeList:
+    - death
+    - night
+    - dark

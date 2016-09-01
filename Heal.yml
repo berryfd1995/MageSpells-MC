@@ -1,0 +1,61 @@
+DisplayName: "&6Heal"
+Lore: "&eHeal your teammates on the battlefield!"
+Bolt:
+    Enabled: false
+    DamageRadius: 3
+    BoltDamage: 5
+Aura:
+    Enabled: true
+    ActiveTime: 7
+    AuraRadius: 10
+    AuraDamage: 0
+Spray:
+    Enabled: false
+    SprayRadius: 5
+    SprayDamage: 3
+ArmorPiercing: 0
+ManaCost: 25
+MoneyCost: 0
+Cooldown: 0
+ChargeTime: 3
+TravelDistance: 0
+SpellNode: "heal"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: false
+AffectSelf: true
+AffectEnemy: false
+AffectTeammates: true
+SpecialEffect: "normal"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    HEART:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:
+    REGENERATION:
+        Duration: 2
+        Amplification: 2
+    SATURATION:
+        Duration: 1
+        Amplification: 1
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        WOLF:
+            Chance: 1.0
+        PIG:
+            Chance: 5.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        SPECKLED_MELON: 2

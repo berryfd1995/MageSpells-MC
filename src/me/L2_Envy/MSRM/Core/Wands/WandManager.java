@@ -27,9 +27,11 @@ public class WandManager {
         return wandObjects.contains(wandObject);
     }
     public void addWandObject(WandObject wandObject){
-        if(!wandObjects.contains(wandObject)){
-            wandObjects.add(wandObject);
-            sortWands();
+        if(wandObject != null) {
+            if (!wandObjects.contains(wandObject)) {
+                wandObjects.add(wandObject);
+                sortWands();
+            }
         }
     }
     public void setEnableWandLearning(boolean enable){

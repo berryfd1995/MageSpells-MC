@@ -31,7 +31,7 @@ public class CastingManager {
                 (!mageSpellsManager.levelingManager.isLevelingEnabled() ||(playerObject.getLevel() >= spellObject.getRequiredLevelToCast() &&
                 playerObject.getLevel() >= wandObject.getRequiredleveltouse()))
                 && (!mageSpellsManager.isNodeSystemEnabled() ||( player.hasPermission("magespells.wand." + wandObject.getWandnode())
-                && player.hasPermission("magespells.spell" + spellObject.getSpellNode()) && wandObject.isSpellCompatible(spellObject.getSpellNode())))
+                && player.hasPermission("magespells.spell." + spellObject.getSpellNode()) && wandObject.isSpellCompatible(spellObject.getSpellNode())))
                 && mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(player.getLocation())) {
             if(mageSpellsManager.manaManager.hasAtLeastMana(playerObject, spellObject.getManacost())) {
                 if(spellObject.isItemcostenabled()) {
@@ -80,59 +80,61 @@ public class CastingManager {
                         ItemStack itemStack1 = itemStack.clone();
                         itemStack1.setAmount(1);
                         //is custom item
-                        if (mageSpellsManager.main.utils.itemStackIsCustomItem(is)) {
-                            if (is.equals(itemStack1)) {
-                                if (itemStack.getAmount() > amount) {
-                                    itemStack.setAmount(itemStack.getAmount() - amount);
-                                    amount = 0;
-                                } else {
-                                    amount = amount - itemStack.getAmount();
-                                    itemStacks[i] = new ItemStack(Material.AIR);
-                                }
-                            }
-                        } else {
-                            if (itemStack.getType() == is.getType() && itemStack.getDurability() == is.getDurability()) {
-                                if (itemStack.hasItemMeta() && is.hasItemMeta()) {
-                                    if (itemStack.getItemMeta().hasDisplayName() && is.getItemMeta().hasDisplayName()) {
-                                        if (itemStack.getItemMeta().hasLore() && is.getItemMeta().hasLore()) {
-                                            if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(is.getItemMeta().getDisplayName()) && itemStack.getItemMeta().getLore().equals(is.getItemMeta().getLore())) {
-                                                if (itemStack.getAmount() > amount) {
-                                                    itemStack.setAmount(itemStack.getAmount() - amount);
-                                                    amount = 0;
-                                                } else {
-                                                    amount = amount - itemStack.getAmount();
-                                                    itemStacks[i] = new ItemStack(Material.AIR);
-                                                }
-                                            }
-                                        } else {
-                                            if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(is.getItemMeta().getDisplayName())) {
-                                                if (itemStack.getAmount() > amount) {
-                                                    itemStack.setAmount(itemStack.getAmount() - amount);
-                                                    amount = 0;
-                                                } else {
-                                                    amount = amount - itemStack.getAmount();
-                                                    itemStacks[i] = new ItemStack(Material.AIR);
-                                                }
-                                            }
-                                        }
-                                    } else if (itemStack.getItemMeta().hasLore() && is.getItemMeta().hasLore()) {
-                                        if (itemStack.getItemMeta().getLore().equals(is.getItemMeta().getLore())) {
-                                            if (itemStack.getAmount() > amount) {
-                                                itemStack.setAmount(itemStack.getAmount() - amount);
-                                                amount = 0;
-                                            } else {
-                                                amount = amount - itemStack.getAmount();
-                                                itemStacks[i] = new ItemStack(Material.AIR);
-                                            }
-                                        }
-                                    }
-                                } else {
+                        if(!mageSpellsManager.wandManager.isWand(itemStack)) {
+                            if (mageSpellsManager.main.utils.itemStackIsCustomItem(is)) {
+                                if (is.equals(itemStack1)) {
                                     if (itemStack.getAmount() > amount) {
                                         itemStack.setAmount(itemStack.getAmount() - amount);
                                         amount = 0;
                                     } else {
                                         amount = amount - itemStack.getAmount();
                                         itemStacks[i] = new ItemStack(Material.AIR);
+                                    }
+                                }
+                            } else {
+                                if (itemStack.getType() == is.getType() && itemStack.getDurability() == is.getDurability()) {
+                                    if (itemStack.hasItemMeta() && is.hasItemMeta()) {
+                                        if (itemStack.getItemMeta().hasDisplayName() && is.getItemMeta().hasDisplayName()) {
+                                            if (itemStack.getItemMeta().hasLore() && is.getItemMeta().hasLore()) {
+                                                if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(is.getItemMeta().getDisplayName()) && itemStack.getItemMeta().getLore().equals(is.getItemMeta().getLore())) {
+                                                    if (itemStack.getAmount() > amount) {
+                                                        itemStack.setAmount(itemStack.getAmount() - amount);
+                                                        amount = 0;
+                                                    } else {
+                                                        amount = amount - itemStack.getAmount();
+                                                        itemStacks[i] = new ItemStack(Material.AIR);
+                                                    }
+                                                }
+                                            } else {
+                                                if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(is.getItemMeta().getDisplayName())) {
+                                                    if (itemStack.getAmount() > amount) {
+                                                        itemStack.setAmount(itemStack.getAmount() - amount);
+                                                        amount = 0;
+                                                    } else {
+                                                        amount = amount - itemStack.getAmount();
+                                                        itemStacks[i] = new ItemStack(Material.AIR);
+                                                    }
+                                                }
+                                            }
+                                        } else if (itemStack.getItemMeta().hasLore() && is.getItemMeta().hasLore()) {
+                                            if (itemStack.getItemMeta().getLore().equals(is.getItemMeta().getLore())) {
+                                                if (itemStack.getAmount() > amount) {
+                                                    itemStack.setAmount(itemStack.getAmount() - amount);
+                                                    amount = 0;
+                                                } else {
+                                                    amount = amount - itemStack.getAmount();
+                                                    itemStacks[i] = new ItemStack(Material.AIR);
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if (itemStack.getAmount() > amount) {
+                                            itemStack.setAmount(itemStack.getAmount() - amount);
+                                            amount = 0;
+                                        } else {
+                                            amount = amount - itemStack.getAmount();
+                                            itemStacks[i] = new ItemStack(Material.AIR);
+                                        }
                                     }
                                 }
                             }

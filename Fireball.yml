@@ -1,0 +1,64 @@
+DisplayName: "&4Fire Ball"
+Lore: "&cBurn baby &oBURNNNN"
+Bolt:
+    Enabled: true
+    DamageRadius: 3
+    BoltDamage: 5
+Aura:
+    Enabled: false
+    ActiveTime: 0
+    AuraRadius: 0
+    AuraDamage: 0
+Spray:
+    Enabled: true
+    SprayRadius: 5
+    SprayDamage: 3
+ArmorPiercing: 20
+ManaCost: 20
+MoneyCost: 0
+Cooldown: 3
+ChargeTime: 0
+TravelDistance: 50
+SpellNode: "fire"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "fire"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SMOKE_LARGE:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    FLAME:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:
+    WEAKNESS:
+        Duration: 3
+        Amplification: 2
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        BLAZE:
+            Chance: 1.0
+        MAGMA_CUBE:
+            Chance: 5.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        FIREBALL: 1

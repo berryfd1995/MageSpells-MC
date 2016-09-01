@@ -59,17 +59,25 @@ public class SpellConfig {
         } else {
             main.logger.info("Creating Spells Folder...");
             location.mkdirs();
-            firstLoad();
+            firstLoad("AirShot.yml");
+            firstLoad("BasicSpell.yml");
+            firstLoad("Blizzard.yml");
+            firstLoad("DeathGrip.yml");
+            firstLoad("EarthQuake.yml");
+            firstLoad("Fireball.yml");
+            firstLoad("Heal.yml");
+            firstLoad("Rocket.yml");
+            firstLoad("Thor.yml");
             loadSpellConfigs();
         }
     }
-    public void firstLoad() {
+    public void firstLoad(String spell) {
         try {
             String home = getClass().getProtectionDomain()
                     .getCodeSource().getLocation()
                     .getPath().replaceAll("%20", " ");
             JarFile jar = new JarFile(home);
-            ZipEntry entry = jar.getEntry("PhasorBeam.yml");
+            ZipEntry entry = jar.getEntry(spell);
             File efile = new File("plugins/MageSpellsRemastered/Spells/", entry.getName());
 
             InputStream in =

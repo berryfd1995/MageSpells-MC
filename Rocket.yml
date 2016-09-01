@@ -1,0 +1,68 @@
+DisplayName: "&e&lRocket"
+Lore: "&6PEW! PEW!"
+Bolt:
+    Enabled: true
+    DamageRadius: 10
+    BoltDamage: 8
+Aura:
+    Enabled: false
+    ActiveTime: 1
+    AuraRadius: 10
+    AuraDamage: 15
+Spray:
+    Enabled: false
+    SprayRadius: 5
+    SprayDamage: 3
+ArmorPiercing: 20
+ManaCost: 20
+MoneyCost: 0
+Cooldown: 0
+ChargeTime: 2
+TravelDistance: 0
+SpellNode: "basic"
+RequiredLevelToBind: 1
+RequiredLevelToCast: 1
+RequiredLevelToDrop: 1
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "explode"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SMOKE_LARGE:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    FLAME:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    FIREWORKS_SPARK:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:
+    WEAKNESS:
+        Duration: 0
+        Amplification: 0
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        VILLAGER:
+            Chance: 5.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        FIREWORK_CHARGE: 1

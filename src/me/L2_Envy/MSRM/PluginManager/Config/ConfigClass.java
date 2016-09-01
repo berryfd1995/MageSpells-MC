@@ -106,7 +106,7 @@ public class ConfigClass {
                     main.logger.info("Could not level " + levelstr);
                 }
             }
-            boolean enabledlearning = config.getBoolean(path + "EnabledLearning");
+            boolean enabledlearning = config.getBoolean(path + "EnableLearning");
             boolean enableSpellBookLearning = config.getBoolean(path + "EnableSpellBookLearning");
             boolean wandlearning = config.getBoolean(path + "EnableWandLearning");
             boolean enablenodesystem = config.getBoolean(path + "EnableNodeSystem");

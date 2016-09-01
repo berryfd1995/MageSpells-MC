@@ -1,57 +1,57 @@
-DisplayName: ""
-Lore: ""
+DisplayName: "&fAir Shot"
+Lore: "Fire a gust of wind at someone"
 Bolt:
-    Enabled: true
+    Enabled: false
     DamageRadius: 0
     BoltDamage: 0
 Aura:
-    Enabled: true
+    Enabled: false
     ActiveTime: 0
     AuraRadius: 10
     AuraDamage: 5
 Spray:
     Enabled: true
     SprayRadius: 5
-    SprayDamage: 5
-ArmorPiercing: 10
+    SprayDamage: 1
+ArmorPiercing: 0
 ManaCost: 5
 MoneyCost: 0
 Cooldown: 2
 ChargeTime: 1
-TravelDistance: 25
-SpellNode: "mystic"
-RequiredLevelToBind: 1
-RequiredLevelToCast: 1
-RequiredLevelToDrop: 1
+TravelDistance: 50
+SpellNode: "air"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
 AffectMobs: true
-AffectSelf: true
+AffectSelf: false
 AffectEnemy: true
-AffectTeammates: true
-SpecialEffect: ""
+AffectTeammates: false
+SpecialEffect: "normal"
 Sound:
     Name: ENTITY_BAT_TAKEOFF
     Volume: 0.5
     Pitch: 0.5
 Particles:
-    CRIT_MAGIC:
+    SNOWBALL:
         Amount: 50
         offSetX: 0.05
         offSetY: 0.05
         offSetZ: 0.05
         Speed: 0.5
 PotionEffects:
-    CONFUSION:
-        Duration: 0
-        Amplification: 0
+    BLINDNESS:
+        Duration: 3
+        Amplification: 1
 MobDrops:
     Settings:
         Enable: True
     Drops:
-        SILVERFISH:
+        GHAST:
             Chance: 10.0
 ItemCost:
     Settings:
-        Enabled: True
+        Enabled: False
     Items:
         EMERALD: 1
         WOOD-2: 1

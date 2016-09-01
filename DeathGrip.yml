@@ -1,0 +1,65 @@
+DisplayName: "&8Death Grip"
+Lore: "Hunt down your enemies through dark magics"
+Bolt:
+    Enabled: true
+    DamageRadius: 1
+    BoltDamage: 5
+Aura:
+    Enabled: true
+    ActiveTime: 5
+    AuraRadius: 10
+    AuraDamage: 5
+Spray:
+    Enabled: false
+    SprayRadius: 5
+    SprayDamage: 1
+ArmorPiercing: 5
+ManaCost: 15
+MoneyCost: 0
+Cooldown: 2
+ChargeTime: 3
+TravelDistance: 30
+SpellNode: "death"
+RequiredLevelToBind: 3
+RequiredLevelToCast: 3
+RequiredLevelToDrop: 3
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "homing"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SMOKE_LARGE:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    SMOKE_LARGE:
+        Amount: 50
+        offSetX: 0.5
+        offSetY: 0.5
+        offSetZ: 0.5
+        Speed: 0.8
+PotionEffects:
+    BLINDNESS:
+        Duration: 5
+        Amplification: 1
+    CONFUSION:
+        Duration: 5
+        Amplification: 1
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        BLAZE:
+            Chance: 1.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        BLOOD: 5

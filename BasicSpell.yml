@@ -1,33 +1,33 @@
-DisplayName: "&5Phasor Beam"
-Lore: "&cTil death do us part"
+DisplayName: "Basic Spell"
+Lore: "The spell every aspiring mage learns."
 Bolt:
     Enabled: true
     DamageRadius: 1
-    BoltDamage: 5
+    BoltDamage: 2
 Aura:
-    Enabled: true
-    ActiveTime: 5
+    Enabled: false
+    ActiveTime: 0
     AuraRadius: 10
     AuraDamage: 5
 Spray:
-    Enabled: true
+    Enabled: false
     SprayRadius: 5
     SprayDamage: 5
-ArmorPiercing: 10
-ManaCost: 5
+ArmorPiercing: 0
+ManaCost: 10
 MoneyCost: 0
-Cooldown: 2
-ChargeTime: 1
+Cooldown: 1
+ChargeTime: 0
 TravelDistance: 25
-SpellNode: "mystic"
+SpellNode: "basic"
 RequiredLevelToBind: 1
 RequiredLevelToCast: 1
 RequiredLevelToDrop: 1
 AffectMobs: true
-AffectSelf: true
+AffectSelf: false
 AffectEnemy: true
-AffectTeammates: true
-SpecialEffect: "Homing"
+AffectTeammates: false
+SpecialEffect: "normal"
 Sound:
     Name: ENTITY_BAT_TAKEOFF
     Volume: 0.5
@@ -39,31 +39,19 @@ Particles:
         offSetY: 0.05
         offSetZ: 0.05
         Speed: 0.5
-    SPELL_MOB:
-        Amount: 12
-        offSetX: 0.05
-        offSetY: 0.05
-        offSetZ: 0.05
-        Speed: 0.5
 PotionEffects:
     CONFUSION:
         Duration: 0
         Amplification: 0
-    SLOW:
-        Duration: 1
-        Amplification: 1
 MobDrops:
     Settings:
         Enable: True
     Drops:
-        SILVERFISH:
-            Chance: 10.0
-        ENDERMAN:
+        Zombie:
             Chance: 10.0
 ItemCost:
     Settings:
-        Enabled: True
+        Enabled: false
     Items:
         EMERALD: 1
         WOOD-2: 1
-

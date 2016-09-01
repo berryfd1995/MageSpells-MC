@@ -1,0 +1,71 @@
+DisplayName: "&e&lT&bhor"
+Lore: "&bStrike with the power of a god /&cWARNING:&b This will hurt you!"
+Bolt:
+    Enabled: false
+    DamageRadius: 3
+    BoltDamage: 5
+Aura:
+    Enabled: true
+    ActiveTime: 1
+    AuraRadius: 10
+    AuraDamage: 15
+Spray:
+    Enabled: false
+    SprayRadius: 5
+    SprayDamage: 3
+ArmorPiercing: 20
+ManaCost: 100
+MoneyCost: 0
+Cooldown: 10
+ChargeTime: 5
+TravelDistance: 0
+SpellNode: "sun"
+RequiredLevelToBind: 3
+RequiredLevelToCast: 3
+RequiredLevelToDrop: 3
+AffectMobs: true
+AffectSelf: true
+AffectEnemy: true
+AffectTeammates: true
+SpecialEffect: "lightning"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SMOKE_LARGE:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    FLAME:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    SPELL_WITCH:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:
+    WEAKNESS:
+        Duration: 3
+        Amplification: 2
+    CONFUSION:
+        Duration: 3
+        Amplification: 2
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        WITHER:
+            Chance: 1.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        NETHER_STAR: 1

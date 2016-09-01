@@ -36,212 +36,247 @@ public class CommandMenu implements CommandExecutor{
                         if (player.hasPermission("magespells.mage")) {
                             if (pluginManager.main.mageSpellsManager.mageManager.isMage(player)) {
                                 PlayerObject playerObject = pluginManager.main.mageSpellsManager.mageManager.getMage(player.getUniqueId());
-                                switch (args[0].toLowerCase()) {
-                                    case "help":
-                                        if (args.length == 2) {
-                                            helpMenu.displayHelpMenu(player, Integer.parseInt(args[1]));
-                                        } else {
-                                            helpMenu.displayHelpMenu(player, 1);
-                                        }
-                                        break;
-                                    case "menu":
-                                        pluginManager.main.mageSpellsManager.playerInterface.openPlayerInterface(player);
-                                        break;
-                                    case "stats":
-                                        pluginManager.main.mageSpellsManager.mageStats.openMageStats(player);
-                                        break;
-                                    case "spellmenu":
-                                        pluginManager.main.mageSpellsManager.spellUI.openSpellUI(player);
-                                        break;
-                                    case "wandmenu":
-                                        pluginManager.main.mageSpellsManager.wandUI.openWandUI(player);
-                                        break;
-                                    case "bag":
-                                        pluginManager.main.mageSpellsManager.wandBag.openWandBag(player);
-                                        break;
-                                    case "bind":
-                                        pluginManager.main.mageSpellsManager.bindingMenu.openSpellBindingMenu(player);
-                                        break;
-                                    case "learnspell":
-                                        if(args.length >= 2){
-                                            if(player.hasPermission("magespells.admin")) {
-                                                if (args.length == 2) {
-                                                    pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(player, playerObject, args[1]);
-                                                } else if (args.length == 3) {
-                                                    pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(player, args[2], args[1]);
-                                                }else{
-                                                    //invalid
-                                                }
+                                if(args.length ==0){
+                                    helpMenu.displayHelpMenu(player, 1);
+                                }else {
+                                    switch (args[0].toLowerCase()) {
+                                        case "help":
+                                            if (args.length == 2) {
+                                                helpMenu.displayHelpMenu(player, Integer.parseInt(args[1]));
+                                            } else {
+                                                helpMenu.displayHelpMenu(player, 1);
                                             }
-                                        }else {
-                                            pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(player,playerObject);
-                                        }
-                                        break;
-                                    case "learnwand":
-                                        if(args.length >= 2){
-                                            if(player.hasPermission("magespells.admin")) {
-                                                if (args.length == 2) {
-                                                    pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(player, playerObject, args[1]);
-                                                } else if (args.length == 3) {
-                                                    pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(player, args[2], args[1]);
-                                                }else{
-                                                    //invalid
-                                                }
-                                            }
-                                        }else {
-                                            pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(player,playerObject);
-                                        }
-                                        break;
-                                    case "addexperience":
-                                        if(args.length == 3){
-                                            if(player.hasPermission("magespells.admin")) {
-                                                pluginManager.main.mageSpellsManager.levelingManager.giveExperience(player, args[1], Long.parseLong(args[2]));
-                                            }
-                                        }
-                                        break;
-                                    case "spawnspellbook":
-                                        if(args.length >= 2){
-                                            if(player.hasPermission("magespells.admin")) {
-                                                SpellObject spellObject = pluginManager.main.mageSpellsManager.spellManager.getSpellFromName(args[1]);
-                                                if(args.length > 2) {
-                                                    Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
-                                                    if (spellObject != null && player1 != null) {
-                                                        player1.getInventory().addItem(spellObject.getSpellbook());
-                                                    }
-                                                }else{
-                                                    if (spellObject != null) {
-                                                        player.getInventory().addItem(spellObject.getSpellbook());
+                                            break;
+                                        case "menu":
+                                            pluginManager.main.mageSpellsManager.playerInterface.openPlayerInterface(player);
+                                            break;
+                                        case "stats":
+                                            pluginManager.main.mageSpellsManager.mageStats.openMageStats(player);
+                                            break;
+                                        case "spellmenu":
+                                            pluginManager.main.mageSpellsManager.spellUI.openSpellUI(player);
+                                            break;
+                                        case "wandmenu":
+                                            pluginManager.main.mageSpellsManager.wandUI.openWandUI(player);
+                                            break;
+                                        case "bag":
+                                            pluginManager.main.mageSpellsManager.wandBag.openWandBag(player);
+                                            break;
+                                        case "bind":
+                                            pluginManager.main.mageSpellsManager.bindingMenu.openSpellBindingMenu(player);
+                                            break;
+                                        case "learnspell":
+                                            if (args.length >= 2) {
+                                                if (player.hasPermission("magespells.admin")) {
+                                                    if (args.length == 2) {
+                                                        pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(player, playerObject, args[1]);
+                                                    } else if (args.length == 3) {
+                                                        pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(player, args[2], args[1]);
+                                                    } else {
+                                                        player.sendMessage(ChatColor.RED + "Invalid Parameters");
                                                     }
                                                 }
+                                            } else {
+                                                pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(player, playerObject);
                                             }
-                                        }
-                                        break;
-                                    case "spawnwand":
-                                        if(args.length >= 2){
-                                            if(player.hasPermission("magespells.admin")) {
-                                                WandObject wandObject = pluginManager.main.mageSpellsManager.wandManager.getWandFromName(args[1]);
-                                                if(args.length > 2) {
-                                                    Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
-                                                    if (wandObject != null && player1 != null) {
-                                                        player1.getInventory().addItem(wandObject.getWandItemStack());
-                                                    }
-                                                }else{
-                                                    if (wandObject != null) {
-                                                        player.getInventory().addItem(wandObject.getWandItemStack());
+                                            break;
+                                        case "learnwand":
+                                            if (args.length >= 2) {
+                                                if (player.hasPermission("magespells.admin")) {
+                                                    if (args.length == 2) {
+                                                        pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(player, playerObject, args[1]);
+                                                    } else if (args.length == 3) {
+                                                        pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(player, args[2], args[1]);
+                                                    } else {
+                                                        player.sendMessage(ChatColor.RED + "Invalid Parameters");
                                                     }
                                                 }
+                                            } else {
+                                                pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(player, playerObject);
                                             }
-                                        }
-                                        break;
-                                    case "setprimaryspell":
-                                        if(player.hasPermission("magespells.admin")) {
-                                            if(args.length == 2){
-                                                ItemStack itemStack = player.getInventory().getItemInMainHand();
-                                                if(itemStack != null){
-                                                    if(pluginManager.main.mageSpellsManager.wandManager.isWand(itemStack)){
-                                                        SpellObject spellObject = pluginManager.main.mageSpellsManager.spellManager.getSpellFromName(args[1]);
-                                                        if(spellObject != null){
-                                                            player.getInventory().setItemInMainHand(pluginManager.main.mageSpellsManager.bindingManager.setPrimarySpell(itemStack, spellObject));
-                                                            player.updateInventory();
+                                            break;
+                                        case "learnall":
+                                            if(player.hasPermission("magespells.admin")){
+                                                if(args.length == 1) {
+                                                    for (WandObject wandObject :pluginManager.main.mageSpellsManager.wandManager.getWandObjects()){
+                                                        pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(playerObject, wandObject);
+                                                    }
+                                                    for(SpellObject spellObject : pluginManager.main.mageSpellsManager.spellManager.getSpellObjects()){
+                                                        pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(playerObject,spellObject);
+                                                    }
+                                                    player.sendMessage(ChatColor.GREEN + "You have learned every spell and wand!");
+                                                }else if(args.length == 2){
+                                                    Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[1]);
+                                                    if(player1 != null){
+                                                        if(pluginManager.main.mageSpellsManager.mageManager.isMage(player1)){
+                                                            PlayerObject playerObject1 = pluginManager.main.mageSpellsManager.mageManager.getMage(player1.getUniqueId());
+                                                            for (WandObject wandObject :pluginManager.main.mageSpellsManager.wandManager.getWandObjects()){
+                                                                pluginManager.main.mageSpellsManager.spellLearningManager.learnWand(playerObject1, wandObject);
+                                                            }
+                                                            for(SpellObject spellObject : pluginManager.main.mageSpellsManager.spellManager.getSpellObjects()){
+                                                                pluginManager.main.mageSpellsManager.spellLearningManager.learnSpell(playerObject1,spellObject);
+                                                            }
+                                                        }
+                                                    }
+                                                    player1.sendMessage(ChatColor.GREEN + "You have learned every spell and wand!");
+                                                }
+                                            }
+                                        case "addexperience":
+                                            if (args.length == 3) {
+                                                if (player.hasPermission("magespells.admin")) {
+                                                    pluginManager.main.mageSpellsManager.levelingManager.giveExperience(player, args[1], Long.parseLong(args[2]));
+                                                    player.sendMessage(ChatColor.GREEN+ "You have given player " + args[1] + " " + Long.parseLong(args[2]) + " experience.");
+                                                }
+                                            }
+                                            break;
+                                        case "spawnspellbook":
+                                            if (args.length >= 2) {
+                                                if (player.hasPermission("magespells.admin")) {
+                                                    SpellObject spellObject = pluginManager.main.mageSpellsManager.spellManager.getSpellFromName(args[1]);
+                                                    if (args.length > 2) {
+                                                        Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
+                                                        if (spellObject != null && player1 != null) {
+                                                            player1.getInventory().addItem(spellObject.getSpellbook());
+                                                            player.sendMessage(ChatColor.GREEN + "Successfully spawned in spellbook for player " + player1.getName());
+                                                        }
+                                                    } else {
+                                                        if (spellObject != null) {
+                                                            player.getInventory().addItem(spellObject.getSpellbook());
+                                                            player.sendMessage(ChatColor.GREEN + "Successfully spawned in spellbook.");
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                        break;
-                                    case "setsecondaryspell":
-                                        if(player.hasPermission("magespells.admin")) {
-                                            if(player.hasPermission("magespells.admin")) {
-                                                if(args.length == 2){
+                                            break;
+                                        case "spawnwand":
+                                            if (args.length >= 2) {
+                                                if (player.hasPermission("magespells.admin")) {
+                                                    WandObject wandObject = pluginManager.main.mageSpellsManager.wandManager.getWandFromName(args[1]);
+                                                    if (args.length > 2) {
+                                                        Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
+                                                        if (wandObject != null && player1 != null) {
+                                                            player1.getInventory().addItem(wandObject.getWandItemStack());
+                                                            player.sendMessage(ChatColor.GREEN + "Successfully spawned in wand for player " + player1.getName());
+                                                        }
+                                                    } else {
+                                                        if (wandObject != null) {
+                                                            player.getInventory().addItem(wandObject.getWandItemStack());
+                                                            player.sendMessage(ChatColor.GREEN + "Successfully spawned in wand.");
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case "setprimaryspell":
+                                            if (player.hasPermission("magespells.admin")) {
+                                                if (args.length == 2) {
                                                     ItemStack itemStack = player.getInventory().getItemInMainHand();
-                                                    if(itemStack != null){
-                                                        if(pluginManager.main.mageSpellsManager.wandManager.isWand(itemStack)){
+                                                    if (itemStack != null) {
+                                                        if (pluginManager.main.mageSpellsManager.wandManager.isWand(itemStack)) {
                                                             SpellObject spellObject = pluginManager.main.mageSpellsManager.spellManager.getSpellFromName(args[1]);
-                                                            if(spellObject != null){
-                                                                player.getInventory().setItemInMainHand(pluginManager.main.mageSpellsManager.bindingManager.setSecondarySpell(itemStack, spellObject));
+                                                            if (spellObject != null) {
+                                                                player.getInventory().setItemInMainHand(pluginManager.main.mageSpellsManager.bindingManager.setPrimarySpell(itemStack, spellObject));
                                                                 player.updateInventory();
                                                             }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                        break;
-                                    case "team":
-                                        if(pluginManager.main.mageSpellsManager.teamManager.getUsercreatesteam()) {
+                                            break;
+                                        case "setsecondaryspell":
+                                            if (player.hasPermission("magespells.admin")) {
+                                                if (player.hasPermission("magespells.admin")) {
+                                                    if (args.length == 2) {
+                                                        ItemStack itemStack = player.getInventory().getItemInMainHand();
+                                                        if (itemStack != null) {
+                                                            if (pluginManager.main.mageSpellsManager.wandManager.isWand(itemStack)) {
+                                                                SpellObject spellObject = pluginManager.main.mageSpellsManager.spellManager.getSpellFromName(args[1]);
+                                                                if (spellObject != null) {
+                                                                    player.getInventory().setItemInMainHand(pluginManager.main.mageSpellsManager.bindingManager.setSecondarySpell(itemStack, spellObject));
+                                                                    player.updateInventory();
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            break;
+                                        case "team":
+                                            if (pluginManager.main.mageSpellsManager.teamManager.getUsercreatesteam()) {
+                                                if (args.length >= 2) {
+                                                    switch (args[1].toLowerCase()) {
+                                                        case "create":
+                                                            if (args.length == 4) {
+                                                                Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[3]);
+                                                                if (playerFromName != null) {
+                                                                    pluginManager.main.mageSpellsManager.teamManager.createTeam(args[2], player, playerFromName);
+                                                                }
+                                                            }
+                                                            break;
+                                                        case "leave":
+                                                            pluginManager.main.mageSpellsManager.teamManager.leaveTeam(player);
+                                                            break;
+                                                        case "accept":
+                                                            if (args.length == 3) {
+                                                                pluginManager.main.mageSpellsManager.teamManager.acceptInvite(player, args[2]);
+                                                            }
+                                                            break;
+                                                        case "decline":
+                                                            if (args.length == 3) {
+                                                                pluginManager.main.mageSpellsManager.teamManager.declineInvite(player, args[2]);
+                                                            }
+                                                            break;
+                                                        case "invite":
+                                                            if (args.length == 3) {
+                                                                Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
+                                                                if (player1 != null) {
+                                                                    pluginManager.main.mageSpellsManager.teamManager.invitePlayer(player, player1);
+                                                                }
+                                                            }
+                                                            break;
+                                                        case "makeofficer":
+                                                            if (args.length == 3) {
+                                                                Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
+                                                                if (playerFromName != null) {
+                                                                    pluginManager.main.mageSpellsManager.teamManager.promotePlayer(player, playerFromName);
+                                                                }
+                                                            }
+                                                            break;
+                                                        case "disband":
+                                                            if (args.length == 2) {
+                                                                pluginManager.main.mageSpellsManager.teamManager.disbandTeam(player);
+                                                            }
+                                                            break;
+                                                    }
+                                                }
+                                            }
                                             if (args.length >= 2) {
                                                 switch (args[1].toLowerCase()) {
-                                                    case "create":
-                                                        if(args.length == 4) {
-                                                            Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[3]);
-                                                            if (playerFromName != null) {
-                                                                pluginManager.main.mageSpellsManager.teamManager.createTeam(args[2], player, playerFromName);
+                                                    case "add":
+                                                        if (player.hasPermission("magespells.admin")) {
+                                                            if (args.length == 4) {
+                                                                Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
+                                                                if (playerFromName != null) {
+                                                                    pluginManager.main.mageSpellsManager.teamManager.addPlayer(args[3], playerFromName);
+                                                                }
                                                             }
                                                         }
                                                         break;
-                                                    case "leave":
-                                                            pluginManager.main.mageSpellsManager.teamManager.leaveTeam(player);
-                                                        break;
-                                                    case "accept":
-                                                        if(args.length == 3) {
-                                                            pluginManager.main.mageSpellsManager.teamManager.acceptInvite(player, args[2]);
-                                                        }
-                                                        break;
-                                                    case "decline":
-                                                        if(args.length == 3) {
-                                                            pluginManager.main.mageSpellsManager.teamManager.declineInvite(player, args[2]);
-                                                        }
-                                                        break;
-                                                    case "invite":
-                                                        if(args.length == 3) {
-                                                            Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
-                                                            if (player1 != null) {
-                                                                pluginManager.main.mageSpellsManager.teamManager.invitePlayer(player, player1);
+                                                    case "remove":
+                                                        if (player.hasPermission("magespells.admin")) {
+                                                            if (args.length == 4) {
+                                                                Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
+                                                                if (playerFromName != null) {
+                                                                    pluginManager.main.mageSpellsManager.teamManager.removePlayer(args[3], playerFromName);
+                                                                }
                                                             }
-                                                        }
-                                                        break;
-                                                    case "makeofficer":
-                                                        if(args.length == 3) {
-                                                            Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
-                                                            if (playerFromName != null) {
-                                                                pluginManager.main.mageSpellsManager.teamManager.promotePlayer(player, playerFromName);
-                                                            }
-                                                        }
-                                                        break;
-                                                    case "disband":
-                                                        if(args.length == 2) {
-                                                            pluginManager.main.mageSpellsManager.teamManager.disbandTeam(player);
                                                         }
                                                         break;
                                                 }
                                             }
-                                        }
-                                        if (args.length >= 2) {
-                                            switch (args[1].toLowerCase()) {
-                                                case "add":
-                                                    if(player.hasPermission("magespells.admin")){
-                                                        if(args.length == 4) {
-                                                            Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
-                                                            if(playerFromName != null) {
-                                                                pluginManager.main.mageSpellsManager.teamManager.addPlayer(args[3], playerFromName);
-                                                            }
-                                                        }
-                                                    }
-                                                    break;
-                                                case "remove":
-                                                    if(player.hasPermission("magespells.admin")){
-                                                        if(args.length == 4) {
-                                                            Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
-                                                            if(playerFromName != null) {
-                                                                pluginManager.main.mageSpellsManager.teamManager.removePlayer(args[3], playerFromName);
-                                                            }
-                                                        }
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                    default:
-                                        break;
+                                        default:
+                                            break;
+                                    }
                                 }
                             }
                         }

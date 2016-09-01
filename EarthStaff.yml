@@ -1,0 +1,18 @@
+Name: "&2Earth Staff"
+RequiredLevelToCraft: 2
+RequiredLevelToUse: 2
+RequiredLevelToBind: 2
+Wand_Material: STICK
+Recipe: AIR,AIR,AIR,AIR,DIRT,AIR,AIR,STICK,AIR
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        SILVERFISH:
+            Chance: 10.0
+WandNode: "earth"
+CompatibleSpellNodeList:
+    - earth
+    - rock
+    - stone
+    - ground

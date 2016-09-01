@@ -11,6 +11,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.jar.JarFile;
@@ -53,17 +54,23 @@ public class WandConfig {
         } else {
             main.logger.info("Creating Wands Folder...");
             location.mkdirs();
-            firstLoad();
+            firstLoad("BasicWand.yml");
+            firstLoad("AirStaff.yml");
+            firstLoad("DarkStaff.yml");
+            firstLoad("LightStaff.yml");
+            firstLoad("WaterStaff.yml");
+            firstLoad("FireStaff.yml");
+            firstLoad("EarthStaff.yml");
             loadWandConfigs();
         }
     }
-    public void firstLoad() {
+    public void firstLoad(String wand) {
         try {
             String home = getClass().getProtectionDomain()
                     .getCodeSource().getLocation()
                     .getPath().replaceAll("%20", " ");
             JarFile jar = new JarFile(home);
-            ZipEntry entry = jar.getEntry("BasicWand.yml");
+            ZipEntry entry = jar.getEntry(wand);
             File efile = new File("plugins/MageSpellsRemastered/Wands/", entry.getName());
 
             InputStream in =
@@ -114,7 +121,7 @@ public class WandConfig {
                 }
             }
             String wandnode = config.getString("WandNode");
-            List<String> compatiblespells = config.getStringList("CompatibleSpellNodeList");
+            ArrayList<String> compatiblespells = (ArrayList<String>)config.getStringList("CompatibleSpellNodeList");
             return new WandObject(wandName,displayname,requiredleveltocraft,requiredleveltouse,requiredleveltobind,wand, shapedRecipe,mobdropsenabled, mobDrops, wandnode, compatiblespells);
         }catch(Exception ex) {
             return null;

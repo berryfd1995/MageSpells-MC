@@ -1,0 +1,20 @@
+Name: "&4Fire Staff"
+RequiredLevelToCraft: 2
+RequiredLevelToUse: 2
+RequiredLevelToBind: 2
+Wand_Material: BLAZE_ROD
+Recipe: AIR,AIR,AIR,AIR,LAVA_BUCKET,AIR,AIR,STICK,AIR
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        BLAZE:
+            Chance: 10.0
+        MAGMA_CUBE:
+            Chance: 10.0
+WandNode: "fire"
+CompatibleSpellNodeList:
+    - fire
+    - lava
+    - ash
+    - burn

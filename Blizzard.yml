@@ -1,0 +1,56 @@
+DisplayName: "&b&lBlizzard"
+Lore: "Freeze your enemys around you"
+Bolt:
+    Enabled: false
+    DamageRadius: 0
+    BoltDamage: 0
+Aura:
+    Enabled: true
+    ActiveTime: 5
+    AuraRadius: 10
+    AuraDamage: 3
+Spray:
+    Enabled: false
+    SprayRadius: 5
+    SprayDamage: 1
+ArmorPiercing: 20
+ManaCost: 25
+MoneyCost: 0
+Cooldown: 0
+ChargeTime: 5
+TravelDistance: 0
+SpellNode: "snow"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "normal"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SNOWBALL:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:
+    SLOW:
+        Duration: 5
+        Amplification: 1
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        GHAST:
+            Chance: 10.0
+ItemCost:
+    Settings:
+        Enabled: False
+    Items:
+        SNOW: 1
