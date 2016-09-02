@@ -54,9 +54,11 @@ public class WandManager {
     }
     public boolean isWand(ItemStack itemStack){
         if(itemStack.hasItemMeta()) {
-            for (WandObject wandObject : wandObjects) {
-                if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(wandObject.getDisplayname())) {
-                    return true;
+            if (itemStack.getItemMeta().hasDisplayName()) {
+                for (WandObject wandObject : wandObjects) {
+                    if (itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(wandObject.getDisplayname())) {
+                        return true;
+                    }
                 }
             }
         }

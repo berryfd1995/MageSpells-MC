@@ -155,15 +155,6 @@ public class BindingMenu {
                 if (itemStack.getType() != Material.AIR) {
                     WandObject wandObject = mageSpellsManager.wandManager.getWandFromItem(itemStack);
                     if(wandObject != null){
-                        System.out.println(playerObject.getLevel() >= wandObject.getRequiredleveltobind());
-                        System.out.println(spellObject.getRequiredLevelToBind() <= wandObject.getRequiredleveltobind());
-                        System.out.println(spellObject.getRequiredLevelToBind());
-                        System.out.println(wandObject.getRequiredleveltobind());
-                        System.out.println(((playerObject.getLevel() >= wandObject.getRequiredleveltobind() && spellObject.getRequiredLevelToBind()
-                                <= wandObject.getRequiredleveltobind()) ||!mageSpellsManager.levelingManager.isLevelingEnabled())
-                                +"&&"+(!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsWand(wandObject))
-                                +"&&"+ (!mageSpellsManager.isNodeSystemEnabled() ||( player.hasPermission("magespells.wand." + wandObject.getWandnode())
-                                && player.hasPermission("magespells.spell." + spellObject.getSpellNode()) && wandObject.isSpellCompatible(spellObject.getSpellNode()))));
                         if(((playerObject.getLevel() >= wandObject.getRequiredleveltobind() && spellObject.getRequiredLevelToBind()
                                 <= wandObject.getRequiredleveltobind()) ||!mageSpellsManager.levelingManager.isLevelingEnabled())
                                 &&(!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsWand(wandObject))
