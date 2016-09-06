@@ -349,5 +349,161 @@ Extra: General Charateristics of spells
 
 
                                         5) Wand Creation/How it works
-    
+    Wands are what allow users to cast spells. Without these, there is no magic (que bad music). Wands can hold
+up to two spells. A primary and a secondary. TO initate a primary spell simply leftclick in the direction you wish
+it to go. For the secondary spell just simply right click and watch it fly. Wands are learnable, and require levels
+/permission nodes to use (If set in config).
 
+Name: "&4Fire Staff"                                    -1
+RequiredLevelToCraft: 2                                 -2
+RequiredLevelToUse: 2                                   -3
+RequiredLevelToBind: 2                                  -4
+Wand_Material: BLAZE_ROD                                -5
+Recipe: AIR,AIR,AIR,AIR,LAVA_BUCKET,AIR,AIR,STICK,AIR   -6
+MobDrops:                                               -7
+    Settings:
+        Enable: True                                    -8
+    Drops:
+        BLAZE:                                          -9
+            Chance: 10.0                                -9.1
+        MAGMA_CUBE:
+            Chance: 10.0
+WandNode: "fire"                                        -10
+CompatibleSpellNodeList:                                -11
+    - fire                                              -11.1
+    - lava
+    - ash
+    - burn
+
+1: Name
+    This is where you put the display name of the spell. Make it fancy as color codes are welcome!
+2: Required level to craft
+    In order to craft a wand, they must first have the required level or above. As well as if it is set in the
+    config, they must know the spell and have the permission node.
+3: Required level to use
+    In order to use a wand (cast with it) the must have the required level or above. As well as if it is set in
+    the config, they must know the spell and have the permission node.
+4: Required level to bind
+    In order to bind with a wand, they must have the required level or above. As well as if it is set in the
+    config, they must know the spell and have the permission node. Reminder: Wands will not be displayed if the
+    spell is not compatible, user is not the right level, or the user does not know the wand.
+5: Wand material
+    This is where you specify the wand material. Anything can be a wand. But be careful. If the wand is a block
+    it may be placed on right click! Pick any material. Materials are lsited in the MaterialList.txt document.
+    Items with data values are accepted, simply use a hyphen. Example. Wool-3 would be Light Blue Wool. For a
+    list of specific ID's use http://minecraft-ids.grahamedgecombe.com/ or /itemdb in MC.
+6: Recipe
+    Recipies is where you specify how to make a wand. Each spot refers to a spot in a crafting table
+    [1][2][3]   -This is the crafting table. In terms of the conifg it goes by position. So,
+    [4][5][6]       1,2,3,4,5,6,7,8,9. Each number should be replaced by some sort of material type.
+    [7][8][9]       Materials with data values are allowed. Simply use a hyphen.Example. Wool-3 would be Light
+    Blue Wool. For a list of specific ID's use http://minecraft-ids.grahamedgecombe.com/ or /itemdb in MC. If you
+    do not wish to have anything in the spot, simply put 'AIR'. Please note, for recipes, minecraft does not store
+    specific data like lore and display name. SO, with that said, custom items will NOT be recognized in the recipe
+7: Mob Drops
+    Mob drops is used with binding and spell learning. In order to bind a spell you must have a spellbook present
+    in your inventory. To get these spellbooks you must kill mobs (if you want). This is where you set the chance
+    a certian mob has to dropping the book.
+8: Enable (Mob Drops)
+    Set this to true if you want spellsbooks to drop
+9: Blaze (Example)
+    These work as a key-value set. The key being Blaze, and the value (chance) being .10 or 10% chance of dropping.
+    Note: You can only go as low as .01 or 1% chance.
+10: Wand Node
+    Wand Nodes (see Section 3.8) Used for the node system. put 'all' if not enabled.
+11: Compatible Spell Node List
+    Compatible Nodes (see Section 3.8) Used for the node system. put 'all' if not enabled.
+
+
+                                      6) Custom Item Creation/How it works
+    Custom Items are great for item costs and things to just add into your server. They have their owne crafting
+recipie, as well as you can customize the display name and lore. Custom item creating right now only supports
+leveling system. Meaning you must be a certian level to create it. I will eventually add node system and maybe
+learning into it.
+
+Name: "&4Blood"                                                             -1
+Lore: "&cA pool of blood from your enemies"                                 -2
+Material: "REDSTONE"                                                        -3
+Recipe: "AIR,REDSTONE,AIR,REDSTONE,AIR,REDSTONE,AIR,REDSTONE,AIR"           -4
+RequiredLevel: 3                                                            -5
+
+1: Name
+    This is where you can customize the items display name for all players to see. Make it fancy ;)
+    Color Codes welcome!
+2: Lore
+    This is the lore for custom items. Great to add.. lore, and anything else you wish. For a new line type
+    a '/' in there. Color Codes Welcome!
+3: Material
+    This is where you specify the item material. Anything can be a custom item. But be careful. If the custom
+    item is a block it may be placed on right click, and will lose all data value associated with it! Pick any material.
+    Materials are lsited in the MaterialList.txt document. Items with data values are accepted, simply use a hyphen.
+    Example. Wool-3 would be Light Blue Wool. For a list of specific ID's use http://minecraft-ids.grahamedgecombe.com/
+    or /itemdb in MC.
+4: Recipe
+    Recipies is where you specify how to make a wand. Each spot refers to a spot in a crafting table
+    [1][2][3]   -This is the crafting table. In terms of the conifg it goes by position. So,
+    [4][5][6]       1,2,3,4,5,6,7,8,9. Each number should be replaced by some sort of material type.
+    [7][8][9]       Materials with data values are allowed. Simply use a hyphen.Example. Wool-3 would be Light
+    Blue Wool. For a list of specific ID's use http://minecraft-ids.grahamedgecombe.com/ or /itemdb in MC. If you
+    do not wish to have anything in the spot, simply put 'AIR'. Please note, for recipes, minecraft does not store
+    specific data like lore and display name. SO, with that said, custom items will NOT be recognized in the recipe
+5: Required Level
+    For a player to craft an item they must be this requried level or higher.
+
+
+                                          7) Team Creation/How It works
+                                           ****STILL IN ALPHA PHASE****
+    Teams are a great addition to magespells. They help sort players into groups, so that spells will either not
+or will hurt/help them depending on the spell settings. Teams can either be solely admin created, or user created.
+Example: if a admin wanted 4 factions, simply create 4 new teams. Set yourself as tbe leader. Then when a new player
+joins, simply have them click a serversign that will add them to a team.
+
+Leader: "L2_Envy(UUID)"                 -1
+Officer: "SomeoneSpecial(UUID)"         -2
+Members:                                -3
+    -Someone(UUID)                      -3.1
+    -Someone2(UUID)
+    -Someone3(UUID)
+1: Leader
+    This is where the leaders UUID of the team will be. It is important that it is a UUID and not the name! Leaders
+    have full control over the team.
+2: Officer
+    This is where the first officer will be. They have almost all the same permissions as the leader.
+3: Members
+    Any other member will be added here. They have the option to leave the team. Simply put, just shows
+    they are on a team. Each user can only be on one team.
+    (3.1) This is where the UUID of the player will be. It is in a list format for easy reading.
+
+
+                                                8) In-Game Menu
+    The mage menu, this is for easy access for any mage. Here it has 5 sub-menus. Spell Menu, Wand Menu, Wand Bag,
+Binding Menu, and Mage Stats. Each one operates differently and allows for different things.
+
+1: Spell Menu
+    The spell menu displays every spell that is loaded in the server. Each spell will be organized alphabetically for
+    easy access and finding. As well as be organized, each spell will be blacked out until the player has learned
+    the spell, is the right level, AND has the correct permission node for it. This means the spell is fully 'unlocked'.
+    The reason it requires all of this is because it allows for more diversity if an admin only wants a spell to show if
+    they have the right node. ALl they have to do is turn off the other two in the settings. Once unlocked, it will show
+    general information about a spell to help the user understand what it does and how powerful it is. You can also check
+    out item costs here too.
+2: Wand Menu
+    The Wand menu also displays every wand that is loaded in the server. Each wand will be organized alphabetically for
+    easy access and finding. As well as be organized, each wand will be blacked out until the player has learned the
+    spell, is the right level for use, and has the correct wand node. This means the wand is fully 'unlocked'.
+    Once unlocked, it will show general information about the wand, as well as how to craft the wand! (YAY!)
+3: Wand Bag
+    The wand bag is ment to be used for wand storage. This is because over time the player will get more and more
+    wands with different spells, and instead of it taking up so much space, the user can easily store it into their
+    wand bag. The wand bag is the normal size of an inventory, but will only store wands.
+4: Binding Menu
+    Okay, so binding is complicating when attempting to bind two things. In the binding menu you will sometimes see that
+    a spell or wand is not listed in the menu. This is because one of multiple things. A) The player does not know
+    the spell/wand. B) The player is not a high enough level to bind with the wand/spell. C) The player Does not have
+    the wand/spell node. OR D) The Wand does not have the spellnode in its compatible list. Any of these things can
+    prevent a spell from binding with a wand. Also when binding, the spell book will be consumed! Also, you will have
+    an option to bind with either primary or secondary. Remember if there is already a spell on either the primary or
+    secondary, and you attempt to place over that spell, it WILL remove the current spell, and replace it with the new
+    spell.
+5: Mage Stats
+    To see what level you are, or what team you are on, simply use this. More info will be coming

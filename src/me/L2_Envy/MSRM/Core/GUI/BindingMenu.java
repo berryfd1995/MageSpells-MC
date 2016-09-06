@@ -155,11 +155,11 @@ public class BindingMenu {
                 if (itemStack.getType() != Material.AIR) {
                     WandObject wandObject = mageSpellsManager.wandManager.getWandFromItem(itemStack);
                     if(wandObject != null){
-                        if(((playerObject.getLevel() >= wandObject.getRequiredleveltobind() && spellObject.getRequiredLevelToBind()
-                                <= wandObject.getRequiredleveltobind()) ||!mageSpellsManager.levelingManager.isLevelingEnabled())
+                        if(((playerObject.getLevel() >= wandObject.getRequiredleveltobind() /*&& spellObject.getRequiredLevelToBind()
+                                <= wandObject.getRequiredleveltobind()*/ )||!mageSpellsManager.levelingManager.isLevelingEnabled())
                                 &&(!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsWand(wandObject))
                                 && (!mageSpellsManager.isNodeSystemEnabled() ||( player.hasPermission("magespells.wand." + wandObject.getWandnode())
-                                && player.hasPermission("magespells.spell." + spellObject.getSpellNode()) && wandObject.isSpellCompatible(spellObject.getSpellNode())))) {
+                                && player.hasPermission("magespells.spell." + spellObject.getSpellNode()) && wandObject.isSpellCompatible(spellObject.getSpellNode())))){
                             ItemStack itemStack1 = itemStack.clone();
                             itemStack1.setAmount(1);
                             if (!wands.contains(itemStack1)) {
