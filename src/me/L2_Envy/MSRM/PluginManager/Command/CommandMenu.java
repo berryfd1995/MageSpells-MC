@@ -26,7 +26,7 @@ public class CommandMenu implements CommandExecutor{
         this.pluginManager = pluginManager;
         helpMenu.link(this);
     }
-
+    @SuppressWarnings( "deprecation" )
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
             if (sender instanceof Player) {

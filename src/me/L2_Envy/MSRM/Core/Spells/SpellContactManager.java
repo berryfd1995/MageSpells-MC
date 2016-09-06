@@ -1,6 +1,7 @@
 package me.L2_Envy.MSRM.Core.Spells;
 
 import it.unimi.dsi.fastutil.Hash;
+import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Bukkit;
@@ -26,68 +27,68 @@ public class SpellContactManager {
         this.mageSpellsManager = mageSpellsManager;
     }
 
-    public void checkSpellContact(ActiveSpellObject activeSpellObject){
-        if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(activeSpellObject.getLocation())) {
-            if (activeSpellObject.isSprayenabled()) {
-                for (LivingEntity livingEntity : getNearbyEntites(activeSpellObject, activeSpellObject.getSprayradius())) {
+    public void checkSpellContact(SpellEffect spellEffect){
+        if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(spellEffect.getActiveSpell().getLocation())) {
+            if (spellEffect.getActiveSpell().isSprayenabled()) {
+                for (LivingEntity livingEntity : getNearbyEntites(spellEffect.getActiveSpell(), spellEffect.getActiveSpell().getSprayradius())) {
                     //particle
                     if (mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
-                        activeSpellObject.getSpellEffect().onHit(livingEntity);
-                        mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, livingEntity.getLocation().clone());
+                        spellEffect.onHit(livingEntity);
+                        mageSpellsManager.particleEffectManager.playParticle(spellEffect.getActiveSpell(), livingEntity.getLocation().clone());
                         //potion affect
-                        mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
+                        mageSpellsManager.potionEffectManager.playPotionEffect(spellEffect.getActiveSpell(), livingEntity);
                         //damage
-                        mageSpellsManager.damageEffectManager.doDamage(activeSpellObject, livingEntity, false, true, false);
+                        mageSpellsManager.damageEffectManager.doDamage(spellEffect.getActiveSpell(), livingEntity, false, true, false);
                     }
                 }
             }
-            if (activeSpellObject.isBoltenabled()) {
-                if (boltHit(activeSpellObject)) {
-                    for (LivingEntity livingEntity : getNearbyEntitesBolt(activeSpellObject, activeSpellObject.getBoltradius())) {
+            if (spellEffect.getActiveSpell().isBoltenabled()) {
+                if (boltHit(spellEffect)) {
+                    for (LivingEntity livingEntity : getNearbyEntitesBolt(spellEffect.getActiveSpell(), spellEffect.getActiveSpell().getBoltradius())) {
                         if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
-                            activeSpellObject.getSpellEffect().onHit(livingEntity);
-                            mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, livingEntity.getLocation().clone());
+                            spellEffect.onHit(livingEntity);
+                            mageSpellsManager.particleEffectManager.playParticle(spellEffect.getActiveSpell(), livingEntity.getLocation().clone());
                             //potion affect
-                            mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
+                            mageSpellsManager.potionEffectManager.playPotionEffect(spellEffect.getActiveSpell(), livingEntity);
                             //damage
-                            mageSpellsManager.damageEffectManager.doDamage(activeSpellObject, livingEntity, true, false, false);
+                            mageSpellsManager.damageEffectManager.doDamage(spellEffect.getActiveSpell(), livingEntity, true, false, false);
                         }
                     }
-                    initiateSpellEndSeq(activeSpellObject);
+                    initiateSpellEndSeq(spellEffect);
                 }
             }
         }
     }
 
-    public void initiateSpellEndSeq(ActiveSpellObject activeSpellObject){
-        if(activeSpellObject.isAuraenabled()){
-            mageSpellsManager.activeSpellManager.removeSpell(activeSpellObject);
-            activeAura(activeSpellObject);
+    public void initiateSpellEndSeq(SpellEffect spellEffect){
+        if(spellEffect.getActiveSpell().isAuraenabled()){
+            mageSpellsManager.activeSpellManager.removeSpell(spellEffect);
+            activeAura(spellEffect);
         }else{
-            mageSpellsManager.activeSpellManager.removeSpell(activeSpellObject);
+            mageSpellsManager.activeSpellManager.removeSpell(spellEffect);
         }
     }
-    public void activeAura(ActiveSpellObject activeSpellObject){
-        activeSpellObject.clearSprayHit();
-       activeSpellObject.setAuratimertask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main, () -> {
-           if(activeSpellObject.getAuratimeleft() >0) {
-               mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, activeSpellObject.getLocation().clone());
-               for (LivingEntity livingEntity : getNearbyEntites(activeSpellObject, activeSpellObject.getAuraradius())) {
+    public void activeAura(SpellEffect spellEffect){
+        spellEffect.getActiveSpell().clearSprayHit();
+        spellEffect.getActiveSpell().setAuratimertask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main, () -> {
+           if(spellEffect.getActiveSpell().getAuratimeleft() >0) {
+               mageSpellsManager.particleEffectManager.playParticle(spellEffect.getActiveSpell(), spellEffect.getActiveSpell().getLocation().clone());
+               for (LivingEntity livingEntity : getNearbyEntites(spellEffect.getActiveSpell(), spellEffect.getActiveSpell().getAuraradius())) {
                    if (mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
-                       activeSpellObject.getSpellEffect().onHit(livingEntity);
-                       mageSpellsManager.particleEffectManager.playParticle(activeSpellObject, livingEntity.getLocation().clone());
+                       spellEffect.onHit(livingEntity);
+                       mageSpellsManager.particleEffectManager.playParticle(spellEffect.getActiveSpell(), livingEntity.getLocation().clone());
                        //potion
-                       mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
+                       mageSpellsManager.potionEffectManager.playPotionEffect(spellEffect.getActiveSpell(), livingEntity);
                        //damage
-                       mageSpellsManager.damageEffectManager.doDamage(activeSpellObject, livingEntity, false, false, true);
+                       mageSpellsManager.damageEffectManager.doDamage(spellEffect.getActiveSpell(), livingEntity, false, false, true);
                        //sound
-                       livingEntity.getLocation().getWorld().playSound(livingEntity.getLocation(), activeSpellObject.getSound(), activeSpellObject.getSoundvolume(), activeSpellObject.getSoundpitch());
+                       livingEntity.getLocation().getWorld().playSound(livingEntity.getLocation(), spellEffect.getActiveSpell().getSound(), spellEffect.getActiveSpell().getSoundvolume(),spellEffect.getActiveSpell().getSoundpitch());
                    }
                }
-               activeSpellObject.clearSprayHit();
-               activeSpellObject.tickauratimer();
+               spellEffect.getActiveSpell().clearSprayHit();
+               spellEffect.getActiveSpell().tickauratimer();
            }else{
-               removeAuraTask(activeSpellObject);
+               removeAuraTask(spellEffect.getActiveSpell());
            }
        },0L,20L));
     }
@@ -95,48 +96,48 @@ public class SpellContactManager {
         Bukkit.getScheduler().cancelTask(activeSpellObject.getAuratimertask());
     }
     //Different from bolt radius. Bolt hit must be within 1.5 blocks to be activated. and end spell
-    public boolean boltHit(ActiveSpellObject activeSpellObject){
+    public boolean boltHit(SpellEffect spellEffect){
         double radius = 1.5;
-        for (Entity entity : activeSpellObject.getLocation().getWorld().getEntities()) {
+        for (Entity entity : spellEffect.getActiveSpell().getLocation().getWorld().getEntities()) {
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity1 = (LivingEntity) entity;
-                    if (activeSpellObject.getLocation().distance(entity.getLocation().clone().add(0, 0.5, 0)) < radius) {
+                    if (spellEffect.getActiveSpell().getLocation().distance(entity.getLocation().clone().add(0, 0.5, 0)) < radius) {
                         if (entity instanceof Player) {
                             Player player = (Player) entity;
-                            boolean sameteam = mageSpellsManager.teamManager.onSameTeam(activeSpellObject.getCaster(), player);
-                            if (activeSpellObject.getCaster().getName().equalsIgnoreCase(player.getName())) {
-                                if (activeSpellObject.isAffectself()) {
-                                    activeSpellObject.setBoltHit(player);
-                                    if(activeSpellObject.didBoltHit(player)) {
-                                        attackEntityBolt(activeSpellObject, player);
+                            boolean sameteam = mageSpellsManager.teamManager.onSameTeam(spellEffect.getActiveSpell().getCaster(), player);
+                            if (spellEffect.getActiveSpell().getCaster().getName().equalsIgnoreCase(player.getName())) {
+                                if (spellEffect.getActiveSpell().isAffectself()) {
+                                    spellEffect.getActiveSpell().setBoltHit(player);
+                                    if(spellEffect.getActiveSpell().didBoltHit(player)) {
+                                        attackEntityBolt(spellEffect, player);
                                     }
                                     return true;
                                 }
                             } else {
                                 if (sameteam) {
-                                    if (activeSpellObject.isAffectteammates()) {
-                                        activeSpellObject.setBoltHit(player);
-                                        if(activeSpellObject.didBoltHit(player)) {
-                                            attackEntityBolt(activeSpellObject, player);
+                                    if (spellEffect.getActiveSpell().isAffectteammates()) {
+                                        spellEffect.getActiveSpell().setBoltHit(player);
+                                        if(spellEffect.getActiveSpell().didBoltHit(player)) {
+                                            attackEntityBolt(spellEffect, player);
                                         }
                                         return true;
                                     }
                                 } else {
-                                    if (activeSpellObject.isAffectenemys()) {
-                                        activeSpellObject.setBoltHit(player);
-                                        if(activeSpellObject.didBoltHit(player)) {
-                                            attackEntityBolt(activeSpellObject, player);
+                                    if (spellEffect.getActiveSpell().isAffectenemys()) {
+                                        spellEffect.getActiveSpell().setBoltHit(player);
+                                        if(spellEffect.getActiveSpell().didBoltHit(player)) {
+                                            attackEntityBolt(spellEffect, player);
                                         }
                                         return true;
                                     }
                                 }
                             }
                         } else {
-                            if (activeSpellObject.isAffectmobs()) {
+                            if (spellEffect.getActiveSpell().isAffectmobs()) {
                                 LivingEntity livingEntity = (LivingEntity) entity;
-                                activeSpellObject.setBoltHit(livingEntity);
-                                if(activeSpellObject.didBoltHit(livingEntity)) {
-                                    attackEntityBolt(activeSpellObject, livingEntity);
+                                spellEffect.getActiveSpell().setBoltHit(livingEntity);
+                                if(spellEffect.getActiveSpell().didBoltHit(livingEntity)) {
+                                    attackEntityBolt(spellEffect, livingEntity);
                                 }
                                 return true;
                             }
@@ -146,12 +147,12 @@ public class SpellContactManager {
         }
         return false;
     }
-    public void attackEntityBolt(ActiveSpellObject activeSpellObject, LivingEntity livingEntity){
+    public void attackEntityBolt(SpellEffect spellEffect, LivingEntity livingEntity){
         if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {
-            activeSpellObject.getSpellEffect().onHit(livingEntity);
-            mageSpellsManager.potionEffectManager.playPotionEffect(activeSpellObject, livingEntity);
+            spellEffect.onHit(livingEntity);
+            mageSpellsManager.potionEffectManager.playPotionEffect(spellEffect.getActiveSpell(), livingEntity);
             //damage
-            mageSpellsManager.damageEffectManager.doDamage(activeSpellObject, livingEntity, true, false, false);
+            mageSpellsManager.damageEffectManager.doDamage(spellEffect.getActiveSpell(), livingEntity, true, false, false);
         }
     }
     //How will it know to end.

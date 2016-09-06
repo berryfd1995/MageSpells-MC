@@ -64,7 +64,7 @@ public class SpellUI {
                                     + "/&6Money Cost: " + spellObject.getMoneycost()
                                     + "/&6Charge Time: " + spellObject.getChargetime()
                                     + "/&6Cooldown Time: " + spellObject.getCooldown()
-                                    + "/&6Special Effect: " + spellObject.getSpellEffect().getName()
+                                    + "/&6Special Effect: " + spellObject.getSpellEffect()
                                     + "/&6Required Level: " + spellObject.getRequiredLevelToCast();
                             if (spellObject.isItemcostenabled()) {
                                 lore = lore + "/&6Item Cost: ";

@@ -1,6 +1,8 @@
 package me.L2_Envy.MSRM.Core.Casting;
 
 import me.L2_Envy.MSRM.Core.Effects.Preset.HomingSpellEffect;
+import me.L2_Envy.MSRM.Core.Effects.Preset.NormalEffect;
+import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
@@ -60,13 +62,12 @@ public class CastingManager {
     public void doSpellCasting(String name, SpellObject spellObject){
         Player player  = mageSpellsManager.main.utils.getOnlinePlayerFromName(name);
         PlayerObject playerObject = mageSpellsManager.mageManager.getMage(player.getUniqueId());
-        ActiveSpellObject activeSpellObject = new ActiveSpellObject(spellObject, player.getLocation().add(0,1,0), player);
-        activeSpellObject.getSpellEffect().setInitialVector(activeSpellObject.getCaster().getEyeLocation().getDirection().multiply(2));
         if(spellObject.getCooldown() > 0){
             mageSpellsManager.manaManager.scheduleCooldownTask(playerObject,spellObject.getCooldown());
         }
-        mageSpellsManager.activeSpellManager.shootSpell(activeSpellObject);
+        mageSpellsManager.activeSpellManager.shootSpell(mageSpellsManager.spellEffectManager.setupSpellEffect(spellObject, player));
     }
+    @SuppressWarnings( "deprecation" )
     public void takeItemCosts(Player player, SpellObject spell){
         Inventory inventory = player.getInventory();
         HashMap<ItemStack, Integer> itemCosts = spell.getItemcost();

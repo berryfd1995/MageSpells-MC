@@ -33,6 +33,7 @@ public class Notes {
             export("ParticleList.txt");
             export("MaterialsList.txt");
             export("README.txt");
+            export("Tutorial.txt");
         }
     }
     public void export(String name) {

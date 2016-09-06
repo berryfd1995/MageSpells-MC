@@ -43,7 +43,7 @@ public class SpellObject{
     private boolean affectenemys;
     private boolean affectteammates;
     private ItemStack spellbook;
-    private SpellEffect spellEffect;
+    private String spellEffect;
     private Sound sound;
     private float soundvolume;
     private float soundpitch;
@@ -54,7 +54,7 @@ public class SpellObject{
     private boolean itemcostenabled;
     private HashMap<ItemStack, Integer> itemcost;
 
-    public SpellObject(String name, String displayname, String spellnode, String lore, boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled, int auratime, int auraradius, double auradamage,boolean sprayenabled, int sprayradius, double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime, int traveldistance, int requiredleveltobind,int requiredleveltocast, int requiredleveltodrop,boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates, ItemStack spellbook, SpellEffect spellEffect, Sound sound, float soundvolume, float soundpitch, ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled, HashMap<ItemStack, Integer> itemcost){
+    public SpellObject(String name, String displayname, String spellnode, String lore, boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled, int auratime, int auraradius, double auradamage,boolean sprayenabled, int sprayradius, double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime, int traveldistance, int requiredleveltobind,int requiredleveltocast, int requiredleveltodrop,boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates, ItemStack spellbook, String spellEffect, Sound sound, float soundvolume, float soundpitch, ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled, HashMap<ItemStack, Integer> itemcost){
         this.name = name;
         this.displayname = displayname;
         this.spellnode = spellnode;
@@ -198,7 +198,7 @@ public class SpellObject{
         return spellbook;
     }
 
-    public SpellEffect getSpellEffect() {
+   public String getSpellEffect() {
         return spellEffect;
     }
 

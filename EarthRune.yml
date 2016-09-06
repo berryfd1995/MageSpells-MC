@@ -1,0 +1,5 @@
+Name: "&2Earth &2Rune"
+Lore: "&cA Rune embedded with the power of the earth."
+Material: "INK_SACK-10"
+Recipe: "AIR,DIRT,AIR,DIRT,OBSIDIAN,DIRT,AIR,DIRT,AIR"
+RequiredLevel: 3

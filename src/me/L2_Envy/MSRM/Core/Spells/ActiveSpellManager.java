@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM.Core.Spells;
 
+import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Bukkit;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class ActiveSpellManager {
     public MageSpellsManager mageSpellsManager;
-    private ArrayList<ActiveSpellObject> activeSpellObjects;
+    private ArrayList<SpellEffect> activeSpellObjects;
     public ActiveSpellManager(){
         activeSpellObjects = new ArrayList<>();
     }
@@ -22,51 +23,50 @@ public class ActiveSpellManager {
     public boolean hasActiveSpellObject(ActiveSpellObject activeSpellObject){
         return activeSpellObjects.contains(activeSpellObject);
     }
-    public void addActiveSpellObject(ActiveSpellObject activeSpellObject){
-        if(!activeSpellObjects.contains(activeSpellObject)){
-            activeSpellObjects.add(activeSpellObject);
+    public void addActiveSpellObject(SpellEffect spellEffect){
+        if(!activeSpellObjects.contains(spellEffect)){
+            activeSpellObjects.add(spellEffect);
         }
     }
-    public void removeActiveSpellObject(ActiveSpellObject activeSpellObject){
-        if(!activeSpellObjects.contains(activeSpellObject)){
-            activeSpellObjects.remove(activeSpellObject);
+    public void removeSpellEffect(SpellEffect spellEffect){
+        if(activeSpellObjects.contains(spellEffect)){
+            activeSpellObjects.remove(spellEffect);
         }
     }
-    public void shootSpell(ActiveSpellObject activeSpellObject){
-        activeSpellObject.setTimerTask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main,() -> {
-            //has it hit a block?
-            if(activeSpellObject.getLocation().getBlock().getType() == Material.AIR){
-                //Is it past max distance?
-                if(activeSpellObject.getInitialLoc().distance(activeSpellObject.getLocation()) < activeSpellObject.getTraveldistance()){
-                    //Spell Effect
-                    activeSpellObject.getSpellEffect().Run(activeSpellObject.getLocation());
-                    //Update Spell Location
-                    activeSpellObject.setLocation(activeSpellObject.getSpellEffect().plotSpellPoint());
-                    //Play particle at spell location
-                    mageSpellsManager.particleEffectManager.playParticle(activeSpellObject);
-                    //Check if nearby spells
-                    if(isNearbySpells(activeSpellObject)){
-                        removeSpell(activeSpellObject);
-                    }
-                    //sound effect
-                    playSound(activeSpellObject);
-                    //Do spell effects / damage
-                    mageSpellsManager.spellContactManager.checkSpellContact(activeSpellObject);
-                }else{
-                    mageSpellsManager.spellContactManager.initiateSpellEndSeq(activeSpellObject);
-                }
-            }else{
-                mageSpellsManager.spellContactManager.initiateSpellEndSeq(activeSpellObject);
-            }
+    public void shootSpell(SpellEffect spellEffect){
+        spellEffect.getActiveSpell().setTimerTask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main, () ->{//has it hit a block?
+                        if (spellEffect.getActiveSpell().getLocation().getBlock().getType() == Material.AIR) {
+                            //Is it past max distance?
+                            if (spellEffect.getActiveSpell().getInitialLoc().distance(spellEffect.getActiveSpell().getLocation()) < spellEffect.getActiveSpell().getTraveldistance()) {
+                                //Spell Effect
+                                spellEffect.Run();
+                                //Update Spell Location
+                                spellEffect.getActiveSpell().setLocation(spellEffect.plotSpellPoint());
+                                //Play particle at spell location
+                                mageSpellsManager.particleEffectManager.playParticle(spellEffect.getActiveSpell());
+                                //Check if nearby spells
+                                if (isNearbySpells(spellEffect)) {
+                                    removeSpell(spellEffect);
+                                }
+                                //sound effect
+                                playSound(spellEffect.getActiveSpell());
+                                //Do spell effects / damage
+                                mageSpellsManager.spellContactManager.checkSpellContact(spellEffect);
+                            } else {
+                                mageSpellsManager.spellContactManager.initiateSpellEndSeq(spellEffect);
+                            }
+                        } else {
+                            mageSpellsManager.spellContactManager.initiateSpellEndSeq(spellEffect);
+                        }
         },0L,1L));
     }
-    public boolean isNearbySpells(ActiveSpellObject spell) {
-        for (ActiveSpellObject otherSpell : ((ArrayList<ActiveSpellObject>) activeSpellObjects.clone())) {
+    public boolean isNearbySpells(SpellEffect spell) {
+        for (SpellEffect otherSpell : ((ArrayList<SpellEffect>) activeSpellObjects.clone())) {
             double radius = 2;
-            if (otherSpell.getCaster() != spell.getCaster()) {
-                if (otherSpell.getLocation().distance(spell.getLocation()) < radius) {
-                    otherSpell.getLocation().getWorld()
-                            .createExplosion(spell.getLocation(), 2.0F);
+            if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
+                if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) < radius) {
+                    otherSpell.getActiveSpell().getLocation().getWorld()
+                            .createExplosion(spell.getActiveSpell().getLocation(), 2.0F);
                     removeSpell(spell);
                     removeSpell(otherSpell);
                     return true;
@@ -75,10 +75,11 @@ public class ActiveSpellManager {
         }
         return false;
     }
-    public void removeSpell(ActiveSpellObject spell) {
-        Bukkit.getScheduler().cancelTask(spell.getTimerTask());
-        if (activeSpellObjects.contains(spell))
-            activeSpellObjects.remove(spell);
+    public void removeSpell(SpellEffect spellEffect) {
+        spellEffect.spellEndingSeq();
+        Bukkit.getScheduler().cancelTask(spellEffect.getActiveSpell().getTimerTask());
+        removeSpellEffect(spellEffect);
+
     }
     public void playSound(ActiveSpellObject activeSpellObject){
         activeSpellObject.getLocation().getWorld().playSound(activeSpellObject.getLocation(), activeSpellObject.getSound(), activeSpellObject.getSoundvolume(), activeSpellObject.getSoundpitch());

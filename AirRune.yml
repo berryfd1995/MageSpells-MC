@@ -1,0 +1,5 @@
+Name: "&fAir &fRune"
+Lore: "&cA Rune embedded with the power of air."
+Material: "INK_SACK-7"
+Recipe: "AIR,WOOL,AIR,WOOL,AIR,WOOL,AIR,WOOL,AIR"
+RequiredLevel: 3

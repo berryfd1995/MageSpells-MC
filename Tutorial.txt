@@ -1,0 +1,353 @@
+Hey guys! So I have been getting a lot of questions on how all of this works.
+This will be my attempt on doing an in-depth tutorial on everything for magespells.
+
+Table o' Contents:
+1) What is MageSpells?
+2)
+3) Settings Config
+4) Spell Creation/How it works
+5) Wand Creation/How it works
+6) Custom Item Creation/How it works
+7) Team Creation/How It works
+8) In-Game Menu
+8) Extra
+
+
+
+
+
+
+
+                                        1) What is MageSpells?
+    MageSpells is my pride and glory. I have been working on this plugin since the beginning of 2015.
+(Its 2016 as I am writng this). Since I began creating plugins, and programs alike, I have always been
+a big supporter of user customization. This is what I built the basis of Magespells on. Customization.
+I love seeing what new users can create and do with what I make. Sometimes even pushing the bounderies of
+the plugin itself. Magespells allows for almost complete customization. Literatly giving players as much
+customization as I possibly can while maintaining an effective and (hopefully) bug-free plugin. MageSpells
+allows for server admins to create what they want for the type of server they need. Wand a billion spells
+with massive battles? Sure! Want a roleplaying type of server where you must unlock spells and wands. Sure
+thing. I give admins the ability to restrict the use of spells down to the letter. It can be incorperated
+easily with other plugins simply with the permission system. Or if there is a savvy dev out there wishing
+to hook-in and create their own spell effects, they have the freedom to do so. MageSpells is what you want it
+to be. Without me telling you NO, dont use my plugin like that, Instead I encourage it. Show it off, take the credit
+you did, afterall create it. This plugin has been a non-profit plugin although donations will be accepted
+they are never enforced or required. I do it out of joy. not for money.
+
+
+
+
+                                        2)
+                                        3) Settings Config
+    Okay so lets start off at the beginning. Settings. You should edit this before doing anything else. I
+have attempted to provide some sort of guidance in the config. Here is an example of it with more explination
+Settings:
+    GameplaySettings:
+        EnableLeveling: True                    -1
+        MobExperience:                          -2
+            ZOMBIE: 10                          -2.1
+            SPIDER: 40
+        ExpFromPlayers: 50                      -3
+        LevelSystem:                            -4
+            1: 0                                -4.1
+            2: 100
+            3: 200
+            4: 500
+            5: 1000
+            6: 2000
+            7: 5000
+            8: 10000
+            9: 20000
+            10: 40000
+        EnableLearning: True                    -5
+        EnableSpellBookLearning: True           -6
+        EnableWandLearning: true                -7
+        EnableNodeSystem: true                  -8
+    TeamSettings:
+        UserCreatesTeam: True                   -9
+    MaxManaAmount: 100                          -10
+    ManaRegenRate: 3                            -11
+    DisplayExactValue: true                     -12
+    Colors:                                     -13
+        InactiveMana: "&f"
+        ActiveMana: "&b"
+        LowMana: "&c"
+        ManaBrackets: "&6"
+        ChargeStatusBar: "&e"
+        ChargeLeftBar: "&c"
+        ChargeBracket: "&6"
+        CooldownStatusBar: "&2"
+        CooldownLeftBar: "&a"
+        CooldownBracket: "&6"
+
+1: Enable Leveling
+    Leveling is a way to unlock spells. This also enables gaining experience from mobs
+    and players. Leveling is great in a role play enviroment. It allows for micromanaging
+    spells and wands alike. Leveling governs Dropping of spellbooks/wands. Binding spells
+    with wands, casting spells, and crafting spells.
+2: Mob Experience
+    Mob experince works as a key-value. The KEY being the mob type. and Key being the amount of
+    experince earned from that mob.
+3: Player Experince
+    This works exactly the same as mobs but instead for palyers.
+4: Leveling System
+    In order for a leveling system to work there need to be levels. Meaning there needs to be
+    a set amount of experience required to reach that level. That is how this system works.
+    You can add unlimited amount of levels.
+    (4.1) The key being any integer. And the value being any integer representing the amount
+        of experience required. (Technically LONG). In thisexample, if a player has 1242 exp,
+        they will be level 5.
+5: Enable Learning
+    Learning is also a way to unlock spells. Learning gives a better ability to determine who
+    uses what spell while still maintaing a role-play effectiveness. It allows for managing each
+    spell individually for who uses what spell. This is a more specific way to micromanage players
+    getting spells. Great for server signs or other command type plugins even VIP stuff. This will
+    enable learning through spellbooks and wands.
+6: Enable SpellBook learning
+    IF Enable learning is enabled, this this will take into effect. If a player who does not already know
+    the spell right clicks the book, the book will be consumed and the player will then 'learn' the spell(Regardless of level).
+    This will allow for later use of the spell for casting.
+7: Enable Wand Learning
+    Similary to spellbook leanring, if Enable Learning is enabled, then this will also take into effect.
+    If a player right clicks an unknown wand, then they 'learn' that wand (Regardless of level). This
+    will allow for later use of the wand itself for casting.
+8: Enable Node System
+    This is where micromanaging gets complex. Do not use this if you are not good with permissions.
+    The Node system is based on the permission system. This allows for all plugins to hook into it.
+    How does it work? Each spell has a 'SpellNode' (magespells.spell.<node>) and each Wand has a
+    'WandNode'(magespells.wand.<ndoe>). For a player to use a spell or wand they MUST have this node
+    in their permissions.  So this works very similar to learning, except the node system has the
+    ability to group spells and wands together. Example: You have 3 Fire spells. You set all three
+    of their spell nodes to 'fire' (magespells.spell.fire). This means if a player has the permisison
+    'magespells.spell.fire' they will immediately gain access to all three spells. Wands work the exact
+    same but with one added feature. Wands have a wandcompatibility node list. This list is where you
+    can specifiy what spells will be compatible with that wand. So if you wanted only fire spells on
+    a fire wand. In the wand compatiblity node list you simply add '- fire'. This means all three of
+    the spells as mentioned aboved will be allowed to bind with the fire wand. This adds for so much
+    diversity and simplicity for micromanaging your spells and wands.
+9: User Creates Team
+    Teams are great system in magespells. If you want players to be grouped together so that certain
+    spells wont hurt them. This is how you do it. Teams help players specify who they are with. For this
+    option, where a user can create teams. This means any user is allowed to creates teams (WHO KNEW!).
+    Great for factions. Each team has a leader and an officer as well as members. To create a team there
+    must be a leader and officer. In order for a leader to join another team, they must leave the current
+    team they are added in. This helps keep an excess of teams. Players may only be part of one team at time.
+10: Max Mana Amount
+    This is where you can change how much mana each player has by setting a maximum mana. This allows for
+    more expensive spell or however you wish to group your spells.
+11: Mana Regen Rage
+    Mana regens naturally. And will continue to regenerate until it is full. Mana Is needed for any spell
+    (Unless you choose to set the cost to 0 for all spells). It will regenerate by the amount specified each
+    second. Tinker around with this and see what you like!
+12: Display Exact Value
+    If you wish for players to see exactly how much mana they have. This is the easiet way as the bar
+    may prove a bit confusing.
+13: Colors
+    Colors is just an added way to choose what you want as a server admin, to help fix your color theme of
+    your server. Simply cosmetic and does not affect gameplay in any way.
+
+
+
+
+                                        4) Spell Creation/How it works
+    I'm not going to lie, as I am typing this.. I am not looking forward to going over every aspect of spells
+just because there is so much to customize... Nonetheless, these are spells. Configurable masterpieces.
+Spells are created by simply creating a .yml file and copying and pasting the template into the yml.
+After you have done that, all you need to do is edit to your pleasing. Be sure you look over everything
+so you know it is all working! Spell creating takes time a paitence, but you will not be disappointed.
+
+DisplayName: "&4Fire Ball"                      -1
+Lore: "&cBurn baby &oBURNNNN"                   -2
+Bolt:                                           -3
+    Enabled: true                               -3.1
+    DamageRadius: 3                             -3.2
+    BoltDamage: 5                               -3.3
+Aura:                                           -4
+    Enabled: false                              -4.1
+    ActiveTime: 0                               -4.2
+    AuraRadius: 0                               -4.3
+    AuraDamage: 0                               -4.4
+Spray:                                          -5
+    Enabled: true                               -5.1
+    SprayRadius: 5                              -5.2
+    SprayDamage: 3                              -5.3
+ArmorPiercing: 20                               -6
+ManaCost: 20                                    -7
+MoneyCost: 0                                    -8
+Cooldown: 3                                     -9
+ChargeTime: 0                                   -10
+TravelDistance: 50                              -11
+SpellNode: "fire"                               -12
+RequiredLevelToBind: 2                          -13
+RequiredLevelToCast: 2                          -14
+RequiredLevelToDrop: 2                          -15
+AffectMobs: true                                -16
+AffectSelf: false                               -17
+AffectEnemy: true                               -18
+AffectTeammates: false                          -19
+SpecialEffect: "fire"                           -20
+Sound:                                          -21
+    Name: ENTITY_BAT_TAKEOFF                    -21.1
+    Volume: 0.5                                 -21.2
+    Pitch: 0.5                                  -21.3
+Particles:                                      -22
+    SMOKE_LARGE:                                -23
+        Amount: 50                              -23.1
+        offSetX: 0.05                           -23.2
+        offSetY: 0.05                           -23.3
+        offSetZ: 0.05                           -23.4
+        Speed: 0.5                              -23.5
+    FLAME:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:                                  -24
+    WEAKNESS:                                   -25
+        Duration: 3                             -25.1
+        Amplification: 2                        -25.2
+MobDrops:                                       -26
+    Settings:
+        Enable: True                            -27
+    Drops:
+        BLAZE:                                  -28
+            Chance: 1.0                         -28.1
+        MAGMA_CUBE:
+            Chance: 5.0
+ItemCost:                                       -29
+    Settings:
+        Enabled: True                           -30
+    Items:
+        FIREBALL: 1                             -31
+
+1: DisplayName
+    Simply put, this is what the players will see in the spell menu, and on the wand. Make it fancy ;)
+    Color Codes welcome!
+2: Lore
+    This is the lore for spells. Great to add.. lore, and anything else you wish. For a new line type
+    a '/' in there. Color Codes Welcome!
+3: Bolt
+    Bolt spells, these are your basic spells that will stop when an enemy is hit. Bolt spells are great
+    for long range spells.
+    (3.1) To enable bolt spells, set this to true! This means the spell will inherit any charateristics of
+        a bolt spell
+    (3.2) Damage Radius is when a bolt initailly hits an enemy anyone within the specified radius will be
+        considered hit aswell.
+    (3.3) Bolt Damage is simply put, the amount of damage delt to a player. (Armor is taken into affect).
+4: Aura
+    Aura Spells are great for affecting a wide rage of players for a specific amount of time! Aura spells
+    can be combined with bolt spells. If this is done, then at the end of a bolt spells life, the aura spell
+    will produce an aura. If you wish for the aura spell to happen at the players location, just put the
+    travel distance to '0'. Otherwise the spell will fly until it hits a wall or runs out of distance, then
+    activate.
+    (4.1) Set this to true if you wish to inherit the characterisitcs of an aura spell.
+    (4.2) Spells operate differently than normal spells. An aura is active for a specific period of time.
+        Set this in seconds for the aura to last that long. Aura spells will tick every second.
+    (4.3) This is the radius of the aura. Great for covering large amounts of land. Any person eligible to
+        be affected will be in regards to the settings.
+    (4.4) This is where you can set the amount of damage an aura spell does. (Armor is taken into affect)
+5: Spray
+    Spray spells work similar to bolt spells, but while they fly they do not stop when hitting an enemy (unless
+    bolt is set to true). Instead it damages anyone within the radius of the spell as it flys through the air.
+    Note that enemies are only hit once by this spell.
+    (5.1) Enable this to inherit the characteristics of the spray spell.
+    (5.2) This is the radius at which it affects people as it flys through the air.
+    (5.3) This is how much damage each player is delt. (Armor is taken into affect)
+6: Armor Piercing
+    Armor can be a nasty pain in the butt. Lets eleminate that with armor piercing. Set this anywhere
+    from 0-100. This will be taken as a percent to negate when the damage is delt. So if a player has
+    lets say 50% armor and the armor penetration is set to 20%. That means that only 40% of the armor is
+    registered.
+7: Mana Cost
+    Mana Cost is what spells run on (if you want). In order to cast a spell the player must have this
+    mana amount aquired, otherwise the spell will not be cast. (See section 3.10)
+8: Money Cost
+    NOT IMPLEMENTED YET -- Money cost is the same as mana cost but instead it uses money! Vault needed for
+    this option.
+9: Cooldown
+    If you want to limit how often a player can cast a spell, cooldowns are a great way to do this.
+    This keeps player from rapid spamming a spell at other players, and helps keep things balanced.
+10: Charge Time
+    Charge time is the same as cooldown time, but instead it operates before a spell is cast. The charge
+    time must tick all the way through and then the spell is automatically cast. (Mana is drained before)
+11: Travel Distance
+    This is where you specify how far you wish the spell to travel (In units of blocks). If spells go past
+    this distance, they are removed. Spells may end before this travel distance is reached.
+12: Spell Node
+    Spell Nodes (see Section 3.8) Used for the node system. put 'all' if not enabled.
+13: Required Level To Bind
+    This level is required before a player can bind this spell with a wand. Leveling system must be enabled
+14: Required Level to Cast
+    This level is required before a player can cast this spell. Leveling system must be enabled.
+15: Required Level To Drop
+    This level is required before an entity will drop for a player. Leveling system must be enabled.
+16: Affect Mobs
+    Set this to ture to affect all mob types.
+17: Affect Self
+    Set this to true to affect yourself with the spell.
+18: Affect Enemy
+    Set this to true to affect anyone that is not on you team.
+19: Affect Teammates
+    Set this to ture to affect anyone that is on your team.
+20: Special Effect
+    Special Effects are for any spells. If you are not sure what to put set it to 'normal'. If you
+    want to know what special effects there are, look at the effectlist.txt document. Here I will add
+    what new spelleffects I have added. Spell effects do things like set enemies ablaze, or teleport the player.
+21: Sound
+    Each spell has a sound. I perfer Entity_Bat_Takeoff for mine, but that is by prefrence. There are a lot
+    of sounds to choose from, if you want a list then check out my SountList.txt document. I have added all possible
+    sounds for 1.10. Enjoy choosing!
+    (21.1) This is where you put the sound name.
+    (21.2) This is where you can change the volume of the sound
+    (21.3) This is where you can change the pitch of the sound
+22: Particles
+    Particles are what give spells the fancyness. You can make your spell stand out, or make it simple.
+    Add as many particole effects as you want to spell. Look at ParticeList.txt to see what particles are avaliable
+    to you! Particles at created every tick of the spell.
+23: Smoke_Large (Example)
+    Smoke_Large is a particle type. When creating a new spell be sure to specify what particle followed by a colon.
+    (23.1) Here is where you put the amount of particles you wish to be spawned per tick.
+    (23.2-4) The offset is, simply put, how far away you wish the particles to be spread from the center.
+        Meaning, if you have 0.05 that means 0.05 blocks it will expand on either the x/y/z axis.
+    (23.5) Speed is how fast you want the particles to go through their animation. Menaing they will
+        speed up and disappear the faster you have it.
+24: Potion Effects
+    Potion Effects are just like the potions in vanilla minecraft. Each one has a name to be identified by
+    use the potioneffectlist.txt document to figure out what potioneffect you wish to add.
+25: Weakness (Example)
+    As per example of potion effects. Just like Particle effects, be sure to specify what particle followed by a colon
+    and then set the duration and amplification.
+    (25.1) The duration is how long a potion effect will last in seconds.
+    (25.2) The Amplification is how strong the potion effect will be. Some potion effects can only go to 2.
+    So be careful!
+26: Mob Drops
+    Mob drops is used with binding and spell learning. In order to bind a spell you must have a spellbook present
+    in your inventory. To get these spellbooks you must kill mobs (if you want). This is where you set the chance
+    a certian mob has to dropping the book.
+27: Enable (Mob Drops)
+    Set this to true if you want spellsbooks to drop
+28: Blaze (Example)
+    These work as a key-value set. The key being Blaze, and the value (chance) being .10 or 10% chance of dropping.
+    Note: You can only go as low as .01 or 1% chance.
+29: Item Costs
+    Item Costs allow for more complexity when attempting to cast a spell. If a player does not have the specified
+    items in his inventory then the spell will not be cast. The Item Costs work with custom items meaning you
+    can make it so a player requires a custom item to cast a spell. Use the MaterialsList.txt document to get a list
+    of materials. To specifiy a specific material that has a data key to it. Use a hyphen. Example. Wool-3 would be
+    Light Blue Wool. For a list of specific ID's use http://minecraft-ids.grahamedgecombe.com/ or /itemdb in MC.
+30: Enable (Item Cost)
+    Enable this if you wish to have custom items costs for the spell.
+31: FIREBALL (Example)
+    For this example we will use Fireball (Also known as Firecharge). This also works as a key-value pair.
+    The key being fireball, and the value (amount) being 1.
+Extra: General Charateristics of spells
+    Spells are the whole reason for this plugins. But to keep spells from becoming too op.. or dumb.. or broken.
+    I set in place a couple checks. For example when a spell hits a wall, it will no longer be active
+    and will disipate. Spells can only travel through air. May change in a later update to be configurable.
+    Also note that damnages from aura, spray, and bolt do indeed stack!
+
+
+                                        5) Wand Creation/How it works
+    
+

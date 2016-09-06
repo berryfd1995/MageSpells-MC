@@ -1,6 +1,7 @@
 package me.L2_Envy.MSRM.Core.Handlers;
 
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
+import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import org.bukkit.entity.LivingEntity;
@@ -24,8 +25,9 @@ public class EntityListener implements Listener{
         if(player != null) {
             if(player.hasPermission("magespells.mage")) {
                 if (mageSpellsManager.mageManager.isMage(player)) {
+                    PlayerObject playerObject = mageSpellsManager.mageManager.getMage(player.getUniqueId());
                     for (SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()) {
-                        if(spellObject.isMobdropsenabled()) {
+                        if (spellObject.isMobdropsenabled() && playerObject.getLevel() >= spellObject.getRequiredLevelToDrop()) {
                             if (spellObject.getMobDrops().containsKey(livingEntity.getType())) {
                                 if (mageSpellsManager.spellBookManager.shouldDrop(spellObject.getMobDrops().get(livingEntity.getType()))) {
                                     entityDeathEvent.getDrops().add(spellObject.getSpellbook());

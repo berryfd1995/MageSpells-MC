@@ -63,40 +63,40 @@ public class ManaManager {
     }
     public void scheduleManaTask(PlayerObject playerObject){
         playerObject.setCurrentmana(maxmana);
-        manatask.put(playerObject, Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main,() -> {
-                regenMana(playerObject);
+        manatask.put(playerObject, Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main, () ->{
+            regenMana(playerObject);
         },10L,20L));
     }
-    public void scheduleChargeTask(String name,PlayerObject playerObject, SpellObject spellObject,int time){
+    public void scheduleChargeTask( String name,PlayerObject playerObject,SpellObject spellObject,int time){
         playerObject.setCharging(true);
         playerObject.setTimeleftoncharge(time);
         playerObject.setMaxchargetime(time);
         chargetask.put(playerObject, Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main, () ->{
-            if(playerObject.getTimeleftoncharge() == 0){
-                playerObject.setTimeleftoncharge(0);
-                playerObject.setMaxchargetime(0);
-                playerObject.setCharging(false);
-                mageSpellsManager.castingManager.doSpellCasting(name, spellObject);
-                chargetask.get(playerObject).cancel();
-            }else{
-                playerObject.tickTimeLeftOnCharge();
-                updateManaBar(playerObject);
-            }
+                if (playerObject.getTimeleftoncharge() == 0) {
+                    playerObject.setTimeleftoncharge(0);
+                    playerObject.setMaxchargetime(0);
+                    playerObject.setCharging(false);
+                    mageSpellsManager.castingManager.doSpellCasting(name, spellObject);
+                    chargetask.get(playerObject).cancel();
+                } else {
+                    playerObject.tickTimeLeftOnCharge();
+                    updateManaBar(playerObject);
+                }
         },0L,20L));
     }
     public void scheduleCooldownTask(PlayerObject playerObject, int time){
         playerObject.setOncooldown(true);
         playerObject.setMaxcooldowntime(time);
         playerObject.setTimeleftoncooldwon(time);
-        cooldowntask.put(playerObject,Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main, () -> {
-            if(playerObject.getTimeleftoncooldwon() == 0){
-                playerObject.setTimeleftoncooldwon(0);
-                playerObject.setMaxcooldowntime(0);
-                playerObject.setOncooldown(false);
-                cooldowntask.get(playerObject).cancel();
-            }else{
-                playerObject.tickTimeLeftOnCooldown();
-                updateManaBar(playerObject);
+        cooldowntask.put(playerObject,Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main, () ->{
+                if (playerObject.getTimeleftoncooldwon() == 0) {
+                    playerObject.setTimeleftoncooldwon(0);
+                    playerObject.setMaxcooldowntime(0);
+                    playerObject.setOncooldown(false);
+                    cooldowntask.get(playerObject).cancel();
+                } else {
+                    playerObject.tickTimeLeftOnCooldown();
+                    updateManaBar(playerObject);
             }
         },0L,20L));
     }

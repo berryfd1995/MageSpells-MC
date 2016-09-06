@@ -1,0 +1,5 @@
+Name: "&4Fire &4Rune"
+Lore: "&cA Rune embedded with the power of fire."
+Material: "INK_SACK-14"
+Recipe: "AIR,BLAZE_POWDER,AIR,BLAZE_POWDER,LAVA_BUCKET,BLAZE_POWDER,AIR,BLAZE_POWDER,AIR"
+RequiredLevel: 3

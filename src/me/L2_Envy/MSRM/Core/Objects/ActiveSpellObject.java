@@ -28,7 +28,7 @@ public class ActiveSpellObject extends SpellObject {
         this.location = location;
         this.initialLoc = location.clone();
         this.auratimeleft = spellObject.getAuratime();
-        getSpellEffect().setInitialLocation(location.clone());
+        //getSpellEffect().setInitialLocation(location.clone());
         this.boltHit = new ArrayList<>();
         this.sprayHit = new ArrayList<>();
     }

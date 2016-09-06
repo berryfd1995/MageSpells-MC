@@ -52,6 +52,10 @@ public class CustomItemConfig {
             location.mkdirs();
             firstLoad("Blood.yml");
             firstLoad("Heart_Of_Ice.yml");
+            firstLoad("EarthRune.yml");
+            firstLoad("AirRune.yml");
+            firstLoad("WaterRune.yml");
+            firstLoad("FireRune.yml");
             loadCustomItemConfigs();
         }
     }

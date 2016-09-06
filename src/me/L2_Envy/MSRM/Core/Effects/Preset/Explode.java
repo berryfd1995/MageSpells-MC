@@ -1,6 +1,7 @@
 package me.L2_Envy.MSRM.Core.Effects.Preset;
 
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
+import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -12,7 +13,14 @@ public class Explode implements SpellEffect{
     private String name = "Explode";
     private Vector vector;
     private Location spelllocation;
-    public void Run(Location location){
+    private ActiveSpellObject activeSpellObject;
+    public ActiveSpellObject getActiveSpell(){
+        return activeSpellObject;
+    }
+    public void setActiveSpell(ActiveSpellObject activeSpellObject){
+        this.activeSpellObject = activeSpellObject;
+    }
+    public void Run(){
         spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
@@ -23,12 +31,18 @@ public class Explode implements SpellEffect{
 
     }
     public void setInitialVector(Vector vector){
-        this.vector = vector;
+        this.vector =vector;
     }
     public Location plotSpellPoint(){
         return spelllocation;
     }
     public String getName(){
         return name;
+    }
+    public void initialSetup(){
+
+    }
+    public void spellEndingSeq(){
+
     }
 }

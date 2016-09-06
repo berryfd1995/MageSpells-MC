@@ -1,6 +1,7 @@
 package me.L2_Envy.MSRM.Core.Effects.Preset;
 
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
+import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -15,7 +16,14 @@ public class HomingSpellEffect implements SpellEffect{
     private String name = "Homing";
     private Vector vector;
     private Location spelllocation;
-    public void Run(Location location){
+    private ActiveSpellObject activeSpellObject;
+    public ActiveSpellObject getActiveSpell(){
+        return activeSpellObject;
+    }
+    public void setActiveSpell(ActiveSpellObject activeSpellObject){
+        this.activeSpellObject = activeSpellObject;
+    }
+    public void Run(){
         Location location1 = getClosestEntity();
         if(location1 != null){
             vector =  location1.toVector().subtract(spelllocation.toVector()).multiply(2);
@@ -42,6 +50,12 @@ public class HomingSpellEffect implements SpellEffect{
     public String getName(){
         return name;
     }
+    public void initialSetup(){
+
+    }
+    public Location getSpellLocation(){
+        return spelllocation;
+    }
 
     public Location getClosestEntity(){
         Location location =  null;
@@ -57,5 +71,8 @@ public class HomingSpellEffect implements SpellEffect{
             }
         }
         return location;
+    }
+    public void spellEndingSeq(){
+
     }
 }

@@ -7,10 +7,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 /**
- * Created by Daniel on 8/26/2016.
+ * Created by Daniel on 9/5/2016.
  */
-public class Teleport implements SpellEffect{
-    private String name = "teleport";
+public class GravityPush implements SpellEffect {
+    private String name = "push";
     private Vector vector;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;
@@ -24,7 +24,8 @@ public class Teleport implements SpellEffect{
         spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
-
+        Vector unitVector = livingEntity.getLocation().toVector().subtract(activeSpellObject.getLocation().toVector()).normalize();
+        livingEntity.setVelocity(unitVector.multiply(4.0));
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
@@ -46,6 +47,6 @@ public class Teleport implements SpellEffect{
         return spelllocation;
     }
     public void spellEndingSeq(){
-        activeSpellObject.getCaster().teleport(spelllocation);
+
     }
 }

@@ -1,0 +1,5 @@
+Name: "&bWater &bRune"
+Lore: "&cA Rune embedded with the power of water."
+Material: "INK_SACK-12"
+Recipe: "AIR,PRISMARINE,AIR,PRISMARINE,WATER_BUCKET,PRISMARINE,AIR,PRISMARINE,AIR"
+RequiredLevel: 3

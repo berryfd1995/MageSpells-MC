@@ -72,38 +72,38 @@ public class PlayerConfig {
             e.printStackTrace();
         }
     }
-    public void loadPlayerData(String name, UUID uuid){
+    public void loadPlayerData( String name,UUID uuid){
         Bukkit.getScheduler().runTaskAsynchronously(main, () ->{
-            boolean found = false;
-            File location = new File(main.getDataFolder() + "/PlayerData/");
-            if (location.exists()) {
-                for (File fileData : location.listFiles()) {
-                    try {
-                        if(!fileData.isHidden()) {
-                            String playerUUID  = FilenameUtils.getBaseName(fileData.getName());
-                            UUID uuid1 = UUID.fromString(playerUUID);
-                            if(uuid.equals(uuid1)) {
-                                YamlConfiguration config = YamlConfiguration.loadConfiguration(fileData);
-                                PlayerObject playerObject = deformatData(config, fileData);
-                                if(playerObject != null){
-                                    main.mageSpellsManager.mageManager.addMage(playerObject);
-                                    main.mageSpellsManager.manaManager.scheduleManaTask(playerObject);
+                boolean found = false;
+                File location = new File(main.getDataFolder() + "/PlayerData/");
+                if (location.exists()) {
+                    for (File fileData : location.listFiles()) {
+                        try {
+                            if (!fileData.isHidden()) {
+                                String playerUUID = FilenameUtils.getBaseName(fileData.getName());
+                                UUID uuid1 = UUID.fromString(playerUUID);
+                                if (uuid.equals(uuid1)) {
+                                    YamlConfiguration config = YamlConfiguration.loadConfiguration(fileData);
+                                    PlayerObject playerObject = deformatData(config, fileData);
+                                    if (playerObject != null) {
+                                        main.mageSpellsManager.mageManager.addMage(playerObject);
+                                        main.mageSpellsManager.manaManager.scheduleManaTask(playerObject);
+                                    }
+                                    found = true;
                                 }
-                                found = true;
                             }
+                        } catch (Exception e) {
+                            System.out.println("File " + fileData.getName() + " corrupted.");
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        System.out.println("File " + fileData.getName() + " corrupted.");
-                        e.printStackTrace();
                     }
+                    if (!found) {
+                        createPlayerData(name, uuid);
+                    }
+                } else {
+                    location.mkdirs();
+                    firstLoad();
                 }
-                if(!found) {
-                    createPlayerData(name, uuid);
-                }
-            } else {
-                location.mkdirs();
-                firstLoad();
-            }
         });
     }
     public PlayerObject loadPlayerData(UUID uuid){
@@ -141,14 +141,14 @@ public class PlayerConfig {
         main.mageSpellsManager.manaManager.scheduleManaTask(playerObject);
     }
     public void savePlayerData(PlayerObject playerObject){
-        Bukkit.getScheduler().runTaskAsynchronously(main,() -> {
-            try {
-                formatData(playerObject);
-                playerObject.getPlayerconfig().save(playerObject.getPlayerFile());
-                main.mageSpellsManager.mageManager.removeMage(playerObject);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+        Bukkit.getScheduler().runTaskAsynchronously(main,() ->{
+                try {
+                    formatData(playerObject);
+                    playerObject.getPlayerconfig().save(playerObject.getPlayerFile());
+                    main.mageSpellsManager.mageManager.removeMage(playerObject);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
         });
     }
     public void savePlayerDataNOW(PlayerObject playerObject){
@@ -255,8 +255,8 @@ public class PlayerConfig {
             if (!gameFile.exists()) {
                 gameFile.createNewFile();
             }
-            Bukkit.getScheduler().scheduleSyncDelayedTask(main, () -> {
-            });
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main, () ->{
+        });
             return gameFile;
         } catch (IOException ex) {
             ex.printStackTrace();

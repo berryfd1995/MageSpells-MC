@@ -128,11 +128,6 @@ public class SpellConfig {
             ItemStack spellbook = main.utils.getItemStack("Enchanted_Book", displayname, lore);
             String spelleffectname = config.getString("SpecialEffect");
             SpellEffect spelleffect;
-            if(main.mageSpellsManager.spellEffectManager.hasSpellEffect(spelleffectname)){
-                spelleffect = main.mageSpellsManager.spellEffectManager.getSpellEffect(spelleffectname);
-            }else{
-                spelleffect = new NormalEffect();
-            }
             String soundname = config.getString("Sound.Name");
             Sound sound = Sound.valueOf(soundname.toUpperCase());
             double volume = config.getDouble("Sound.Volume");
@@ -200,7 +195,7 @@ public class SpellConfig {
                     }
                 }
             }
-            return new SpellObject(spellName,displayname,spellnode,lore,boltenabled,boltradius,boltdamage,auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,requiredleveltobind,requiredleveltocast,requiredleveltodrop,affectsmobs,affectself,affectenemy,affectteammates,spellbook,spelleffect,sound,soundvolume,soundpitch,particleObjects,potionEffects,mobdropsenabled,mobDrops,itemcostsenabled,itemcost);
+            return new SpellObject(spellName,displayname,spellnode,lore,boltenabled,boltradius,boltdamage,auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,requiredleveltobind,requiredleveltocast,requiredleveltodrop,affectsmobs,affectself,affectenemy,affectteammates,spellbook,spelleffectname,sound,soundvolume,soundpitch,particleObjects,potionEffects,mobdropsenabled,mobDrops,itemcostsenabled,itemcost);
             /**
             int count = 0;
             double damage = config.getDouble(path + ".Damage");

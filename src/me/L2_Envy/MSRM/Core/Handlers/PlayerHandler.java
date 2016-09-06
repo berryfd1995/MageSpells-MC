@@ -44,6 +44,7 @@ public class PlayerHandler implements Listener{
         }
     }
     @EventHandler
+    @SuppressWarnings( "deprecation" )
     public void spellBookLearning(PlayerInteractEvent event){
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();

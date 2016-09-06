@@ -75,6 +75,7 @@ public class BindingManager {
         }
         return null;
     }
+    @SuppressWarnings( "deprecation" )
     public boolean removeSpellBookAndWand(Player player,SpellObject spellObject,ItemStack wanditem){
         try {
             boolean tookspellbook = false;
