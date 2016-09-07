@@ -49,7 +49,7 @@ public class Meteor implements SpellEffect{
     }
     public SpellEffect spellEndingSeq(){
         ActiveSpellObject activeSpellObject = getActiveSpell();
-        Location fromloc = spelllocation.clone().add(10,30,10);
+        Location fromloc = spelllocation.clone().add(15,100,15);
         SpellEffect spellEffect = new Meteor2();
         spellEffect.setInitialLocation(fromloc);
         vector =  spelllocation.toVector().subtract(fromloc.toVector()).multiply(2);
