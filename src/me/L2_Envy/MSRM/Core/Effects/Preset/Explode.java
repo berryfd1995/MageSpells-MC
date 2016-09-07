@@ -20,8 +20,9 @@ public class Explode implements SpellEffect{
     public void setActiveSpell(ActiveSpellObject activeSpellObject){
         this.activeSpellObject = activeSpellObject;
     }
-    public void Run(){
+    public SpellEffect Run(){
         spelllocation.add(vector);
+        return null;
     }
     public void onHit(LivingEntity livingEntity){
         livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),4.0F);
@@ -47,5 +48,8 @@ public class Explode implements SpellEffect{
     }
     public boolean shouldEnd(){
         return false;
+    }
+    public SpellEffect auraRun(){
+        return null;
     }
 }

@@ -28,6 +28,7 @@ public class SpellEffectManager {
         spellEffects.add(new Vampire());
         spellEffects.add(new Meteor());
         spellEffects.add(new ChainStrike());
+        spellEffects.add(new Petrify());
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;

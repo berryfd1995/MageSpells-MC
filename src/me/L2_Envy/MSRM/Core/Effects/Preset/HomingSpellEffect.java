@@ -23,7 +23,7 @@ public class HomingSpellEffect implements SpellEffect{
     public void setActiveSpell(ActiveSpellObject activeSpellObject){
         this.activeSpellObject = activeSpellObject;
     }
-    public void Run(){
+    public SpellEffect Run(){
         Location location1 = getClosestEntity();
         if(location1 != null){
             vector =  location1.toVector().subtract(spelllocation.toVector()).multiply(2);
@@ -32,6 +32,7 @@ public class HomingSpellEffect implements SpellEffect{
         }else {
             spelllocation.add(vector);
         }
+        return null;
     }
     public void onHit(LivingEntity livingEntity){
 
@@ -84,6 +85,9 @@ public class HomingSpellEffect implements SpellEffect{
         return location;
     }
     public SpellEffect spellEndingSeq(){
+        return null;
+    }
+    public SpellEffect auraRun(){
         return null;
     }
 }

@@ -20,8 +20,9 @@ public class GravityPush implements SpellEffect {
     public void setActiveSpell(ActiveSpellObject activeSpellObject){
         this.activeSpellObject = activeSpellObject;
     }
-    public void Run(){
+    public SpellEffect Run(){
         spelllocation.add(vector);
+        return null;
     }
     public void onHit(LivingEntity livingEntity){
         Vector unitVector = livingEntity.getLocation().toVector().subtract(activeSpellObject.getLocation().toVector()).normalize();
@@ -43,13 +44,13 @@ public class GravityPush implements SpellEffect {
     public void initialSetup(){
 
     }
-    public Location getSpellLocation(){
-        return spelllocation;
-    }
     public SpellEffect spellEndingSeq(){
         return null;
     }
     public boolean shouldEnd(){
         return false;
+    }
+    public SpellEffect auraRun(){
+        return null;
     }
 }

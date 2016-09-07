@@ -7,10 +7,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 /**
- * Created by Daniel on 9/5/2016.
+ * Created by Daniel on 9/7/2016.
  */
-public class Vampire implements SpellEffect{
-    private String name = "vampire";
+public class Strom implements SpellEffect{
+    private String name = "storm";
     private Vector vector;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;
@@ -25,29 +25,6 @@ public class Vampire implements SpellEffect{
         return null;
     }
     public void onHit(LivingEntity livingEntity){
-        double currenthealth = activeSpellObject.getCaster().getHealth();
-        double auradamage = activeSpellObject.getAuradamage() * 0.25;
-        double boltdamage = activeSpellObject.getBoltdamage()* 0.25;
-        double spraydamage = activeSpellObject.getSpraydamage()* 0.25;
-        if(activeSpellObject.isAuraenabled()){
-            if(currenthealth + auradamage >= 20){
-                activeSpellObject.getCaster().setHealth(20);
-            }else{
-                activeSpellObject.getCaster().setHealth(currenthealth + auradamage);
-            }
-        }else if(activeSpellObject.isBoltenabled()){
-            if(currenthealth + boltdamage >= 20){
-                activeSpellObject.getCaster().setHealth(20);
-            }else{
-                activeSpellObject.getCaster().setHealth(currenthealth + boltdamage);
-            }
-        }else if(activeSpellObject.isSprayenabled()){
-            if(currenthealth + spraydamage >= 20){
-                activeSpellObject.getCaster().setHealth(20);
-            }else{
-                activeSpellObject.getCaster().setHealth(currenthealth + spraydamage);
-            }
-        }
 
     }
     public void setInitialLocation(Location location) {

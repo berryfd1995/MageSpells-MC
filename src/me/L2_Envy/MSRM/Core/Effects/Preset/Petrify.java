@@ -2,15 +2,18 @@ package me.L2_Envy.MSRM.Core.Effects.Preset;
 
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
+import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 /**
- * Created by Daniel on 9/5/2016.
+ * Created by Daniel on 9/7/2016.
  */
-public class Vampire implements SpellEffect{
-    private String name = "vampire";
+public class Petrify implements SpellEffect{
+    private String name = "petrify";
     private Vector vector;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;
@@ -25,30 +28,14 @@ public class Vampire implements SpellEffect{
         return null;
     }
     public void onHit(LivingEntity livingEntity){
-        double currenthealth = activeSpellObject.getCaster().getHealth();
-        double auradamage = activeSpellObject.getAuradamage() * 0.25;
-        double boltdamage = activeSpellObject.getBoltdamage()* 0.25;
-        double spraydamage = activeSpellObject.getSpraydamage()* 0.25;
-        if(activeSpellObject.isAuraenabled()){
-            if(currenthealth + auradamage >= 20){
-                activeSpellObject.getCaster().setHealth(20);
-            }else{
-                activeSpellObject.getCaster().setHealth(currenthealth + auradamage);
-            }
-        }else if(activeSpellObject.isBoltenabled()){
-            if(currenthealth + boltdamage >= 20){
-                activeSpellObject.getCaster().setHealth(20);
-            }else{
-                activeSpellObject.getCaster().setHealth(currenthealth + boltdamage);
-            }
-        }else if(activeSpellObject.isSprayenabled()){
-            if(currenthealth + spraydamage >= 20){
-                activeSpellObject.getCaster().setHealth(20);
-            }else{
-                activeSpellObject.getCaster().setHealth(currenthealth + spraydamage);
-            }
-        }
+        if(!(livingEntity instanceof Player)){
+            Location location = livingEntity.getLocation();
+            location.getBlock().setType(Material.STONE);
+            location.add(0,1,0).getBlock().setType(Material.STONE);
+            livingEntity.setHealth(0);
+        }else{
 
+        }
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
@@ -76,6 +63,9 @@ public class Vampire implements SpellEffect{
         return false;
     }
     public SpellEffect auraRun(){
+        return null;
+    }
+    public SpellEffect castNewSpell(){
         return null;
     }
 }

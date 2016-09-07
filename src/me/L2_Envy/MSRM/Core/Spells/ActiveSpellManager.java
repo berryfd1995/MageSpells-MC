@@ -40,7 +40,10 @@ public class ActiveSpellManager {
                             //Is it past max distance?
                             if (spellEffect.getActiveSpell().getInitialLoc().distance(spellEffect.getActiveSpell().getLocation()) < spellEffect.getActiveSpell().getTraveldistance()) {
                                 //Spell Effect
-                                spellEffect.Run();
+                                SpellEffect newSpell = spellEffect.Run();
+                                if(newSpell != null){
+                                    shootSpell(newSpell);
+                                }
                                 //Update Spell Location
                                 spellEffect.getActiveSpell().setLocation(spellEffect.plotSpellPoint());
                                 //Play particle at spell location
