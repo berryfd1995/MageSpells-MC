@@ -45,7 +45,10 @@ public class Fire implements SpellEffect{
     public void initialSetup(){
 
     }
-    public void spellEndingSeq(){
-
+    public SpellEffect spellEndingSeq(){
+        return null;
+    }
+    public boolean shouldEnd(){
+        return false;
     }
 }

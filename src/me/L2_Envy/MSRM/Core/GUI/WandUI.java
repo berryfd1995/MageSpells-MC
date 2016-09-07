@@ -90,7 +90,7 @@ public class WandUI {
                             inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack(
                                     "STAINED_GLASS_PANE-15", wandObject.getDisplayname(),
                                     "&6Required Level: " + wandObject.getRequiredleveltouse()
-                                            + "/&4You have not discovered this wand yet!"));
+                                            + "/&4This wand is currently unavaliable!"));
                         }
                     }
                 }

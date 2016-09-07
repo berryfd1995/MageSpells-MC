@@ -3,4 +3,9 @@ Homing - Homes in on the closest target.
 Fire - Set your enemies on fire!
 Lightning - Strike Enemies down with the power of thor!
 Explode - Creates an explosion!
+Teleport - Teleport to the location of the spell!
+Push - Push players away from the spell!
+Vampire - Heal for 1/4th of total damage dealt to players!
+Meteor - Summon a meteor from above to deal explosion damage
+Chain - After each spell hits an enemy, it will bounce to the next closest one!
 (More coming soon!)

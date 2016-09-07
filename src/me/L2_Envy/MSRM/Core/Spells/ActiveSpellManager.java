@@ -34,8 +34,9 @@ public class ActiveSpellManager {
         }
     }
     public void shootSpell(SpellEffect spellEffect){
+        addActiveSpellObject(spellEffect);
         spellEffect.getActiveSpell().setTimerTask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main, () ->{//has it hit a block?
-                        if (spellEffect.getActiveSpell().getLocation().getBlock().getType() == Material.AIR) {
+                        if (spellEffect.getActiveSpell().getLocation().getBlock().getType() == Material.AIR && !spellEffect.shouldEnd()) {
                             //Is it past max distance?
                             if (spellEffect.getActiveSpell().getInitialLoc().distance(spellEffect.getActiveSpell().getLocation()) < spellEffect.getActiveSpell().getTraveldistance()) {
                                 //Spell Effect
@@ -76,8 +77,13 @@ public class ActiveSpellManager {
         return false;
     }
     public void removeSpell(SpellEffect spellEffect) {
-        spellEffect.spellEndingSeq();
         Bukkit.getScheduler().cancelTask(spellEffect.getActiveSpell().getTimerTask());
+        SpellEffect newspell = spellEffect.spellEndingSeq();
+        if(newspell != null){
+            Bukkit.getScheduler().scheduleSyncDelayedTask(mageSpellsManager.main, () ->{
+            },20L);
+            shootSpell(newspell);
+        }
         removeSpellEffect(spellEffect);
 
     }

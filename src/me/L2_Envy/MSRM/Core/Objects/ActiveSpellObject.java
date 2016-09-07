@@ -35,6 +35,9 @@ public class ActiveSpellObject extends SpellObject {
     public void setBoltHit(LivingEntity livingEntity){
         boltHit.add(livingEntity.getUniqueId());
     }
+    public void clearBoltHit(){
+        boltHit = new ArrayList<>();
+    }
     public void setSprayHit(LivingEntity livingEntity) {
         sprayHit.add(livingEntity.getUniqueId());
     }
@@ -83,7 +86,9 @@ public class ActiveSpellObject extends SpellObject {
     public void setTimerTask(int taskID) {
         this.timerTask = taskID;
     }
-
+    public void setInitialLoc(Location loc){
+        this.initialLoc = loc;
+    }
     public int getTimerTask() {
         return timerTask;
     }

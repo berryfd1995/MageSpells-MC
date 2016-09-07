@@ -45,7 +45,10 @@ public class NormalEffect implements SpellEffect{
     public Location getSpellLocation(){
         return spelllocation;
     }
-    public void spellEndingSeq(){
-
+    public SpellEffect spellEndingSeq(){
+        return null;
+    }
+    public boolean shouldEnd(){
+        return false;
     }
 }

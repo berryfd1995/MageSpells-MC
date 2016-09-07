@@ -3,7 +3,7 @@ This will be my attempt on doing an in-depth tutorial on everything for magespel
 
 Table o' Contents:
 1) What is MageSpells?
-2)
+2) Installation/Specifications
 3) Settings Config
 4) Spell Creation/How it works
 5) Wand Creation/How it works
@@ -36,8 +36,25 @@ they are never enforced or required. I do it out of joy. not for money.
 
 
 
+                                        2) Installation/Specifications
+    Before attempting to install magespells, be sure you have all the required plugins.
+    Installation:
+    1) Download MageSpells
+    2) Put Magespells into your plugin folder
+    3) Start your server, allow for generation of the folders and configs.
+    4) Customize the config to your liking.
+    5) Customize spells and wands to your liking.
+    6) Enjoy!
 
-                                        2)
+    Specifications:
+    The more players and spells you have, the more intensive the plugin will be to your server
+    be sure, you have adequate processing power and ram.
+    The plugin in built for Java 8+ and Minecraft Version 1.10.
+    Particle API and Title Action Manager are required for this plugin.
+    World Guard and World Edit are also required for region support. (Optional)MID
+
+
+
                                         3) Settings Config
     Okay so lets start off at the beginning. Settings. You should edit this before doing anything else. I
 have attempted to provide some sort of guidance in the config. Here is an example of it with more explination

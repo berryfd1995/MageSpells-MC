@@ -82,7 +82,7 @@ public class SpellUI {
                         } else {
                             inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-15", spellObject.getDisplayname(),
                                     spellObject.getLore() + "/&6Required Level: " + spellObject.getRequiredLevelToCast()
-                                            + "/&4You have not learned this spell yet!"));
+                                            + "/&4This spell is currently unavaliable!"));
                         }
                     }
                 }

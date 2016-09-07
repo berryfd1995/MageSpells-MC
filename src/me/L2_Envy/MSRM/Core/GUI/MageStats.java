@@ -52,7 +52,11 @@ public class MageStats {
                     "&6Name: " + player.getName()
                             + "/&6Team Name: " + teamname
                             + "/&6Level: " + playerObject.getLevel()
-                            + "/&6Current xp: " + playerObject.getExperience()));
+                            + "/&6Current xp: " + playerObject.getExperience()
+                            + "/&6Spells Learned: " + (playerObject.getSpellObjects().size())
+                            + " out of " + (mageSpellsManager.spellManager.getSpellObjects().size())
+                            + "/&6Wands Learned: " + playerObject.getWandObjects().size()
+                            + " out of " + mageSpellsManager.wandManager.getWandObjects().size()));
         }
         return inventory;
     }

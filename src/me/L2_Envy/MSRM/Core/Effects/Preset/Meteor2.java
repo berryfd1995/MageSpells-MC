@@ -7,10 +7,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 /**
- * Created by Daniel on 8/28/2016.
+ * Created by Daniel on 9/6/2016.
  */
-public class Explode implements SpellEffect{
-    private String name = "Explode";
+public class Meteor2 implements SpellEffect{
+    private String name = "meteor2";
     private Vector vector;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;
@@ -31,7 +31,7 @@ public class Explode implements SpellEffect{
 
     }
     public void setInitialVector(Vector vector){
-        this.vector =vector;
+        this.vector = vector;
     }
     public Location plotSpellPoint(){
         return spelllocation;
@@ -42,10 +42,11 @@ public class Explode implements SpellEffect{
     public void initialSetup(){
 
     }
-    public SpellEffect spellEndingSeq(){
-        return null;
-    }
     public boolean shouldEnd(){
         return false;
+    }
+    public SpellEffect spellEndingSeq(){
+        spelllocation.getWorld().createExplosion(spelllocation,8.0F);
+        return null;
     }
 }

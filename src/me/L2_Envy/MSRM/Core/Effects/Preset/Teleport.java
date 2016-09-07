@@ -45,7 +45,11 @@ public class Teleport implements SpellEffect{
     public Location getSpellLocation(){
         return spelllocation;
     }
-    public void spellEndingSeq(){
+    public SpellEffect spellEndingSeq(){
         activeSpellObject.getCaster().teleport(spelllocation);
+        return null;
+    }
+    public boolean shouldEnd(){
+        return false;
     }
 }

@@ -19,5 +19,6 @@ public interface SpellEffect {
     public ActiveSpellObject getActiveSpell();
     public void setActiveSpell(ActiveSpellObject activeSpell);
     public void initialSetup();
-    public void spellEndingSeq();
+    public boolean shouldEnd();
+    public SpellEffect spellEndingSeq();
 }
