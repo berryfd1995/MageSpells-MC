@@ -11,4 +11,5 @@ Chain - After each spell hits an enemy, it will bounce to the next closest one!
 Armageddon - Conjour the meteor power, unleash a storm of meteors.
 Storm - Create a lightning storm
 Petrify - Turn mobs into stone.
+HailMary - Shoot a barrage worth of spells.
 (More coming soon!)

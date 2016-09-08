@@ -1,0 +1,59 @@
+DisplayName: "&bL&7ightning &bS&7torm"
+Lore: "&cMay Zeus strike down your enemies"
+Bolt:
+    Enabled: false
+    DamageRadius: 0
+    BoltDamage: 0
+Aura:
+    Enabled: true
+    ActiveTime: 10
+    AuraRadius: 30
+    AuraDamage: 3
+Spray:
+    Enabled: false
+    SprayRadius: 0
+    SprayDamage: 0
+ArmorPiercing: 10
+ManaCost: 100
+MoneyCost: 0
+Cooldown: 3
+ChargeTime: 8
+TravelDistance: 0
+SpellNode: "storm"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "storm"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SPELL:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:
+    WEAKNESS:
+        Duration: 3
+        Amplification: 2
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        GHAST:
+            Chance: 10.0
+        Creeper:
+            Chance: 1.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        NETHER_STAR: 1
+        airrune: 20

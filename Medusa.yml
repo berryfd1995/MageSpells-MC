@@ -1,0 +1,62 @@
+DisplayName: "&5Medusa"
+Lore: "&cTurn your enemies to stone"
+Bolt:
+    Enabled: false
+    DamageRadius: 0
+    BoltDamage: 0
+Aura:
+    Enabled: true
+    ActiveTime: 1
+    AuraRadius: 10
+    AuraDamage: 2
+Spray:
+    Enabled: false
+    SprayRadius: 0
+    SprayDamage: 0
+ArmorPiercing: 100
+ManaCost: 40
+MoneyCost: 0
+Cooldown: 1
+ChargeTime: 1
+TravelDistance: 0
+SpellNode: "dark"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "petrify"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SPELL_WITCH:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+    VILLAGER_ANGRY:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.5
+PotionEffects:
+    SLOW:
+        Duration: 10
+        Amplification: 2
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        SPIDER:
+            Chance: 1.0
+ItemCost:
+    Settings:
+        Enabled: false
+    Items:
+        FIREBALL: 1

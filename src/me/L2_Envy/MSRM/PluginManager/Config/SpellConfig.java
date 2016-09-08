@@ -68,6 +68,14 @@ public class SpellConfig {
             firstLoad("Heal.yml");
             firstLoad("Rocket.yml");
             firstLoad("Thor.yml");
+            firstLoad("ChainLightning.yml");
+            firstLoad("DrainLife.yml");
+            firstLoad("ForcePush.yml");
+            firstLoad("LightningStorm.yml");
+            firstLoad("Medusa.yml");
+            firstLoad("MeteorShower.yml");
+            firstLoad("MeteorStrike.yml");
+            firstLoad("WallOfFire.yml");
             loadSpellConfigs();
         }
     }

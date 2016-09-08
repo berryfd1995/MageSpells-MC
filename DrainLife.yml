@@ -1,0 +1,56 @@
+DisplayName: "&cDrain Life"
+Lore: "&cSuck the life out of your enemies"
+Bolt:
+    Enabled: false
+    DamageRadius: 0
+    BoltDamage: 0
+Aura:
+    Enabled: false
+    ActiveTime: 0
+    AuraRadius: 0
+    AuraDamage: 0
+Spray:
+    Enabled: true
+    SprayRadius: 5
+    SprayDamage: 10
+ArmorPiercing: 0
+ManaCost: 25
+MoneyCost: 0
+Cooldown: 2
+ChargeTime: 0
+TravelDistance: 25
+SpellNode: "death"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "vampire"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    REDSTONE:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.05
+PotionEffects:
+    HUNGER:
+        Duration: 10
+        Amplification: 1
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        BAT:
+            Chance: 20.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        blood: 5

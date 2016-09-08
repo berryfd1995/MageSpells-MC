@@ -1,0 +1,58 @@
+DisplayName: "&bChain Lightning"
+Lore: "&cBouncing bolt of lightning"
+Bolt:
+    Enabled: true
+    DamageRadius: 0
+    BoltDamage: 10
+Aura:
+    Enabled: false
+    ActiveTime: 10
+    AuraRadius: 30
+    AuraDamage: 3
+Spray:
+    Enabled: false
+    SprayRadius: 0
+    SprayDamage: 0
+ArmorPiercing: 30
+ManaCost: 30
+MoneyCost: 0
+Cooldown: 3
+ChargeTime: 2
+TravelDistance: 30
+SpellNode: "chain"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "storm"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    FIREWORKS_SPARK:
+        Amount: 10
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.05
+PotionEffects:
+    WEAKNESS:
+        Duration: 3
+        Amplification: 2
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        GHAST:
+            Chance: 18.0
+        Creeper:
+            Chance: 8.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        airrune: 30

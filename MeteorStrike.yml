@@ -1,0 +1,63 @@
+DisplayName: "&4M&8eteor &4S&8trike"
+Lore: "&cSummon a meteor at a target location"
+Bolt:
+    Enabled: True
+    DamageRadius: 0
+    BoltDamage: 0
+Aura:
+    Enabled: false
+    ActiveTime: 0
+    AuraRadius: 0
+    AuraDamage: 0
+Spray:
+    Enabled: false
+    SprayRadius: 0
+    SprayDamage: 0
+ArmorPiercing: 50
+ManaCost: 25
+MoneyCost: 0
+Cooldown: 2
+ChargeTime: 0
+TravelDistance: 0
+SpellNode: "fire"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "meteor"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SMOKE_LARGE:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.05
+    FLAME:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.05
+PotionEffects:
+    WEAKNESS:
+        Duration: 0
+        Amplification: 0
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        GHAST:
+            Chance: 10.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        firerune: 3
+        airrune: 5

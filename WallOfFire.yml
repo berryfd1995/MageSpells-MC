@@ -1,0 +1,65 @@
+DisplayName: "&4Wall of Fire"
+Lore: "&cYOU SHALL NOT .. PASS!"
+Bolt:
+    Enabled: false
+    DamageRadius: 0
+    BoltDamage: 0
+Aura:
+    Enabled: true
+    ActiveTime: 10
+    AuraRadius: 3
+    AuraDamage: 3
+Spray:
+    Enabled: true
+    SprayRadius: 3
+    SprayDamage: 3
+ArmorPiercing: 15
+ManaCost: 50
+MoneyCost: 0
+Cooldown: 5
+ChargeTime: 0
+TravelDistance: 50
+SpellNode: "fire"
+RequiredLevelToBind: 2
+RequiredLevelToCast: 2
+RequiredLevelToDrop: 2
+AffectMobs: true
+AffectSelf: false
+AffectEnemy: true
+AffectTeammates: false
+SpecialEffect: "hailmary"
+Sound:
+    Name: ENTITY_BAT_TAKEOFF
+    Volume: 0.5
+    Pitch: 0.5
+Particles:
+    SMOKE_LARGE:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.05
+    FLAME:
+        Amount: 50
+        offSetX: 0.05
+        offSetY: 0.05
+        offSetZ: 0.05
+        Speed: 0.05
+PotionEffects:
+    WEAKNESS:
+        Duration: 0
+        Amplification: 0
+MobDrops:
+    Settings:
+        Enable: True
+    Drops:
+        BLAZE:
+            Chance: 3.0
+        MAGMA_CUBE:
+            Chance: 5.0
+ItemCost:
+    Settings:
+        Enabled: True
+    Items:
+        FIREBALL: 5
+        firerune: 5
