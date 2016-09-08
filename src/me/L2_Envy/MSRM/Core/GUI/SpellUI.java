@@ -80,8 +80,19 @@ public class SpellUI {
 
                             //Add Item Cost
                         } else {
+                            //Add lore here
+                            String lore = "";
+                            if(!(playerObject.getLevel() >= spellObject.getRequiredLevelToCast()) && mageSpellsManager.levelingManager.isLevelingEnabled()){
+                                lore ="/&6Required Level: " + spellObject.getRequiredLevelToCast();
+                            }
+                            if(mageSpellsManager.spellLearningManager.isLearningEnabled() && !playerObject.knowsSpell(spellObject)){
+                                lore = "/&6You have not learned this spell yet!";
+                            }
+                            if(mageSpellsManager.isNodeSystemEnabled() && !player.hasPermission("magespells.spell." + spellObject.getSpellNode())){
+                                lore = "/&6You do not have permission to see this spell!";
+                            }
                             inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-15", spellObject.getDisplayname(),
-                                    spellObject.getLore() + "/&6Required Level: " + spellObject.getRequiredLevelToCast()
+                                    spellObject.getLore() + lore
                                             + "/&4This spell is currently unavaliable!"));
                         }
                     }

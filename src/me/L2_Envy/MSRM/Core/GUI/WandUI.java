@@ -87,9 +87,18 @@ public class WandUI {
                             inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack(wandObject.getWandItemStack().getType().toString(),
                                     wandObject.getDisplayname(), lore));
                         } else {
+                            String lore = "";
+                            if(!(playerObject.getLevel() >= wandObject.getRequiredleveltouse()) && mageSpellsManager.levelingManager.isLevelingEnabled()){
+                                lore = "&6Required Level: " + wandObject.getRequiredleveltouse();
+                            }
+                            if(mageSpellsManager.spellLearningManager.isLearningEnabled() && !playerObject.knowsWand(wandObject)){
+                                lore = "/&6You have not learned this wand yet!";
+                            }
+                            if(mageSpellsManager.isNodeSystemEnabled() && !(player.hasPermission("magespells.wand." + wandObject.getWandnode()))){
+                                lore = "/&6You do not have permission to see this wand!";
+                            }
                             inventory.setItem(i + 1, mageSpellsManager.main.utils.getItemStack(
-                                    "STAINED_GLASS_PANE-15", wandObject.getDisplayname(),
-                                    "&6Required Level: " + wandObject.getRequiredleveltouse()
+                                    "STAINED_GLASS_PANE-15", wandObject.getDisplayname(), lore
                                             + "/&4This wand is currently unavaliable!"));
                         }
                     }
