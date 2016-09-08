@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM.Core.Effects.Preset;
 
+import me.L2_Envy.MSRM.API.MageSpellsAPI;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Bukkit;
@@ -24,7 +25,7 @@ public class ChainStrike implements SpellEffect{
     public void setActiveSpell(ActiveSpellObject activeSpellObject){
         this.activeSpellObject = activeSpellObject;
     }
-    public SpellEffect Run(){
+    public void Run(){
         Location location1 = getClosestEntity();
         if(location1 != null){
             vector =  location1.toVector().subtract(spelllocation.toVector()).multiply(2);
@@ -33,7 +34,6 @@ public class ChainStrike implements SpellEffect{
         }else {
             spelllocation.add(vector);
         }
-        return null;
     }
     public void onHit(LivingEntity livingEntity){
 
@@ -54,7 +54,7 @@ public class ChainStrike implements SpellEffect{
     public void initialSetup(){
 
     }
-    public SpellEffect spellEndingSeq(){
+    public void spellEndingSeq(){
         Location location = getClosestEntity();
         if(location != null && (spelllocation.getBlock().getType() == Material.AIR || spelllocation.getBlock().getType() == Material.LONG_GRASS)) {
             ActiveSpellObject activeSpellObject = getActiveSpell();
@@ -69,9 +69,8 @@ public class ChainStrike implements SpellEffect{
             spelllocation.add(vector);
             spellEffect.setInitialVector(vector);
             spellEffect.setActiveSpell(activeSpellObject);
-            return spellEffect;
+            MageSpellsAPI.shootSpell(spellEffect);
         }else{
-            return null;
         }
     }
     public boolean shouldEnd(){
@@ -104,7 +103,6 @@ public class ChainStrike implements SpellEffect{
         }
         return location;
     }
-    public SpellEffect auraRun(){
-        return null;
+    public void auraRun(){
     }
 }

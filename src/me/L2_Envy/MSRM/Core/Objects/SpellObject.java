@@ -241,7 +241,24 @@ public class SpellObject{
     public String getSpellNode(){
         return spellnode.toLowerCase();
     }
-
+    public void setBoltenabled(boolean enabled){
+        boltenabled = enabled;
+    }
+    public void setAuraenabled(boolean enabled){
+        auraenabled = enabled;
+    }
+    public void setSprayenabled(boolean enabled){
+        sprayenabled = enabled;
+    }
+    public void setTraveldistance(int traveldistance){
+        this.traveldistance = traveldistance;
+    }
+    public void setBoltradius(int radius){
+        this.boltradius = radius;
+    }
+    public void setBoltdamage(double boltdamage){
+        this.boltdamage = boltdamage;
+    }
     public static class CompId implements Comparator<SpellObject> {
         @Override
         public int compare(SpellObject arg0, SpellObject arg1) {

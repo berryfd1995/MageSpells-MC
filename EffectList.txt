@@ -8,4 +8,7 @@ Push - Push players away from the spell!
 Vampire - Heal for 1/4th of total damage dealt to players!
 Meteor - Summon a meteor from above to deal explosion damage
 Chain - After each spell hits an enemy, it will bounce to the next closest one!
+Armageddon - Conjour the meteor power, unleash a storm of meteors.
+Storm - Create a lightning storm
+Petrify - Turn mobs into stone.
 (More coming soon!)

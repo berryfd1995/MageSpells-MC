@@ -20,9 +20,8 @@ public class Teleport implements SpellEffect{
     public void setActiveSpell(ActiveSpellObject activeSpellObject){
         this.activeSpellObject = activeSpellObject;
     }
-    public SpellEffect Run(){
+    public void Run(){
         spelllocation.add(vector);
-        return null;
     }
     public void onHit(LivingEntity livingEntity){
 
@@ -46,14 +45,12 @@ public class Teleport implements SpellEffect{
     public Location getSpellLocation(){
         return spelllocation;
     }
-    public SpellEffect spellEndingSeq(){
+    public void spellEndingSeq(){
         activeSpellObject.getCaster().teleport(spelllocation);
-        return null;
     }
     public boolean shouldEnd(){
         return false;
     }
-    public SpellEffect auraRun(){
-        return null;
+    public void auraRun(){
     }
 }

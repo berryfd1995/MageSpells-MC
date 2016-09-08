@@ -51,6 +51,7 @@ public class PluginManager {
     public void linkAll(Main main){
         this.main = main;
         commandMenu.link(this);
+        mageSpellsAPI.link(this);
         titleManagerAPI.link(this);
         worldEditAPI.link(this);
         particleAPI.link(this);

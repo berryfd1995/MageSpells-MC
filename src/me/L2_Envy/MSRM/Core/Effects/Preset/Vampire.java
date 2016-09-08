@@ -20,9 +20,8 @@ public class Vampire implements SpellEffect{
     public void setActiveSpell(ActiveSpellObject activeSpellObject){
         this.activeSpellObject = activeSpellObject;
     }
-    public SpellEffect Run(){
+    public void Run(){
         spelllocation.add(vector);
-        return null;
     }
     public void onHit(LivingEntity livingEntity){
         double currenthealth = activeSpellObject.getCaster().getHealth();
@@ -69,13 +68,11 @@ public class Vampire implements SpellEffect{
     public Location getSpellLocation(){
         return spelllocation;
     }
-    public SpellEffect spellEndingSeq(){
-        return null;
+    public void spellEndingSeq(){
     }
     public boolean shouldEnd(){
         return false;
     }
-    public SpellEffect auraRun(){
-        return null;
+    public void auraRun(){
     }
 }

@@ -72,10 +72,7 @@ public class SpellContactManager {
         spellEffect.getActiveSpell().clearSprayHit();
         spellEffect.getActiveSpell().setAuratimertask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main, () -> {
            if(spellEffect.getActiveSpell().getAuratimeleft() >0) {
-               SpellEffect newSpell = spellEffect.auraRun();
-               if(newSpell != null){
-                   mageSpellsManager.activeSpellManager.shootSpell(newSpell);
-               }
+               spellEffect.auraRun();
                mageSpellsManager.particleEffectManager.playParticle(spellEffect.getActiveSpell(), spellEffect.getActiveSpell().getLocation().clone());
                for (LivingEntity livingEntity : getNearbyEntites(spellEffect.getActiveSpell(), spellEffect.getActiveSpell().getAuraradius())) {
                    if (mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(livingEntity.getLocation())) {

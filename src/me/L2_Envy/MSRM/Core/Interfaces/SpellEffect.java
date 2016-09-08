@@ -17,9 +17,9 @@ public interface SpellEffect {
     public void setInitialLocation(Location location);
     public void setInitialVector(Vector vector);
     public Location plotSpellPoint();
-    public SpellEffect Run();
-    public SpellEffect auraRun();
+    public void Run();
+    public void auraRun();
     public void onHit(LivingEntity livingEntity);
     public boolean shouldEnd();
-    public SpellEffect spellEndingSeq();
+    public void spellEndingSeq();
 }

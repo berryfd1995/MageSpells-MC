@@ -20,9 +20,8 @@ public class Meteor2 implements SpellEffect{
     public void setActiveSpell(ActiveSpellObject activeSpellObject){
         this.activeSpellObject = activeSpellObject;
     }
-    public SpellEffect Run(){
+    public void Run(){
         spelllocation.add(vector);
-        return null;
     }
     public void onHit(LivingEntity livingEntity){
         livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),4.0F);
@@ -46,12 +45,10 @@ public class Meteor2 implements SpellEffect{
     public boolean shouldEnd(){
         return false;
     }
-    public SpellEffect spellEndingSeq(){
+    public void spellEndingSeq(){
         spelllocation.getWorld().createExplosion(spelllocation,8.0F);
-        return null;
     }
-    public SpellEffect auraRun(){
-        return null;
+    public void auraRun(){
     }
 
 }

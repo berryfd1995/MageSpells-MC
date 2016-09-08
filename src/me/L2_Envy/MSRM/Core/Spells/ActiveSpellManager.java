@@ -36,14 +36,13 @@ public class ActiveSpellManager {
     public void shootSpell(SpellEffect spellEffect){
         addActiveSpellObject(spellEffect);
         spellEffect.getActiveSpell().setTimerTask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main, () ->{//has it hit a block?
-                        if (spellEffect.getActiveSpell().getLocation().getBlock().getType() == Material.AIR && !spellEffect.shouldEnd()) {
+                        if ((spellEffect.getActiveSpell().getLocation().getBlock().getType() == Material.AIR
+                                ||spellEffect.getActiveSpell().getLocation().getBlock().getType() == Material.LONG_GRASS
+                                ||spellEffect.getActiveSpell().getLocation().getBlock().getType() == Material.DOUBLE_PLANT) && !spellEffect.shouldEnd()) {
                             //Is it past max distance?
                             if (spellEffect.getActiveSpell().getInitialLoc().distance(spellEffect.getActiveSpell().getLocation()) < spellEffect.getActiveSpell().getTraveldistance()) {
                                 //Spell Effect
-                                SpellEffect newSpell = spellEffect.Run();
-                                if(newSpell != null){
-                                    shootSpell(newSpell);
-                                }
+                                spellEffect.Run();
                                 //Update Spell Location
                                 spellEffect.getActiveSpell().setLocation(spellEffect.plotSpellPoint());
                                 //Play particle at spell location
@@ -81,14 +80,8 @@ public class ActiveSpellManager {
     }
     public void removeSpell(SpellEffect spellEffect) {
         Bukkit.getScheduler().cancelTask(spellEffect.getActiveSpell().getTimerTask());
-        SpellEffect newspell = spellEffect.spellEndingSeq();
-        if(newspell != null){
-            Bukkit.getScheduler().scheduleSyncDelayedTask(mageSpellsManager.main, () ->{
-            },20L);
-            shootSpell(newspell);
-        }
+        spellEffect.spellEndingSeq();
         removeSpellEffect(spellEffect);
-
     }
     public void playSound(ActiveSpellObject activeSpellObject){
         activeSpellObject.getLocation().getWorld().playSound(activeSpellObject.getLocation(), activeSpellObject.getSound(), activeSpellObject.getSoundvolume(), activeSpellObject.getSoundpitch());

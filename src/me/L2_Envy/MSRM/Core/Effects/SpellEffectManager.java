@@ -29,6 +29,9 @@ public class SpellEffectManager {
         spellEffects.add(new Meteor());
         spellEffects.add(new ChainStrike());
         spellEffects.add(new Petrify());
+        spellEffects.add(new Armageddon());
+        spellEffects.add(new Storm());
+        spellEffects.add(new HailMary());
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
