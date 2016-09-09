@@ -19,7 +19,7 @@ MoneyCost: 0
 Cooldown: 3
 ChargeTime: 2
 TravelDistance: 30
-SpellNode: "chain"
+SpellNode: "light"
 RequiredLevelToBind: 2
 RequiredLevelToCast: 2
 RequiredLevelToDrop: 2
@@ -27,7 +27,7 @@ AffectMobs: true
 AffectSelf: false
 AffectEnemy: true
 AffectTeammates: false
-SpecialEffect: "storm"
+SpecialEffect: "chain"
 Sound:
     Name: ENTITY_BAT_TAKEOFF
     Volume: 0.5

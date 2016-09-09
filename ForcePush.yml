@@ -6,7 +6,7 @@ Bolt:
     BoltDamage: 0
 Aura:
     Enabled: true
-    ActiveTime: 0
+    ActiveTime: 1
     AuraRadius: 7
     AuraDamage: 3
 Spray:

@@ -38,19 +38,19 @@ Particles:
         offSetX: 0.05
         offSetY: 0.05
         offSetZ: 0.05
-        Speed: 0.5
+        Speed: 0.05
     FLAME:
         Amount: 50
         offSetX: 0.05
         offSetY: 0.05
         offSetZ: 0.05
-        Speed: 0.5
+        Speed: 0.05
     FIREWORKS_SPARK:
         Amount: 50
         offSetX: 0.05
         offSetY: 0.05
         offSetZ: 0.05
-        Speed: 0.5
+        Speed: 0.05
 PotionEffects:
     WEAKNESS:
         Duration: 0
