@@ -71,112 +71,116 @@ public class InventoryListener implements Listener{
     }
     @EventHandler
     public void selectMenu(InventoryClickEvent event){
-        Player player = (Player) event.getWhoClicked();
-        if(spellUI.inSpellUI(player)){
-            int slot = event.getSlot();
-            switch(slot){
-                case 0:
-                    spellUI.previousPage(player);
-                    break;
-                case 8:
-                    spellUI.nextPage(player);
-                    break;
-                default:
-                    break;
-            }
-            event.setCancelled(true);
-        }
-        if(wandUI.inWandUI(player)){
-            int slot = event.getSlot();
-            switch(slot){
-                case 0:
-                    wandUI.previousPage(player);
-                    break;
-                case 8:
-                    wandUI.nextPage(player);
-                    break;
-                default:
-                    break;
-            }
-            event.setCancelled(true);
-        }
-        if(mageStats.inMageStats(player)){
-            event.setCancelled(true);
-        }
-        if(wandBag.inWandBag(player)){
-            if(event.getCurrentItem() != null && event.getCursor() != null) {
-                if ((!mageSpellsManager.wandManager.isWand(event.getCurrentItem()) && event.getCursor().getType() == Material.AIR) || (!mageSpellsManager.wandManager.isWand(event.getCursor()) && event.getCurrentItem().getType() == Material.AIR)) {
+        if(event.getWhoClicked() instanceof Player) {
+            Player player = (Player) event.getWhoClicked();
+            if(mageSpellsManager.mageManager.isMage(player)) {
+                if (spellUI.inSpellUI(player)) {
+                    int slot = event.getSlot();
+                    switch (slot) {
+                        case 0:
+                            spellUI.previousPage(player);
+                            break;
+                        case 8:
+                            spellUI.nextPage(player);
+                            break;
+                        default:
+                            break;
+                    }
+                    event.setCancelled(true);
+                }
+                if (wandUI.inWandUI(player)) {
+                    int slot = event.getSlot();
+                    switch (slot) {
+                        case 0:
+                            wandUI.previousPage(player);
+                            break;
+                        case 8:
+                            wandUI.nextPage(player);
+                            break;
+                        default:
+                            break;
+                    }
+                    event.setCancelled(true);
+                }
+                if (mageStats.inMageStats(player)) {
+                    event.setCancelled(true);
+                }
+                if (wandBag.inWandBag(player)) {
+                    if (event.getCurrentItem() != null && event.getCursor() != null) {
+                        if ((!mageSpellsManager.wandManager.isWand(event.getCurrentItem()) && event.getCursor().getType() == Material.AIR) || (!mageSpellsManager.wandManager.isWand(event.getCursor()) && event.getCurrentItem().getType() == Material.AIR)) {
+                            event.setCancelled(true);
+                        }
+                    }
+                }
+                if (bindingMenu.inSpellBindingMenu(player)) {
+                    if (event.getCurrentItem() != null && event.getCursor() != null) {
+                        if (mageSpellsManager.spellBookManager.isSpellBook(event.getCurrentItem())) {
+                            ItemStack itemStack = event.getCurrentItem().clone();
+                            itemStack.setAmount(1);
+                            SpellObject spellObject = mageSpellsManager.spellBookManager.getSpellFromBook(itemStack);
+                            bindingMenu.openWandBindingMenu(player, spellObject);
+                            bindingMenu.closeSpellBindingMenu(player);
+                        }
+                        event.setCancelled(true);
+                    }
+                } else if (bindingMenu.inWandBindingMenu(player)) {
+                    if (event.getCurrentItem() != null && event.getCursor() != null) {
+                        if (mageSpellsManager.wandManager.isWand(event.getCurrentItem())) {
+                            ItemStack itemStack = event.getCurrentItem().clone();
+                            itemStack.setAmount(1);
+                            bindingMenu.openSelectionMenu(player, itemStack);
+                            bindingMenu.closeWandBindingMenu(player);
+                        }
+                        event.setCancelled(true);
+                    }
+                } else if (bindingMenu.inSelectionMenu(player)) {
+                    int slot = event.getSlot();
+                    switch (slot) {
+                        case 3:
+                            mageSpellsManager.bindingManager.bind(player, bindingMenu.getSpellBookFromSelectionMenu(player), bindingMenu.getItemStackFromMenu(player), true);
+                            bindingMenu.closeSelectionmenu(player);
+                            player.closeInventory();
+                            break;
+                        case 5:
+                            mageSpellsManager.bindingManager.bind(player, bindingMenu.getSpellBookFromSelectionMenu(player), bindingMenu.getItemStackFromMenu(player), false);
+                            bindingMenu.closeSelectionmenu(player);
+                            player.closeInventory();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    event.setCancelled(true);
+                }
+                if (playerInterface.inPlayerInterface(player)) {
+                    int slot = event.getSlot();
+                    switch (slot) {
+                        case 2:
+                            playerInterface.closePlayerInterface(player);
+                            wandUI.openWandUI(player);
+                            break;
+                        case 3:
+                            playerInterface.closePlayerInterface(player);
+                            spellUI.openSpellUI(player);
+                            break;
+                        case 4:
+                            playerInterface.closePlayerInterface(player);
+                            wandBag.openWandBag(player);
+                            System.out.println("called:" + slot);
+                            break;
+                        case 5:
+                            playerInterface.closePlayerInterface(player);
+                            mageStats.openMageStats(player);
+                            break;
+                        case 6:
+                            playerInterface.closePlayerInterface(player);
+                            bindingMenu.openSpellBindingMenu(player);
+                        default:
+                            break;
+                    }
                     event.setCancelled(true);
                 }
             }
-        }
-        if(bindingMenu.inSpellBindingMenu(player)) {
-            if (event.getCurrentItem() != null && event.getCursor() != null) {
-                if(mageSpellsManager.spellBookManager.isSpellBook(event.getCurrentItem())){
-                    ItemStack itemStack = event.getCurrentItem().clone();
-                    itemStack.setAmount(1);
-                    SpellObject spellObject = mageSpellsManager.spellBookManager.getSpellFromBook(itemStack);
-                    bindingMenu.openWandBindingMenu(player, spellObject);
-                    bindingMenu.closeSpellBindingMenu(player);
-                }
-                event.setCancelled(true);
-            }
-        }else if(bindingMenu.inWandBindingMenu(player)) {
-            if (event.getCurrentItem() != null && event.getCursor() != null) {
-                if(mageSpellsManager.wandManager.isWand(event.getCurrentItem())){
-                    ItemStack itemStack = event.getCurrentItem().clone();
-                    itemStack.setAmount(1);
-                    bindingMenu.openSelectionMenu(player,itemStack);
-                    bindingMenu.closeWandBindingMenu(player);
-                }
-                event.setCancelled(true);
-            }
-        }else if(bindingMenu.inSelectionMenu(player)){
-            int slot = event.getSlot();
-            switch(slot){
-                case 3:
-                    mageSpellsManager.bindingManager.bind(player,bindingMenu.getSpellBookFromSelectionMenu(player),bindingMenu.getItemStackFromMenu(player), true);
-                    bindingMenu.closeSelectionmenu(player);
-                    player.closeInventory();
-                    break;
-                case 5:
-                    mageSpellsManager.bindingManager.bind(player,bindingMenu.getSpellBookFromSelectionMenu(player),bindingMenu.getItemStackFromMenu(player), false);
-                    bindingMenu.closeSelectionmenu(player);
-                    player.closeInventory();
-                    break;
-                default:
-                    break;
-            }
-
-            event.setCancelled(true);
-        }
-        if(playerInterface.inPlayerInterface(player)){
-            int slot = event.getSlot();
-            switch(slot){
-                case 2:
-                    playerInterface.closePlayerInterface(player);
-                    wandUI.openWandUI(player);
-                    break;
-                case 3:
-                    playerInterface.closePlayerInterface(player);
-                    spellUI.openSpellUI(player);
-                    break;
-                case 4:
-                    playerInterface.closePlayerInterface(player);
-                    wandBag.openWandBag(player);
-                    System.out.println("called:" + slot);
-                    break;
-                case 5:
-                    playerInterface.closePlayerInterface(player);
-                    mageStats.openMageStats(player);
-                    break;
-                case 6:
-                    playerInterface.closePlayerInterface(player);
-                    bindingMenu.openSpellBindingMenu(player);
-                default:
-                    break;
-            }
-            event.setCancelled(true);
         }
 
     }
