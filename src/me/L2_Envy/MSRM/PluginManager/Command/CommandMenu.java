@@ -10,6 +10,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.libs.org.ibex.nestedvm.Runtime;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -280,6 +281,14 @@ public class CommandMenu implements CommandExecutor{
                                                 break;
                                         }
                                     }
+                                }
+                            }else{
+                                try {
+                                    player.sendMessage(ChatColor.RED + "Somehow you are not a mage, but should be. Let me fix that for you!");
+                                    pluginManager.playerConfig.loadPlayerData(player.getName(), player.getUniqueId());
+                                    player.sendMessage(ChatColor.RED + "Okay, now try to run /mage again.");
+                                }catch (Exception ex){
+                                    player.sendMessage(ChatColor.RED +"Contact your server administrator. There was an error with MageSpells.");
                                 }
                             }
                         }

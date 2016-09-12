@@ -3,6 +3,7 @@ package me.L2_Envy.MSRM.PluginManager.Config;
 import me.L2_Envy.MSRM.Core.Objects.CustomItemObject;
 import me.L2_Envy.MSRM.Main;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.exception.ExceptionContext;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -94,16 +95,28 @@ public class ConfigClass {
                     main.logger.info("Could not register entity " + entity);
                 }
             }
-            int playerexperience = config.getInt(path + "ExpFromPlayers");
-            main.mageSpellsManager.levelingManager.setPlayerexperience(playerexperience);
-            for (String levelstr : config.getConfigurationSection(path + "LevelSystem.").getKeys(false)){
-                try{
-                    int level = Integer.parseInt(levelstr);
-                    long experience = config.getLong(path + "LevelSystem." + levelstr);
-                    main.mageSpellsManager.levelingManager.addLevel(level, experience);
-                }catch(Exception ex){
-                    ex.printStackTrace();
-                    main.logger.info("Could not level " + levelstr);
+            if(enableleveling) {
+                int playerexperience = config.getInt(path + "ExpFromPlayers");
+                main.mageSpellsManager.levelingManager.setPlayerexperience(playerexperience);
+                for (String levelstr : config.getConfigurationSection(path + "LevelSystem.").getKeys(false)) {
+                    try {
+                        int level = Integer.parseInt(levelstr);
+                        long experience = config.getLong(path + "LevelSystem." + levelstr);
+                        main.mageSpellsManager.levelingManager.addLevel(level, experience);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        main.logger.info("Could not add level " + levelstr);
+                    }
+                }
+                for (String levelmana : config.getConfigurationSection(path + "ManaLevelSystem").getKeys(false)) {
+                    try {
+                        int level = Integer.parseInt(levelmana);
+                        int manaamount = config.getInt(path + "ManaLevelSystem." + levelmana);
+                        main.mageSpellsManager.manaManager.addManaLevel(level, manaamount);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        main.logger.info("Could not add Mana level ");
+                    }
                 }
             }
             boolean enabledlearning = config.getBoolean(path + "EnableLearning");

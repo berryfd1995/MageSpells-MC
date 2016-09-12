@@ -19,6 +19,7 @@ public class ManaManager {
     private HashMap<PlayerObject, BukkitTask> manatask;
     private HashMap<PlayerObject, BukkitTask> chargetask;
     private HashMap<PlayerObject, BukkitTask> cooldowntask;
+    private HashMap<Integer, Integer> manalevelsystem;
     private int maxmana;
     private int regenrate;
     private boolean displayexactvalue;
@@ -36,6 +37,7 @@ public class ManaManager {
         manatask = new HashMap<>();
         chargetask = new HashMap<>();
         cooldowntask = new HashMap<>();
+        manalevelsystem = new HashMap<>();
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
@@ -55,10 +57,38 @@ public class ManaManager {
         this.cooldownleft = cooldownleft;
         this.displayexactvalue = displayexactvalue;
     }
+    public void addManaLevel(int level, int amount){
+        if(!manalevelsystem.containsKey(level)){
+            manalevelsystem.put(level, amount);
+        }
+    }
+    public int getMaxmana(int playerlevel){
+        int closestlevel = 0;
+        for(int level : manalevelsystem.keySet()){
+            if(playerlevel >= level){
+                if(level > closestlevel){
+                    closestlevel = level;
+                }
+            }
+        }
+        if(manalevelsystem.containsKey(closestlevel)){
+            return manalevelsystem.get(closestlevel);
+        }else{
+            return maxmana;
+        }
+    }
     public void regenMana(PlayerObject player){
-        if(player.getCurrentmana() < maxmana) {
-            addMana(player, regenrate);
-            updateManaBar(player);
+        if(mageSpellsManager.levelingManager.isLevelingEnabled()){
+            int maxmanaamount = getMaxmana(player.getLevel());
+            if(player.getCurrentmana() < maxmanaamount){
+                addMana(player, regenrate);
+                updateManaBar(player);
+            }
+        }else {
+            if (player.getCurrentmana() < maxmana) {
+                addMana(player, regenrate);
+                updateManaBar(player);
+            }
         }
     }
     public void scheduleManaTask(PlayerObject playerObject){
@@ -130,8 +160,9 @@ public class ManaManager {
         String leftBracket = "﴾";
         String rightBracket = "﴿";
         double bars;
+
         int j =0;
-        if(playerObject.isOnCooldown()){
+        if(playerObject.isOnCooldown() && playerObject.getMaxcooldowntime() > 0){
             sb.append(cooldownbracket).append(leftBracket);
             if(playerObject.getMaxcooldowntime() < 5){
                 j = playerObject.getMaxcooldowntime()+1;
@@ -168,7 +199,7 @@ public class ManaManager {
             }
         }
         sb.append(manabrackets).append(rightBracket);
-        if(playerObject.isCharging()){
+        if(playerObject.isCharging() && playerObject.getMaxcooldowntime() > 0){
             sb.append(chargebracket).append(leftBracket);
             if(playerObject.getMaxcooldowntime() < 5){
                 j = playerObject.getMaxchargetime()+1;
