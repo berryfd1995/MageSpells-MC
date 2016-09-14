@@ -2,7 +2,9 @@ package me.L2_Envy.MSRM.API;
 
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
+import me.L2_Envy.MSRM.Core.Objects.ParticleObject;
 import me.L2_Envy.MSRM.PluginManager.PluginManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -37,6 +39,18 @@ public class MageSpellsAPI {
     public static ActiveSpellObject cloneActiveSpellObject(ActiveSpellObject activeSpellObject){
         ActiveSpellObject activeSpellObject1 = new ActiveSpellObject(activeSpellObject.getSpellObject(), activeSpellObject.getLocation().clone(),activeSpellObject.getCaster());
         return activeSpellObject1;
+    }
+    public static void playParticle(ActiveSpellObject activeSpellObject, Location location) {
+        for(ParticleObject particle : activeSpellObject.getParticleObjects()) {
+            particle.getParticle().send(
+                    Bukkit.getOnlinePlayers(),
+                    location,
+                    particle.getOffSetX(),
+                    particle.getOffSetY(),
+                    particle.getOffSetZ(),
+                    particle.getSpeed(),
+                    particle.getAmount());
+        }
     }
 
 }
