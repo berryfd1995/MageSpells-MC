@@ -35,7 +35,13 @@ public class SpellDrop implements SpellEffect {
         MageSpellsAPI.playParticle(getActiveSpell(), new Location(spelllocation.getWorld(),x,spelllocation.getY(),z));
     }
     public void onHit(LivingEntity livingEntity){
-
+        int j,spots = 20,size = 2;
+        for (j = 0; j < 360; j += 360/spots) {
+            double angle = (j * Math.PI / 180);
+            double x = size * Math.cos(angle);
+            double z = size * Math.sin(angle);
+            MageSpellsAPI.playParticle(getActiveSpell(), livingEntity.getLocation().clone().add(x,0,z));
+        }
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
@@ -62,5 +68,12 @@ public class SpellDrop implements SpellEffect {
         return false;
     }
     public void auraRun(){
+        int j,spots = activeSpellObject.getAuraradius()*activeSpellObject.getAuraradius();
+        for (j = 0; j < 360; j += 360/spots) {
+            double angle = (j * Math.PI / 180);
+            double x = activeSpellObject.getAuraradius() * Math.cos(angle);
+            double z = activeSpellObject.getAuraradius() * Math.sin(angle);
+            MageSpellsAPI.playParticle(getActiveSpell(), spelllocation.clone().add(x,1,z));
+        }
     }
 }
