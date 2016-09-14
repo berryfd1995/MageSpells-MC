@@ -288,6 +288,7 @@ public class CommandMenu implements CommandExecutor{
                                     pluginManager.playerConfig.loadPlayerData(player.getName(), player.getUniqueId());
                                     player.sendMessage(ChatColor.RED + "Okay, now try to run /mage again.");
                                 }catch (Exception ex){
+                                    ex.printStackTrace();
                                     player.sendMessage(ChatColor.RED +"Contact your server administrator. There was an error with MageSpells.");
                                 }
                             }
