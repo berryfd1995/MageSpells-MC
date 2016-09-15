@@ -7,6 +7,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Daniel on 9/14/2016.
  */
@@ -33,15 +36,27 @@ public class SpellDrop implements SpellEffect {
             i = 0;
         }
         MageSpellsAPI.playParticle(getActiveSpell(), new Location(spelllocation.getWorld(),x,spelllocation.getY(),z));
+
     }
     public void onHit(LivingEntity livingEntity){
-        int j,spots = 20,size = 2;
-        for (j = 0; j < 360; j += 360/spots) {
-            double angle = (j * Math.PI / 180);
-            double x = size * Math.cos(angle);
-            double z = size * Math.sin(angle);
-            MageSpellsAPI.playParticle(getActiveSpell(), livingEntity.getLocation().clone().add(x,0,z));
-        }
+        /*int j,spots = 10;
+        double pos = .5,size = 2;
+        for(int s = 0; s < 8; s++) {
+            for (j = 0; j < 360; j += 360 / spots) {
+                double angle = (j * Math.PI / 180);
+                double x = size * Math.cos(angle);
+                double z = size * Math.sin(angle);
+                MageSpellsAPI.playParticle(getActiveSpell(), livingEntity.getLocation().clone().add(x, pos, z));
+            }
+            pos = pos + .5;
+            if(s > 4) {
+                if (size <= 0) {
+                    size = .2;
+                }else{
+                    size -= .5;
+                }
+            }
+        }*/
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
@@ -68,12 +83,16 @@ public class SpellDrop implements SpellEffect {
         return false;
     }
     public void auraRun(){
+<<<<<<< HEAD
         int j,spots = activeSpellObject.getAuraradius()*2;
+=======
+        /*int j,spots = activeSpellObject.getAuraradius()*activeSpellObject.getAuraradius();
+>>>>>>> 3aa85c4deca3f071a893b896ee3e2ec0f3930dac
         for (j = 0; j < 360; j += 360/spots) {
             double angle = (j * Math.PI / 180);
             double x = activeSpellObject.getAuraradius() * Math.cos(angle);
             double z = activeSpellObject.getAuraradius() * Math.sin(angle);
             MageSpellsAPI.playParticle(getActiveSpell(), spelllocation.clone().add(x,1,z));
-        }
+        }*/
     }
 }

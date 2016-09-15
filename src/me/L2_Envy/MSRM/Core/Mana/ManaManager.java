@@ -199,7 +199,7 @@ public class ManaManager {
             }
         }
         sb.append(manabrackets).append(rightBracket);
-        if(playerObject.isCharging() && playerObject.getMaxcooldowntime() > 0){
+        if(playerObject.isCharging() && playerObject.getMaxchargetime() > 0){
             sb.append(chargebracket).append(leftBracket);
             if(playerObject.getMaxcooldowntime() < 5){
                 j = playerObject.getMaxchargetime()+1;
