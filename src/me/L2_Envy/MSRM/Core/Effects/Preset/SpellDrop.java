@@ -68,7 +68,7 @@ public class SpellDrop implements SpellEffect {
         return false;
     }
     public void auraRun(){
-        int j,spots = activeSpellObject.getAuraradius()*activeSpellObject.getAuraradius();
+        int j,spots = activeSpellObject.getAuraradius()*2;
         for (j = 0; j < 360; j += 360/spots) {
             double angle = (j * Math.PI / 180);
             double x = activeSpellObject.getAuraradius() * Math.cos(angle);
