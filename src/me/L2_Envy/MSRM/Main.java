@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM;
 
+import me.L2_Envy.MSRM.Alchemy.AlchemyManager;
 import me.L2_Envy.MSRM.Core.Handlers.*;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
@@ -18,6 +19,7 @@ public class Main extends JavaPlugin {
     public Logger logger = getLogger();
     public MageSpellsManager mageSpellsManager;
     public PluginManager pluginManager;
+    public AlchemyManager alchemyManager;
     public Utils utils;
     public AlchemyListener alchemyListener;
     public CastingListener castingListener;
@@ -29,10 +31,12 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         mageSpellsManager = new MageSpellsManager();
         pluginManager = new PluginManager();
+        alchemyManager = new AlchemyManager();
         utils = new Utils(this);
         logger.info("Initilizing MageSpells_Remastered");
         pluginManager.linkAll(this);
         mageSpellsManager.linkAll(this);
+        alchemyManager.linkAll(this);
         if(!pluginManager.InitilizePlugin()){
             Bukkit.getPluginManager().disablePlugin(this);
         }else{
