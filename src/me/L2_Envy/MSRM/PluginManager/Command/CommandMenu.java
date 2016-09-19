@@ -2,6 +2,7 @@ package me.L2_Envy.MSRM.PluginManager.Command;
 
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
+import me.L2_Envy.MSRM.Core.Objects.TeamObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import me.L2_Envy.MSRM.PluginManager.PluginManager;
 import org.bukkit.Bukkit;
@@ -209,44 +210,109 @@ public class CommandMenu implements CommandExecutor{
                                                     if (args.length >= 2) {
                                                         switch (args[1].toLowerCase()) {
                                                             case "create":
-                                                                if (args.length == 4) {
-                                                                    pluginManager.main.mageSpellsManager.teamManager.createTeam(args[2], player);
-
+                                                                if (args.length == 3) {
+                                                                    if(pluginManager.main.mageSpellsManager.teamManager.createTeam(args[2], player)) {
+                                                                        player.sendMessage(ChatColor.GREEN + "You have successfully created the team: " + args[2]);
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "You were unable to create this team!");
+                                                                    }
+                                                                }else{
+                                                                    player.sendMessage(ChatColor.RED + "Unable to create this team!");
                                                                 }
                                                                 break;
                                                             case "leave":
-                                                                pluginManager.main.mageSpellsManager.teamManager.leaveTeam(player);
+                                                                if(pluginManager.main.mageSpellsManager.teamManager.leaveTeam(player)){
+                                                                    player.sendMessage(ChatColor.GREEN + "You successfully left your team!");
+                                                                }else{
+                                                                    player.sendMessage(ChatColor.RED + "You were unable to perform this action!");
+                                                                }
                                                                 break;
                                                             case "accept":
                                                                 if (args.length == 3) {
-                                                                    pluginManager.main.mageSpellsManager.teamManager.acceptInvite(player, args[2]);
+                                                                    if(pluginManager.main.mageSpellsManager.teamManager.acceptInvite(player, args[2])){
+                                                                        player.sendMessage(ChatColor.GREEN + "You successfully joined a team!");
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "You were unable to join this team!");
+                                                                    }
                                                                 }
                                                                 break;
                                                             case "decline":
                                                                 if (args.length == 3) {
-                                                                    pluginManager.main.mageSpellsManager.teamManager.declineInvite(player, args[2]);
+                                                                    if(pluginManager.main.mageSpellsManager.teamManager.declineInvite(player, args[2])){
+                                                                        player.sendMessage(ChatColor.GREEN + "You successfully declined this invite!");
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "You were unable to perform this action!");
+                                                                    }
                                                                 }
                                                                 break;
                                                             case "invite":
                                                                 if (args.length == 3) {
                                                                     Player player1 = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
                                                                     if (player1 != null) {
-                                                                        pluginManager.main.mageSpellsManager.teamManager.invitePlayer(player, player1);
+                                                                        if(pluginManager.main.mageSpellsManager.teamManager.invitePlayer(player, player1)){
+                                                                            player.sendMessage(ChatColor.GREEN + "You successfully invited " + player1.getName());
+                                                                        }else{
+                                                                            player.sendMessage(ChatColor.RED + "You were unable to invite " + player1.getName());
+                                                                        }
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "Could not find that player!");
                                                                     }
                                                                 }
                                                                 break;
-                                                            case "makeofficer":
+                                                            case "promote":
                                                                 if (args.length == 3) {
                                                                     Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
                                                                     if (playerFromName != null) {
-                                                                        pluginManager.main.mageSpellsManager.teamManager.promotePlayer(player, playerFromName);
+                                                                        if(pluginManager.main.mageSpellsManager.teamManager.promotePlayer(player, playerFromName)){
+                                                                            player.sendMessage(ChatColor.GREEN + "You successfully promoted this player!");
+                                                                        }else{
+                                                                            player.sendMessage(ChatColor.RED +"You were unable to promote this player!");
+                                                                        }
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "Player must be online to promote!");
                                                                     }
                                                                 }
                                                                 break;
+                                                            case "demote":
+                                                                if(args.length == 3){
+                                                                    Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[2]);
+                                                                    if(playerFromName!= null){
+                                                                        if(pluginManager.main.mageSpellsManager.teamManager.demotePlayer(player, playerFromName)){
+                                                                            player.sendMessage(ChatColor.GREEN + "You successfully demoted this player!");
+                                                                        }else{
+                                                                            player.sendMessage(ChatColor.RED +"You were unable to demote this player!");
+                                                                        }
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "Player must be online to demote!");
+                                                                    }
+                                                                }
                                                             case "disband":
                                                                 if (args.length == 2) {
-                                                                    pluginManager.main.mageSpellsManager.teamManager.disbandTeam(player);
+                                                                    if(pluginManager.main.mageSpellsManager.teamManager.disbandTeam(player)){
+                                                                        player.sendMessage(ChatColor.GREEN + "You successfully disbanded your team!");
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "Unable to perform this action!");
+                                                                    }
                                                                 }
+                                                                break;
+                                                            case "kick":
+                                                                if(args.length == 3){
+                                                                    OfflinePlayer offlinePlayer = pluginManager.main.utils.getOfflinePlayerFromName(args[2]);
+                                                                    if(offlinePlayer != null){
+                                                                        if(pluginManager.main.mageSpellsManager.teamManager.kickPlayer(player,offlinePlayer)){
+                                                                            player.sendMessage(ChatColor.GREEN + "You successfully kicked that player!");
+                                                                        }else{
+                                                                            player.sendMessage(ChatColor.RED + "You were unable to perform that action!");
+                                                                        }
+                                                                    }else{
+                                                                        player.sendMessage(ChatColor.RED + "Could not find that player!");
+                                                                    }
+                                                                }
+                                                            case "stats":
+                                                                pluginManager.main.mageSpellsManager.teamManager.displayStats(player);
+                                                                break;
+                                                            default:
+                                                                helpMenu.displayHelpMenu(player, 2);
                                                                 break;
                                                         }
                                                     }
@@ -278,6 +344,28 @@ public class CommandMenu implements CommandExecutor{
                                             default:
                                                 break;
                                         }
+                                    }
+                                }
+                            }else{
+                                try {
+                                    player.sendMessage(ChatColor.RED + "Somehow you are not a mage, but should be. Let me fix that for you!");
+                                    pluginManager.playerConfig.loadPlayerData(player.getName(), player.getUniqueId());
+                                    player.sendMessage(ChatColor.RED + "Okay, now try to run /mage again.");
+                                }catch (Exception ex){
+                                    ex.printStackTrace();
+                                    player.sendMessage(ChatColor.RED +"Contact your server administrator. There was an error with MageSpells.");
+                                }
+                            }
+                        }
+                    }else if(cmd.getName().equalsIgnoreCase("tc")){
+                        if (player.hasPermission("magespells.mage") || player.isOp()) {
+                            if (pluginManager.main.mageSpellsManager.mageManager.isMage(player)) {
+                                PlayerObject playerObject = pluginManager.main.mageSpellsManager.mageManager.getMage(player.getUniqueId());
+                                if (playerObject != null) {
+                                    if (args.length == 0) {
+                                        helpMenu.displayHelpMenu(player, 1);
+                                    } else {
+                                        pluginManager.main.mageSpellsManager.teamManager.sendMessage(player,args[0]);
                                     }
                                 }
                             }else{

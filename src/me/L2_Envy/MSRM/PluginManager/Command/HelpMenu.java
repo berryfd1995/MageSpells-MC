@@ -34,13 +34,17 @@ public class HelpMenu {
                     player.sendMessage(ChatColor.BLUE + "/mage team leave --" + ChatColor.GREEN + "Leave the team you are currently in.");
                     player.sendMessage(ChatColor.BLUE + "/mage team invite <player> --" + ChatColor.GREEN + "Invite a player to your team.");
                     player.sendMessage(ChatColor.BLUE + "/mage team accept <teamname> --" + ChatColor.GREEN + "Accept a team invite.");
+                    player.sendMessage(ChatColor.BLUE + "/mage team stats --" + ChatColor.GREEN + "Display current team information");
                 }
                 player.sendMessage(ChatColor.BLUE + "Extra Info on other pages.");
                 break;
             case 3:
                 player.sendMessage(ChatColor.GREEN+ "=========" + ChatColor.BLUE + "HELP MENU [3/6]"+ChatColor.GREEN + "========");
                 if(commandMenu.pluginManager.main.mageSpellsManager.teamManager.getUsercreatesteam() || player.hasPermission("magespells.admin")) {
-                    player.sendMessage(ChatColor.BLUE + "/mage team makeofficer <player>--" + ChatColor.GREEN + "Make a player your current officer");
+                    player.sendMessage(ChatColor.BLUE + "/mage team promote <player>--" + ChatColor.GREEN + "Promote a player to officer status");
+                    player.sendMessage(ChatColor.BLUE + "/mage team demote <player>--" + ChatColor.GREEN + "Demote a player to normal memeber status");
+                    player.sendMessage(ChatColor.BLUE + "/mage team kick <player> --" + ChatColor.GREEN + "Kick a player off your team!");
+                    player.sendMessage(ChatColor.BLUE + "/tc <message> --" + ChatColor.GREEN + "Send a message to all of your teammates!");
                 }
                 if(player.hasPermission("magespells.admin")){
                     player.sendMessage(ChatColor.BLUE + "/mage team add <player> <team> --" + ChatColor.GREEN + "Add a player to a team.");

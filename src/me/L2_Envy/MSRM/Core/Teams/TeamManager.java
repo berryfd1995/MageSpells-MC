@@ -1,9 +1,14 @@
 package me.L2_Envy.MSRM.Core.Teams;
 
+import me.L2_Envy.MSRM.Core.Effects.Preset.ChainStrike;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.TeamObject;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,10 +76,23 @@ public class TeamManager {
     public boolean promotePlayer(Player promoter, Player promotee){
         TeamObject teamObject = getTeam(promoter);
         TeamObject teamObject1 = getTeam(promotee);
-        if(teamObject != null && teamObject1 == null){
+        if(teamObject != null && teamObject1 != null){
             if(teamObject.equals(teamObject1)){
                 if(teamObject.getLeader().equals(promoter.getUniqueId())){
                     teamObject.addOfficer(promotee.getUniqueId());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean demotePlayer(Player demoter, Player demotee){
+        TeamObject teamObject = getTeam(demoter);
+        TeamObject teamObject1 = getTeam(demotee);
+        if(teamObject != null && teamObject1 != null){
+            if(teamObject.equals(teamObject1)){
+                if(teamObject.getLeader().equals(demoter.getUniqueId())){
+                    teamObject.removeOfficer(demotee.getUniqueId());
                     return true;
                 }
             }
@@ -104,10 +122,14 @@ public class TeamManager {
         if(teamObject != null){
             if(!teamObject.getLeader().equals(player.getUniqueId())){
                 if(teamObject.getOfficer().equals(player.getUniqueId())){
-                    teamObject.addOfficer(null);
+                    teamObject.removeOfficer(player.getUniqueId());
                     teamObject.removePlayer(player.getUniqueId());
-                    return true;
+                }else{
+                    teamObject.removePlayer(player.getUniqueId());
                 }
+                return true;
+            }else{
+                player.sendMessage(ChatColor.RED + "If you wish to leave your team, you must do /mage team disband!");
             }
         }
         return false;
@@ -136,8 +158,22 @@ public class TeamManager {
         TeamObject teamObject1 = getTeam(invitee);
         if(teamObject != null && teamObject1 == null){
             if(teamObject.getLeader() == inviter.getUniqueId() || teamObject.isOfficer(inviter.getUniqueId())){
-                invitelist.put(teamObject,invitee.getUniqueId());
-                return true;
+                if(!alreadyInvited(teamObject, invitee.getUniqueId())) {
+                    invitelist.put(teamObject, invitee.getUniqueId());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean alreadyInvited(TeamObject teamObject, UUID uuid){
+        if(teamObject != null && uuid != null){
+            for(TeamObject teamObject1 : invitelist.keySet()){
+                if(teamObject.equals(teamObject1)){
+                    if(invitelist.get(teamObject1).equals(uuid)){
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -191,5 +227,65 @@ public class TeamManager {
             }
         }
         return null;
+    }
+    public boolean kickPlayer(Player kicker, OfflinePlayer kickee){
+        TeamObject teamObject = getTeam(kicker);
+        if(teamObject != null){
+            if(teamObject.isMember(kickee.getUniqueId())){
+                if(teamObject.getLeader().equals(kicker.getUniqueId())){
+                    if(teamObject.isOfficer(kickee.getUniqueId())){
+                        teamObject.removeOfficer(kickee.getUniqueId());
+                    }
+                    teamObject.removePlayer(kickee.getUniqueId());
+                    return true;
+                }
+                if(teamObject.isOfficer(kicker.getUniqueId())){
+                    if(teamObject.isOfficer(kickee.getUniqueId()) || teamObject.getLeader().equals(kickee.getUniqueId())){
+                        kicker.sendMessage(ChatColor.RED + "You cannot remove this player!");
+                    }else{
+                        teamObject.removePlayer(kickee.getUniqueId());
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public void displayStats(Player player){
+        TeamObject teamObject = getTeam(player);
+        if(teamObject != null){
+            player.sendMessage(ChatColor.BLUE + "===========" + ChatColor.GREEN + teamObject.getTeamname().toUpperCase() + ChatColor.BLUE + "===========");
+            player.sendMessage(ChatColor.BLUE + "Leader: " + ChatColor.GREEN + mageSpellsManager.main.utils.getOfflinePlayerFromUUID(teamObject.getLeader()).getName());
+            player.sendMessage(ChatColor.BLUE + "Total Members: " + ChatColor.GREEN + teamObject.getMemebers().size());
+        }
+    }
+    public void notifyTeammates(TeamObject teamObject, String message){
+        OfflinePlayer offlinePlayer = mageSpellsManager.main.utils.getOfflinePlayerFromUUID(teamObject.getLeader());
+        if(offlinePlayer.isOnline()){
+            Player leader = (Player) offlinePlayer;
+            leader.sendMessage(message);
+        }
+        for(UUID uuid : teamObject.getMemebers()){
+            for(Player player1 : Bukkit.getOnlinePlayers()){
+                if(player1.getUniqueId().equals(uuid)) {
+                    player1.sendMessage(message);
+                }
+            }
+        }
+    }
+    public void sendMessage(Player player, String message){
+        String finalmessage = "";
+        TeamObject teamObject = getTeam(player);
+        if(teamObject != null) {
+            if (teamObject.getLeader().equals(player.getUniqueId())) {
+                finalmessage = ChatColor.RED+"[Team][Leader] " + ChatColor.BLUE + player.getName() + ": " +ChatColor.GREEN+ message;
+            } else if (teamObject.isOfficer(player.getUniqueId())) {
+                finalmessage = ChatColor.RED +"[Team][Officer] " + ChatColor.BLUE + player.getName() + ": " +ChatColor.GREEN+ message;
+            } else {
+                finalmessage =ChatColor.RED + "[Team] " + ChatColor.BLUE + player.getName() + ": " +ChatColor.GREEN+ message;
+            }
+            notifyTeammates(teamObject, finalmessage);
+
+        }
     }
 }

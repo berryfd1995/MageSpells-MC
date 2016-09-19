@@ -41,11 +41,22 @@ public class TeamObject {
     public List<UUID> getOfficer() {
         return officers;
     }
-    public void addOfficer(UUID uuid){this.officers.add(uuid);
+    public void addOfficer(UUID uuid){
+        this.officers.add(uuid);
+    }
+    public void removeOfficer(UUID uuid){
+        this.officers.remove(uuid);
     }
     public void addPlayer(UUID uuid){
         if(!memebers.contains(uuid)){
             memebers.add(uuid);
+        }
+    }
+    public boolean isMember(UUID uuid){
+        if(memebers.contains(uuid)){
+            return true;
+        }else{
+            return false;
         }
     }
     public void removePlayer(UUID uuid){
