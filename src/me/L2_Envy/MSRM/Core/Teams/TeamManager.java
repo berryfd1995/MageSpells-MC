@@ -17,6 +17,16 @@ public class TeamManager {
     private ArrayList<TeamObject> teamObjects;
     private HashMap<TeamObject, UUID> invitelist;
     private boolean usercreatesteam = false;
+
+    /**
+     * TODO: Fix invite system/ double check it.
+     * TODO: More options for leaders
+     * TODO: Kick feature.
+     * TODO: For below, create option(s)
+     * TODO: Other features: Tags, Stat tracker, Managability(Kick, Promote, invite)
+     * TODO: Add in API features
+     * TODO: Work on the deletion factor
+     */
     public TeamManager(){
         teamObjects = new ArrayList<>();
         invitelist = new HashMap<>();
@@ -64,7 +74,7 @@ public class TeamManager {
         if(teamObject != null && teamObject1 == null){
             if(teamObject.equals(teamObject1)){
                 if(teamObject.getLeader().equals(promoter.getUniqueId())){
-                    teamObject.setOfficer(promotee.getUniqueId());
+                    teamObject.addOfficer(promotee.getUniqueId());
                     return true;
                 }
             }
@@ -94,7 +104,7 @@ public class TeamManager {
         if(teamObject != null){
             if(!teamObject.getLeader().equals(player.getUniqueId())){
                 if(teamObject.getOfficer().equals(player.getUniqueId())){
-                    teamObject.setOfficer(null);
+                    teamObject.addOfficer(null);
                     teamObject.removePlayer(player.getUniqueId());
                     return true;
                 }
@@ -102,12 +112,11 @@ public class TeamManager {
         }
         return false;
     }
-    public boolean createTeam(String teamname, Player player, Player player1){
+    public boolean createTeam(String teamname, Player player){
         TeamObject teamObject = getTeam(player);
-        TeamObject teamObject1 = getTeam(player1);
         TeamObject teamObject2 = getTeam(teamname);
-        if(teamObject == null && teamObject1 == null && teamObject2 == null) {
-            mageSpellsManager.main.pluginManager.teamConfig.createTeamData(teamname,player.getUniqueId(),player1.getUniqueId());
+        if(teamObject == null && teamObject2 == null) {
+            mageSpellsManager.main.pluginManager.teamConfig.createTeamData(teamname,player.getUniqueId());
             return true;
         }
         return false;
@@ -126,7 +135,7 @@ public class TeamManager {
         TeamObject teamObject = getTeam(inviter);
         TeamObject teamObject1 = getTeam(invitee);
         if(teamObject != null && teamObject1 == null){
-            if(teamObject.getLeader() == inviter.getUniqueId() || teamObject.getOfficer() == inviter.getUniqueId()){
+            if(teamObject.getLeader() == inviter.getUniqueId() || teamObject.isOfficer(inviter.getUniqueId())){
                 invitelist.put(teamObject,invitee.getUniqueId());
                 return true;
             }

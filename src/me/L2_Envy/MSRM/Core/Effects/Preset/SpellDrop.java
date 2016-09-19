@@ -7,9 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Daniel on 9/14/2016.
  */
@@ -83,9 +80,7 @@ public class SpellDrop implements SpellEffect {
         return false;
     }
     public void auraRun(){
-<<<<<<< HEAD
-        int j,spots = activeSpellObject.getAuraradius()*2;
-=======
+        //int j,spots = activeSpellObject.getAuraradius()*2;
         /*int j,spots = activeSpellObject.getAuraradius()*activeSpellObject.getAuraradius();
 >>>>>>> 3aa85c4deca3f071a893b896ee3e2ec0f3930dac
         for (j = 0; j < 360; j += 360/spots) {

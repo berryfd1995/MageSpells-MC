@@ -3,7 +3,7 @@ version: 2.0.6.2-SNAPSHOT
 description: Delve into the black magics of minecraft!
 author: L2_Envy
 main: me.L2_Envy.MSRM.Main
-depend: [TitleManager, Vault]
+depend: [TitleManager]
 softdepend: [WorldGuard, WorldEdit]
 commands:
     mage:

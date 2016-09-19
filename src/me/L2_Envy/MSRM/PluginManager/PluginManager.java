@@ -4,7 +4,6 @@ import me.L2_Envy.MSRM.Main;
 import me.L2_Envy.MSRM.API.MageSpellsAPI;
 import me.L2_Envy.MSRM.PluginManager.APIHooks.ParticlePkg.ParticleAPI;
 import me.L2_Envy.MSRM.PluginManager.APIHooks.TitleManagerPkg.TitleManagerAPI;
-import me.L2_Envy.MSRM.PluginManager.APIHooks.VaultPkg.VaultAPI;
 import me.L2_Envy.MSRM.PluginManager.APIHooks.WorldEditPkg.WorldEditAPI;
 import me.L2_Envy.MSRM.PluginManager.Command.CommandMenu;
 import me.L2_Envy.MSRM.PluginManager.Config.*;
@@ -20,7 +19,6 @@ public class PluginManager {
     public ParticleAPI particleAPI;
     public TitleManagerAPI titleManagerAPI;
     public WorldEditAPI worldEditAPI;
-    public VaultAPI vaultAPI;
     public Messages messages;
     public ConfigClass configClass;
     public PlayerConfig playerConfig;
@@ -36,7 +34,6 @@ public class PluginManager {
         titleManagerAPI = new TitleManagerAPI();
         worldEditAPI = new WorldEditAPI();
         particleAPI = new ParticleAPI();
-        vaultAPI = new VaultAPI();
         messages = new Messages();
         configClass = new ConfigClass();
         playerConfig = new PlayerConfig();
@@ -55,7 +52,6 @@ public class PluginManager {
         titleManagerAPI.link(this);
         worldEditAPI.link(this);
         particleAPI.link(this);
-        vaultAPI.link(this);
         messages.link(this);
         configClass.link(main);
         playerConfig.link(main);
@@ -78,7 +74,6 @@ public class PluginManager {
             teamConfig.loadTeamConfigs();
             notes.exportNotes();
             exampleConfig.exportExamples();
-            vaultAPI.setupEconomy();
             return true;
         }else{
             return false;

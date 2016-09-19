@@ -30,7 +30,7 @@ public class HelpMenu {
                 player.sendMessage(ChatColor.BLUE + "/mage bind --" + ChatColor.GREEN + "Directly opens up the binding interface.");
                 if(commandMenu.pluginManager.main.mageSpellsManager.teamManager.getUsercreatesteam()|| player.hasPermission("magespells.admin")) {
                     player.sendMessage(ChatColor.BLUE + "/mage team disband --" + ChatColor.GREEN + "Disband your current team.");
-                    player.sendMessage(ChatColor.BLUE + "/mage team create <teamname> <officername> --" + ChatColor.GREEN + "Create a team with a first officer.");
+                    player.sendMessage(ChatColor.BLUE + "/mage team create <teamname>--" + ChatColor.GREEN + "Create a team.");
                     player.sendMessage(ChatColor.BLUE + "/mage team leave --" + ChatColor.GREEN + "Leave the team you are currently in.");
                     player.sendMessage(ChatColor.BLUE + "/mage team invite <player> --" + ChatColor.GREEN + "Invite a player to your team.");
                     player.sendMessage(ChatColor.BLUE + "/mage team accept <teamname> --" + ChatColor.GREEN + "Accept a team invite.");

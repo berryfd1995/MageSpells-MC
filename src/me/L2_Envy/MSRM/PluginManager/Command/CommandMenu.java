@@ -210,10 +210,8 @@ public class CommandMenu implements CommandExecutor{
                                                         switch (args[1].toLowerCase()) {
                                                             case "create":
                                                                 if (args.length == 4) {
-                                                                    Player playerFromName = pluginManager.main.utils.getOnlinePlayerFromName(args[3]);
-                                                                    if (playerFromName != null) {
-                                                                        pluginManager.main.mageSpellsManager.teamManager.createTeam(args[2], player, playerFromName);
-                                                                    }
+                                                                    pluginManager.main.mageSpellsManager.teamManager.createTeam(args[2], player);
+
                                                                 }
                                                                 break;
                                                             case "leave":

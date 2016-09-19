@@ -12,14 +12,14 @@ import java.util.UUID;
 public class TeamObject {
     private String teamname;
     private UUID leader;
-    private UUID officer;
+    private List<UUID> officers;
     private List<UUID> memebers;
     private File teamFile;
     private FileConfiguration teamconfig;
-    public TeamObject(String teamname, UUID leader, UUID officer, List<UUID> members, File teamFile, FileConfiguration teamconfig){
+    public TeamObject(String teamname, UUID leader, List<UUID> officer, List<UUID> members, File teamFile, FileConfiguration teamconfig){
         this.teamname = teamname;
         this.leader = leader;
-        this.officer = officer;
+        this.officers = officer;
         this.memebers = members;
         this.teamFile = teamFile;
         this.teamconfig = teamconfig;
@@ -38,11 +38,10 @@ public class TeamObject {
         return leader;
     }
 
-    public UUID getOfficer() {
-        return officer;
+    public List<UUID> getOfficer() {
+        return officers;
     }
-    public void setOfficer(UUID uuid){
-        this.officer = uuid;
+    public void addOfficer(UUID uuid){this.officers.add(uuid);
     }
     public void addPlayer(UUID uuid){
         if(!memebers.contains(uuid)){
@@ -60,13 +59,21 @@ public class TeamObject {
                 return true;
             }
         }
-        if(officer != null){
-            if(officer.equals(uuid)){
-                return true;
+        if(officers != null){
+            if(officers.contains(uuid)){
+                return  true;
             }
         }
         if(memebers.contains(uuid)){
             return true;
+        }
+        return false;
+    }
+    public boolean isOfficer(UUID uuid){
+        if(officers != null){
+            if(officers.contains(uuid)){
+                return true;
+            }
         }
         return false;
     }

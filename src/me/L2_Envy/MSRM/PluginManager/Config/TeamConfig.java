@@ -89,10 +89,15 @@ public class TeamConfig {
         try {
             String leader = config.getString("Leader");
             UUID leaderuuid = UUID.fromString(leader);
-            String officer = config.getString("Officer");
-            UUID officeruuid = null;
-            if(officer != "" && officer != null) {
-                officeruuid = UUID.fromString(officer);
+            List<String> officers = config.getStringList("Officers");
+            List<UUID> officeruuids = new ArrayList<>();
+            if(!officeruuids.isEmpty() && officers != null) {
+                for(String officer : officers){
+                    UUID officeruuid = UUID.fromString(officer);
+                    if(officeruuid != null){
+                        officeruuids.add(officeruuid);
+                    }
+                }
             }
             List<String> members = config.getStringList("Members");
             List<UUID> memberuuids = new ArrayList<>();
@@ -105,7 +110,7 @@ public class TeamConfig {
                     }
                 }
             }
-            return new TeamObject(teamName,leaderuuid,officeruuid,memberuuids, file, config);
+            return new TeamObject(teamName,leaderuuid,officeruuids,memberuuids, file, config);
         }catch(Exception ex) {
             ex.printStackTrace();
             return null;
@@ -148,11 +153,11 @@ public class TeamConfig {
             }
         }
     }
-    public void createTeamData(String teamname, UUID uuid, UUID uuid2){
+    public void createTeamData(String teamname, UUID uuid){
         TeamObject teamObject;
         File teamFile = createTeamFile(teamname);
         FileConfiguration teamConfig = YamlConfiguration.loadConfiguration(teamFile);
-        teamObject = new TeamObject(teamname,uuid,uuid2,new ArrayList<>(), teamFile,teamConfig);
+        teamObject = new TeamObject(teamname,uuid,new ArrayList<>(),new ArrayList<>(), teamFile,teamConfig);
         main.mageSpellsManager.teamManager.addTeamObject(teamObject);
         saveTeamData(teamObject);
     }
