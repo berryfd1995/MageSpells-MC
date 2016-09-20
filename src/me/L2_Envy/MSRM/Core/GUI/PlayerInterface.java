@@ -39,6 +39,7 @@ public class PlayerInterface {
         inv.setItem(4, mageSpellsManager.main.utils.getItemStack("CHEST", ChatColor.GOLD +"Wand Bag"));
         inv.setItem(5, mageSpellsManager.main.utils.getItemStack("PAPER", ChatColor.BLUE +"Mage Stats"));
         inv.setItem(6, mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", ChatColor.BLUE +"Binding Menu"));
+        inv.setItem(7, mageSpellsManager.main.utils.getItemStack("BREWING_STAND", ChatColor.GREEN + "Brewing Menu"));
         return inv;
     }
 }

@@ -1,7 +1,7 @@
 package me.L2_Envy.MSRM;
 
 import me.L2_Envy.MSRM.Alchemy.AlchemyManager;
-import me.L2_Envy.MSRM.Alchemy.Handlers.AlchemyListener;
+import me.L2_Envy.MSRM.Alchemy.Handlers.MenuListener;
 import me.L2_Envy.MSRM.Core.Handlers.*;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
@@ -22,7 +22,7 @@ public class Main extends JavaPlugin {
     public PluginManager pluginManager;
     public AlchemyManager alchemyManager;
     public Utils utils;
-    public AlchemyListener alchemyListener;
+    public MenuListener menuListener;
     public CastingListener castingListener;
     public CraftingListener craftingListener;
     public EnchantingListener enchantingListener;
@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         }else{
             mageSpellsManager.InitilizePlugin();
-            registerEvents(this, new AlchemyListener(), new CastingListener(mageSpellsManager), new CraftingListener(mageSpellsManager),
+            registerEvents(this, new MenuListener(alchemyManager), new CastingListener(mageSpellsManager), new CraftingListener(mageSpellsManager),
                     new EntityListener(mageSpellsManager), new EnchantingListener(mageSpellsManager), new InventoryListener(mageSpellsManager), new PlayerHandler(mageSpellsManager));
             for(Player player : Bukkit.getOnlinePlayers()){
                 if(player.hasPermission("magespells.mage")) {
