@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
         }else{
             mageSpellsManager.InitilizePlugin();
-            registerEvents(this, new AlchemyListener(mageSpellsManager), new CastingListener(mageSpellsManager), new CraftingListener(mageSpellsManager),
+            registerEvents(this, new AlchemyListener(), new CastingListener(mageSpellsManager), new CraftingListener(mageSpellsManager),
                     new EntityListener(mageSpellsManager), new EnchantingListener(mageSpellsManager), new InventoryListener(mageSpellsManager), new PlayerHandler(mageSpellsManager));
             for(Player player : Bukkit.getOnlinePlayers()){
                 if(player.hasPermission("magespells.mage")) {
