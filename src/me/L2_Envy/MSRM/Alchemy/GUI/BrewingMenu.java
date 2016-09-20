@@ -24,12 +24,36 @@ public class BrewingMenu {
       3 = Result
      */
     private static final int[][] layout =
-                   {{0,0,0,0,2,0,0,0,0},
+                   /*{{0,0,0,0,2,0,0,0,0},
+                    {0,0,0,2,2,2,0,0,0},
+                    {0,0,0,0,2,0,0,0,0},
+                    {0,0,0,2,0,2,0,0,0},
+                    {0,0,2,0,0,0,2,0,0},
+                    {0,2,2,2,2,2,2,2,0}};*/
+                   /*{{1,2,2,2,2,2,2,2,1},
+                    {2,2,0,0,0,0,0,2,2},
+                    {2,0,2,0,0,0,2,0,2},
+                    {2,0,0,2,0,2,0,0,2},
+                    {2,0,0,0,3,0,0,0,2},
+                    {1,2,0,0,0,0,0,2,1}};*/
+                   /*{{2,2,2,2,2,2,2,2,2},
+                    {0,2,0,0,1,0,0,2,0},
+                    {0,0,2,1,0,1,2,0,0},
+                    {0,0,1,2,0,2,1,0,0},
+                    {0,1,0,0,2,0,0,1,0},
+                    {1,1,1,1,1,1,1,1,1}};*/
+                   /*{{0,0,0,0,2,0,0,0,0},
+                    {1,1,1,2,1,2,1,1,1},
+                    {0,1,2,0,0,0,2,1,0},
+                    {0,2,1,0,0,0,1,2,0},
+                    {2,2,2,2,2,2,2,2,2},
+                    {0,0,0,0,1,0,0,0,0}};*/
+                   /*{{0,0,0,0,2,0,0,0,0},
                     {0,0,0,1,1,1,0,0,0},
                     {0,2,1,1,3,1,1,2,0},
                     {0,0,1,1,1,1,1,0,0},
                     {0,0,1,1,0,1,1,0,0},
-                    {0,2,1,0,0,0,1,2,0}};
+                    {0,2,0,0,0,0,0,2,0}};*/
     /**
      * [00][01][02][03][04][05][06][07][08]
      * [09][10][11][12][13][14][15[16][17]
@@ -69,19 +93,18 @@ public class BrewingMenu {
     }
     private Inventory loadInventory(){
         ItemStack[] contents = new ItemStack[54];
-
         for(int i = 0; i <6; i++){
             for(int j = 0; j < 9; j++){
-                int s = (i*10) + j;
+                int s = ((i*8)+i) + j;
                 switch (layout[i][j]){
                     case 0:
-                        contents[s] = alchemyManager.main.utils.getItemStack("AIR");
+                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE");
                         break;
                     case 1:
-                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-15");
+                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-14");
                         break;
                     case 2:
-                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-13", "&cIngrediant");
+                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-15", "&cIngrediant");
                         break;
                     case 3:
                         contents[s] = alchemyManager.main.utils.getItemStack("GLASS_BOTTLE", "&cResult");
@@ -93,5 +116,11 @@ public class BrewingMenu {
         inv.setContents(contents);
         //inv.setItem(53, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-13", ChatColor.GREEN +"Create Potion"));
         return inv;
+    }
+    public void addItem(){
+
+    }
+    public void removeItem(){
+
     }
 }
