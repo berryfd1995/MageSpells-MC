@@ -50,7 +50,7 @@ public class PlayerHandler implements Listener{
         ItemStack itemStack = event.getItem();
         if(player.getInventory().getItemInMainHand().equals(itemStack)) {
             if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK){
-                if(mageSpellsManager.spellLearningManager.isSpellBookLearningEnabled()){
+                if(mageSpellsManager.spellLearningManager.isLearningEnabled() && mageSpellsManager.spellLearningManager.isSpellBookLearningEnabled()){
                     SpellObject spellObject = mageSpellsManager.spellBookManager.getSpellFromBook(itemStack);
                     if(spellObject != null){
                         if(mageSpellsManager.mageManager.isMage(player)) {
@@ -83,7 +83,7 @@ public class PlayerHandler implements Listener{
                         }
                     }
                 }
-                if(mageSpellsManager.wandManager.isWandLearningEnabled()){
+                if(mageSpellsManager.spellLearningManager.isLearningEnabled() && mageSpellsManager.wandManager.isWandLearningEnabled()){
                     WandObject wandObject = mageSpellsManager.wandManager.getWandFromItem(itemStack);
                     if(wandObject != null){
                         if(mageSpellsManager.mageManager.isMage(player)){

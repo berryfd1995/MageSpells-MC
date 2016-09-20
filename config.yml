@@ -3,7 +3,7 @@ Settings:
         #Allows for players to gain levels in MageSpells.
         #True: Players will need a required level to use wands/spells
         #False: All Spells and Wands will be available to users.
-        EnableLeveling: True
+        EnableLeveling: false
         #Experience gained from killing these things.
         MobExperience:
             ZOMBIE: 10
@@ -36,7 +36,7 @@ Settings:
         #Enable this if you would like for players to need to learn spells before use.
         #True: Players required to learn a spell before use.
         #False: All spells will be avaliable to players when found.
-        EnableLearning: True
+        EnableLearning: false
         #Ebale this if you wish players to learn via spell books by right clicking them. if not, it will remain command based.
         EnableSpellBookLearning: True
         #Enable this if you wish for players to learn wands by right clicking them.
@@ -46,7 +46,7 @@ Settings:
         #This will enable nodes. via permission system. Players must have the permission magespells.spell.<node> to use spells.
         #and magespells.wand.<node> to use wands. AS WELL AS for wands and spells to be bound. the wand must have the spell node in its
         #compatibility list.
-        EnableNodeSystem: true
+        EnableNodeSystem: false
 
     TeamSettings:
         #Enabling this means users can create their own teams.

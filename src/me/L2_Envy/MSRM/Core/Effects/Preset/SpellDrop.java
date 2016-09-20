@@ -25,14 +25,14 @@ public class SpellDrop implements SpellEffect {
         this.activeSpellObject = activeSpellObject;
     }
     public void Run(){
-        double angle = i * increment;
+        /*double angle = i * increment;
         double x = spelllocation.getX() + (4 * Math.cos(angle));
         double z = spelllocation.getZ() + (4 * Math.sin(angle));
         i++;
         if(i == points){
             i = 0;
         }
-        MageSpellsAPI.playParticle(getActiveSpell(), new Location(spelllocation.getWorld(),x,spelllocation.getY(),z));
+        MageSpellsAPI.playParticle(getActiveSpell(), new Location(spelllocation.getWorld(),x,spelllocation.getY(),z));*/
 
     }
     public void onHit(LivingEntity livingEntity){

@@ -12,4 +12,5 @@ Armageddon - Conjour the meteor power, unleash a storm of meteors.
 Storm - Create a lightning storm
 Petrify - Turn mobs into stone.
 HailMary - Shoot a barrage worth of spells.
+ArcSpell - Makes the spell be affected by gravity. It falls!
 (More coming soon!)
