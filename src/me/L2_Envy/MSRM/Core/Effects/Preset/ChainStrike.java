@@ -56,6 +56,7 @@ public class ChainStrike implements SpellEffect{
     }
     public void spellEndingSeq(){
         Location location = getClosestEntity();
+        location = location.add(0,0.5,0);
         if(location != null && (spelllocation.getBlock().getType() == Material.AIR || spelllocation.getBlock().getType() == Material.LONG_GRASS)) {
             ActiveSpellObject activeSpellObject = getActiveSpell();
             SpellEffect spellEffect = new ChainStrike();
@@ -86,16 +87,16 @@ public class ChainStrike implements SpellEffect{
                         Player player = (Player) livingEntity;
                         if (!activeSpellObject.getCaster().equals(player)) {
                             if (location == null) {
-                                location = entity.getLocation();
+                                location = entity.getLocation().clone();
                             } else if (spelllocation.distance(entity.getLocation()) < spelllocation.distance(location)) {
-                                location = entity.getLocation();
+                                location = entity.getLocation().clone();
                             }
                         }
                     } else {
                         if (location == null) {
-                            location = entity.getLocation();
+                            location = entity.getLocation().clone();
                         } else if (spelllocation.distance(entity.getLocation()) < spelllocation.distance(location)) {
-                            location = entity.getLocation();
+                            location = entity.getLocation().clone();
                         }
                     }
                 }

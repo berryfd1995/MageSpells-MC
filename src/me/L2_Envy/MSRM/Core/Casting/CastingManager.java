@@ -38,7 +38,9 @@ public class CastingManager {
             if(mageSpellsManager.manaManager.hasAtLeastMana(playerObject, spellObject.getManacost())) {
                 if(spellObject.isItemcostenabled()) {
                     if(hasItemCost(player, spellObject)) {
-                        mageSpellsManager.manaManager.removeMana(playerObject, spellObject.getManacost());
+                        if(spellObject.getManacost() >0) {
+                            mageSpellsManager.manaManager.removeMana(playerObject, spellObject.getManacost());
+                        }
                         takeItemCosts(player, spellObject);
                         if (spellObject.getChargetime() > 0) {
                             mageSpellsManager.manaManager.scheduleChargeTask(player.getName(), playerObject, spellObject, spellObject.getChargetime());
@@ -49,7 +51,9 @@ public class CastingManager {
                         player.sendMessage(ChatColor.RED + "You do not have the required items.");
                     }
                 }else{
-                    mageSpellsManager.manaManager.removeMana(playerObject, spellObject.getManacost());
+                    if(spellObject.getManacost() > 0) {
+                        mageSpellsManager.manaManager.removeMana(playerObject, spellObject.getManacost());
+                    }
                     if (spellObject.getChargetime() > 0) {
                         mageSpellsManager.manaManager.scheduleChargeTask(player.getName(), playerObject, spellObject, spellObject.getChargetime());
                     }else{

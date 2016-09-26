@@ -1,5 +1,6 @@
 Settings:
     GameplaySettings:
+        EnchantmentEffect: true
         #Allows for players to gain levels in MageSpells.
         #True: Players will need a required level to use wands/spells
         #False: All Spells and Wands will be available to users.

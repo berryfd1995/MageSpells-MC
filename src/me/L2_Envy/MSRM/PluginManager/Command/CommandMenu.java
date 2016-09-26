@@ -5,6 +5,7 @@ import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.TeamObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import me.L2_Envy.MSRM.PluginManager.PluginManager;
+import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -43,6 +44,27 @@ public class CommandMenu implements CommandExecutor{
                                         helpMenu.displayHelpMenu(player, 1);
                                     } else {
                                         switch (args[0].toLowerCase()) {
+                                            case "reload":
+                                                player.sendMessage(ChatColor.GREEN + "Reloading configs..");
+                                                pluginManager.configClass.loadOtherConfigs();
+                                                pluginManager.customItemConfig.loadCustomItemConfigs();
+                                                pluginManager.spellConfig.loadSpellConfigs();
+                                                pluginManager.wandConfig.loadWandConfigs();
+                                                pluginManager.teamConfig.loadTeamConfigs();
+                                                player.sendMessage(ChatColor.GREEN + "Reloading player data..");
+                                                if(player.hasPermission("magespells.admin")){
+                                                    for(Player player1 : Bukkit.getOnlinePlayers()){
+                                                        if(player.hasPermission("magespells.mage")) {
+                                                            PlayerObject playerObject1 = pluginManager.playerConfig.loadPlayerData(player1.getUniqueId());
+                                                            if (playerObject1 != null) {
+                                                                pluginManager.main.mageSpellsManager.mageManager.addMage(playerObject1);
+                                                                pluginManager.main.mageSpellsManager.manaManager.scheduleManaTask(playerObject1);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                player.sendMessage(ChatColor.GREEN + "Magespells reloaded.");
+                                                break;
                                             case "help":
                                                 if (args.length == 2) {
                                                     helpMenu.displayHelpMenu(player, Integer.parseInt(args[1]));

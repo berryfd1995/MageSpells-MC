@@ -55,6 +55,7 @@ public class HelpMenu {
             case 4:
                 player.sendMessage(ChatColor.GREEN + "=========" + ChatColor.BLUE + "HELP MENU [4/6]" + ChatColor.GREEN + "========");
                 if(player.hasPermission("magespells.admin")) {
+                    player.sendMessage(ChatColor.BLUE + "/mage relaod --" + ChatColor.GREEN + "Reload configs and player data for magespells");
                     player.sendMessage(ChatColor.BLUE + "/mage spawnwand <wandname> <player>--" + ChatColor.GREEN + "Spawn in a wand from specified wand name.");
                     player.sendMessage(ChatColor.BLUE + "/mage setprimaryspell <spellname> --" + ChatColor.GREEN + "Set the primary spell of the current held wand.");
                     player.sendMessage(ChatColor.BLUE + "/mage setsecondaryspell <spellname> -- " + ChatColor.GREEN + "Set the secondary spell of the current held wand.");
