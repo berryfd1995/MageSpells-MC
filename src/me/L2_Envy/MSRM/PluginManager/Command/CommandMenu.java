@@ -357,7 +357,7 @@ public class CommandMenu implements CommandExecutor{
                                 }
                             }
                         }
-                    }else if(cmd.getName().equalsIgnoreCase("tc")){
+                    }else if(cmd.getName().equalsIgnoreCase("mtc")){
                         if (player.hasPermission("magespells.mage") || player.isOp()) {
                             if (pluginManager.main.mageSpellsManager.mageManager.isMage(player)) {
                                 PlayerObject playerObject = pluginManager.main.mageSpellsManager.mageManager.getMage(player.getUniqueId());

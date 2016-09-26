@@ -62,7 +62,7 @@ public class PluginManager {
         exampleConfig.link(main);
         customItemConfig.link(main);
         main.getCommand("mage").setExecutor(commandMenu);
-        main.getCommand("tc").setExecutor(commandMenu);
+        main.getCommand("mtc").setExecutor(commandMenu);
     }
     public boolean InitilizePlugin(){
         //Hook Plugins in

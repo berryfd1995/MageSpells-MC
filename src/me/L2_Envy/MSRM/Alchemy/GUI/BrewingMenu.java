@@ -26,9 +26,9 @@ public class BrewingMenu {
     private static final int[][] layout =
                    {{1,1,1,1,1,1,1,1,1},
                     {1,0,0,0,0,0,0,0,1},
-                    {1,0,0,0,0,0,0,0,1},
-                    {1,0,0,0,0,0,0,0,1},
-                    {1,0,0,0,0,0,0,0,1},
+                    {1,1,2,1,1,1,2,1,1},
+                    {1,1,2,1,1,1,2,1,1},
+                    {1,1,2,2,3,2,2,1,1},
                     {1,1,1,1,1,1,1,1,1}};
                    /*{{0,0,0,0,2,0,0,0,0},
                     {0,0,0,2,2,2,0,0,0},
@@ -97,15 +97,6 @@ public class BrewingMenu {
     public boolean inBrewingMenu(Player player){
         return playerinbrewingmenu.contains(player.getName());
     }
-    private Inventory loadInventory(){
-        Inventory inv = Bukkit.createInventory(null,9, ChatColor.DARK_PURPLE +"Brewing Menu");
-        inv.setItem(1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-5", ChatColor.GREEN +"Mix Ingredients"));
-        inv.setItem(1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-14", ChatColor.GREEN +"Don't Mix"));
-        for(int i = 1; i < 9; i++){
-            inv.setItem(1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-15"));
-        }
-        return inv;
-    }
     /*private Inventory loadInventory(){
         Inventory inv = Bukkit.createInventory(null,9, ChatColor.DARK_PURPLE +"Brewing Menu");
         inv.setItem(1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-5", ChatColor.GREEN +"Mix Ingredients"));
@@ -116,19 +107,28 @@ public class BrewingMenu {
         return inv;
     }*/
     /*private Inventory loadInventory(){
+        Inventory inv = Bukkit.createInventory(null,9, ChatColor.DARK_PURPLE +"Brewing Menu");
+        inv.setItem(1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-5", ChatColor.GREEN +"Mix Ingredients"));
+        inv.setItem(1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-14", ChatColor.GREEN +"Don't Mix"));
+        for(int i = 1; i < 9; i++){
+            inv.setItem(1, mageSpellsManager.main.utils.getItemStack("STAINED_GLASS_PANE-15"));
+        }
+        return inv;
+    }*/
+    private Inventory loadInventory(){
         ItemStack[] contents = new ItemStack[54];
         for(int i = 0; i <6; i++){
             for(int j = 0; j < 9; j++){
                 int s = ((i*8)+i) + j;
                 switch (layout[i][j]){
                     case 0:
-                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-2");
+                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-2", "&cIngrediant");
                         break;
                     case 1:
                         contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-15");
                         break;
                     case 2:
-                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-15", "&cIngrediant");
+                        contents[s] = alchemyManager.main.utils.getItemStack("STAINED_GLASS_PANE-14");
                         break;
                     case 3:
                         contents[s] = alchemyManager.main.utils.getItemStack("GLASS_BOTTLE", "&cResult");
@@ -146,5 +146,5 @@ public class BrewingMenu {
     }
     public void removeItem(){
 
-    }*/
+    }
 }

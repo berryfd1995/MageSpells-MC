@@ -10,7 +10,7 @@ commands:
         aliases: [magespells, ms]
         description: Command menu for MageSpells Remastered.
         usage: /<command>
-    tc:
+    mtc:
         aliases: [teamchat]
         description: Talk in your team chat!
         usage: /<command> <message>
