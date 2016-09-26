@@ -286,6 +286,8 @@ public class TeamManager {
             }
             notifyTeammates(teamObject, finalmessage);
 
+        }else{
+            player.sendMessage(ChatColor.RED + "You are not on a team!");
         }
     }
 }

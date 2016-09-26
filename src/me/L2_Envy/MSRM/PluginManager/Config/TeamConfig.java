@@ -42,7 +42,7 @@ public class TeamConfig {
                         TeamObject teamData = deformatData(teamName, fileData, config);
                         if(teamData != null) {
                             main.mageSpellsManager.teamManager.addTeamObject(teamData);
-                            main.logger.info(teamName + " loaded.");
+                            //main.logger.info(teamName + " loaded.");
                         }else{
                             main.logger.info("Error loading " + teamName);
                         }

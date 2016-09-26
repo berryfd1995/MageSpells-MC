@@ -95,9 +95,11 @@ public class Main extends JavaPlugin {
      * -Messages HOLD
      * -Fix Space in title.
      * -API HOLD
-     * Work on API 0%
+     * Work on API 10%
      * Work on Enchanting 0%
-     * Work on Alchemy 0%
+     * Work on Alchemy 15%
      * TODO: Add more options for custom item
+     * TODO: Command will be run when spell is cast
+     * TODO: Particle effects changes
      */
 }

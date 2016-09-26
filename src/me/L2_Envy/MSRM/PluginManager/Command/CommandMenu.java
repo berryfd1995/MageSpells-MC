@@ -5,7 +5,6 @@ import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.TeamObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import me.L2_Envy.MSRM.PluginManager.PluginManager;
-import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;

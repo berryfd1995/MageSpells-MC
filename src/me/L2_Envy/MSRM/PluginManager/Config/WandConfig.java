@@ -40,7 +40,7 @@ public class WandConfig {
                         WandObject wandData = deformatData(wandName, config);
                         if(wandData != null) {
                             main.mageSpellsManager.wandManager.addWandObject(wandData);
-                            main.logger.info(wandData.getWandName() + " loaded.");
+                            //main.logger.info(wandData.getWandName() + " loaded.");
                         }else{
                             main.logger.info("Error loading " + wandName);
                         }

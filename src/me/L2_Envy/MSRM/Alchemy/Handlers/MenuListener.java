@@ -49,10 +49,10 @@ public class MenuListener implements Listener {
                 if (mageSpellsManager.playerInterface.inPlayerInterface(player)) {
                     int slot = event.getSlot();
                     switch (slot) {
-                        case 7:
+                        /*case 7:
                             mageSpellsManager.playerInterface.closePlayerInterface(player);
                             brewingMenu.openBrewingMenu(player);
-                            break;
+                            break;*/
                         default:
                             break;
                     }

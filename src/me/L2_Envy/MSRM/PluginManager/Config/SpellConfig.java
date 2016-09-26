@@ -45,7 +45,7 @@ public class SpellConfig {
                         SpellObject spellData = deformatData(spellName, config);
                         if(spellData!= null) {
                             main.mageSpellsManager.spellManager.addSpellObject(spellData);
-                            main.logger.info(spellData.getName() + " loaded.");
+                           // main.logger.info(spellData.getName() + " loaded.");
                         }else{
                             main.logger.info("Error loading " + spellName);
                         }

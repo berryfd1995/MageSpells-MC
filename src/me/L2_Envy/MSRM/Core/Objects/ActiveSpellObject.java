@@ -54,6 +54,18 @@ public class ActiveSpellObject extends SpellObject {
         }
         return false;*/
     }
+    public ArrayList<UUID> getSprayHit(){
+        return sprayHit;
+    }
+    public void setSprayHit(ArrayList<UUID> ents){
+        this.sprayHit = ents;
+    }
+    public ArrayList<UUID> getBoltHit(){
+        return boltHit;
+    }
+    public void setBoltHit(ArrayList<UUID> ents){
+        this.boltHit = ents;
+    }
     public boolean didBoltHit(LivingEntity livingEntity){
         return boltHit.contains(livingEntity.getUniqueId());
     }

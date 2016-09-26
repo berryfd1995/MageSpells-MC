@@ -36,7 +36,7 @@ public class CustomItemConfig {
                         CustomItemObject itemData = deformatData(itemname, config);
                         if(itemData != null) {
                             main.utils.addCustomItemObject(itemData);
-                            main.logger.info(itemData.getItemname() + " loaded.");
+                            //main.logger.info(itemData.getItemname() + " loaded.");
                         }else{
                             main.logger.info("Error loading " + itemname);
                         }
