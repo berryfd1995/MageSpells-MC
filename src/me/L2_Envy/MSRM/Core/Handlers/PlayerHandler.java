@@ -80,6 +80,7 @@ public class PlayerHandler implements Listener{
                                 player.updateInventory();
                                 player.sendMessage(ChatColor.GREEN + "You have learned a new spell!");
                             }
+
                         }
                     }
                 }
@@ -113,6 +114,7 @@ public class PlayerHandler implements Listener{
                                 player.sendMessage(ChatColor.GREEN + "You have learned a new wand!");
                             }
                         }
+                        event.setCancelled(true);
                     }
                 }
             }

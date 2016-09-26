@@ -42,6 +42,9 @@ public class CastingListener implements Listener {
                     if(spellObject != null && wandObject != null){
                         mageSpellsManager.castingManager.castSpell(player,playerObject, spellObject, wandObject);
                     }
+                    if(spellObject != null){
+                        event.setCancelled(true);
+                    }
                 }
             }
         }

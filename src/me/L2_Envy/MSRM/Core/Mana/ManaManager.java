@@ -93,9 +93,11 @@ public class ManaManager {
     }
     public void scheduleManaTask(PlayerObject playerObject){
         playerObject.setCurrentmana(maxmana);
-        manatask.put(playerObject, Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main, () ->{
-            regenMana(playerObject);
-        },10L,20L));
+        if(!manatask.containsKey(playerObject)) {
+            manatask.put(playerObject, Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main, () -> {
+                regenMana(playerObject);
+            }, 10L, 20L));
+        }
     }
     public void scheduleChargeTask( String name,PlayerObject playerObject,SpellObject spellObject,int time){
         playerObject.setCharging(true);
@@ -137,8 +139,8 @@ public class ManaManager {
         }
     }
     public void addMana(PlayerObject player, int amount){
-        if(player.getCurrentmana() + amount >= maxmana){
-            player.setCurrentmana(maxmana);
+        if(player.getCurrentmana() + amount >= getMaxmana(player.getLevel())){
+            player.setCurrentmana(getMaxmana(player.getLevel()));
         }else {
             player.setCurrentmana(player.getCurrentmana() + amount);
         }
@@ -185,13 +187,13 @@ public class ManaManager {
             sb.append(activemana).append(" "+(int) (playerObject.getCurrentmana() + 0.5d) + " ");
         }
         sb.append(manabrackets).append(leftBracket);
-        bars = maxmana / 25; //each bar = num/25
+        bars = getMaxmana(playerObject.getLevel()) / 25; //each bar = num/25
         for (int i = 1; i < 26; i++) {
             String manabar = "▬";
             if (i*bars <= playerObject.getCurrentmana()) {
                     sb.append(activemana).append(manabar);
             } else {
-                if(playerObject.getCurrentmana() > maxmana *.25) {
+                if(playerObject.getCurrentmana() > getMaxmana(playerObject.getLevel()) *.25) {
                     sb.append(inactivemana).append(manabar);
                 }else{
                     sb.append(lowmana).append(manabar);
