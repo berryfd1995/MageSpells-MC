@@ -56,22 +56,19 @@ public class ChainStrike implements SpellEffect{
     }
     public void spellEndingSeq(){
         Location location = getClosestEntity();
-        location = location.add(0,0.5,0);
         if(location != null && (spelllocation.getBlock().getType() == Material.AIR || spelllocation.getBlock().getType() == Material.LONG_GRASS)) {
             ActiveSpellObject activeSpellObject = getActiveSpell();
             SpellEffect spellEffect = new ChainStrike();
             spelllocation = spelllocation.add(0,1,0);
             location = location.add(0,1,0);
             spellEffect.setInitialLocation(spelllocation);
-            vector = location.toVector().subtract(spelllocation.toVector()).multiply(2);
+            vector = location.toVector().subtract(spelllocation.toVector());
             vector.normalize();
             activeSpellObject.setLocation(spelllocation);
             activeSpellObject.setInitialLoc(spelllocation);
             spelllocation.add(vector);
             spellEffect.setInitialVector(vector);
             spellEffect.setActiveSpell(activeSpellObject);
-            spellEffect.getActiveSpell().setSprayHit(activeSpellObject.getSprayHit());
-            spellEffect.getActiveSpell().setBoltHit(activeSpellObject.getBoltHit());
             MageSpellsAPI.shootSpell(spellEffect);
         }else{
         }
@@ -81,7 +78,6 @@ public class ChainStrike implements SpellEffect{
     }
     public Location getClosestEntity(){
         Location location =  null;
-        LivingEntity livingEntity1 = null;
         for(Entity entity : spelllocation.getWorld().getNearbyEntities(spelllocation,activeSpellObject.getTraveldistance(),activeSpellObject.getTraveldistance(),activeSpellObject.getTraveldistance())){
             if(entity instanceof LivingEntity){
                 LivingEntity livingEntity =(LivingEntity) entity;
@@ -91,26 +87,24 @@ public class ChainStrike implements SpellEffect{
                         if (!activeSpellObject.getCaster().equals(player)) {
                             if (location == null) {
                                 location = entity.getLocation().clone();
-                                livingEntity1 = livingEntity;
+                                location = location.add(0,0.5,0);
                             } else if (spelllocation.distance(entity.getLocation()) < spelllocation.distance(location)) {
                                 location = entity.getLocation().clone();
-                                livingEntity1 = livingEntity;
+                                location = location.add(0,0.5,0);
                             }
                         }
                     } else {
                         if (location == null) {
                             location = entity.getLocation().clone();
-                            livingEntity1 = livingEntity;
+                            location = location.add(0,0.5,0);
                         } else if (spelllocation.distance(entity.getLocation()) < spelllocation.distance(location)) {
                             location = entity.getLocation().clone();
-                            livingEntity1 = livingEntity;
+                            location = location.add(0,0.5,0);
                         }
                     }
                 }
             }
         }
-        //getActiveSpell().setSprayHit(livingEntity1);
-        //getActiveSpell().setBoltHit(livingEntity1);
         return location;
     }
     public void auraRun(){

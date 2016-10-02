@@ -92,7 +92,11 @@ public class ManaManager {
         }
     }
     public void scheduleManaTask(PlayerObject playerObject){
-        playerObject.setCurrentmana(maxmana);
+        if(mageSpellsManager.levelingManager.isLevelingEnabled()) {
+            playerObject.setCurrentmana(getMaxmana(playerObject.getLevel()));
+        }else{
+            playerObject.setCurrentmana(maxmana);
+        }
         if(!manatask.containsKey(playerObject)) {
             manatask.put(playerObject, Bukkit.getScheduler().runTaskTimerAsynchronously(mageSpellsManager.main, () -> {
                 regenMana(playerObject);
