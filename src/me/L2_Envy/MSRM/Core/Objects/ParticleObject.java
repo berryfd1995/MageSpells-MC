@@ -1,6 +1,7 @@
 package me.L2_Envy.MSRM.Core.Objects;
 
-import org.inventivetalent.particle.ParticleEffect;
+import de.slikey.effectlib.util.ParticleEffect;
+import org.bukkit.Particle;
 
 /**
  * Created by Daniel on 7/24/2016.
@@ -10,6 +11,7 @@ public class ParticleObject {
     private float offSetY;
     private float offSetZ;
     private float speed;
+    //private ParticleEffect particle;
     private ParticleEffect particle;
     private int amount;
 
@@ -21,6 +23,8 @@ public class ParticleObject {
         this.offSetZ = offSetZ;
         this.speed = speed;
         this.particle =  ParticleEffect.valueOf(particle);
+
+        //ParticleEffect.valueOf(particle);
     }
 
     public float getOffSetX() {

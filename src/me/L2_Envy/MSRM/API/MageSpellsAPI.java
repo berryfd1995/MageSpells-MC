@@ -13,6 +13,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import java.util.List;
+
 /**
  * Created by Daniel on 7/23/2016.
  */
@@ -69,15 +71,19 @@ public class MageSpellsAPI {
      */
     public static void playParticle(ActiveSpellObject activeSpellObject, Location location) {
         for(ParticleObject particle : activeSpellObject.getParticleObjects()) {
-            particle.getParticle().send(
+            particle.getParticle().display(particle.getOffSetX(),particle.getOffSetY(),particle.getOffSetZ(),particle.getSpeed(),particle.getAmount(),location, 200);
+
+            /*particle.getParticle().send(
                     Bukkit.getOnlinePlayers(),
                     location,
                     particle.getOffSetX(),
                     particle.getOffSetY(),
                     particle.getOffSetZ(),
                     particle.getSpeed(),
-                    particle.getAmount());
+                    particle.getAmount());*/
         }
     }
+
+
 
 }

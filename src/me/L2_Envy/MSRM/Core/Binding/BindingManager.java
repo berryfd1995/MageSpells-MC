@@ -27,6 +27,7 @@ public class BindingManager {
     public void bind(Player player, ItemStack spellbook){
 
     }
+
     public void bind(Player player, SpellObject spellObject, ItemStack itemStack, boolean primary){
         PlayerObject playerObject = mageSpellsManager.mageManager.getMage(player.getUniqueId());
         if(playerObject != null && itemStack != null && spellObject != null){
