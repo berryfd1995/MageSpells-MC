@@ -101,5 +101,11 @@ public class Main extends JavaPlugin {
      * TODO: Add more options for custom item
      * TODO: Command will be run when spell is cast
      * TODO: Particle effects changes
+     * TODO: Fix menu showing list of items. It repeats and skips.
+     * TODO: MENU Duplicating on reload? Test
+     * TODO: Block iterator instead of ray casting
+     * TODO: API?
+     * TODO: Look over leveling and see if there should be changes
+     * 
      */
 }
