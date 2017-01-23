@@ -170,7 +170,7 @@ public class WandUI {
                 ArrayList<WandObject> wandObjectArrayList = new ArrayList<>();
                 if (i != maxpages - 1) {
                     for (int j = 0; j < 7; j++) {
-                        int s = j + j * i;
+                        int s = j + 7 * i;
                         wandObjectArrayList.add(wandObjects.get(s));
                     }
                     wandpages.put(i + 1, wandObjectArrayList);

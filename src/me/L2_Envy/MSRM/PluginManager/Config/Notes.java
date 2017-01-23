@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.*;
+import java.util.Base64;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 

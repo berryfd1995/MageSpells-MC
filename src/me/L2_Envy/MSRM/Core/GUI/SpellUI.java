@@ -164,7 +164,7 @@ public class SpellUI {
             ArrayList<SpellObject> spellObjectArrayList = new ArrayList<>();
             if(i != maxpages-1){
                 for(int j = 0; j <7; j++){
-                    int s = j + j*i;
+                    int s = j + 7*i;
                     spellObjectArrayList.add(spellObjects.get(s));
                 }
                 spellpages.put(i+1, spellObjectArrayList);
