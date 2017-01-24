@@ -4,6 +4,7 @@ import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.TeamObject;
+import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -48,8 +49,32 @@ public class SpellInfoUI {
             }else{
 
             }
+            //if admin
             if(player.hasPermission("")){
-                
+
+            }
+        }
+        return inventory;
+    }
+    public Inventory loadInventory(Player player, WandObject wandObject){
+        Inventory inventory = Bukkit.createInventory(null,27, ChatColor.BLUE + "Wand: " + wandObject.getDisplayname());
+        if(mageSpellsManager.mageManager.isMage(player)){
+            PlayerObject playerObject = mageSpellsManager.mageManager.getMage(player.getUniqueId());
+            //Setup inventory
+            /*
+                -compatible wands
+                -spell info like damage, armour piercing
+                -effects
+                -
+             */
+            if(playerObject.knowsWand(wandObject)){
+
+            }else{
+
+            }
+            //if admin
+            if(player.hasPermission("")){
+
             }
         }
         return inventory;
