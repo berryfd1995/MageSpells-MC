@@ -149,22 +149,28 @@ public class SpellUI {
         }
         return 0;
     }
+
+    public SpellObject getSpellSelected(Player player, int slot){
+        return spellpages.get(getPage(player)).get(slot-1);
+    }
+
+    //Fix
     public void resortSpellPages(ArrayList<SpellObject> spellObjects){
         spellpages = new HashMap<>();
-        int maxpages = spellObjects.size() /7;
-        int lastpageamount = spellObjects.size() %7;
-        if(lastpageamount > 0){
+        int maxpages = spellObjects.size() /7; //Max pages is how many times 7 can go into the size.
+        int lastpageamount = spellObjects.size() %7; //grabs the remainder
+        if(lastpageamount > 0){//if there are more. then increase the last page.
             maxpages +=1;
-        }else if(lastpageamount == 0){
+        }else if(lastpageamount == 0){ //if it equals 0 then set the last page to 7
             lastpageamount = 7;
         }
         //i = page #
         //j = item in page 1-7
-        for(int i = 0; i < maxpages; i++){
-            ArrayList<SpellObject> spellObjectArrayList = new ArrayList<>();
-            if(i != maxpages-1){
+        for(int i = 0; i < maxpages; i++){ // do the amount of pages. 0 to maxpages -1
+            ArrayList<SpellObject> spellObjectArrayList = new ArrayList<>();//new array list for the page... should change to array.
+            if(i != maxpages-1){//pages leading up to last page.
                 for(int j = 0; j <7; j++){
-                    int s = j + j*i;
+                    int s = j + 7*i;
                     spellObjectArrayList.add(spellObjects.get(s));
                 }
                 spellpages.put(i+1, spellObjectArrayList);
@@ -176,6 +182,7 @@ public class SpellUI {
                 spellpages.put(i+1, spellObjectArrayList);
             }
         }
+
     }
     //LEVEL AND ALPHABETICAL
 }

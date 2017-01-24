@@ -34,6 +34,7 @@ public class MageSpellsManager {
     public PlayerInterface playerInterface;
     public SpellUI spellUI;
     public WandUI wandUI;
+    public SpellInfoUI spellInfoUI;
     public WandBag wandBag;
     public MageStats mageStats;
     public BindingMenu bindingMenu;
@@ -60,6 +61,7 @@ public class MageSpellsManager {
         wandBag = new WandBag();
         mageStats = new MageStats();
         wandUI = new WandUI();
+        spellInfoUI = new SpellInfoUI();
         bindingMenu = new BindingMenu();
         castingManager = new CastingManager();
         spellLearningManager = new SpellLearningManager();
@@ -83,6 +85,7 @@ public class MageSpellsManager {
         spellEffectManager.link(this);
         playerInterface.link(this);
         spellUI.link(this);
+        spellInfoUI.link(this);
         wandBag.link(this);
         mageStats.link(this);
         wandUI.link(this);

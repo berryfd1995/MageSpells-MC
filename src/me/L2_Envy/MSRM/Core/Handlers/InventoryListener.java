@@ -29,6 +29,7 @@ public class InventoryListener implements Listener{
     private MageStats mageStats;
     private WandUI wandUI;
     private BindingMenu bindingMenu;
+    private SpellInfoUI spellInfoUI;
 
     public InventoryListener(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
@@ -38,6 +39,7 @@ public class InventoryListener implements Listener{
         mageStats = mageSpellsManager.mageStats;
         wandUI = mageSpellsManager.wandUI;
         bindingMenu = mageSpellsManager.bindingMenu;
+        spellInfoUI = mageSpellsManager.spellInfoUI;
     }
 
     @EventHandler
@@ -61,6 +63,9 @@ public class InventoryListener implements Listener{
         if(wandUI.inWandUI(event.getPlayer())){
             wandUI.closeWandUI(event.getPlayer());
         }
+        if(spellInfoUI.inSpellInfoUI(event.getPlayer())){
+            spellInfoUI.closeSpellInfoUI(event.getPlayer());
+        }
         if(bindingMenu.inSpellBindingMenu(event.getPlayer())){
             bindingMenu.closeSpellBindingMenu(event.getPlayer());
         }else if(bindingMenu.inWandBindingMenu(event.getPlayer())){
@@ -74,6 +79,7 @@ public class InventoryListener implements Listener{
         if(event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
             if(mageSpellsManager.mageManager.isMage(player)) {
+
                 if (spellUI.inSpellUI(player)) {
                     int slot = event.getSlot();
                     switch (slot) {
@@ -84,9 +90,21 @@ public class InventoryListener implements Listener{
                             spellUI.nextPage(player);
                             break;
                         default:
+                            //get spell
+                            SpellObject spellObject = spellUI.getSpellSelected(player, slot);
+                            if(spellObject != null){
+                                spellUI.closeSpellUI(player);
+                                spellInfoUI.loadInventory(player, spellObject);
+                            }
                             break;
                     }
                     event.setCancelled(true);
+                }
+                if(spellInfoUI.inSpellInfoUI(player)){
+                    int slot = event.getSlot();
+                    switch(slot){
+
+                    }
                 }
                 if (wandUI.inWandUI(player)) {
                     int slot = event.getSlot();

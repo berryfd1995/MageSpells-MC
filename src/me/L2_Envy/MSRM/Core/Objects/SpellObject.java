@@ -260,7 +260,7 @@ public class SpellObject{
         this.boltdamage = boltdamage;
     }
 
-    
+
     public static class CompId implements Comparator<SpellObject> {
         @Override
         public int compare(SpellObject arg0, SpellObject arg1) {
