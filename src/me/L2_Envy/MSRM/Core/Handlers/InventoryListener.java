@@ -104,24 +104,25 @@ public class InventoryListener implements Listener{
                 if(spellInfoUI.inSpellInfoUI(player)){
                     int slot = event.getSlot();
                     switch(slot){
-                        case 5:
+                        case 39:
                             player.getInventory().addItem(spellInfoUI.getSpellObject(player).getSpellbook());
                             break;
-                        case 6:
+                        case 40:
                             mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellInfoUI.getSpellObject(player));
                             player.sendMessage(ChatColor.GREEN +"You have learned the spell: " + spellInfoUI.getSpellObject(player).getDisplayname());
                             break;
-                        case 7:
+                        case 41:
                             for (SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()) {
                                 mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellObject);
                             }
                             player.sendMessage(ChatColor.GREEN +"You have learned all spells!");
                             break;
-                        case 14:
+                        case 43:
                             spellInfoUI.closeSpellInfoUI(player);
                             spellUI.openSpellUI(player);
                             break;
                     }
+                    event.setCancelled(true);
                 }
                 if (wandUI.inWandUI(player)) {
                     int slot = event.getSlot();

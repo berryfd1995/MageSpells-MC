@@ -54,7 +54,7 @@ public class SpellInfoUI {
     }
     public SpellObject getSpellObject(Player player){
         if(inSpellInfoUI(player)){
-            return playersinmenu.get(player);
+            return playersinmenu.get(player.getName());
         }else{
             return null;
         }
