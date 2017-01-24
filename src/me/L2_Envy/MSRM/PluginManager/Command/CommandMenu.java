@@ -43,7 +43,7 @@ public class CommandMenu implements CommandExecutor{
                                     } else {
                                         switch (args[0].toLowerCase()) {
                                             case "reload":
-                                                player.sendMessage(ChatColor.GREEN + "Reloading configs..");
+                                               /* player.sendMessage(ChatColor.GREEN + "Reloading configs..");
                                                 pluginManager.configClass.loadOtherConfigs();
                                                 pluginManager.customItemConfig.loadCustomItemConfigs();
                                                 pluginManager.spellConfig.loadSpellConfigs();
@@ -61,7 +61,8 @@ public class CommandMenu implements CommandExecutor{
                                                         }
                                                     }
                                                 }
-                                                player.sendMessage(ChatColor.GREEN + "Magespells reloaded.");
+                                                player.sendMessage(ChatColor.GREEN + "Magespells reloaded.");*/
+                                                player.sendMessage(ChatColor.GREEN + "This feature has been temporarily disabled.");
                                                 break;
                                             case "help":
                                                 if (args.length == 2) {

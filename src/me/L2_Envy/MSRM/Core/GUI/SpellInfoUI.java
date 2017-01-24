@@ -109,16 +109,16 @@ public class SpellInfoUI {
                             case 4:
                                 if(playerObject.knowsSpell(spellObject)){
                                     if(spellObject.isBoltenabled()){
-                                        lore += "Bolt Enabled/Damage Radius: " + spellObject.getBoltradius() + "/";
-                                        lore += "Bolt Damage: " + spellObject.getBoltdamage() + "/";
+                                        lore += "Bolt Enabled/   Damage Radius: " + spellObject.getBoltradius() + "/";
+                                        lore += "   Bolt Damage: " + spellObject.getBoltdamage() + "/";
                                     }
                                     if(spellObject.isSprayenabled()){
-                                        lore += "Spray Enabled/Spray Radius: " + spellObject.getSprayradius() + "/";
-                                        lore += "Spray Damage: " + spellObject.getSpraydamage() + "/";
+                                        lore += "Spray Enabled/   Spray Radius: " + spellObject.getSprayradius() + "/";
+                                        lore += "   Spray Damage: " + spellObject.getSpraydamage() + "/";
                                     }
                                     if(spellObject.isAuraenabled()){
-                                        lore += "Aura Enabled/Aura Radius: " + spellObject.getAuraradius() + "/";
-                                        lore += "Aura Damage: " + spellObject.getAuradamage() + "/Duration: " + spellObject.getAuratime() + "/";
+                                        lore += "Aura Enabled/   Aura Radius: " + spellObject.getAuraradius() + "/";
+                                        lore += "   Aura Damage: " + spellObject.getAuradamage() + "/Duration: " + spellObject.getAuratime() + "/";
                                     }
                                     lore += "Armor Penetration: " + spellObject.getArmorpiercing() + "%/";
                                     lore += "Travel Distance: "+spellObject.getTraveldistance()+"/";
@@ -192,8 +192,8 @@ public class SpellInfoUI {
                             case 11:
                                 if(playerObject.knowsSpell(spellObject)){
                                     for(PotionEffect potionEffect : spellObject.getPotionEffects()){
-                                        lore += "Type: "+potionEffect.getType() + "/";
-                                        lore += "   Duration: "+potionEffect.getDuration() + "/";
+                                        lore += "Type: "+potionEffect.getType().getName() + "/";
+                                        lore += "   Duration: "+potionEffect.getDuration()/20 + "/";
                                         lore += "   Amplification: "+potionEffect.getAmplifier() + "/";
                                     }
                                 }else{
@@ -234,27 +234,5 @@ public class SpellInfoUI {
                 inventory.setContents(contents);
         }
         return inventory;
-    }
-    public Inventory loadInventory(Player player, WandObject wandObject){
-        if(mageSpellsManager.mageManager.isMage(player)){
-            PlayerObject playerObject = mageSpellsManager.mageManager.getMage(player.getUniqueId());
-            //Setup inventory
-            /*
-                -compatible wands
-                -spell info like damage, armour piercing
-                -effects
-                -
-             */
-            if(playerObject.knowsWand(wandObject)){
-
-            }else{
-
-            }
-            //if admin
-            if(player.hasPermission("")){
-
-            }
-        }
-        return null;
     }
 }
