@@ -24,8 +24,8 @@ public class WandInfoUI {
     private static final int[][] layout =
                     {{1,1,1,1,1,1,1,1,1},
                     {1,0,0,0,2,0,0,0,1},
-                    {1,0,8,12,3,13,10,0,1},
-                    {1,0,9,0,4,0,11,0,1},
+                    {1,0,8,0,3,0,9,0,1},
+                    {1,0,0,0,4,0,0,0,1},
                     {1,0,0,5,6,7,0,14,1},
                     {1,1,1,1,1,1,1,1,1}};
     public WandInfoUI(){
@@ -79,6 +79,9 @@ public class WandInfoUI {
                             break;
                         case 3:
                             if(playerObject.knowsWand(wandObject)){
+                                lore += "&6Required level to bind: "+ wandObject.getRequiredleveltobind()+"/";
+                                lore += "&6Required level to use: "+ wandObject.getRequiredleveltouse()+"/";
+                                lore += "&6Required level to craft: "+ wandObject.getRequiredleveltocraft()+"/";
                             }else{
                                 lore = "&6Unknown";
                             }
@@ -86,67 +89,80 @@ public class WandInfoUI {
                             break;
                         case 4:
                             if(playerObject.knowsWand(wandObject)){
+                                lore = lore + ("&6[1][2][3]/");
+                                lore = lore + ("&6[4][5][6]/");
+                                lore = lore + ("&6[7][8][9]/");
+                                int count = 1;
+                                for (String sh : wandObject.getShapedRecipe().getShape()) {
+                                    for (int k = 0; k < 3; k++) {
+                                        for (Character c : wandObject.getShapedRecipe().getIngredientMap().keySet()) {
+                                            if (c.equals(sh.charAt(k))) {
+                                                ItemStack is = wandObject.getShapedRecipe().getIngredientMap().get(c);
+                                                if (is != null) {
+                                                    if (is.hasItemMeta()) {
+                                                        if (is.getItemMeta().hasDisplayName()) {
+                                                            lore = lore + ("&6" + count + ": &b" + is.getItemMeta().getDisplayName() + "/");
+                                                        } else {
+                                                            lore = lore + ("&6" + count + ": &b" + ItemNames.lookup(is) + "/");
+                                                        }
+                                                    } else {
+                                                        lore = lore + ("&6" + count + ": &b" + ItemNames.lookup(is) + "/");
+                                                    }
+                                                    count++;
+                                                } else {
+                                                    lore = lore + ("&6" + count + ": &bNothing/");
+                                                    count++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }else{
                                 lore = "&6Unknown";
                             }
-                            contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
+                            contents[s] = mageSpellsManager.main.utils.getItemStack("WORKBENCH", "&6Crafting Info:", lore);
                             break;
                         case 5:
                             if(player.hasPermission("magespells.admin") || player.isOp()){
-                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn SpellBook:", "Spawn a spell book in your inventory.");
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn Wand:", "Spawn this wand in your inventory.");
                             }
                             break;
                         case 6:
                             if(player.hasPermission("magespells.admin") || player.isOp()){
-                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Spell:", "Teach yourself this spell.");
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Wand:", "Teach yourself this wand.");
                             }
                             break;
                         case 7:
                             if(player.hasPermission("magespells.admin") || player.isOp()){
-                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Spells:", "Teaches this spell and all other spells.");
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Wands:", "Teaches this wand and all other wands.");
                             }
                             break;
                         case 8:
                             if(playerObject.knowsWand(wandObject)){
+                                if(wandObject.isMobdropsenabled()){
+                                    for(EntityType e : wandObject.getMobDrops().keySet()){
+                                        lore += "&6" + e + ": " + wandObject.getMobDrops().get(e) + "%/";
+                                    }
+                                }else{
+                                    lore += "&6This wand does not drop from any monsters!"+"/";
+                                }
+
                             }else{
                                 lore = "&6Unknown";
                             }
-                            contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
+                            contents[s] = mageSpellsManager.main.utils.getItemStack("MONSTER_EGG", "&6Mob Drop Chances:", lore);
                             break;
                         case 9:
                             if(playerObject.knowsWand(wandObject)){
+                                for(SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()){
+                                    if(wandObject.isSpellCompatible(spellObject.getSpellNode())){
+                                        lore += spellObject.getDisplayname() + "/";
+                                    }
+                                }
                             }else{
                                 lore = "&6Unknown";
                             }
-                            contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
-                            break;
-                        case 10:
-                            if(playerObject.knowsWand(wandObject)){
-                            }else{
-                                lore = "&6Unknown";
-                            }
-                            contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
-                            break;
-                        case 11:
-                            if(playerObject.knowsWand(wandObject)){
-                            }else{
-                                lore = "&6Unknown";
-                            }
-                            contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
-                            break;
-                        case 12:
-                            if(playerObject.knowsWand(wandObject)){
-                            }else{
-                                lore = "&6Unknown";
-                            }
-                            contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
-                            break;
-                        case 13:
-                            if(playerObject.knowsWand(wandObject)){
-                            }else{
-                                lore = "&6Unknown";
-                            }
-                            contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
+                            contents[s] = mageSpellsManager.main.utils.getItemStack("NETHER_STAR", "&6Compatible Spells:", lore);
                             break;
                         case 14:
                             contents[s] = mageSpellsManager.main.utils.getItemStack("REDSTONE_BLOCK", "&cBack");

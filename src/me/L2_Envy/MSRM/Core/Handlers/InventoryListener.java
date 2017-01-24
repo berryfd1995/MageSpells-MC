@@ -110,17 +110,23 @@ public class InventoryListener implements Listener{
                     int slot = event.getSlot();
                     switch(slot){
                         case 39:
-                            player.getInventory().addItem(spellInfoUI.getSpellObject(player).getSpellbook());
+                            if(player.hasPermission("magespells.admin")) {
+                                player.getInventory().addItem(spellInfoUI.getSpellObject(player).getSpellbook());
+                            }
                             break;
                         case 40:
-                            mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellInfoUI.getSpellObject(player));
-                            player.sendMessage(ChatColor.GREEN +"You have learned the spell: " + spellInfoUI.getSpellObject(player).getDisplayname());
+                            if(player.hasPermission("magespells.admin")) {
+                                mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellInfoUI.getSpellObject(player));
+                                player.sendMessage(ChatColor.GREEN + "You have learned the spell: " + spellInfoUI.getSpellObject(player).getDisplayname());
+                            }
                             break;
                         case 41:
-                            for (SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()) {
-                                mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellObject);
+                            if(player.hasPermission("magespells.admin")) {
+                                for (SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()) {
+                                    mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellObject);
+                                }
+                                player.sendMessage(ChatColor.GREEN + "You have learned all spells!");
                             }
-                            player.sendMessage(ChatColor.GREEN +"You have learned all spells!");
                             break;
                         case 43:
                             spellInfoUI.closeSpellInfoUI(player);
@@ -132,7 +138,29 @@ public class InventoryListener implements Listener{
                 if(wandInfoUI.inWandInfoUI(player)){
                     int slot = event.getSlot();
                     switch (slot){
-
+                        case 39:
+                            if(player.hasPermission("magespells.admin")) {
+                                player.getInventory().addItem(wandInfoUI.getWandObject(player).getWandItemStack());
+                            }
+                            break;
+                        case 40:
+                            if(player.hasPermission("magespells.admin")) {
+                                mageSpellsManager.spellLearningManager.learnWand(mageSpellsManager.mageManager.getMage(player.getUniqueId()), wandInfoUI.getWandObject(player));
+                                player.sendMessage(ChatColor.GREEN + "You have learned the wand: " + wandInfoUI.getWandObject(player).getDisplayname());
+                            }
+                            break;
+                        case 41:
+                            if(player.hasPermission("magespells.admin")) {
+                                for (WandObject wandObject : mageSpellsManager.wandManager.getWandObjects()) {
+                                    mageSpellsManager.spellLearningManager.learnWand(mageSpellsManager.mageManager.getMage(player.getUniqueId()), wandObject);
+                                }
+                                player.sendMessage(ChatColor.GREEN + "You have learned all wands!");
+                            }
+                            break;
+                        case 43:
+                            wandInfoUI.closeWandInfoUI(player);
+                            wandUI.openWandUI(player);
+                            break;
                     }
                     event.setCancelled(true);
                 }

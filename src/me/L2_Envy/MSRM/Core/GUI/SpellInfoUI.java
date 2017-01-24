@@ -85,21 +85,21 @@ public class SpellInfoUI {
                             case 3:
                                 if(playerObject.knowsSpell(spellObject)){
                                     if(spellObject.isAffectenemys()){
-                                        lore += "Affects Enemys/";
+                                        lore += "&6Affects Enemys/";
                                     }
                                     if(spellObject.isAffectmobs()){
-                                        lore += "Affects Mobs/";
+                                        lore += "&6Affects Mobs/";
                                     }
                                     if(spellObject.isAffectself()){
-                                        lore += "Affects Self/";
+                                        lore += "&6Affects Self/";
                                     }
                                     if(spellObject.isAffectteammates()){
-                                        lore += "Affects Teammates/";
+                                        lore += "&6Affects Teammates/";
                                     }
                                     if(mageSpellsManager.levelingManager.isLevelingEnabled()){
-                                        lore += "Required Level to Bind: " + spellObject.getRequiredLevelToBind() + "/";
-                                        lore += "Required Level to Cast: " + spellObject.getRequiredLevelToCast() + "/";
-                                        lore += "Required Level to Drop: " + spellObject.getRequiredLevelToDrop() + "/";
+                                        lore += "&6Required Level to Bind: " + spellObject.getRequiredLevelToBind() + "/";
+                                        lore += "&6Required Level to Cast: " + spellObject.getRequiredLevelToCast() + "/";
+                                        lore += "&6Required Level to Drop: " + spellObject.getRequiredLevelToDrop() + "/";
                                     }
                                 }else{
                                     lore = "&6Unknown";
@@ -109,19 +109,19 @@ public class SpellInfoUI {
                             case 4:
                                 if(playerObject.knowsSpell(spellObject)){
                                     if(spellObject.isBoltenabled()){
-                                        lore += "Bolt Enabled/   Damage Radius: " + spellObject.getBoltradius() + "/";
-                                        lore += "   Bolt Damage: " + spellObject.getBoltdamage() + "/";
+                                        lore += "&6Bolt Enabled/   &6Damage Radius: " + spellObject.getBoltradius() + "/";
+                                        lore += "   &6Bolt Damage: " + spellObject.getBoltdamage() + "/";
                                     }
                                     if(spellObject.isSprayenabled()){
-                                        lore += "Spray Enabled/   Spray Radius: " + spellObject.getSprayradius() + "/";
-                                        lore += "   Spray Damage: " + spellObject.getSpraydamage() + "/";
+                                        lore += "&6Spray Enabled/   &6Spray Radius: " + spellObject.getSprayradius() + "/";
+                                        lore += "   &6Spray Damage: " + spellObject.getSpraydamage() + "/";
                                     }
                                     if(spellObject.isAuraenabled()){
-                                        lore += "Aura Enabled/   Aura Radius: " + spellObject.getAuraradius() + "/";
-                                        lore += "   Aura Damage: " + spellObject.getAuradamage() + "/Duration: " + spellObject.getAuratime() + "/";
+                                        lore += "&6Aura Enabled/   &6Aura Radius: " + spellObject.getAuraradius() + "/";
+                                        lore += "   &6Aura Damage: " + spellObject.getAuradamage() + "/&6Duration: " + spellObject.getAuratime() + "/";
                                     }
-                                    lore += "Armor Penetration: " + spellObject.getArmorpiercing() + "%/";
-                                    lore += "Travel Distance: "+spellObject.getTraveldistance()+"/";
+                                    lore += "&6Armor Penetration: " + spellObject.getArmorpiercing() + "%/";
+                                    lore += "&6Travel Distance: "+spellObject.getTraveldistance()+"/";
                                 }else{
                                     lore = "&6Unknown";
                                 }
@@ -129,27 +129,27 @@ public class SpellInfoUI {
                                 break;
                             case 5:
                                 if(player.hasPermission("magespells.admin") || player.isOp()){
-                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn SpellBook:", "Spawn a spell book in your inventory.");
+                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn SpellBook:", "&6Spawn a spell book in your inventory.");
                                 }
                                 break;
                             case 6:
                                 if(player.hasPermission("magespells.admin") || player.isOp()){
-                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Spell:", "Teach yourself this spell.");
+                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Spell:", "&6Teach yourself this spell.");
                                 }
                                 break;
                             case 7:
                                 if(player.hasPermission("magespells.admin") || player.isOp()){
-                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Spells:", "Teaches this spell and all other spells.");
+                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Spells:", "&6Teaches this spell and all other spells.");
                                 }
                                 break;
                             case 8:
                                 if(playerObject.knowsSpell(spellObject)){
                                     if(spellObject.isMobdropsenabled()){
                                         for(EntityType e : spellObject.getMobDrops().keySet()){
-                                            lore += e + ": " + spellObject.getMobDrops().get(e) + "%/";
+                                            lore += "&6" + e + ": " + spellObject.getMobDrops().get(e) + "%/";
                                         }
                                     }else{
-                                        lore += "This spell does not drop from any monsters!"+"/";
+                                        lore += "&6This spell does not drop from any monsters!"+"/";
                                     }
 
                                 }else{
@@ -163,16 +163,16 @@ public class SpellInfoUI {
                                         for(ItemStack itemStack : spellObject.getItemcost().keySet()){
                                             if(itemStack.hasItemMeta()){
                                                 if(itemStack.getItemMeta().hasDisplayName()){
-                                                    lore += itemStack.getItemMeta().getDisplayName() + " x" + spellObject.getItemcost().get(itemStack) + "/";
+                                                    lore += "&6" + itemStack.getItemMeta().getDisplayName() + " x" + spellObject.getItemcost().get(itemStack) + "/";
                                                 }else{
-                                                    lore += ItemNames.lookup(itemStack) + " x" + spellObject.getItemcost().get(itemStack) + "/";
+                                                    lore += "&6" + ItemNames.lookup(itemStack) + " x" + spellObject.getItemcost().get(itemStack) + "/";
                                                 }
                                             }else{
-                                                lore += ItemNames.lookup(itemStack) + " x" + spellObject.getItemcost().get(itemStack) + "/";
+                                                lore += "&6" + ItemNames.lookup(itemStack) + " x" + spellObject.getItemcost().get(itemStack) + "/";
                                             }
                                         }
                                     }else{
-                                        lore += "This spell does not require anything/";
+                                        lore += "&6This spell does not require anything/";
                                     }
                                 }else{
                                     lore = "&6Unknown";
@@ -181,9 +181,9 @@ public class SpellInfoUI {
                                 break;
                             case 10:
                                 if(playerObject.knowsSpell(spellObject)){
-                                    lore += "Mana Cost: " + spellObject.getManacost() + "/";
-                                    lore += "Cooldown Time: " + spellObject.getCooldown() + "s/";
-                                    lore += "Charge Time: " + spellObject.getChargetime() + "s/";
+                                    lore += "&6Mana Cost: " + spellObject.getManacost() + "/";
+                                    lore += "&6Cooldown Time: " + spellObject.getCooldown() + "s/";
+                                    lore += "&6Charge Time: " + spellObject.getChargetime() + "s/";
                                 }else{
                                     lore = "&6Unknown";
                                 }
@@ -192,9 +192,9 @@ public class SpellInfoUI {
                             case 11:
                                 if(playerObject.knowsSpell(spellObject)){
                                     for(PotionEffect potionEffect : spellObject.getPotionEffects()){
-                                        lore += "Type: "+potionEffect.getType().getName() + "/";
-                                        lore += "   Duration: "+potionEffect.getDuration()/20 + "/";
-                                        lore += "   Amplification: "+potionEffect.getAmplifier() + "/";
+                                        lore += "&6Type: "+potionEffect.getType().getName() + "/";
+                                        lore += "   &6Duration: "+potionEffect.getDuration()/20 + "/";
+                                        lore += "   &6Amplification: "+potionEffect.getAmplifier() + "/";
                                     }
                                 }else{
                                     lore = "&6Unknown";
@@ -210,7 +210,7 @@ public class SpellInfoUI {
                                             }
                                         }
                                     }else{
-                                        lore += "This spell works with any wand";
+                                        lore += "&6This spell works with any wand";
                                     }
                                 }else{
                                     lore = "&6Unknown";
@@ -219,7 +219,7 @@ public class SpellInfoUI {
                                 break;
                             case 13:
                                 if(playerObject.knowsSpell(spellObject)){
-                                    lore += spellObject.getSpellEffect();
+                                    lore += "&6"+spellObject.getSpellEffect();
                                 }else{
                                     lore = "&6Unknown";
                                 }
