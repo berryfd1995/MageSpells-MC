@@ -31,6 +31,7 @@ public class InventoryListener implements Listener{
     private WandUI wandUI;
     private BindingMenu bindingMenu;
     private SpellInfoUI spellInfoUI;
+    private WandInfoUI wandInfoUI;
 
     public InventoryListener(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
@@ -41,6 +42,7 @@ public class InventoryListener implements Listener{
         wandUI = mageSpellsManager.wandUI;
         bindingMenu = mageSpellsManager.bindingMenu;
         spellInfoUI = mageSpellsManager.spellInfoUI;
+        wandInfoUI = mageSpellsManager.wandInfoUI;
     }
 
     @EventHandler
@@ -66,6 +68,9 @@ public class InventoryListener implements Listener{
         }
         if(spellInfoUI.inSpellInfoUI(event.getPlayer())){
             spellInfoUI.closeSpellInfoUI(event.getPlayer());
+        }
+        if(wandInfoUI.inWandInfoUI(event.getPlayer())){
+            wandInfoUI.closeWandInfoUI(event.getPlayer());
         }
         if(bindingMenu.inSpellBindingMenu(event.getPlayer())){
             bindingMenu.closeSpellBindingMenu(event.getPlayer());
@@ -124,6 +129,13 @@ public class InventoryListener implements Listener{
                     }
                     event.setCancelled(true);
                 }
+                if(wandInfoUI.inWandInfoUI(player)){
+                    int slot = event.getSlot();
+                    switch (slot){
+
+                    }
+                    event.setCancelled(true);
+                }
                 if (wandUI.inWandUI(player)) {
                     int slot = event.getSlot();
                     switch (slot) {
@@ -134,6 +146,11 @@ public class InventoryListener implements Listener{
                             wandUI.nextPage(player);
                             break;
                         default:
+                            WandObject wandObject = wandUI.getWandSelected(player, slot);
+                            if(wandObject != null){
+                                wandUI.closeWandUI(player);
+                                wandInfoUI.openWandInfoUI(player, wandObject);
+                            }
                             break;
                     }
                     event.setCancelled(true);
@@ -232,6 +249,9 @@ public class InventoryListener implements Listener{
         if(spellInfoUI.inSpellInfoUI(player)){
             event.setCancelled(true);
         }
+        if(wandInfoUI.inWandInfoUI(player)){
+            event.setCancelled(true);
+        }
         if(mageStats.inMageStats(player)){
             event.setCancelled(true);
         }
@@ -266,6 +286,9 @@ public class InventoryListener implements Listener{
         }
         if(spellInfoUI.inSpellInfoUI(player)){
             spellInfoUI.closeSpellInfoUI(player);
+        }
+        if(wandInfoUI.inWandInfoUI(player)){
+            wandInfoUI.closeWandInfoUI(player);
         }
         if(mageStats.inMageStats(player)){
             mageStats.closeMageStats(player);

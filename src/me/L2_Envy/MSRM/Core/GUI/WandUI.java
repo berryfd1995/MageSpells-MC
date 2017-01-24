@@ -154,6 +154,10 @@ public class WandUI {
         }
         return 0;
     }
+
+    public WandObject getWandSelected(Player player, int slot){
+        return wandpages.get(getPage(player)).get(slot-1);
+    }
     public void resortWandPages(ArrayList<WandObject> wandObjects){
         if(!wandObjects.isEmpty()) {
             wandpages = new HashMap<>();
