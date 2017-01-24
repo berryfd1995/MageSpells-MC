@@ -5,6 +5,7 @@ import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -94,7 +95,7 @@ public class InventoryListener implements Listener{
                             SpellObject spellObject = spellUI.getSpellSelected(player, slot);
                             if(spellObject != null){
                                 spellUI.closeSpellUI(player);
-                                spellInfoUI.loadInventory(player, spellObject);
+                                spellInfoUI.openSpellInfoUI(player, spellObject);
                             }
                             break;
                     }
@@ -103,7 +104,23 @@ public class InventoryListener implements Listener{
                 if(spellInfoUI.inSpellInfoUI(player)){
                     int slot = event.getSlot();
                     switch(slot){
-
+                        case 5:
+                            player.getInventory().addItem(spellInfoUI.getSpellObject(player).getSpellbook());
+                            break;
+                        case 6:
+                            mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellInfoUI.getSpellObject(player));
+                            player.sendMessage(ChatColor.GREEN +"You have learned the spell: " + spellInfoUI.getSpellObject(player).getDisplayname());
+                            break;
+                        case 7:
+                            for (SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()) {
+                                mageSpellsManager.spellLearningManager.learnSpell(mageSpellsManager.mageManager.getMage(player.getUniqueId()), spellObject);
+                            }
+                            player.sendMessage(ChatColor.GREEN +"You have learned all spells!");
+                            break;
+                        case 14:
+                            spellInfoUI.closeSpellInfoUI(player);
+                            spellUI.openSpellUI(player);
+                            break;
                     }
                 }
                 if (wandUI.inWandUI(player)) {
@@ -211,6 +228,9 @@ public class InventoryListener implements Listener{
         if(spellUI.inSpellUI(player)){
             event.setCancelled(true);
         }
+        if(spellInfoUI.inSpellInfoUI(player)){
+            event.setCancelled(true);
+        }
         if(mageStats.inMageStats(player)){
             event.setCancelled(true);
         }
@@ -242,6 +262,9 @@ public class InventoryListener implements Listener{
         }
         if(spellUI.inSpellUI(player)){
             spellUI.closeSpellUI(player);
+        }
+        if(spellInfoUI.inSpellInfoUI(player)){
+            spellInfoUI.closeSpellInfoUI(player);
         }
         if(mageStats.inMageStats(player)){
             mageStats.closeMageStats(player);
