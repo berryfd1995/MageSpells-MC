@@ -124,17 +124,17 @@ public class WandInfoUI {
                             break;
                         case 5:
                             if(player.hasPermission("magespells.admin") || player.isOp()){
-                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn Wand:", "Spawn this wand in your inventory.");
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn Wand:", ChatColor.GOLD +"Spawn this wand in your inventory.");
                             }
                             break;
                         case 6:
                             if(player.hasPermission("magespells.admin") || player.isOp()){
-                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Wand:", "Teach yourself this wand.");
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Wand:", ChatColor.GOLD +"Teach yourself this wand.");
                             }
                             break;
                         case 7:
                             if(player.hasPermission("magespells.admin") || player.isOp()){
-                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Wands:", "Teaches this wand and all other wands.");
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Wands:", ChatColor.GOLD +"Teaches this wand and all other wands.");
                             }
                             break;
                         case 8:

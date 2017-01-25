@@ -129,17 +129,17 @@ public class SpellInfoUI {
                                 break;
                             case 5:
                                 if(player.hasPermission("magespells.admin") || player.isOp()){
-                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn SpellBook:", "&6Spawn a spell book in your inventory.");
+                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Spawn SpellBook:", ChatColor.GOLD +"Spawn a spell book in your inventory.");
                                 }
                                 break;
                             case 6:
                                 if(player.hasPermission("magespells.admin") || player.isOp()){
-                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Spell:", "&6Teach yourself this spell.");
+                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn This Spell:", ChatColor.GOLD +"Teach yourself this spell.");
                                 }
                                 break;
                             case 7:
                                 if(player.hasPermission("magespells.admin") || player.isOp()){
-                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Spells:", "&6Teaches this spell and all other spells.");
+                                    contents[s] = mageSpellsManager.main.utils.getItemStack("BOOK", "&6Learn All Spells:", ChatColor.GOLD +"Teaches this spell and all other spells.");
                                 }
                                 break;
                             case 8:
@@ -219,11 +219,11 @@ public class SpellInfoUI {
                                 break;
                             case 13:
                                 if(playerObject.knowsSpell(spellObject)){
-                                    lore += "&6"+spellObject.getSpellEffect();
+                                    lore += ChatColor.GOLD +spellObject.getSpellEffect().toUpperCase();
                                 }else{
                                     lore = "&6Unknown";
                                 }
-                                contents[s] = mageSpellsManager.main.utils.getItemStack("BLAZE_POWDER", "&6Special Effect:", lore);
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("BLAZE_POWDER", ChatColor.GOLD +"Special Effect:", lore);
                                 break;
                             case 14:
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("REDSTONE_BLOCK", "&cBack");

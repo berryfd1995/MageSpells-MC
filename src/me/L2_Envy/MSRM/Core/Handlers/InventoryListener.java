@@ -105,8 +105,7 @@ public class InventoryListener implements Listener{
                             break;
                     }
                     event.setCancelled(true);
-                }
-                if(spellInfoUI.inSpellInfoUI(player)){
+                } else if(spellInfoUI.inSpellInfoUI(player)){
                     int slot = event.getSlot();
                     switch(slot){
                         case 39:
@@ -135,7 +134,25 @@ public class InventoryListener implements Listener{
                     }
                     event.setCancelled(true);
                 }
-                if(wandInfoUI.inWandInfoUI(player)){
+                if (wandUI.inWandUI(player)) {
+                    int slot = event.getSlot();
+                    switch (slot) {
+                        case 0:
+                            wandUI.previousPage(player);
+                            break;
+                        case 8:
+                            wandUI.nextPage(player);
+                            break;
+                        default:
+                            WandObject wandObject = wandUI.getWandSelected(player, slot);
+                            if(wandObject != null){
+                                wandUI.closeWandUI(player);
+                                wandInfoUI.openWandInfoUI(player, wandObject);
+                            }
+                            break;
+                    }
+                    event.setCancelled(true);
+                }else if(wandInfoUI.inWandInfoUI(player)){
                     int slot = event.getSlot();
                     switch (slot){
                         case 39:
@@ -159,26 +176,7 @@ public class InventoryListener implements Listener{
                             break;
                         case 43:
                             wandInfoUI.closeWandInfoUI(player);
-                            wandUI.openWandUI(player);
-                            break;
-                    }
-                    event.setCancelled(true);
-                }
-                if (wandUI.inWandUI(player)) {
-                    int slot = event.getSlot();
-                    switch (slot) {
-                        case 0:
-                            wandUI.previousPage(player);
-                            break;
-                        case 8:
-                            wandUI.nextPage(player);
-                            break;
-                        default:
-                            WandObject wandObject = wandUI.getWandSelected(player, slot);
-                            if(wandObject != null){
-                                wandUI.closeWandUI(player);
-                                wandInfoUI.openWandInfoUI(player, wandObject);
-                            }
+                            wandUI.openWandUI( player);
                             break;
                     }
                     event.setCancelled(true);
