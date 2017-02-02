@@ -106,6 +106,7 @@ public class Main extends JavaPlugin {
      * TODO: Block iterator instead of ray casting
      * TODO: API?
      * TODO: Look over leveling and see if there should be changes
-     * 
+     * TODO: Custom Items menu.
+     *
      */
 }
