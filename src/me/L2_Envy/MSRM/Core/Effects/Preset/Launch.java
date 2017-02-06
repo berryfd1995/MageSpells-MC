@@ -3,15 +3,14 @@ package me.L2_Envy.MSRM.Core.Effects.Preset;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 /**
- * Created by Daniel on 8/26/2016.
+ * Created by berry on 2/6/2017.
  */
-public class Teleport implements SpellEffect{
-    private String name = "teleport";
+public class Launch implements SpellEffect {
+    private String name = "launch";
     private Vector vector;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;
@@ -25,7 +24,9 @@ public class Teleport implements SpellEffect{
         spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
-
+        //Vector unitVector = livingEntity.getLocation().toVector().subtract(activeSpellObject.getLocation().toVector()).normalize();
+        Vector unitVector = new Location(livingEntity.getWorld(),0,1,0).toVector();
+        livingEntity.setVelocity(unitVector.multiply(5.0));
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
@@ -43,21 +44,7 @@ public class Teleport implements SpellEffect{
     public void initialSetup(){
 
     }
-    public Location getSpellLocation(){
-        return spelllocation;
-    }
     public void spellEndingSeq(){
-        Location loc = spelllocation.clone();
-        Block block = loc.getBlock();
-        if(block == null) {
-            activeSpellObject.getCaster().teleport(spelllocation);
-        }else{
-            vector.setX(vector.getX()*-1);
-            vector.setY(vector.getY()*-1);
-            vector.setZ(vector.getZ()*-1);
-            spelllocation.add(vector);
-            activeSpellObject.getCaster().teleport(spelllocation);
-        }
     }
     public boolean shouldEnd(){
         return false;
