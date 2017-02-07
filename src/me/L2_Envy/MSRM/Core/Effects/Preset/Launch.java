@@ -25,8 +25,8 @@ public class Launch implements SpellEffect {
     }
     public void onHit(LivingEntity livingEntity){
         //Vector unitVector = livingEntity.getLocation().toVector().subtract(activeSpellObject.getLocation().toVector()).normalize();
-        Vector unitVector = new Location(livingEntity.getWorld(),0,1,0).toVector();
-        livingEntity.setVelocity(unitVector.multiply(5.0));
+        Vector unitVector = new Location(livingEntity.getWorld(),0,1,0).toVector().normalize();
+        livingEntity.setVelocity(unitVector.multiply(2));
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;

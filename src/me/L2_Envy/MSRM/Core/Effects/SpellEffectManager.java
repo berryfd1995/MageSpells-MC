@@ -33,6 +33,7 @@ public class SpellEffectManager {
         spellEffects.add(new Storm());
         spellEffects.add(new HailMary());
         spellEffects.add(new SpellDrop());
+        spellEffects.add(new Launch());
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;

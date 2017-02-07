@@ -3,6 +3,7 @@ package me.L2_Envy.MSRM.Core.Effects.Preset;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
@@ -48,16 +49,16 @@ public class Teleport implements SpellEffect{
     }
     public void spellEndingSeq(){
         Location loc = spelllocation.clone();
+        Vector vec = vector.clone();
         Block block = loc.getBlock();
-        if(block == null) {
-            activeSpellObject.getCaster().teleport(spelllocation);
-        }else{
-            vector.setX(vector.getX()*-1);
-            vector.setY(vector.getY()*-1);
-            vector.setZ(vector.getZ()*-1);
-            spelllocation.add(vector);
-            activeSpellObject.getCaster().teleport(spelllocation);
+        vec.setX(vec.getX()*-1);
+        vec.setY(vec.getY()*-1);
+        vec.setZ(vec.getZ()*-1);
+        while(block.getType() != Material.AIR || loc.getWorld().getBlockAt(loc.clone().add(0,1,0)).getType() != Material.AIR){
+            loc.add(vec);
+            block = loc.getBlock();
         }
+        activeSpellObject.getCaster().teleport(loc.getBlock().getLocation().add(.5,0,.5));
     }
     public boolean shouldEnd(){
         return false;
