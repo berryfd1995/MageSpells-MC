@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
+import static java.lang.Math.PI;
+
 /**
  * Created by berry on 2/8/2017.
  */
@@ -73,7 +75,7 @@ z(θ)=c3+rcos(θ)a3+rsin(θ)b3
             double y = spelllocation.getY() + radius * Math.cos(point)*u.getY() + radius * Math.sin(point)*normal.getY();
             double z = spelllocation.getZ() + radius * Math.cos(point)*u.getZ() + radius * Math.sin(point)*normal.getZ();
             //increment angle
-            point += .33;
+            point += (1/PI)/(radius/2);
             //plot
             spellpoint = new Location(spelllocation.getWorld(),x,y,z);
         }
