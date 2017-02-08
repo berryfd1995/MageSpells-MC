@@ -18,6 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
@@ -42,7 +43,7 @@ public class SpellConfig {
                     if(!fileData.isHidden()) {
                         YamlConfiguration config = YamlConfiguration.loadConfiguration(fileData);
                         String spellName  = FilenameUtils.getBaseName(fileData.getName());
-                        SpellObject spellData = deformatData(spellName, config);
+                        SpellObject spellData = deformatData(spellName, config, fileData);
                         if(spellData!= null) {
                             main.mageSpellsManager.spellManager.addSpellObject(spellData);
                            // main.logger.info(spellData.getName() + " loaded.");
@@ -105,7 +106,7 @@ public class SpellConfig {
             e.printStackTrace();
         }
     }
-    public SpellObject deformatData(String spellName, YamlConfiguration config) {
+    public SpellObject deformatData(String spellName, YamlConfiguration config, File file) {
         try {
             String displayname = main.utils.colorize(config.getString("DisplayName"));
             String lore = main.utils.colorize(config.getString("Lore"));
@@ -203,7 +204,34 @@ public class SpellConfig {
                     }
                 }
             }
-            return new SpellObject(spellName,displayname,spellnode,lore,boltenabled,boltradius,boltdamage,auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,requiredleveltobind,requiredleveltocast,requiredleveltodrop,affectsmobs,affectself,affectenemy,affectteammates,spellbook,spelleffectname,sound,soundvolume,soundpitch,particleObjects,potionEffects,mobdropsenabled,mobDrops,itemcostsenabled,itemcost);
+            //
+            if(!config.contains("CastCommand")){
+                config.createSection("CastCommand");
+                config.set("CastCommand","");
+            }
+            String castcommand = config.getString("CastCommand");
+            if(!config.contains("Variables")){
+                config.createSection("Variables");
+                config.createSection("Variables.1");
+                config.set("Variables.1", "");
+            }
+            ArrayList<String> variables = new ArrayList<>();
+            for(String var : config.getConfigurationSection("Variables.").getKeys(false)){
+                variables.add(config.getString("Variables." + var));
+            }
+            try {
+                config.save(file);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return new SpellObject(spellName,displayname,spellnode,lore,boltenabled,boltradius,boltdamage,
+                    auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,
+                    armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,
+                    requiredleveltobind,requiredleveltocast,requiredleveltodrop,
+                    affectsmobs,affectself,affectenemy,affectteammates,
+                    spellbook,spelleffectname,sound,soundvolume,soundpitch,
+                    particleObjects,potionEffects,mobdropsenabled,mobDrops,
+                    itemcostsenabled,itemcost, castcommand, variables);
             /**
             int count = 0;
             double damage = config.getDouble(path + ".Damage");

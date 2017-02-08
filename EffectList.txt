@@ -1,16 +1,26 @@
+Some spell effects require variables pulled from the config.
+Ex:
+For Meteor, it requires 2 extra variables
+Variables:
+    1: 5 #Bolt damage = 5
+    2: 4 #Explosion Damage = 4.0F
+
+For meteor, 1 is the meteor on hit damage, and 2 is the explosion damage. Denoted as: {1:Bolt Damage, 2:Explosion Damage}
+
 Normal - Shoots straight
 Homing - Homes in on the closest target.
-Fire - Set your enemies on fire!
+Fire - Set your enemies on fire! {1:Fire Ticks}
 Lightning - Strike Enemies down with the power of thor!
-Explode - Creates an explosion!
+Explode - Creates an explosion!{1:Explosion Damage}
 Teleport - Teleport to the location of the spell!
-Push - Push players away from the spell!
+Push - Push players away from the spell!{1:Force of push}
 Vampire - Heal for 1/4th of total damage dealt to players!
-Meteor - Summon a meteor from above to deal explosion damage
+Meteor - Summon a meteor from above to deal explosion damage{1:Bolt Damage, 2:Explosion Damage}
 Chain - After each spell hits an enemy, it will bounce to the next closest one!
-Armageddon - Conjour the meteor power, unleash a storm of meteors.
+Armageddon - Conjour the meteor power, unleash a storm of meteors.{1:Bolt Damage, 2:Explosion Damage}
 Storm - Create a lightning storm
 Petrify - Turn mobs into stone.
 HailMary - Shoot a barrage worth of spells.
 ArcSpell - Makes the spell be affected by gravity. It falls!
+Launchg - Launches a player up{1:Force of launch}
 (More coming soon!)

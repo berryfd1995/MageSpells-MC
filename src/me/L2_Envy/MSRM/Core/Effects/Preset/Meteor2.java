@@ -24,7 +24,13 @@ public class Meteor2 implements SpellEffect{
         spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
-        livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),4.0F);
+        try {
+            String var = activeSpellObject.getVariables().get(1);
+            int i = Integer.parseInt(var);
+            livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),i);
+        }catch(Exception e){
+            livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),4.0F);
+        }
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
@@ -46,7 +52,14 @@ public class Meteor2 implements SpellEffect{
         return false;
     }
     public void spellEndingSeq(){
-        spelllocation.getWorld().createExplosion(spelllocation,8.0F);
+        try {
+            String var = activeSpellObject.getVariables().get(1);
+            int i = Integer.parseInt(var);
+            spelllocation.getWorld().createExplosion(spelllocation,i);
+        }catch(Exception e){
+            spelllocation.getWorld().createExplosion(spelllocation,8.0F);
+        }
+
     }
     public void auraRun(){
     }

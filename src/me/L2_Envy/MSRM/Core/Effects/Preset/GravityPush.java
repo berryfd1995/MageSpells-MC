@@ -25,7 +25,13 @@ public class GravityPush implements SpellEffect {
     }
     public void onHit(LivingEntity livingEntity){
         Vector unitVector = livingEntity.getLocation().toVector().subtract(activeSpellObject.getLocation().toVector()).normalize();
-        livingEntity.setVelocity(unitVector.multiply(4.0));
+        try {
+            String var = activeSpellObject.getVariables().get(0);
+            int i = Integer.parseInt(var);
+            livingEntity.setVelocity(unitVector.multiply(i));
+        }catch(Exception e){
+            livingEntity.setVelocity(unitVector.multiply(4.0));
+        }
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;

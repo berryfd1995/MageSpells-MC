@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
  * Created by Daniel on 7/27/2016.
  */
 public class HomingSpellEffect implements SpellEffect{
-    private String name = "Homing";
+    private String name = "homing";
     private Vector vector;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;

@@ -24,7 +24,14 @@ public class Explode implements SpellEffect{
         spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
-        livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),4.0F);
+        try {
+            String var = activeSpellObject.getVariables().get(0);
+            int i = Integer.parseInt(var);
+            livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),i);
+        }catch(Exception e){
+            livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),4.0F);
+        }
+
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;

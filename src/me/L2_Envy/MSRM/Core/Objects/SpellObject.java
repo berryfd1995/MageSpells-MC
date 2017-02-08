@@ -1,8 +1,6 @@
 package me.L2_Envy.MSRM.Core.Objects;
 
-import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import org.bukkit.Sound;
-import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -14,7 +12,7 @@ import java.util.HashMap;
 /**
  * Created by Daniel on 7/23/2016.
  */
-public class SpellObject{
+public class SpellObject {
     private String name;
     private String displayname;
     private String lore;
@@ -54,7 +52,19 @@ public class SpellObject{
     private boolean itemcostenabled;
     private HashMap<ItemStack, Integer> itemcost;
 
-    public SpellObject(String name, String displayname, String spellnode, String lore, boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled, int auratime, int auraradius, double auradamage,boolean sprayenabled, int sprayradius, double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime, int traveldistance, int requiredleveltobind,int requiredleveltocast, int requiredleveltodrop,boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates, ItemStack spellbook, String spellEffect, Sound sound, float soundvolume, float soundpitch, ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled, HashMap<ItemStack, Integer> itemcost){
+    private String castcommand;
+    private ArrayList<String> variables;
+
+    public SpellObject(String name, String displayname, String spellnode, String lore,
+                       boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled,
+                       int auratime, int auraradius, double auradamage, boolean sprayenabled, int sprayradius,
+                       double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime,
+                       int traveldistance, int requiredleveltobind, int requiredleveltocast, int requiredleveltodrop,
+                       boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates,
+                       ItemStack spellbook, String spellEffect, Sound sound, float soundvolume, float soundpitch,
+                       ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects,
+                       boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled,
+                       HashMap<ItemStack, Integer> itemcost, String castcommand, ArrayList<String> variables) {
         this.name = name;
         this.displayname = displayname;
         this.spellnode = spellnode;
@@ -93,7 +103,10 @@ public class SpellObject{
         this.mobDrops = mobDrops;
         this.itemcostenabled = itemcostenabled;
         this.itemcost = itemcost;
+        this.variables = variables;
+        this.castcommand = castcommand;
     }
+
     public String getName() {
         return name;
     }
@@ -114,7 +127,9 @@ public class SpellObject{
         return boltradius;
     }
 
-    public double getBoltdamage() { return  boltdamage; }
+    public double getBoltdamage() {
+        return boltdamage;
+    }
 
     public boolean isAuraenabled() {
         return auraenabled;
@@ -128,7 +143,9 @@ public class SpellObject{
         return auraradius;
     }
 
-    public double getAuradamage() { return auradamage; }
+    public double getAuradamage() {
+        return auradamage;
+    }
 
     public boolean isSprayenabled() {
         return sprayenabled;
@@ -198,7 +215,7 @@ public class SpellObject{
         return spellbook;
     }
 
-   public String getSpellEffect() {
+    public String getSpellEffect() {
         return spellEffect;
     }
 
@@ -238,28 +255,41 @@ public class SpellObject{
         return itemcost;
     }
 
-    public String getSpellNode(){
-        return spellnode.toLowerCase();
-    }
-    public void setBoltenabled(boolean enabled){
-        boltenabled = enabled;
-    }
-    public void setAuraenabled(boolean enabled){
-        auraenabled = enabled;
-    }
-    public void setSprayenabled(boolean enabled){
-        sprayenabled = enabled;
-    }
-    public void setTraveldistance(int traveldistance){
-        this.traveldistance = traveldistance;
-    }
-    public void setBoltradius(int radius){
-        this.boltradius = radius;
-    }
-    public void setBoltdamage(double boltdamage){
-        this.boltdamage = boltdamage;
+    public ArrayList<String> getVariables() {
+        return variables;
     }
 
+    public String getCastcommand() {
+        return castcommand;
+    }
+
+    public String getSpellNode() {
+        return spellnode.toLowerCase();
+    }
+
+    public void setBoltenabled(boolean enabled) {
+        boltenabled = enabled;
+    }
+
+    public void setAuraenabled(boolean enabled) {
+        auraenabled = enabled;
+    }
+
+    public void setSprayenabled(boolean enabled) {
+        sprayenabled = enabled;
+    }
+
+    public void setTraveldistance(int traveldistance) {
+        this.traveldistance = traveldistance;
+    }
+
+    public void setBoltradius(int radius) {
+        this.boltradius = radius;
+    }
+
+    public void setBoltdamage(double boltdamage) {
+        this.boltdamage = boltdamage;
+    }
 
     public static class CompId implements Comparator<SpellObject> {
         @Override
@@ -267,6 +297,7 @@ public class SpellObject{
             return arg0.getName().compareTo(arg1.getName());
         }
     }
+}
     /**
     private SpellEffect spellEffect;
     private boolean affectTeammates;
@@ -432,4 +463,3 @@ public class SpellObject{
         return spellEffect;
     }
      **/
-}

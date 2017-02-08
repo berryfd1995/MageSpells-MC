@@ -25,7 +25,19 @@ public class ActiveSpellObject extends SpellObject {
     private int auratimeleft;
     private SpellObject spellObject;
     public ActiveSpellObject(SpellObject spellObject, Location location, Player player){
-        super(spellObject.getName(),spellObject.getSpellNode(),spellObject.getDisplayname(), spellObject.getLore(), spellObject.isBoltenabled(), spellObject.getBoltradius(), spellObject.getBoltdamage(), spellObject.isAuraenabled(), spellObject.getAuratime(),spellObject.getAuraradius(), spellObject.getAuradamage(),spellObject.isSprayenabled(),spellObject.getSprayradius(),spellObject.getSpraydamage(),spellObject.getArmorpiercing(),spellObject.getMoneycost(),spellObject.getManacost(),spellObject.getCooldown(),spellObject.getChargetime(),spellObject.getTraveldistance(),spellObject.getRequiredLevelToBind(),spellObject.getRequiredLevelToCast(),spellObject.getRequiredLevelToDrop(),spellObject.isAffectmobs(), spellObject.isAffectself(),spellObject.isAffectenemys(),spellObject.isAffectteammates(),spellObject.getSpellbook(),spellObject.getSpellEffect(),spellObject.getSound(),spellObject.getSoundvolume(),spellObject.getSoundpitch(),spellObject.getParticleObjects(),spellObject.getPotionEffects(),spellObject.isMobdropsenabled(),spellObject.getMobDrops(),spellObject.isItemcostenabled(),spellObject.getItemcost());
+        super(spellObject.getName(),spellObject.getSpellNode(),spellObject.getDisplayname(),
+                spellObject.getLore(), spellObject.isBoltenabled(), spellObject.getBoltradius(),
+                spellObject.getBoltdamage(), spellObject.isAuraenabled(), spellObject.getAuratime(),
+                spellObject.getAuraradius(), spellObject.getAuradamage(),spellObject.isSprayenabled(),
+                spellObject.getSprayradius(),spellObject.getSpraydamage(),spellObject.getArmorpiercing(),
+                spellObject.getMoneycost(),spellObject.getManacost(),spellObject.getCooldown(),
+                spellObject.getChargetime(),spellObject.getTraveldistance(),spellObject.getRequiredLevelToBind(),
+                spellObject.getRequiredLevelToCast(),spellObject.getRequiredLevelToDrop(),spellObject.isAffectmobs(),
+                spellObject.isAffectself(),spellObject.isAffectenemys(),spellObject.isAffectteammates(),spellObject.getSpellbook(),
+                spellObject.getSpellEffect(),spellObject.getSound(),spellObject.getSoundvolume(),spellObject.getSoundpitch(),
+                spellObject.getParticleObjects(),spellObject.getPotionEffects(),spellObject.isMobdropsenabled(),
+                spellObject.getMobDrops(),spellObject.isItemcostenabled(),spellObject.getItemcost(),
+                spellObject.getCastcommand(), spellObject.getVariables());
         this.player = player;
         this.location = location;
         this.initialLoc = location.clone();

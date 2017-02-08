@@ -24,7 +24,13 @@ public class Fire implements SpellEffect{
         spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
-        livingEntity.setFireTicks(40);
+        try {
+            String var = activeSpellObject.getVariables().get(0);
+            int i = Integer.parseInt(var);
+            livingEntity.setFireTicks(i);
+        }catch(Exception e){
+            livingEntity.setFireTicks(40);
+        }
     }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
