@@ -63,5 +63,7 @@ public class Meteor2 implements SpellEffect{
     }
     public void auraRun(){
     }
+    public void auraEndingSequence(){
 
+    }
 }

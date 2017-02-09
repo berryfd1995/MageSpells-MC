@@ -89,6 +89,7 @@ public class SpellContactManager {
                spellEffect.getActiveSpell().clearSprayHit();
                spellEffect.getActiveSpell().tickauratimer();
            }else{
+               spellEffect.auraEndingSequence();
                removeAuraTask(spellEffect.getActiveSpell());
            }
        },0L,20L));

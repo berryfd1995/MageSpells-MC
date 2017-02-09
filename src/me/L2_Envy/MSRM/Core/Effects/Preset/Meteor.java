@@ -114,4 +114,7 @@ public class Meteor implements SpellEffect{
         }
         return randomNum*i;
     }
+    public void auraEndingSequence(){
+
+    }
 }

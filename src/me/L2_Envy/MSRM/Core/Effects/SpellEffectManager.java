@@ -92,6 +92,8 @@ public class SpellEffectManager {
                 return new HomingSpellEffect();
             case "shield":
                 return new Shield();
+            case "helix":
+                return new Helix();
                 default:
                     break;
         }

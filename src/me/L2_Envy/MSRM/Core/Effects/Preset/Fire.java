@@ -55,4 +55,7 @@ public class Fire implements SpellEffect{
     }
     public void auraRun(){
     }
+    public void auraEndingSequence(){
+
+    }
 }

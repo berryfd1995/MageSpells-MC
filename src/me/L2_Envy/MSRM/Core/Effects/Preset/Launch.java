@@ -58,4 +58,7 @@ public class Launch implements SpellEffect {
     }
     public void auraRun(){
     }
+    public void auraEndingSequence(){
+
+    }
 }

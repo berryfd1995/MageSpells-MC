@@ -91,4 +91,7 @@ public class SpellDrop implements SpellEffect {
             MageSpellsAPI.playParticle(getActiveSpell(), spelllocation.clone().add(x,1,z));
         }*/
     }
+    public void auraEndingSequence(){
+
+    }
 }

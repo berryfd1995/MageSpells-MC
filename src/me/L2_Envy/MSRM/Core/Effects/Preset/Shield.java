@@ -57,16 +57,21 @@ public class Shield implements SpellEffect {
     public void auraRun(){
         //plot points on sphere
         int radius=activeSpellObject.getAuraradius();
+        activeSpellObject.setLocation(activeSpellObject.getCaster().getLocation());
         //remove other spells.
+        MageSpellsAPI.pluginManager.main.mageSpellsManager.activeSpellManager.removeNearbySpells(this,activeSpellObject.getAuraradius());
         Random random = new Random();
-        for(int i = 0; i < 50*radius; i++) {
+        for(int i = 0; i < 100*radius; i++) {
             double x = random.nextDouble() * 2.0D - 1.0D;
             double y = random.nextDouble() * 2.0D - 1.0D;
             double z = random.nextDouble() * 2.0D - 1.0D;
-            Vector vec = new Vector(x, Math.abs(y), z).normalize().multiply(radius);
+            Vector vec = new Vector(x, y, z).normalize().multiply(radius);
             for (ParticleObject particle : activeSpellObject.getParticleObjects()) {
                 particle.getParticle().display(0, 0, 0, 0, 1, activeSpellObject.getCaster().getLocation().clone().add(vec), 200);
             }
         }
+    }
+    public void auraEndingSequence(){
+
     }
 }

@@ -106,4 +106,7 @@ public class HailMary implements SpellEffect{
         Vector direction = player.getLocation().getDirection().normalize();
         return new Vector(direction.getZ(), 0.0, -direction.getX()).normalize();
     }
+    public void auraEndingSequence(){
+
+    }
 }

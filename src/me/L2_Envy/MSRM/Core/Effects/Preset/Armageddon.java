@@ -32,6 +32,9 @@ public class Armageddon  implements SpellEffect{
         this.spelllocation = location;
 
     }
+    public void auraEndingSequence(){
+
+    }
     public void setInitialVector(Vector vector){
         this.vector = vector;
     }

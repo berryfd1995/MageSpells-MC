@@ -87,4 +87,7 @@ public class Storm implements SpellEffect{
         }
         return randomNum*i;
     }
+    public void auraEndingSequence(){
+
+    }
 }

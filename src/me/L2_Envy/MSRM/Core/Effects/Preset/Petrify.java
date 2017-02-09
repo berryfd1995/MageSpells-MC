@@ -65,4 +65,7 @@ public class Petrify implements SpellEffect{
     public SpellEffect castNewSpell(){
         return null;
     }
+    public void auraEndingSequence(){
+
+    }
 }

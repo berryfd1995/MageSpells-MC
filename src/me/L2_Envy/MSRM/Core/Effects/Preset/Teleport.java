@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 /**
@@ -64,5 +65,8 @@ public class Teleport implements SpellEffect{
         return false;
     }
     public void auraRun(){
+    }
+    public void auraEndingSequence(){
+
     }
 }

@@ -109,4 +109,7 @@ public class ChainStrike implements SpellEffect{
     }
     public void auraRun(){
     }
+    public void auraEndingSequence(){
+
+    }
 }

@@ -7,17 +7,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
-import javax.swing.*;
-import java.util.ArrayList;
-
 import static java.lang.Math.PI;
-import static java.lang.Math.cos;
 
 /**
- * Created by berry on 2/8/2017.
+ * Created by Daniel on 2/9/2017.
  */
-public class Spiral implements SpellEffect{
-    private String name = "spiral";
+public class Helix implements SpellEffect {
+    private String name = "helix";
     private Vector vector;
     private Vector normal;
     private Vector normal2;
@@ -45,7 +41,7 @@ public class Spiral implements SpellEffect{
     }
     public void initialSetup(){
         if(angle == 0) {
-            int spirals = 5;
+           int spirals = 5;
             try {
                 String var = activeSpellObject.getVariables().get(0);
                 spirals = Integer.parseInt(var);
@@ -54,7 +50,7 @@ public class Spiral implements SpellEffect{
             }
             double angleportion = ((360/(1+spirals))*PI)/180;
             for (int i = 1; i < spirals+1; i++) {
-                Spiral spellEffect = new Spiral();
+                Helix spellEffect = new Helix();
                 spellEffect.setStartingAngle(angleportion*i);
                 spellEffect.setActiveSpell(MageSpellsAPI.cloneActiveSpellObject(activeSpellObject));
                 spellEffect.setInitialLocation(spelllocation.clone());
@@ -89,21 +85,23 @@ z(θ)=c3+rcos(θ)a3+rsin(θ)b3
         normal = u.getCrossProduct(axis).normalize();
         normal2 = normal.getCrossProduct(axis).normalize();
     }
+    private double inc = .5;
+    private double radius = inc;
     public Location plotSpellPoint(){
-        int radius = 1;
-        try {
+        /*try {
             if(activeSpellObject.getVariables().size()  >=2) {
                 String var = activeSpellObject.getVariables().get(1);
                 radius = Integer.parseInt(var);
             }
         } catch (NumberFormatException ex) {
 
-        }
-        double increment = (1/PI)/(radius/2);
+        }*/
+        double increment = (1/PI);
         double x = spelllocation.getX() + radius*Math.cos(angle)*normal.getX() + radius*Math.sin(angle)*normal2.getX();
         double y = spelllocation.getY() + radius*Math.cos(angle)*normal.getY() + radius*Math.sin(angle)*normal2.getY();
         double z = spelllocation.getZ() + radius*Math.cos(angle)*normal.getZ() + radius*Math.sin(angle)*normal2.getZ();
         angle += increment;//Increment angle
+        radius+= inc;
         return new Location(spelllocation.getWorld(),x,y,z);
     }
     public void auraEndingSequence(){

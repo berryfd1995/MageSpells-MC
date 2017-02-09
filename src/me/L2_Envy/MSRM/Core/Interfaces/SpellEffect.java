@@ -21,6 +21,7 @@ public interface SpellEffect {
     public Location plotSpellPoint();
     public void Run();
     public void auraRun();
+    public void auraEndingSequence();
     public void onHit(LivingEntity livingEntity);
     public boolean shouldEnd();
     public void spellEndingSeq();

@@ -87,4 +87,7 @@ public class HomingSpellEffect implements SpellEffect{
     }
     public void auraRun(){
     }
+    public void auraEndingSequence(){
+
+    }
 }

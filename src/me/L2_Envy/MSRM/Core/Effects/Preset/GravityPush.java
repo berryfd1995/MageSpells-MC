@@ -56,4 +56,7 @@ public class GravityPush implements SpellEffect {
     }
     public void auraRun(){
     }
+    public void auraEndingSequence(){
+
+    }
 }
