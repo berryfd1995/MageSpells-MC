@@ -1,12 +1,17 @@
 package me.L2_Envy.MSRM.Core.Effects.Preset;
 
+import me.L2_Envy.MSRM.API.MageSpellsAPI;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 import static java.lang.Math.PI;
+import static java.lang.Math.cos;
 
 /**
  * Created by berry on 2/8/2017.
@@ -14,8 +19,11 @@ import static java.lang.Math.PI;
 public class Spiral implements SpellEffect{
     private String name = "spiral";
     private Vector vector;
+    private Vector normal;
+    private Vector normal2;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;
+    private double angle = 0;
     public ActiveSpellObject getActiveSpell(){
         return activeSpellObject;
     }
@@ -25,6 +33,9 @@ public class Spiral implements SpellEffect{
     public void onHit(LivingEntity livingEntity){
 
     }
+    public void setStartingAngle(double angle){
+        this.angle = angle;
+    }
     public void setInitialLocation(Location location) {
         this.spelllocation = location;
 
@@ -33,7 +44,24 @@ public class Spiral implements SpellEffect{
         return name;
     }
     public void initialSetup(){
+        if(angle == 0) {
+            int spirals = 5;
+            try {
+                String var = activeSpellObject.getVariables().get(0);
+                spirals = Integer.parseInt(var);
+            } catch (NumberFormatException ex) {
 
+            }
+            double angleportion = ((360/(1+spirals))*PI)/180;
+            for (int i = 1; i < spirals+1; i++) {
+                Spiral spellEffect = new Spiral();
+                spellEffect.setStartingAngle(angleportion*i);
+                spellEffect.setActiveSpell(MageSpellsAPI.cloneActiveSpellObject(activeSpellObject));
+                spellEffect.setInitialLocation(spelllocation.clone());
+                spellEffect.setInitialVector(spelllocation.getDirection().clone().multiply(2));
+                MageSpellsAPI.shootSpell(spellEffect);
+            }
+        }
     }
     public void spellEndingSeq(){
     }
@@ -55,30 +83,27 @@ z(θ)=c3+rcos(θ)a3+rsin(θ)b3
     }
     public void setInitialVector(Vector vector){
         this.vector = vector;
+        Vector axis = vector.clone().normalize();
+        Location center = spelllocation.clone();
+        Vector u = new Vector(-center.getX(), -center.getY(), -center.getZ()).normalize();
+        normal = u.getCrossProduct(axis).normalize();
+        normal2 = normal.getCrossProduct(axis).normalize();
     }
-    double point = 0;
     public Location plotSpellPoint(){
-        //point on circle
-        Location spellpoint = spelllocation.clone();
-        //increase point up 1.
-        spellpoint.add(vector);
-        //vector u  = vector spelllocationspellpoint and vector are parallel to plane
-        Vector u = new Vector(spellpoint.getX()-spelllocation.getX(), spellpoint.getY() - spelllocation.getY(), spellpoint.getZ() - spelllocation.getZ());
-        //if u DOT vecotr is 0, they are on same line.
-        if(u.dot(vector) == 0) {
-            //radius
-            int radius = 4;
-            //get normal vector to line. make it a unit vector
-            Vector normal = vector.getCrossProduct(u).normalize();
-            //get x y and z
-            double x = spelllocation.getX() + radius * Math.cos(point)*u.getX() + radius * Math.sin(point)*normal.getX();
-            double y = spelllocation.getY() + radius * Math.cos(point)*u.getY() + radius * Math.sin(point)*normal.getY();
-            double z = spelllocation.getZ() + radius * Math.cos(point)*u.getZ() + radius * Math.sin(point)*normal.getZ();
-            //increment angle
-            point += (1/PI)/(radius/2);
-            //plot
-            spellpoint = new Location(spelllocation.getWorld(),x,y,z);
+        int radius = 1;
+        try {
+            if(activeSpellObject.getVariables().size()  >=2) {
+                String var = activeSpellObject.getVariables().get(1);
+                radius = Integer.parseInt(var);
+            }
+        } catch (NumberFormatException ex) {
+
         }
-        return spellpoint;
+        double increment = (1/PI)/(radius/2);
+        double x = spelllocation.getX() + radius*Math.cos(angle)*normal.getX() + radius*Math.sin(angle)*normal2.getX();
+        double y = spelllocation.getY() + radius*Math.cos(angle)*normal.getY() + radius*Math.sin(angle)*normal2.getY();
+        double z = spelllocation.getZ() + radius*Math.cos(angle)*normal.getZ() + radius*Math.sin(angle)*normal2.getZ();
+        angle += increment;//Increment angle
+        return new Location(spelllocation.getWorld(),x,y,z);
     }
 }

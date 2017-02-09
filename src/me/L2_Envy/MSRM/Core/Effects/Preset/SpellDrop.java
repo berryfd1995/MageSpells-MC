@@ -62,6 +62,7 @@ public class SpellDrop implements SpellEffect {
     public void setInitialVector(Vector vector){
         this.vector = vector;
     }
+
     public Location plotSpellPoint(){
         vector = vector.setY(vector.getY() -.08);
         spelllocation.add(vector);

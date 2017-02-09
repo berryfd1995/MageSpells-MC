@@ -17,7 +17,7 @@ public class SpellEffectManager {
     private ArrayList<SpellEffect> spellEffects;
 
     public SpellEffectManager(){
-        spellEffects = new ArrayList<>();
+       /* spellEffects = new ArrayList<>();
         spellEffects.add(new HomingSpellEffect());
         spellEffects.add(new NormalEffect());
         spellEffects.add(new Fire());
@@ -34,30 +34,64 @@ public class SpellEffectManager {
         spellEffects.add(new HailMary());
         spellEffects.add(new SpellDrop());
         spellEffects.add(new Launch());
-        spellEffects.add(new Spiral());
+        spellEffects.add(new Spiral());*/
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
     }
     public void addSpellEffect(SpellEffect spellEffect){
-         spellEffects.add(spellEffect);
+         //spellEffects.add(spellEffect);
      }
     public boolean hasSpellEffect(SpellEffect spellEffect){
-        return spellEffects.contains(spellEffect);
+        //return spellEffects.contains(spellEffect);
+        return false;
     }
     public boolean hasSpellEffect(String spellEffect){
-        for(SpellEffect spellEffect1 : spellEffects){
-            if(spellEffect1.getName().equalsIgnoreCase(spellEffect.toLowerCase())){
-                return true;
-            }
+        if(getSpellEffect(spellEffect) != null){
+            return true;
         }
         return false;
     }
     public SpellEffect getSpellEffect(String spellEffect){
-        for(SpellEffect spellEffect1 : spellEffects){
-            if(spellEffect1.getName().equalsIgnoreCase(spellEffect.toLowerCase())){
-                return spellEffect1;
-            }
+        switch (spellEffect.toLowerCase()){
+            case "armageddon":
+                return new Armageddon();
+            case "chain":
+                return new ChainStrike();
+            case "normal":
+                return new NormalEffect();
+            case "fire":
+                return new Fire();
+            case "meteor":
+                return new Meteor();
+            case "hailmary":
+                return new HailMary();
+            case "launch":
+                return new Launch();
+            case "spiral":
+                return new Spiral();
+            case "vampire":
+                return  new Vampire();
+            case "lightning":
+                return new Lightning();
+            case "teleport":
+                return new Teleport();
+            case "storm":
+                return new Storm();
+            case "push":
+                return new GravityPush();
+            case "petrify":
+                return new Petrify();
+            case "explode":
+                return new Explode();
+            case "arcspell":
+                return new SpellDrop();
+            case "meteor2":
+                return new Meteor2();
+            case "homing":
+                return new HomingSpellEffect();
+                default:
+                    break;
         }
         return null;
     }

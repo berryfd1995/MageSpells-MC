@@ -64,13 +64,7 @@ public class Meteor implements SpellEffect{
         }
         Location fromloc = spelllocation.clone().add(getRandomValue(15), 100, getRandomValue(15));
         SpellEffect spellEffect = new Meteor2();
-        try {
-            String var = activeSpellObject.getVariables().get(0);
-            int i = Integer.parseInt(var);
-            activeSpellObject.setBoltdamage(i);
-        }catch(Exception e){
-            activeSpellObject.setBoltdamage(5);
-        }
+
         activeSpellObject.setBoltradius(radius);
         activeSpellObject.setBoltenabled(true);
         activeSpellObject.setTraveldistance(50);
