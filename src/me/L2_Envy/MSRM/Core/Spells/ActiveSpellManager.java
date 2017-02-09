@@ -48,7 +48,7 @@ public class ActiveSpellManager {
                                 //Play particle at spell location
                                 mageSpellsManager.particleEffectManager.playParticle(spellEffect.getActiveSpell());
                                 //Check if nearby spells
-                                if (isNearbySpells(spellEffect)) {
+                                if (isNearbySpells(spellEffect, 2)) {
                                     removeSpell(spellEffect);
                                 }
                                 //sound effect
@@ -63,14 +63,24 @@ public class ActiveSpellManager {
                         }
         },0L,1L));
     }
-    public boolean isNearbySpells(SpellEffect spell) {
+    public boolean isNearbySpells(SpellEffect spell, int radius) {
         for (SpellEffect otherSpell : ((ArrayList<SpellEffect>) activeSpellObjects.clone())) {
-            double radius = 2;
             if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
                 if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) < radius) {
                     otherSpell.getActiveSpell().getLocation().getWorld()
                             .createExplosion(spell.getActiveSpell().getLocation(), 2.0F);
                     removeSpell(spell);
+                    removeSpell(otherSpell);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean removeNearbySpells(SpellEffect spell, int radius) {
+        for (SpellEffect otherSpell : ((ArrayList<SpellEffect>) activeSpellObjects.clone())) {
+            if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
+                if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) < radius) {
                     removeSpell(otherSpell);
                     return true;
                 }

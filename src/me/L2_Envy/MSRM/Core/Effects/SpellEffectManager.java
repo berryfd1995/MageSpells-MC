@@ -90,6 +90,8 @@ public class SpellEffectManager {
                 return new Meteor2();
             case "homing":
                 return new HomingSpellEffect();
+            case "shield":
+                return new Shield();
                 default:
                     break;
         }
