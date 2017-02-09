@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM.Core.Spells;
 
+import de.slikey.effectlib.util.ParticleEffect;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
@@ -80,7 +81,9 @@ public class ActiveSpellManager {
     public boolean removeNearbySpells(SpellEffect spell, int radius) {
         for (SpellEffect otherSpell : ((ArrayList<SpellEffect>) activeSpellObjects.clone())) {
             if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
-                if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) < radius) {
+                if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation())+radius >-1 &&
+                        otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation())+radius <1){
+                    ParticleEffect.fromName("EXPLOSION_NORMAL").display(0,0,0,0,1,otherSpell.getActiveSpell().getLocation(),200);
                     removeSpell(otherSpell);
                     return true;
                 }

@@ -67,7 +67,7 @@ public class Shield implements SpellEffect {
             double z = random.nextDouble() * 2.0D - 1.0D;
             Vector vec = new Vector(x, y, z).normalize().multiply(radius);
             for (ParticleObject particle : activeSpellObject.getParticleObjects()) {
-                particle.getParticle().display(0, 0, 0, 0, 1, activeSpellObject.getCaster().getLocation().clone().add(vec), 200);
+                particle.getParticle().display(0, 0, 0, 0, 1, activeSpellObject.getLocation().clone().add(vec), 200);
             }
         }
     }
