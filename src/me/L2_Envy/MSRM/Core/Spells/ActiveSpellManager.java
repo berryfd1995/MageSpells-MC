@@ -1,11 +1,14 @@
 package me.L2_Envy.MSRM.Core.Spells;
 
 import de.slikey.effectlib.util.ParticleEffect;
+import me.L2_Envy.MSRM.Core.Effects.Preset.Shield;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 
 import java.util.ArrayList;
 
@@ -67,6 +70,7 @@ public class ActiveSpellManager {
     public boolean isNearbySpells(SpellEffect spell, int radius) {
         for (SpellEffect otherSpell : ((ArrayList<SpellEffect>) activeSpellObjects.clone())) {
             if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
+            if(otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
                 if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) < radius) {
                     otherSpell.getActiveSpell().getLocation().getWorld()
                             .createExplosion(spell.getActiveSpell().getLocation(), 2.0F);
@@ -75,19 +79,36 @@ public class ActiveSpellManager {
                     return true;
                 }
             }
+           }
+        }
+        for(SpellEffect otherSpell : mageSpellsManager.spellContactManager.getActiveAuraSpells()){
+            if(otherSpell instanceof Shield) {
+                if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
+                    if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) - otherSpell.getActiveSpell().getAuraradius() > -1 &&
+                            otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) - otherSpell.getActiveSpell().getAuraradius() < 1) {
+                        ParticleEffect particleEffect = ParticleEffect.EXPLOSION_HUGE;
+                        particleEffect.display(0, 0, 0, 0, 3, spell.getActiveSpell().getLocation(), 200);
+                        spell.getActiveSpell().getLocation().getWorld().playSound(spell.getActiveSpell().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, .5F, 0F);
+                        removeSpell(spell);
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
     public boolean removeNearbySpells(SpellEffect spell, int radius) {
         for (SpellEffect otherSpell : ((ArrayList<SpellEffect>) activeSpellObjects.clone())) {
-            if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
-                if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation())+radius >-1 &&
-                        otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation())+radius <1){
-                    ParticleEffect.fromName("EXPLOSION_NORMAL").display(0,0,0,0,1,otherSpell.getActiveSpell().getLocation(),200);
+            //if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
+                if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation())-radius< 1 &&
+                    otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation())-radius >-1){
+                    Location loc = otherSpell.getActiveSpell().getLocation();
+                    ParticleEffect particleEffect = ParticleEffect.EXPLOSION_LARGE;
+                    particleEffect.display(0,0,0,0,1,loc,200);
                     removeSpell(otherSpell);
                     return true;
                 }
-            }
+           //}
         }
         return false;
     }

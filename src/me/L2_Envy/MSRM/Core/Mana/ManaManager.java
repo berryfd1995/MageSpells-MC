@@ -175,6 +175,7 @@ public class ManaManager {
             }else{
                 j = 6;
             }
+            //fix
             bars = playerObject.getMaxcooldowntime() / (j-1);// each bar = num/5 Ex: max is 10/5 = 2. So every 2 points, make active bar.
             for (int i = 1; i < j; i++) {
                 String chargebar = "▬";

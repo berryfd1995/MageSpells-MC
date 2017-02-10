@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM.Core.Spells;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import it.unimi.dsi.fastutil.Hash;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
@@ -18,10 +19,10 @@ import java.util.UUID;
  * Created by Daniel on 8/11/2016.
  */
 public class SpellContactManager {
-    private HashMap<ActiveSpellObject, Integer> activeAuraSpell;
+    private ArrayList<SpellEffect> activeAuraSpell;
     public MageSpellsManager mageSpellsManager;
     public SpellContactManager(){
-        activeAuraSpell= new HashMap<>();
+        activeAuraSpell= new ArrayList<>();
     }
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
@@ -68,8 +69,12 @@ public class SpellContactManager {
             mageSpellsManager.activeSpellManager.removeSpell(spellEffect);
         }
     }
+    public ArrayList<SpellEffect> getActiveAuraSpells(){
+        return activeAuraSpell;
+    }
     public void activeAura(SpellEffect spellEffect){
         spellEffect.getActiveSpell().clearSprayHit();
+        activeAuraSpell.add(spellEffect);
         spellEffect.getActiveSpell().setAuratimertask(Bukkit.getScheduler().scheduleSyncRepeatingTask(mageSpellsManager.main, () -> {
            if(spellEffect.getActiveSpell().getAuratimeleft() >0) {
                spellEffect.auraRun();
@@ -90,6 +95,7 @@ public class SpellContactManager {
                spellEffect.getActiveSpell().tickauratimer();
            }else{
                spellEffect.auraEndingSequence();
+               activeAuraSpell.remove(spellEffect);
                removeAuraTask(spellEffect.getActiveSpell());
            }
        },0L,20L));
