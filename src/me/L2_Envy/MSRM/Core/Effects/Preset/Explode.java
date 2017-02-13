@@ -50,6 +50,14 @@ public class Explode implements SpellEffect{
 
     }
     public void spellEndingSeq(){
+        try {
+            String var = activeSpellObject.getVariables().get(0);
+            int i = Integer.parseInt(var);
+            spelllocation.getWorld().createExplosion(spelllocation,i);
+        }catch(Exception e){
+            spelllocation.getWorld().createExplosion(spelllocation,4.0F);
+        }
+
     }
     public boolean shouldEnd(){
         return false;

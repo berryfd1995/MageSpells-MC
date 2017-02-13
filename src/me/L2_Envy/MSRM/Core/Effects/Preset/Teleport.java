@@ -59,7 +59,10 @@ public class Teleport implements SpellEffect{
             loc.add(vec);
             block = loc.getBlock();
         }
-        activeSpellObject.getCaster().teleport(loc.getBlock().getLocation().add(.5,0,.5));
+        loc = block.getLocation().add(.5,0,.5);
+        loc.setPitch(activeSpellObject.getCaster().getLocation().getPitch());
+        loc.setYaw(activeSpellObject.getCaster().getLocation().getYaw());
+        activeSpellObject.getCaster().teleport(loc);
     }
     public boolean shouldEnd(){
         return false;

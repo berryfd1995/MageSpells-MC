@@ -64,7 +64,14 @@ public class SpellDrop implements SpellEffect {
     }
 
     public Location plotSpellPoint(){
-        vector = vector.setY(vector.getY() -.08);
+        double droprate =.08;
+        try {
+            String var = activeSpellObject.getVariables().get(0);
+            droprate = Double.parseDouble(var);
+        } catch (NumberFormatException ex) {
+
+        }
+        vector = vector.setY(vector.getY() -droprate);
         spelllocation.add(vector);
         return spelllocation;
     }

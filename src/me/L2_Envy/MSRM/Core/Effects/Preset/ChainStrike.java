@@ -19,6 +19,7 @@ public class ChainStrike implements SpellEffect{
     private Vector vector;
     private Location spelllocation;
     private ActiveSpellObject activeSpellObject;
+    private int currenthits = 0;
     public ActiveSpellObject getActiveSpell(){
         return activeSpellObject;
     }
@@ -42,6 +43,9 @@ public class ChainStrike implements SpellEffect{
         this.spelllocation = location;
 
     }
+    public void incrementHits(){
+        currenthits++;
+    }
     public void setInitialVector(Vector vector){
         this.vector = vector;
     }
@@ -56,9 +60,17 @@ public class ChainStrike implements SpellEffect{
     }
     public void spellEndingSeq(){
         Location location = getClosestEntity();
-        if(location != null && (spelllocation.getBlock().getType() == Material.AIR || spelllocation.getBlock().getType() == Material.LONG_GRASS)) {
+        int maxhits = 5;
+        try {
+            String var = activeSpellObject.getVariables().get(0);
+            maxhits = Integer.parseInt(var);
+        } catch (NumberFormatException ex) {
+
+        }
+        if(currenthits <= maxhits &&location != null && (spelllocation.getBlock().getType() == Material.AIR || spelllocation.getBlock().getType() == Material.LONG_GRASS)) {
             ActiveSpellObject activeSpellObject = getActiveSpell();
-            SpellEffect spellEffect = new ChainStrike();
+            ChainStrike spellEffect = new ChainStrike();
+            spellEffect.incrementHits();
             spelllocation = spelllocation.add(0,1,0);
             location = location.add(0,1,0);
             spellEffect.setInitialLocation(spelllocation);
