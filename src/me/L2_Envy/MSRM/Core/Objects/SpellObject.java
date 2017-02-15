@@ -33,6 +33,7 @@ public class SpellObject {
     private int cooldown;
     private int chargetime;
     private int traveldistance;
+    private int spellspeed;
     private int requiredleveltobind;
     private int requiredleveltocast;
     private int requiredleveltodrop;
@@ -59,7 +60,7 @@ public class SpellObject {
                        boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled,
                        int auratime, int auraradius, double auradamage, boolean sprayenabled, int sprayradius,
                        double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime,
-                       int traveldistance, int requiredleveltobind, int requiredleveltocast, int requiredleveltodrop,
+                       int traveldistance,int spellspeed, int requiredleveltobind, int requiredleveltocast, int requiredleveltodrop,
                        boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates,
                        ItemStack spellbook, String spellEffect, Sound sound, float soundvolume, float soundpitch,
                        ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects,
@@ -105,6 +106,7 @@ public class SpellObject {
         this.itemcost = itemcost;
         this.variables = variables;
         this.castcommand = castcommand;
+        this.spellspeed = spellspeed;
     }
 
     public String getName() {
@@ -182,6 +184,8 @@ public class SpellObject {
     public int getTraveldistance() {
         return traveldistance;
     }
+
+    public int getSpellSpeed() { return  spellspeed; }
 
     public int getRequiredLevelToBind() {
         return requiredleveltobind;

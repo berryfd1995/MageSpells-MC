@@ -83,7 +83,7 @@ public class SpellInfoUI {
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("NETHER_STAR", spellObject.getDisplayname(), spellObject.getLore());
                                 break;
                             case 3:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     if(spellObject.isAffectenemys()){
                                         lore += "&6Affects Enemys/";
                                     }
@@ -102,12 +102,12 @@ public class SpellInfoUI {
                                         lore += "&6Required Level to Drop: " + spellObject.getRequiredLevelToDrop() + "/";
                                     }
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
                                 break;
                             case 4:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     if(spellObject.isBoltenabled()){
                                         lore += "&6Bolt Enabled/   &6Damage Radius: " + spellObject.getBoltradius() + "/";
                                         lore += "   &6Bolt Damage: " + spellObject.getBoltdamage() + "/";
@@ -123,7 +123,7 @@ public class SpellInfoUI {
                                     lore += "&6Armor Penetration: " + spellObject.getArmorpiercing() + "%/";
                                     lore += "&6Travel Distance: "+spellObject.getTraveldistance()+"/";
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("TNT", "&6Stats:", lore);
                                 break;
@@ -143,7 +143,7 @@ public class SpellInfoUI {
                                 }
                                 break;
                             case 8:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     if(spellObject.isMobdropsenabled()){
                                         for(EntityType e : spellObject.getMobDrops().keySet()){
                                             lore += "&6" + e + ": " + spellObject.getMobDrops().get(e) + "%/";
@@ -153,12 +153,12 @@ public class SpellInfoUI {
                                     }
 
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("MONSTER_EGG", "&6Mob Drop Chances:", lore);
                                 break;
                             case 9:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     if(spellObject.isItemcostenabled()){
                                         for(ItemStack itemStack : spellObject.getItemcost().keySet()){
                                             if(itemStack.hasItemMeta()){
@@ -175,34 +175,34 @@ public class SpellInfoUI {
                                         lore += "&6This spell does not require anything/";
                                     }
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("GOLD_NUGGET", "&6Required Items: ", lore);
                                 break;
                             case 10:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     lore += "&6Mana Cost: " + spellObject.getManacost() + "/";
                                     lore += "&6Cooldown Time: " + spellObject.getCooldown() + "s/";
                                     lore += "&6Charge Time: " + spellObject.getChargetime() + "s/";
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("EXP_BOTTLE", "&6Casting Info:", lore);
                                 break;
                             case 11:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     for(PotionEffect potionEffect : spellObject.getPotionEffects()){
                                         lore += "&6Type: "+potionEffect.getType().getName() + "/";
                                         lore += "   &6Duration: "+potionEffect.getDuration()/20 + "/";
                                         lore += "   &6Amplification: "+potionEffect.getAmplifier() + "/";
                                     }
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("POTION", "&6Potion Effects:", lore);
                                 break;
                             case 12:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     if(mageSpellsManager.isNodeSystemEnabled()) {
                                         for (WandObject wandObject : mageSpellsManager.wandManager.getWandObjects()) {
                                             if(wandObject.isSpellCompatible(spellObject.getSpellNode())){
@@ -213,15 +213,15 @@ public class SpellInfoUI {
                                         lore += "&6This spell works with any wand";
                                     }
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("STICK", "&6Wand Compatibility:", lore);
                                 break;
                             case 13:
-                                if(playerObject.knowsSpell(spellObject)){
+                                if(canSee(playerObject,player,spellObject)){
                                     lore += ChatColor.GOLD +spellObject.getSpellEffect().toUpperCase();
                                 }else{
-                                    lore = "&6Unknown";
+                                    lore = "Unknown";
                                 }
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("BLAZE_POWDER", ChatColor.GOLD +"Special Effect:", lore);
                                 break;
@@ -234,5 +234,10 @@ public class SpellInfoUI {
                 inventory.setContents(contents);
         }
         return inventory;
+    }
+    private boolean canSee(PlayerObject playerObject, Player player, SpellObject spellObject){
+        return ((playerObject.getLevel() >= spellObject.getRequiredLevelToCast() || !mageSpellsManager.levelingManager.isLevelingEnabled())
+                && (!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsSpell(spellObject))
+                && (!mageSpellsManager.isNodeSystemEnabled() || player.hasPermission("magespells.spell." + spellObject.getSpellNode())));
     }
 }

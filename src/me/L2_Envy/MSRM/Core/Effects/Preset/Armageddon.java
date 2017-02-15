@@ -80,7 +80,7 @@ public class Armageddon  implements SpellEffect{
         activeSpellObject.setSprayenabled(false);
         activeSpellObject.setAuraenabled(false);
         spellEffect.setInitialLocation(fromloc);
-        Vector vector1 = MageSpellsAPI.createNewVector(toloc, fromloc);
+        Vector vector1 = MageSpellsAPI.createNewVector(activeSpellObject.getSpellObject(),toloc, fromloc);
         activeSpellObject.clearSprayHit();
         activeSpellObject.clearBoltHit();
         activeSpellObject.setLocation(fromloc);

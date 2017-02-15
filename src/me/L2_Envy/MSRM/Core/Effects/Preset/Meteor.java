@@ -71,7 +71,7 @@ public class Meteor implements SpellEffect{
         activeSpellObject.setSprayenabled(false);
         activeSpellObject.setAuraenabled(false);
         spellEffect.setInitialLocation(fromloc);
-        Vector vector1 = MageSpellsAPI.createNewVector(spelllocation, fromloc);
+        Vector vector1 = MageSpellsAPI.createNewVector(activeSpellObject.getSpellObject(),spelllocation, fromloc);
         activeSpellObject.clearSprayHit();
         activeSpellObject.clearBoltHit();
         activeSpellObject.setLocation(fromloc);

@@ -31,7 +31,7 @@ public class ActiveSpellObject extends SpellObject {
                 spellObject.getAuraradius(), spellObject.getAuradamage(),spellObject.isSprayenabled(),
                 spellObject.getSprayradius(),spellObject.getSpraydamage(),spellObject.getArmorpiercing(),
                 spellObject.getMoneycost(),spellObject.getManacost(),spellObject.getCooldown(),
-                spellObject.getChargetime(),spellObject.getTraveldistance(),spellObject.getRequiredLevelToBind(),
+                spellObject.getChargetime(),spellObject.getTraveldistance(),spellObject.getSpellSpeed(), spellObject.getRequiredLevelToBind(),
                 spellObject.getRequiredLevelToCast(),spellObject.getRequiredLevelToDrop(),spellObject.isAffectmobs(),
                 spellObject.isAffectself(),spellObject.isAffectenemys(),spellObject.isAffectteammates(),spellObject.getSpellbook(),
                 spellObject.getSpellEffect(),spellObject.getSound(),spellObject.getSoundvolume(),spellObject.getSoundpitch(),

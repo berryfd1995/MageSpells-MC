@@ -108,7 +108,7 @@ public class SpellEffectManager {
         }
         ActiveSpellObject activeSpellObject = new ActiveSpellObject(spellObject, player.getLocation().add(0,1,0), player);
         spelleffect.setInitialLocation(player.getLocation().add(0,1,0));
-        spelleffect.setInitialVector(activeSpellObject.getCaster().getEyeLocation().getDirection().multiply(2));
+        spelleffect.setInitialVector(activeSpellObject.getCaster().getEyeLocation().getDirection().multiply(spellObject.getSpellSpeed() * .01));
         spelleffect.setActiveSpell(activeSpellObject);
         spelleffect.initialSetup();
         return spelleffect;

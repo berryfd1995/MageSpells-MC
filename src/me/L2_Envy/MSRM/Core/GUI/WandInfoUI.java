@@ -78,17 +78,17 @@ public class WandInfoUI {
                             contents[s] = mageSpellsManager.main.utils.getItemStack("BLAZE_ROD", wandObject.getDisplayname());
                             break;
                         case 3:
-                            if(playerObject.knowsWand(wandObject)){
+                            if(canSee(playerObject, player, wandObject)){
                                 lore += "&6Required level to bind: "+ wandObject.getRequiredleveltobind()+"/";
                                 lore += "&6Required level to use: "+ wandObject.getRequiredleveltouse()+"/";
                                 lore += "&6Required level to craft: "+ wandObject.getRequiredleveltocraft()+"/";
                             }else{
-                                lore = "&6Unknown";
+                                lore = "Unknown";
                             }
                             contents[s] = mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", "&6Info:", lore);
                             break;
                         case 4:
-                            if(playerObject.knowsWand(wandObject)){
+                            if(canSee(playerObject, player, wandObject)){
                                 lore = lore + ("&6[1][2][3]/");
                                 lore = lore + ("&6[4][5][6]/");
                                 lore = lore + ("&6[7][8][9]/");
@@ -118,7 +118,7 @@ public class WandInfoUI {
                                     }
                                 }
                             }else{
-                                lore = "&6Unknown";
+                                lore = "Unknown";
                             }
                             contents[s] = mageSpellsManager.main.utils.getItemStack("WORKBENCH", "&6Crafting Info:", lore);
                             break;
@@ -138,7 +138,7 @@ public class WandInfoUI {
                             }
                             break;
                         case 8:
-                            if(playerObject.knowsWand(wandObject)){
+                            if(canSee(playerObject, player, wandObject)){
                                 if(wandObject.isMobdropsenabled()){
                                     for(EntityType e : wandObject.getMobDrops().keySet()){
                                         lore += "&6" + e + ": " + wandObject.getMobDrops().get(e) + "%/";
@@ -148,19 +148,19 @@ public class WandInfoUI {
                                 }
 
                             }else{
-                                lore = "&6Unknown";
+                                lore = "Unknown";
                             }
                             contents[s] = mageSpellsManager.main.utils.getItemStack("MONSTER_EGG", "&6Mob Drop Chances:", lore);
                             break;
                         case 9:
-                            if(playerObject.knowsWand(wandObject)){
+                            if(canSee(playerObject, player, wandObject)){
                                 for(SpellObject spellObject : mageSpellsManager.spellManager.getSpellObjects()){
                                     if(wandObject.isSpellCompatible(spellObject.getSpellNode())){
                                         lore += spellObject.getDisplayname() + "/";
                                     }
                                 }
                             }else{
-                                lore = "&6Unknown";
+                                lore = "Unknown";
                             }
                             contents[s] = mageSpellsManager.main.utils.getItemStack("NETHER_STAR", "&6Compatible Spells:", lore);
                             break;
@@ -173,5 +173,10 @@ public class WandInfoUI {
             inventory.setContents(contents);
         }
         return inventory;
+    }
+    private boolean canSee(PlayerObject playerObject, Player player, WandObject wandObject){
+        return (playerObject.getLevel() >= wandObject.getRequiredleveltouse() || !mageSpellsManager.levelingManager.isLevelingEnabled())
+                && (!mageSpellsManager.spellLearningManager.isLearningEnabled() || playerObject.knowsWand(wandObject))
+                && (!mageSpellsManager.isNodeSystemEnabled() || (player.hasPermission("magespells.wand." + wandObject.getWandnode())));
     }
 }

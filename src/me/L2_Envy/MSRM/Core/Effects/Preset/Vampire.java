@@ -24,23 +24,33 @@ public class Vampire implements SpellEffect{
         spelllocation.add(vector);
     }
     public void onHit(LivingEntity livingEntity){
+        int amount = 25;
+        try{
+            String var = activeSpellObject.getVariables().get(0);
+            amount = Integer.parseInt(var);
+        }catch (NumberFormatException e){
+
+        }
+        double percentage  = amount * .01;
         double currenthealth = activeSpellObject.getCaster().getHealth();
-        double auradamage = activeSpellObject.getAuradamage() * 0.25;
-        double boltdamage = activeSpellObject.getBoltdamage()* 0.25;
-        double spraydamage = activeSpellObject.getSpraydamage()* 0.25;
+        double auradamage = activeSpellObject.getAuradamage() * percentage;
+        double boltdamage = activeSpellObject.getBoltdamage()* percentage;
+        double spraydamage = activeSpellObject.getSpraydamage()* percentage;
         if(activeSpellObject.isAuraenabled()){
             if(currenthealth + auradamage >= 20){
                 activeSpellObject.getCaster().setHealth(20);
             }else{
                 activeSpellObject.getCaster().setHealth(currenthealth + auradamage);
             }
-        }else if(activeSpellObject.isBoltenabled()){
+        }
+        if(activeSpellObject.isBoltenabled()){
             if(currenthealth + boltdamage >= 20){
                 activeSpellObject.getCaster().setHealth(20);
             }else{
                 activeSpellObject.getCaster().setHealth(currenthealth + boltdamage);
             }
-        }else if(activeSpellObject.isSprayenabled()){
+        }
+        if(activeSpellObject.isSprayenabled()){
             if(currenthealth + spraydamage >= 20){
                 activeSpellObject.getCaster().setHealth(20);
             }else{

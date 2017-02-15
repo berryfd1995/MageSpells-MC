@@ -5,6 +5,7 @@ import me.L2_Envy.MSRM.API.Managers.WandCreationManager;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import me.L2_Envy.MSRM.Core.Objects.ParticleObject;
+import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.PluginManager.PluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -41,7 +42,7 @@ public class MageSpellsAPI {
      * @param from
      * @return
      */
-    public static Vector createNewVector(Location to, Location from){
+    public static Vector createNewVector(SpellObject spellObject, Location to, Location from){
         Vector vector = null;
         vector = to.toVector().subtract(from.toVector()).multiply(2);
         vector.normalize();

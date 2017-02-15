@@ -127,6 +127,11 @@ public class SpellConfig {
             int cooldown = config.getInt("Cooldown");
             int chargetime = config.getInt("ChargeTime");
             int traveldistance = config.getInt("TravelDistance");
+            if(!config.contains("SpellSpeed")){
+                config.createSection("SpellSpeed");
+                config.set("SpellSpeed", "200");
+            }
+            int spellspeed = config.getInt("SpellSpeed");
             int requiredleveltobind = config.getInt("RequiredLevelToBind");
             int requiredleveltocast = config.getInt("RequiredLevelToCast");
             int requiredleveltodrop = config.getInt("RequiredLevelToDrop");
@@ -226,7 +231,7 @@ public class SpellConfig {
             }
             return new SpellObject(spellName,displayname,spellnode,lore,boltenabled,boltradius,boltdamage,
                     auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,
-                    armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,
+                    armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,spellspeed,
                     requiredleveltobind,requiredleveltocast,requiredleveltodrop,
                     affectsmobs,affectself,affectenemy,affectteammates,
                     spellbook,spelleffectname,sound,soundvolume,soundpitch,
