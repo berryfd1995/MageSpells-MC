@@ -13,6 +13,8 @@ public class ActiveMagePotion extends MagePotion{
     private Player caster;
     private Item potion;
     public ActiveMagePotion(MagePotion magePotion){
-        super();
+        super(magePotion.getName(), magePotion.getDisplayname(), magePotion.getLore(), magePotion.isAffectMobs(),magePotion.isAffectEnemy(),
+        magePotion.isAffectTeam(), magePotion.isAffectSelf(), magePotion.getDuration(), magePotion.getAmplification(),magePotion.getParticleObjects(),
+                magePotion.getPotionEffects(),magePotion.getCustomRecipe(),magePotion.getPotion());
     }
 }

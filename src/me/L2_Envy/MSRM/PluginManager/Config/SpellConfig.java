@@ -129,7 +129,7 @@ public class SpellConfig {
             int traveldistance = config.getInt("TravelDistance");
             if(!config.contains("SpellSpeed")){
                 config.createSection("SpellSpeed");
-                config.set("SpellSpeed", "200");
+                config.set("SpellSpeed", 200);
             }
             int spellspeed = config.getInt("SpellSpeed");
             int requiredleveltobind = config.getInt("RequiredLevelToBind");

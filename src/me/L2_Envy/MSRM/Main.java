@@ -33,6 +33,7 @@ public class Main extends JavaPlugin {
         mageSpellsManager = new MageSpellsManager();
         pluginManager = new PluginManager();
         alchemyManager = new AlchemyManager();
+
         utils = new Utils(this);
         logger.info("Initilizing MageSpells_Remastered");
         pluginManager.linkAll(this);

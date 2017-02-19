@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 import static java.lang.Math.PI;
+import static java.lang.Math.acos;
 
 /**
  * Created by Daniel on 2/9/2017.
@@ -54,7 +55,7 @@ public class Helix implements SpellEffect {
                 spellEffect.setStartingAngle(angleportion*i);
                 spellEffect.setActiveSpell(MageSpellsAPI.cloneActiveSpellObject(activeSpellObject));
                 spellEffect.setInitialLocation(spelllocation.clone());
-                spellEffect.setInitialVector(spelllocation.getDirection().clone().multiply(2));
+                spellEffect.setInitialVector(spelllocation.getDirection().clone().multiply(.01* activeSpellObject.getSpellSpeed()));
                 MageSpellsAPI.shootSpell(spellEffect);
             }
         }

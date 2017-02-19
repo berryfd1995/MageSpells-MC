@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM.Core.Effects.Preset;
 
+import me.L2_Envy.MSRM.API.MageSpellsAPI;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import org.bukkit.Location;
@@ -26,10 +27,11 @@ public class Meteor2 implements SpellEffect{
     public void onHit(LivingEntity livingEntity){
         try {
             String var = activeSpellObject.getVariables().get(1);
-            int i = Integer.parseInt(var);
-            livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),i);
+            float i = Float.parseFloat(var);
+            MageSpellsAPI.pluginManager.main.mageSpellsManager.spellEffectManager.createExplosion(livingEntity.getLocation(), i);
         }catch(Exception e){
-            livingEntity.getLocation().getWorld().createExplosion(livingEntity.getLocation(),4.0F);
+            MageSpellsAPI.pluginManager.main.mageSpellsManager.spellEffectManager.createExplosion(livingEntity.getLocation(), 4.0F);
+
         }
     }
     public void setInitialLocation(Location location) {
@@ -55,9 +57,9 @@ public class Meteor2 implements SpellEffect{
         try {
             String var = activeSpellObject.getVariables().get(1);
             int i = Integer.parseInt(var);
-            spelllocation.getWorld().createExplosion(spelllocation,i);
+            MageSpellsAPI.pluginManager.main.mageSpellsManager.spellEffectManager.createExplosion(spelllocation, i);
         }catch(Exception e){
-            spelllocation.getWorld().createExplosion(spelllocation,8.0F);
+            MageSpellsAPI.pluginManager.main.mageSpellsManager.spellEffectManager.createExplosion(spelllocation, 8.0F);
         }
 
     }

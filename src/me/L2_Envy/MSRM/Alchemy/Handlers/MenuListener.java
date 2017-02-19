@@ -26,7 +26,7 @@ public class MenuListener implements Listener {
     private BrewingMenu brewingMenu;
     private MageSpellsManager mageSpellsManager;
     public MenuListener(AlchemyManager alchemyManager){
-     this.alchemyManager = alchemyManager;
+        this.alchemyManager = alchemyManager;
         this.brewingMenu = alchemyManager.brewingMenu;
         this.mageSpellsManager = alchemyManager.main.mageSpellsManager;
     }
@@ -42,9 +42,38 @@ public class MenuListener implements Listener {
             Player player = (Player) event.getWhoClicked();
             if(alchemyManager.main.mageSpellsManager.mageManager.isMage(player)) {
                 if (brewingMenu.inBrewingMenu(player)){
+                    int slot = event.getRawSlot();
+                    switch (slot){
+                        case 11:
+                            break;
+                        case 15:
+                            break;
+                        case 40: // result
+                            if(event.getCursor() == null ||event.getCursor().getType() == Material.AIR|| event.getCursor().getType() == Material.GLASS_BOTTLE ||
+                                    event.getCursor().getType() == Material.POTION || event.getCursor().getType() == Material.SPLASH_POTION
+                                    || event.getCursor().getType() == Material.LINGERING_POTION){
+
+                            }else{
+                                checkAction(event,event.getAction());
+                            }
+                            break;
+                        case 13://brew
+                            if(alchemyManager.canCombine(event.getInventory().getItem(11), event.getInventory().getItem(15), event.getInventory().getItem(40))){
+                                //combine duration
+                                alchemyManager.combineItems(event.getInventory().getItem(11), event.getInventory().getItem(15), event.getInventory().getItem(40));
+                            }
+                            break;
+                        default:
+                            if(slot >=54 && slot <= 89) {
+
+                            }else{
+                                checkAction(event, event.getAction());
+                            }
+                    }
+                   /* checkAction(event, event.getAction());
                     if (event.getCurrentItem() != null && event.getCursor() != null) {
                         event.setCancelled(true);
-                    }
+                    }*/
                 }
                 if (mageSpellsManager.playerInterface.inPlayerInterface(player)) {
                     int slot = event.getSlot();
@@ -73,6 +102,15 @@ public class MenuListener implements Listener {
     public void exitInterface(InventoryCloseEvent event){
         Player player =(Player) event.getPlayer();
         if(brewingMenu.inBrewingMenu(player)){
+            if(player.getOpenInventory().getItem(11) != null){
+                player.getInventory().addItem(player.getOpenInventory().getItem(11));
+            }
+            if(player.getOpenInventory().getItem(15) != null){
+                player.getInventory().addItem(player.getOpenInventory().getItem(15));
+            }
+            if(player.getOpenInventory().getItem(40) != null){
+                player.getInventory().addItem(player.getOpenInventory().getItem(40));
+            }
             brewingMenu.closeBrewingMenu(player);
         }
     }

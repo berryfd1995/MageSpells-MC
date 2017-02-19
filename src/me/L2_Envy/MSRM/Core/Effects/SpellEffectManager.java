@@ -5,6 +5,7 @@ import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -112,5 +113,12 @@ public class SpellEffectManager {
         spelleffect.setActiveSpell(activeSpellObject);
         spelleffect.initialSetup();
         return spelleffect;
+    }
+    public void createExplosion(Location l, float size){
+        if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(l)){
+            l.getWorld().createExplosion(l,size);
+        }else {
+            l.getWorld().createExplosion(l, 0);
+        }
     }
 }

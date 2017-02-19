@@ -58,7 +58,7 @@ public class Spiral implements SpellEffect{
                 spellEffect.setStartingAngle(angleportion*i);
                 spellEffect.setActiveSpell(MageSpellsAPI.cloneActiveSpellObject(activeSpellObject));
                 spellEffect.setInitialLocation(spelllocation.clone());
-                spellEffect.setInitialVector(spelllocation.getDirection().clone().multiply(2));
+                spellEffect.setInitialVector(spelllocation.getDirection().clone().multiply(.01 * activeSpellObject.getSpellSpeed()));
                 MageSpellsAPI.shootSpell(spellEffect);
             }
         }

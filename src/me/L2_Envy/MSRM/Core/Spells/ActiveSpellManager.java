@@ -72,8 +72,7 @@ public class ActiveSpellManager {
             if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
             if(otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
                 if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation()) < radius) {
-                    otherSpell.getActiveSpell().getLocation().getWorld()
-                            .createExplosion(spell.getActiveSpell().getLocation(), 2.0F);
+                    mageSpellsManager.spellEffectManager.createExplosion(spell.getActiveSpell().getLocation(), 2.0f);
                     removeSpell(spell);
                     removeSpell(otherSpell);
                     return true;

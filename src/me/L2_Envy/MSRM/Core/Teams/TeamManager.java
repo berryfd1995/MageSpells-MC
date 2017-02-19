@@ -149,6 +149,7 @@ public class TeamManager {
             if (teamObject.getLeader().equals(player.getUniqueId())) {
                 mageSpellsManager.main.pluginManager.teamConfig.removeTeam(teamObject);
                 teamObjects.remove(teamObject);
+                return true;
             }
         }
         return false;

@@ -245,7 +245,6 @@ public class InventoryListener implements Listener{
                         case 4:
                             playerInterface.closePlayerInterface(player);
                             wandBag.openWandBag(player);
-                            System.out.println("called:" + slot);
                             break;
                         case 5:
                             playerInterface.closePlayerInterface(player);
