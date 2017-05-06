@@ -67,7 +67,7 @@ public class ChainStrike implements SpellEffect{
         } catch (NumberFormatException ex) {
 
         }
-        if(currenthits <= maxhits &&location != null && (spelllocation.getBlock().getType() == Material.AIR || spelllocation.getBlock().getType() == Material.LONG_GRASS)) {
+        if(currenthits <= maxhits &&location != null && (spelllocation.getBlock().getType() == Material.AIR || spelllocation.getBlock().getType() == Material.LONG_GRASS || spelllocation.getBlock().getType() == Material.SNOW)) {
             ActiveSpellObject activeSpellObject = getActiveSpell();
             ChainStrike spellEffect = new ChainStrike();
             spellEffect.incrementHits();

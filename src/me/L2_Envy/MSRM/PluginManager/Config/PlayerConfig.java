@@ -137,7 +137,7 @@ public class PlayerConfig {
         FileConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
         playerObject = new PlayerObject(name,uuid,1,0L,playerFile,playerConfig,new ArrayList<>(), new ArrayList<>(),inventory);
         main.mageSpellsManager.mageManager.addMage(playerObject);
-        savePlayerData(playerObject);
+        savePlayerDataWithoutRemove(playerObject);
         main.mageSpellsManager.manaManager.scheduleManaTask(playerObject);
     }
     public void savePlayerData(PlayerObject playerObject){
@@ -149,6 +149,16 @@ public class PlayerConfig {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+        });
+    }
+    public void savePlayerDataWithoutRemove(PlayerObject playerObject){
+        Bukkit.getScheduler().runTaskAsynchronously(main,() ->{
+            try {
+                formatData(playerObject);
+                playerObject.getPlayerconfig().save(playerObject.getPlayerFile());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
     }
     public void savePlayerDataNOW(PlayerObject playerObject){

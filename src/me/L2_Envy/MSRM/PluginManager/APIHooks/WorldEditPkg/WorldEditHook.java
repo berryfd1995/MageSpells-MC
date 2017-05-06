@@ -40,4 +40,26 @@ public class WorldEditHook {
         }
         return allow;
     }
+    public boolean allowExplosionInRegion(Location location) {
+        boolean allow = false;
+        if (worldEditAPI.worldGuardPlugin != null && worldEditAPI.worldEditPlugin != null) {
+            ApplicableRegionSet set = worldEditAPI.worldGuardPlugin.getRegionManager(location.getWorld()).getApplicableRegions(location);
+            if (set.size() > 0) {
+                ProtectedRegion highestP = null;
+                for (ProtectedRegion p : set) {
+                    if(highestP == null){
+                        highestP = p;
+                    }else if(p.getPriority() > highestP.getPriority()){
+                        highestP = p;
+                    }
+                }
+                if (highestP.getFlag(DefaultFlag.OTHER_EXPLOSION) != StateFlag.State.DENY  ) {
+                    allow = true;
+                }
+            } else {
+                allow = true;
+            }
+        }
+        return allow;
+    }
 }

@@ -123,10 +123,17 @@ public class ConfigClass {
             boolean enableSpellBookLearning = config.getBoolean(path + "EnableSpellBookLearning");
             boolean wandlearning = config.getBoolean(path + "EnableWandLearning");
             boolean enablenodesystem = config.getBoolean(path + "EnableNodeSystem");
+            boolean enablewandbag;
+            if(!config.contains(path + "EnableWandBag")) {
+                config.createSection(path +"EnableWandBag");
+                config.set(path + "EnableWandBag", true);
+            }
+            enablewandbag = config.getBoolean(path + "EnableWandBag");
             main.mageSpellsManager.setNodeSystemEnabled(enablenodesystem);
             main.mageSpellsManager.spellLearningManager.setEnablelearning(enabledlearning);
             main.mageSpellsManager.spellLearningManager.setEnableSpellBookLearning(enableSpellBookLearning);
             main.mageSpellsManager.wandManager.setEnableWandLearning(wandlearning);
+            main.mageSpellsManager.wandBag.setEnabled(enablewandbag);
             boolean usercreatesteam = config.getBoolean("Settings.TeamSettings.UserCreatesTeam");
             main.mageSpellsManager.teamManager.setUsercreatesteam(usercreatesteam);
             //Mana

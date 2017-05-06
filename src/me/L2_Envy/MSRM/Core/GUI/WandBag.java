@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class WandBag {
     private ArrayList<String> playersinwandbag;
     private MageSpellsManager mageSpellsManager;
+    private boolean enabled;
     public WandBag(){
         playersinwandbag = new ArrayList<>();
     }
@@ -29,6 +30,12 @@ public class WandBag {
             player.sendMessage("You are not recoreded as a mage!");
         }
         //Get Player Data
+    }
+    public boolean getEnabled(){
+        return  enabled;
+    }
+    public void setEnabled(boolean enabled){
+        this.enabled = enabled;
     }
     public void closeWandBag(Player player){
         if(playersinwandbag.contains(player.getName())){

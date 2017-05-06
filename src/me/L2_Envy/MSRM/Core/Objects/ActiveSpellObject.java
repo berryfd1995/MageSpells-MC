@@ -3,6 +3,7 @@ package me.L2_Envy.MSRM.Core.Objects;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import org.bukkit.Location;
+import org.bukkit.entity.Evoker;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -32,12 +33,12 @@ public class ActiveSpellObject extends SpellObject {
                 spellObject.getSprayradius(),spellObject.getSpraydamage(),spellObject.getArmorpiercing(),
                 spellObject.getMoneycost(),spellObject.getManacost(),spellObject.getCooldown(),
                 spellObject.getChargetime(),spellObject.getTraveldistance(),spellObject.getSpellSpeed(), spellObject.getRequiredLevelToBind(),
-                spellObject.getRequiredLevelToCast(),spellObject.getRequiredLevelToDrop(),spellObject.isAffectmobs(),
+                spellObject.getRequiredLevelToCast(),spellObject.getRequiredLevelToDrop(),spellObject.getRequiredleveltocraft(),spellObject.isAffectmobs(),
                 spellObject.isAffectself(),spellObject.isAffectenemys(),spellObject.isAffectteammates(),spellObject.getSpellbook(),
                 spellObject.getSpellEffect(),spellObject.getSound(),spellObject.getSoundvolume(),spellObject.getSoundpitch(),
                 spellObject.getParticleObjects(),spellObject.getPotionEffects(),spellObject.isMobdropsenabled(),
                 spellObject.getMobDrops(),spellObject.isItemcostenabled(),spellObject.getItemcost(),
-                spellObject.getCastcommand(), spellObject.getVariables());
+                spellObject.getCastcommand(), spellObject.getVariables(),spellObject.isCraftingenabled(), spellObject.getShapedRecipe());
         this.player = player;
         this.location = location;
         this.initialLoc = location.clone();

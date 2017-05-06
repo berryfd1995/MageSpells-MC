@@ -115,7 +115,7 @@ public class SpellEffectManager {
         return spelleffect;
     }
     public void createExplosion(Location l, float size){
-        if(mageSpellsManager.main.pluginManager.worldEditAPI.allowSpellInRegion(l)){
+        if(mageSpellsManager.main.pluginManager.worldEditAPI.allowExplosionInRegion(l)){
             l.getWorld().createExplosion(l,size);
         }else {
             l.getWorld().createExplosion(l, 0);

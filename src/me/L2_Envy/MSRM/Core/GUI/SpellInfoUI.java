@@ -28,7 +28,7 @@ public class SpellInfoUI {
     private HashMap<String, SpellObject> playersinmenu;
     private static final int[][] layout =
                     {{1,1,1,1,1,1,1,1,1},
-                    {1,0,0,0,2,0,0,0,1},
+                    {1,0,0,0,2,0,0,15,1},
                     {1,0,8,12,3,13,10,0,1},
                     {1,0,9,0,4,0,11,0,1},
                     {1,0,0,5,6,7,0,14,1},
@@ -228,6 +228,45 @@ public class SpellInfoUI {
                             case 14:
                                 contents[s] = mageSpellsManager.main.utils.getItemStack("REDSTONE_BLOCK", "&cBack");
                                 break;
+
+                            case 15:
+                                if(canSee(playerObject, player, spellObject)){
+                                    if(spellObject.isCraftingenabled()) {
+                                        lore = lore + ("&6[1][2][3]/");
+                                        lore = lore + ("&6[4][5][6]/");
+                                        lore = lore + ("&6[7][8][9]/");
+                                        int count = 1;
+                                        for (String sh : spellObject.getShapedRecipe().getShape()) {
+                                            for (int k = 0; k < 3; k++) {
+                                                for (Character c : spellObject.getShapedRecipe().getIngredientMap().keySet()) {
+                                                    if (c.equals(sh.charAt(k))) {
+                                                        ItemStack is = spellObject.getShapedRecipe().getIngredientMap().get(c);
+                                                        if (is != null) {
+                                                            if (is.hasItemMeta()) {
+                                                                if (is.getItemMeta().hasDisplayName()) {
+                                                                    lore = lore + ("&6" + count + ": &b" + is.getItemMeta().getDisplayName() + "/");
+                                                                } else {
+                                                                    lore = lore + ("&6" + count + ": &b" + ItemNames.lookup(is) + "/");
+                                                                }
+                                                            } else {
+                                                                lore = lore + ("&6" + count + ": &b" + ItemNames.lookup(is) + "/");
+                                                            }
+                                                            count++;
+                                                        } else {
+                                                            lore = lore + ("&6" + count + ": &bNothing/");
+                                                            count++;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }else{
+                                        lore = "This spell is uncraftable!";
+                                    }
+                                }else{
+                                    lore = "Unknown";
+                                }
+                                contents[s] = mageSpellsManager.main.utils.getItemStack("WORKBENCH", "&6Crafting Info:", lore);
                         }
                     }
                 }

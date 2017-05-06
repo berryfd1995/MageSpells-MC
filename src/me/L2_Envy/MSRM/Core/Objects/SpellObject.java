@@ -3,6 +3,7 @@ package me.L2_Envy.MSRM.Core.Objects;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class SpellObject {
     private int requiredleveltobind;
     private int requiredleveltocast;
     private int requiredleveltodrop;
+    private int requiredleveltocraft;
     private boolean affectmobs;
     private boolean affectself;
     private boolean affectenemys;
@@ -52,20 +54,22 @@ public class SpellObject {
     private HashMap<EntityType, Double> mobDrops;
     private boolean itemcostenabled;
     private HashMap<ItemStack, Integer> itemcost;
-
     private String castcommand;
     private ArrayList<String> variables;
+
+    private ShapedRecipe shapedRecipe;
+    private boolean craftingenabled;
 
     public SpellObject(String name, String displayname, String spellnode, String lore,
                        boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled,
                        int auratime, int auraradius, double auradamage, boolean sprayenabled, int sprayradius,
                        double spraydamage, int armorpiercing, int moneycost, int manacost, int cooldown, int chargetime,
                        int traveldistance,int spellspeed, int requiredleveltobind, int requiredleveltocast, int requiredleveltodrop,
-                       boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates,
+                       int requiredleveltocraft,boolean affectmobs, boolean affectself, boolean affectenemys, boolean affectteammates,
                        ItemStack spellbook, String spellEffect, Sound sound, float soundvolume, float soundpitch,
                        ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects,
                        boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled,
-                       HashMap<ItemStack, Integer> itemcost, String castcommand, ArrayList<String> variables) {
+                       HashMap<ItemStack, Integer> itemcost, String castcommand, ArrayList<String> variables, boolean craftingenabled, ShapedRecipe shapedRecipe) {
         this.name = name;
         this.displayname = displayname;
         this.spellnode = spellnode;
@@ -89,6 +93,7 @@ public class SpellObject {
         this.requiredleveltobind = requiredleveltobind;
         this.requiredleveltocast = requiredleveltocast;
         this.requiredleveltodrop = requiredleveltodrop;
+        this.requiredleveltocraft = requiredleveltocraft;
         this.affectmobs = affectmobs;
         this.affectself = affectself;
         this.affectenemys = affectenemys;
@@ -107,6 +112,8 @@ public class SpellObject {
         this.variables = variables;
         this.castcommand = castcommand;
         this.spellspeed = spellspeed;
+        this.shapedRecipe = shapedRecipe;
+        this.craftingenabled = craftingenabled;
     }
 
     public String getName() {
@@ -197,6 +204,9 @@ public class SpellObject {
 
     public int getRequiredLevelToDrop() {
         return requiredleveltodrop;
+    }
+    public int getRequiredleveltocraft(){
+        return requiredleveltocraft;
     }
 
     public boolean isAffectmobs() {
@@ -294,7 +304,12 @@ public class SpellObject {
     public void setBoltdamage(double boltdamage) {
         this.boltdamage = boltdamage;
     }
-
+    public boolean isCraftingenabled(){
+        return craftingenabled;
+    }
+    public ShapedRecipe getShapedRecipe(){
+        return shapedRecipe;
+    }
     public static class CompId implements Comparator<SpellObject> {
         @Override
         public int compare(SpellObject arg0, SpellObject arg1) {

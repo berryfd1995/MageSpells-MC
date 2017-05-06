@@ -41,6 +41,13 @@ public class WorldEditAPI {
             return true;
         }
     }
+    public boolean allowExplosionInRegion(Location location){
+        if(worldEditHook != null) {
+            return  worldEditHook.allowSpellInRegion(location) && worldEditHook.allowExplosionInRegion(location);
+        }else{
+            return true;
+        }
+    }
     private WorldEditPlugin getWorldEdit() {
         Plugin plugin = pluginManager.main.getServer().getPluginManager().getPlugin("WorldEdit");
         if (plugin == null || !(plugin instanceof WorldEditPlugin)) {

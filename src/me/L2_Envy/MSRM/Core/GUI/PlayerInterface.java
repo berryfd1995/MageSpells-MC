@@ -36,7 +36,9 @@ public class PlayerInterface {
         Inventory inv = Bukkit.createInventory(null,9,ChatColor.DARK_PURPLE +"Menu");
         inv.setItem(2, mageSpellsManager.main.utils.getItemStack("STICK", ChatColor.RED +"Wand Menu"));
         inv.setItem(3, mageSpellsManager.main.utils.getItemStack("BLAZE_POWDER", ChatColor.RED +"Spell Menu"));
-        inv.setItem(4, mageSpellsManager.main.utils.getItemStack("CHEST", ChatColor.GOLD +"Wand Bag"));
+        if(mageSpellsManager.wandBag.getEnabled()) {
+            inv.setItem(4, mageSpellsManager.main.utils.getItemStack("CHEST", ChatColor.GOLD + "Wand Bag"));
+        }
         inv.setItem(5, mageSpellsManager.main.utils.getItemStack("PAPER", ChatColor.BLUE +"Mage Stats"));
         inv.setItem(6, mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", ChatColor.BLUE +"Binding Menu"));
         inv.setItem(7, mageSpellsManager.main.utils.getItemStack("BARRIER"/*"BREWING_STAND_ITEM"*/, ChatColor.GREEN + "COMING SOON"));

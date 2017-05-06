@@ -48,6 +48,7 @@ Settings:
         #and magespells.wand.<node> to use wands. AS WELL AS for wands and spells to be bound. the wand must have the spell node in its
         #compatibility list.
         EnableNodeSystem: false
+        EnableWandBag: true
 
     TeamSettings:
         #Enabling this means users can create their own teams.

@@ -243,8 +243,10 @@ public class InventoryListener implements Listener{
                             spellUI.openSpellUI(player);
                             break;
                         case 4:
-                            playerInterface.closePlayerInterface(player);
-                            wandBag.openWandBag(player);
+                            if(wandBag.getEnabled()) {
+                                playerInterface.closePlayerInterface(player);
+                                wandBag.openWandBag(player);
+                            }
                             break;
                         case 5:
                             playerInterface.closePlayerInterface(player);

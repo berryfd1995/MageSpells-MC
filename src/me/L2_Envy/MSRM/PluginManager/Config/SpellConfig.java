@@ -6,12 +6,14 @@ import me.L2_Envy.MSRM.Core.Objects.ParticleObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Spells.SpellManager;
 import me.L2_Envy.MSRM.Main;
+import me.L2_Envy.MSRM.Utils;
 import org.apache.commons.io.FilenameUtils;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -224,19 +226,38 @@ public class SpellConfig {
             for(String var : config.getConfigurationSection("Variables.").getKeys(false)){
                 variables.add(config.getString("Variables." + var));
             }
+            if(!config.contains("Crafting")){
+                config.createSection("Crafting");
+                config.createSection("Crafting.Enable");
+                config.createSection("Crafting.Recipe");
+                config.createSection("Crafting.RequiredLevelToCraft");
+                config.set("Crafting.Enable", false);
+                config.set("Crafting.Recipe", "AIR,REDSTONE,AIR,REDSTONE,NETHER_STAR,REDSTONE,AIR,REDSTONE,AIR");
+                config.set("Crafting.RequiredLevelToCraft", 1);
+            }
+            boolean craftingenabled = config.getBoolean("Crafting.Enable");
+            int requiredleveltocraft = config.getInt("Crafting.RequiredLevelToCraft");
+            ShapedRecipe shapedRecipe = null;
+            if(craftingenabled) {
+                String spellrecipe = config.getString("Crafting.Recipe");
+                String[] materials = spellrecipe.split(",");
+                shapedRecipe = main.utils.loadRecipie(materials, spellbook);
+            }
             try {
                 config.save(file);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+
+
             return new SpellObject(spellName,displayname,spellnode,lore,boltenabled,boltradius,boltdamage,
                     auraenabled,auratime,auraradius,auradamage,sprayenabled,sprayradius,spraydamage,
                     armorpiercing,moneycost,manacost,cooldown,chargetime,traveldistance,spellspeed,
-                    requiredleveltobind,requiredleveltocast,requiredleveltodrop,
+                    requiredleveltobind,requiredleveltocast,requiredleveltodrop,requiredleveltocraft,
                     affectsmobs,affectself,affectenemy,affectteammates,
                     spellbook,spelleffectname,sound,soundvolume,soundpitch,
                     particleObjects,potionEffects,mobdropsenabled,mobDrops,
-                    itemcostsenabled,itemcost, castcommand, variables);
+                    itemcostsenabled,itemcost, castcommand, variables, craftingenabled,shapedRecipe);
             /**
             int count = 0;
             double damage = config.getDouble(path + ".Damage");

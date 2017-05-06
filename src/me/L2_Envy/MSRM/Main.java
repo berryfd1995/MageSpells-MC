@@ -99,15 +99,23 @@ public class Main extends JavaPlugin {
      * Work on API 10%
      * Work on Enchanting 0%
      * Work on Alchemy 15%
+     * Craftable Spells - Done
+     * Fix mage creation/application -Done
+     * Fix Explosion for OTHER_Explosion flag
+     * Disable Wand Bag - Done
+     * Cast Cast Command as OP
+     * On-Hit command
+     * admin control feature
+     * Fix enabled enable
+     * Fix Sprial
+     *
      * TODO: Add more options for custom item
-     * TODO: Command will be run when spell is cast
      * TODO: Particle effects changes
-     * TODO: Fix menu showing list of items. It repeats and skips. FIXED
-     * TODO: MENU Duplicating on reload? Test
-     * TODO: Block iterator instead of ray casting
+     * TODO: Block iterator instead of ray casting -- Maybe
      * TODO: API?
      * TODO: Look over leveling and see if there should be changes
      * TODO: Custom Items menu.
+     * TODO: Cast spells through a command -- Maybe
      *
      */
 }
