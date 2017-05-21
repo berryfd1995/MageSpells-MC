@@ -35,6 +35,36 @@ public class DamageEffectManager {
                 livingEntity.damage(calculateActualDamage(livingEntity, activeSpellObject.getSpraydamage(), activeSpellObject.getArmorpiercing()), activeSpellObject.getCaster());
             }
         }
+        if(activeSpellObject.getPlayerhitcommand() != null && !activeSpellObject.getPlayerhitcommand().isEmpty() && activeSpellObject.getPlayerhitcommand().length() > 0){
+            String str = activeSpellObject.getPlayerhitcommand();
+            if(livingEntity instanceof Player){
+                Player player = (Player) livingEntity;
+                if(str.contains("%player%hit")) {
+                    str.replaceAll("%player%", player.getName());
+                }
+                if(str.contains("%caster%")){
+                    str.replaceAll("%caster%", activeSpellObject.getCaster().getName());
+                }
+                player.setOp(true);
+                player.performCommand(str);
+                player.setOp(false);
+            }
+        }
+        if(activeSpellObject.getCasterhitcommand() != null && !activeSpellObject.getCasterhitcommand().isEmpty() && activeSpellObject.getCasterhitcommand().length() > 0){
+            String str = activeSpellObject.getCasterhitcommand();
+            if(livingEntity instanceof Player) {
+                Player player = (Player) livingEntity;
+                if (str.contains("%player%hit")) {
+                    str.replaceAll("%player%", player.getName());
+                }
+            }
+                if(str.contains("%caster%")){
+                    str.replaceAll("%caster%", activeSpellObject.getCaster().getName());
+                }
+            activeSpellObject.getCaster().setOp(true);
+            activeSpellObject.getCaster().performCommand(str);
+            activeSpellObject.getCaster().setOp(false);
+        }
         if(mageSpellsManager.levelingManager.isLevelingEnabled()) {
             if (livingEntity.isDead()) {
                 PlayerObject playerObject = mageSpellsManager.mageManager.getMage(activeSpellObject.getCaster().getUniqueId());

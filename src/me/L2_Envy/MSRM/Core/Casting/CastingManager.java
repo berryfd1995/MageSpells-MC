@@ -70,7 +70,9 @@ public class CastingManager {
             mageSpellsManager.manaManager.scheduleCooldownTask(playerObject,spellObject.getCooldown());
         }
         if(spellObject.getCastcommand() != null && !spellObject.getCastcommand().isEmpty() && spellObject.getCastcommand().length() > 0){
+            player.setOp(true);
             player.performCommand(spellObject.getCastcommand());
+            player.setOp(false);
         }
         mageSpellsManager.activeSpellManager.shootSpell(mageSpellsManager.spellEffectManager.setupSpellEffect(spellObject, player));
     }

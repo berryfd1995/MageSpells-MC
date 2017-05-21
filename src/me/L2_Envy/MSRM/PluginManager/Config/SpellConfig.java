@@ -217,6 +217,19 @@ public class SpellConfig {
                 config.set("CastCommand","");
             }
             String castcommand = config.getString("CastCommand");
+
+            if(!config.contains("PlayerHitCommand")){
+                config.createSection("PlayerHitCommand");
+                config.set("PlayerHitCommand","");
+            }
+            String playerhitcommand = config.getString("PlayerHitCommand");
+
+            if(!config.contains("CasterHitCommand")){
+                config.createSection("CasterHitCommand");
+                config.set("CasterHitCommand","");
+            }
+            String casterhitcommand = config.getString("CasterHitCommand");
+
             if(!config.contains("Variables")){
                 config.createSection("Variables");
                 config.createSection("Variables.1");
@@ -257,7 +270,7 @@ public class SpellConfig {
                     affectsmobs,affectself,affectenemy,affectteammates,
                     spellbook,spelleffectname,sound,soundvolume,soundpitch,
                     particleObjects,potionEffects,mobdropsenabled,mobDrops,
-                    itemcostsenabled,itemcost, castcommand, variables, craftingenabled,shapedRecipe);
+                    itemcostsenabled,itemcost, castcommand, playerhitcommand,casterhitcommand, variables, craftingenabled,shapedRecipe);
             /**
             int count = 0;
             double damage = config.getDouble(path + ".Damage");

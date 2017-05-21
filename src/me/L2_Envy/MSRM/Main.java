@@ -103,8 +103,8 @@ public class Main extends JavaPlugin {
      * Fix mage creation/application -Done
      * Fix Explosion for OTHER_Explosion flag
      * Disable Wand Bag - Done
-     * Cast Cast Command as OP
-     * On-Hit command
+     * Cast Cast Command as OP - DONE
+     * On-Hit command - DONE
      * admin control feature
      * Fix enabled enable
      * Fix Sprial
