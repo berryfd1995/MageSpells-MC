@@ -4,6 +4,8 @@ import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.TeamObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
+import me.L2_Envy.MSRM.GUI.Interfaces.MainMenu;
+import me.L2_Envy.MSRM.Main;
 import me.L2_Envy.MSRM.PluginManager.PluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -73,6 +75,7 @@ public class CommandMenu implements CommandExecutor{
                                                 break;
                                             case "menu":
                                                 pluginManager.main.mageSpellsManager.playerInterface.openPlayerInterface(player);
+                                                //Main.getMageSpellsManager().guiManager.openUserInterface(player, new MainMenu(player));
                                                 break;
                                             case "stats":
                                                 pluginManager.main.mageSpellsManager.mageStats.openMageStats(player);

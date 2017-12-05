@@ -25,7 +25,6 @@ public class PluginManager {
     public SpellConfig spellConfig;
     public TeamConfig teamConfig;
     public WandConfig wandConfig;
-    public PotionConfig potionConfig;
     public ExampleConfig exampleConfig;
     public Notes notes;
     public CustomItemConfig customItemConfig;
@@ -41,7 +40,6 @@ public class PluginManager {
         spellConfig = new SpellConfig();
         teamConfig = new TeamConfig();
         wandConfig = new WandConfig();
-        potionConfig = new PotionConfig();
         notes = new Notes();
         exampleConfig = new ExampleConfig();
         customItemConfig = new CustomItemConfig();
@@ -60,7 +58,6 @@ public class PluginManager {
         spellConfig.link(main);
         teamConfig.link(main);
         wandConfig.link(main);
-        potionConfig.link(main);
         notes.link(main);
         exampleConfig.link(main);
         customItemConfig.link(main);
@@ -75,7 +72,6 @@ public class PluginManager {
             playerConfig.checkFolder();
             spellConfig.loadSpellConfigs();
             wandConfig.loadWandConfigs();
-            potionConfig.loadPotionConfigs();
             teamConfig.loadTeamConfigs();
             notes.exportNotes();
             exampleConfig.exportExamples();

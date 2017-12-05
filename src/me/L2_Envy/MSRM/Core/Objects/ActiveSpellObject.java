@@ -38,7 +38,8 @@ public class ActiveSpellObject extends SpellObject {
                 spellObject.getSpellEffect(),spellObject.getSound(),spellObject.getSoundvolume(),spellObject.getSoundpitch(),
                 spellObject.getParticleObjects(),spellObject.getPotionEffects(),spellObject.isMobdropsenabled(),
                 spellObject.getMobDrops(),spellObject.isItemcostenabled(),spellObject.getItemcost(),
-                spellObject.getCastcommand(),spellObject.getPlayerhitcommand(), spellObject.getCasterhitcommand(),spellObject.getVariables(),spellObject.isCraftingenabled(), spellObject.getShapedRecipe());
+                spellObject.getCastcommand(),spellObject.getPlayerhitcommand(), spellObject.getCasterhitcommand(),spellObject.getVariables(),
+                spellObject.isCraftingenabled(), spellObject.getShapedRecipe(), spellObject.getMatrix());
         this.player = player;
         this.location = location;
         this.initialLoc = location.clone();

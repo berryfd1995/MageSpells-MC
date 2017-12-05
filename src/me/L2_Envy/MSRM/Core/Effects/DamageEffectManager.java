@@ -39,8 +39,8 @@ public class DamageEffectManager {
             String str = activeSpellObject.getPlayerhitcommand();
             if(livingEntity instanceof Player){
                 Player player = (Player) livingEntity;
-                if(str.contains("%player%hit")) {
-                    str.replaceAll("%player%", player.getName());
+                if(str.contains("%playerhit%")) {
+                    str.replaceAll("%playerhit%", player.getName());
                 }
                 if(str.contains("%caster%")){
                     str.replaceAll("%caster%", activeSpellObject.getCaster().getName());
@@ -54,8 +54,8 @@ public class DamageEffectManager {
             String str = activeSpellObject.getCasterhitcommand();
             if(livingEntity instanceof Player) {
                 Player player = (Player) livingEntity;
-                if (str.contains("%player%hit")) {
-                    str.replaceAll("%player%", player.getName());
+                if (str.contains("%playerhit%")) {
+                    str.replaceAll("%playerhit%", player.getName());
                 }
             }
                 if(str.contains("%caster%")){

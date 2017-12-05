@@ -18,6 +18,7 @@ import me.L2_Envy.MSRM.Core.Spells.SpellContactManager;
 import me.L2_Envy.MSRM.Core.Spells.SpellManager;
 import me.L2_Envy.MSRM.Core.Teams.TeamManager;
 import me.L2_Envy.MSRM.Core.Wands.WandManager;
+import me.L2_Envy.MSRM.GUI.GUIManager;
 import me.L2_Envy.MSRM.Main;
 
 /**
@@ -46,10 +47,12 @@ public class MageSpellsManager {
     public SpellBookManager spellBookManager;
     public ActiveSpellManager activeSpellManager;
     public SpellContactManager spellContactManager;
+    public GUIManager guiManager;
     public SpellManager spellManager;
     public TeamManager teamManager;
     public WandManager wandManager;
     private boolean nodesystemenabled;
+    private boolean wandbagenabled;
     public MageSpellsManager(){
         bindingManager = new BindingManager();
         castingManager = new CastingManager();
@@ -76,6 +79,7 @@ public class MageSpellsManager {
         spellManager = new SpellManager();
         teamManager = new TeamManager();
         wandManager = new WandManager();
+        guiManager = new GUIManager();
     }
     public void linkAll(Main main){
         this.main = main;
@@ -114,6 +118,12 @@ public class MageSpellsManager {
     }
     public void setNodeSystemEnabled(boolean enabled){
         this.nodesystemenabled = enabled;
+    }
+    public boolean isWandBagEnabled(){
+        return wandbagenabled;
+    }
+    public void setWandbagenabled(boolean enabled){
+        this.wandbagenabled = enabled;
     }
 
 }

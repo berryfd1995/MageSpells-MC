@@ -1,7 +1,5 @@
 package me.L2_Envy.MSRM.Core.Spells;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-import it.unimi.dsi.fastutil.Hash;
 import me.L2_Envy.MSRM.Core.Interfaces.SpellEffect;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.ActiveSpellObject;
@@ -55,6 +53,7 @@ public class SpellContactManager {
                             mageSpellsManager.damageEffectManager.doDamage(spellEffect.getActiveSpell(), livingEntity, true, false, false);
                         }
                     }
+                    System.out.println("contact");
                     initiateSpellEndSeq(spellEffect);
                 }
             }

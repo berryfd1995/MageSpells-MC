@@ -1,6 +1,5 @@
 package me.L2_Envy.MSRM.Core.GUI;
 
-import it.unimi.dsi.fastutil.Hash;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;

@@ -59,10 +59,10 @@ public class SpellObject {
 
     private ShapedRecipe shapedRecipe;
     private boolean craftingenabled;
+    private ItemStack[] matrix;
 
     private String playerhitcommand;
     private String casterhitcommand;
-
     public SpellObject(String name, String displayname, String spellnode, String lore,
                        boolean boltenabled, int boltradius, double boltdamage, boolean auraenabled,
                        int auratime, int auraradius, double auradamage, boolean sprayenabled, int sprayradius,
@@ -72,7 +72,8 @@ public class SpellObject {
                        ItemStack spellbook, String spellEffect, Sound sound, float soundvolume, float soundpitch,
                        ArrayList<ParticleObject> particleObjects, ArrayList<PotionEffect> potionEffects,
                        boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, boolean itemcostenabled,
-                       HashMap<ItemStack, Integer> itemcost, String castcommand,String playerhitcommand,String casterhitcommand, ArrayList<String> variables, boolean craftingenabled, ShapedRecipe shapedRecipe) {
+                       HashMap<ItemStack, Integer> itemcost, String castcommand,String playerhitcommand,String casterhitcommand,
+                       ArrayList<String> variables, boolean craftingenabled, ShapedRecipe shapedRecipe, ItemStack[] matrix) {
         this.name = name;
         this.displayname = displayname;
         this.spellnode = spellnode;
@@ -117,10 +118,13 @@ public class SpellObject {
         this.spellspeed = spellspeed;
         this.shapedRecipe = shapedRecipe;
         this.craftingenabled = craftingenabled;
+        this.matrix = matrix;
         this.playerhitcommand = playerhitcommand;
         this.casterhitcommand = casterhitcommand;
     }
-
+    public ItemStack[] getMatrix(){
+        return matrix;
+    }
     public String getPlayerhitcommand(){
         return playerhitcommand;
     }

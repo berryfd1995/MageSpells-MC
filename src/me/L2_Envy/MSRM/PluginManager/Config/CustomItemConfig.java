@@ -95,7 +95,12 @@ public class CustomItemConfig {
             int requiredlevel = config.getInt("RequiredLevel");
             ItemStack itemStack = main.utils.getItemStack(material,displayname,lore);
             ShapedRecipe shapedRecipe = main.utils.loadRecipie(recipearray, itemStack);
-            return new CustomItemObject(itemname,requiredlevel,itemStack,shapedRecipe);
+            ItemStack[] matrix = new ItemStack[9];
+            for(int i = 0; i < 9; i++){
+                matrix[i] = main.utils.getItemStack(recipearray[i]);
+            }
+
+            return new CustomItemObject(itemname,requiredlevel,itemStack,shapedRecipe, matrix);
         }catch(Exception ex) {
             ex.printStackTrace();
         }

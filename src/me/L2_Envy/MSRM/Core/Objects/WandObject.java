@@ -26,7 +26,10 @@ public class WandObject{
     private ShapedRecipe shapedRecipe;
     private boolean mobdropsenabled;
     private HashMap<EntityType, Double> mobDrops;
-    public WandObject(String wandname, String displayname, int requiredleveltocraft, int requiredleveltouse, int requiredleveltobind, ItemStack wandItemStack, ShapedRecipe shapedRecipe, boolean mobdropsenabled, HashMap<EntityType, Double> mobDrops, String wandnode, ArrayList<String> compatiblespells){
+    private ItemStack[] matrix;
+    public WandObject(String wandname, String displayname, int requiredleveltocraft, int requiredleveltouse,
+                      int requiredleveltobind, ItemStack wandItemStack, ShapedRecipe shapedRecipe, boolean mobdropsenabled,
+                      HashMap<EntityType, Double> mobDrops, String wandnode, ArrayList<String> compatiblespells, ItemStack[] matrix){
         this.wandname = wandname;
         this.displayname = displayname;
         this.requiredleveltocraft = requiredleveltocraft;
@@ -38,6 +41,10 @@ public class WandObject{
         this.mobDrops = mobDrops;
         this.wandnode = wandnode;
         this.compatiblespellnodes = compatiblespells;
+        this.matrix = matrix;
+    }
+    public ItemStack[] getMatrix(){
+        return matrix;
     }
     public boolean isMobdropsenabled(){
         return mobdropsenabled;

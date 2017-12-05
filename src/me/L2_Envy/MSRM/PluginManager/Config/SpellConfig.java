@@ -251,10 +251,14 @@ public class SpellConfig {
             boolean craftingenabled = config.getBoolean("Crafting.Enable");
             int requiredleveltocraft = config.getInt("Crafting.RequiredLevelToCraft");
             ShapedRecipe shapedRecipe = null;
+            ItemStack[] matrix = new ItemStack[9];
             if(craftingenabled) {
                 String spellrecipe = config.getString("Crafting.Recipe");
                 String[] materials = spellrecipe.split(",");
                 shapedRecipe = main.utils.loadRecipie(materials, spellbook);
+                for(int i = 0; i < 9; i++){
+                    matrix[i] = main.utils.getItemStack(materials[i]);
+                }
             }
             try {
                 config.save(file);
@@ -270,7 +274,7 @@ public class SpellConfig {
                     affectsmobs,affectself,affectenemy,affectteammates,
                     spellbook,spelleffectname,sound,soundvolume,soundpitch,
                     particleObjects,potionEffects,mobdropsenabled,mobDrops,
-                    itemcostsenabled,itemcost, castcommand, playerhitcommand,casterhitcommand, variables, craftingenabled,shapedRecipe);
+                    itemcostsenabled,itemcost, castcommand, playerhitcommand,casterhitcommand, variables, craftingenabled,shapedRecipe, matrix);
             /**
             int count = 0;
             double damage = config.getDouble(path + ".Damage");

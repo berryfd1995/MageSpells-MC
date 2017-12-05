@@ -11,17 +11,21 @@ public class CustomItemObject {
     private ItemStack customitem;
     private int requiredlevel;
     private ShapedRecipe shapedRecipe;
-    public CustomItemObject(String itemname, int requiredlevel, ItemStack customitem, ShapedRecipe shapedRecipe){
+    private ItemStack[] matrix;
+    public CustomItemObject(String itemname, int requiredlevel, ItemStack customitem, ShapedRecipe shapedRecipe, ItemStack[] matrix){
         this.itemname = itemname;
         this.requiredlevel = requiredlevel;
         this.customitem = customitem;
         this.shapedRecipe = shapedRecipe;
+        this.matrix = matrix;
     }
 
     public int getRequiredlevel() {
         return requiredlevel;
     }
-
+    public ItemStack[] getMatrix(){
+        return matrix;
+    }
     public ItemStack getCustomitem() {
         return customitem;
     }

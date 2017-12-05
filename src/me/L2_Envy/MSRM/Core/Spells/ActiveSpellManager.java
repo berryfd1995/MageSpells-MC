@@ -96,7 +96,7 @@ public class ActiveSpellManager {
         }
         return false;
     }
-    public boolean removeNearbySpells(SpellEffect spell, int radius) {
+   /* public boolean removeNearbySpells(SpellEffect spell, int radius) {
         for (SpellEffect otherSpell : ((ArrayList<SpellEffect>) activeSpellObjects.clone())) {
             //if (otherSpell.getActiveSpell().getCaster() != spell.getActiveSpell().getCaster()) {
                 if (otherSpell.getActiveSpell().getLocation().distance(spell.getActiveSpell().getLocation())-radius< 1 &&
@@ -110,7 +110,7 @@ public class ActiveSpellManager {
            //}
         }
         return false;
-    }
+    }*/
     public void removeSpell(SpellEffect spellEffect) {
         Bukkit.getScheduler().cancelTask(spellEffect.getActiveSpell().getTimerTask());
         spellEffect.spellEndingSeq();

@@ -1,10 +1,6 @@
-package me.L2_Envy.MSRM.Alchemy.Handlers;
+package me.L2_Envy.MSRM.GUI;
 
-import me.L2_Envy.MSRM.Alchemy.AlchemyManager;
-import me.L2_Envy.MSRM.Alchemy.GUI.BrewingMenu;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
-import me.L2_Envy.MSRM.Core.Objects.SpellObject;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -14,104 +10,44 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
 
-import java.awt.peer.LabelPeer;
+import java.util.List;
 
-/**
- * Created by Daniel on 7/28/2016.
- */
-public class MenuListener implements Listener {
-    private AlchemyManager alchemyManager;
-    private BrewingMenu brewingMenu;
-    private MageSpellsManager mageSpellsManager;
-    public MenuListener(AlchemyManager alchemyManager){
-        this.alchemyManager = alchemyManager;
-        this.brewingMenu = alchemyManager.brewingMenu;
-        this.mageSpellsManager = alchemyManager.main.mageSpellsManager;
+public class GUIHandler implements Listener{
+    private GUIManager guiManager;
+    public GUIHandler(MageSpellsManager mageSpellsManager){
+        this.guiManager = mageSpellsManager.guiManager;
     }
     @EventHandler
     public void playerQuit(PlayerQuitEvent event){
-        if(brewingMenu.inBrewingMenu(event.getPlayer())){
-            brewingMenu.closeBrewingMenu(event.getPlayer());
+        if(guiManager.inInterface(event.getPlayer())){
+            guiManager.removeFromMap(event.getPlayer());
         }
     }
     @EventHandler
-    public void selectMenu(InventoryClickEvent event){
-        if(event.getWhoClicked() instanceof Player) {
+    public void select(InventoryClickEvent event) {
+        if (event.getWhoClicked() instanceof Player) {
             Player player = (Player) event.getWhoClicked();
-            if(alchemyManager.main.mageSpellsManager.mageManager.isMage(player)) {
-                if (brewingMenu.inBrewingMenu(player)){
-                    int slot = event.getRawSlot();
-                    switch (slot){
-                        case 11:
-                            break;
-                        case 15:
-                            break;
-                        case 40: // result
-                            if(event.getCursor() == null ||event.getCursor().getType() == Material.AIR|| event.getCursor().getType() == Material.GLASS_BOTTLE ||
-                                    event.getCursor().getType() == Material.POTION || event.getCursor().getType() == Material.SPLASH_POTION
-                                    || event.getCursor().getType() == Material.LINGERING_POTION){
-
-                            }else{
-                                checkAction(event,event.getAction());
-                            }
-                            break;
-                        case 13://brew
-                            if(alchemyManager.canCombine(event.getInventory().getItem(11), event.getInventory().getItem(15), event.getInventory().getItem(40))){
-                                //combine duration
-                                alchemyManager.combineItems(event.getInventory().getItem(11), event.getInventory().getItem(15), event.getInventory().getItem(40));
-                            }
-                            break;
-                        default:
-                            if(slot >=54 && slot <= 89) {
-
-                            }else{
-                                checkAction(event, event.getAction());
-                            }
-                    }
-                   /* checkAction(event, event.getAction());
-                    if (event.getCurrentItem() != null && event.getCursor() != null) {
-                        event.setCancelled(true);
-                    }*/
-                }
-                if (mageSpellsManager.playerInterface.inPlayerInterface(player)) {
-                    int slot = event.getSlot();
-                    switch (slot) {
-                        /*case 7:
-                            mageSpellsManager.playerInterface.closePlayerInterface(player);
-                            brewingMenu.openBrewingMenu(player);
-                            break;*/
-                        default:
-                            break;
-                    }
+                int slot = event.getSlot();
+                if(guiManager.inInterface(player)) {
+                    guiManager.selectSlot(player, slot);
                     event.setCancelled(true);
                 }
-            }
         }
+    }
 
-    }
     @EventHandler
-    public void otherOption(InventoryDragEvent event){
-        Player player = (Player) event.getWhoClicked();
-        if(brewingMenu.inBrewingMenu(player)){
-            event.setCancelled(true);
+    public void exitInterface(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
+        if (guiManager.inInterface(player)) {
+            guiManager.removeFromMap(player);
         }
     }
     @EventHandler
-    public void exitInterface(InventoryCloseEvent event){
-        Player player =(Player) event.getPlayer();
-        if(brewingMenu.inBrewingMenu(player)){
-            if(player.getOpenInventory().getItem(11) != null){
-                player.getInventory().addItem(player.getOpenInventory().getItem(11));
-            }
-            if(player.getOpenInventory().getItem(15) != null){
-                player.getInventory().addItem(player.getOpenInventory().getItem(15));
-            }
-            if(player.getOpenInventory().getItem(40) != null){
-                player.getInventory().addItem(player.getOpenInventory().getItem(40));
-            }
-            brewingMenu.closeBrewingMenu(player);
+    public void otherOption(InventoryDragEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        if (guiManager.inInterface(player)) {
+            event.setCancelled(true);
         }
     }
     private void checkAction(InventoryClickEvent event, InventoryAction action) {

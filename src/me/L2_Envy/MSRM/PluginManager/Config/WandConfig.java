@@ -101,6 +101,10 @@ public class WandConfig {
             ItemStack wand = main.utils.getItemStack(wandtype, displayname);
             String[] materials = wandrecipe.split(",");
             ShapedRecipe shapedRecipe = main.utils.loadRecipie(materials, wand);
+            ItemStack[] matrix = new ItemStack[9];
+            for(int i = 0; i < 9; i++){
+                matrix[i] = main.utils.getItemStack(materials[i]);
+            }
             boolean mobdropsenabled = config.getBoolean("MobDrops.Settings.Enable");
             HashMap<EntityType, Double> mobDrops = new HashMap<>();
             if(mobdropsenabled){
@@ -122,7 +126,8 @@ public class WandConfig {
             }
             String wandnode = config.getString("WandNode");
             ArrayList<String> compatiblespells = (ArrayList<String>)config.getStringList("CompatibleSpellNodeList");
-            return new WandObject(wandName,displayname,requiredleveltocraft,requiredleveltouse,requiredleveltobind,wand, shapedRecipe,mobdropsenabled, mobDrops, wandnode, compatiblespells);
+            return new WandObject(wandName,displayname,requiredleveltocraft,requiredleveltouse,requiredleveltobind,
+                    wand, shapedRecipe,mobdropsenabled, mobDrops, wandnode, compatiblespells, matrix);
         }catch(Exception ex) {
             return null;
         }

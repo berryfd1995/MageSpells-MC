@@ -1,10 +1,9 @@
 package me.L2_Envy.MSRM;
 
-import me.L2_Envy.MSRM.Alchemy.AlchemyManager;
-import me.L2_Envy.MSRM.Alchemy.Handlers.MenuListener;
 import me.L2_Envy.MSRM.Core.Handlers.*;
 import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
+import me.L2_Envy.MSRM.GUI.GUIHandler;
 import me.L2_Envy.MSRM.PluginManager.PluginManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,33 +17,28 @@ import java.util.logging.Logger;
  */
 public class Main extends JavaPlugin {
     public Logger logger = getLogger();
-    public MageSpellsManager mageSpellsManager;
-    public PluginManager pluginManager;
-    public AlchemyManager alchemyManager;
+    public static MageSpellsManager mageSpellsManager;
+    public static PluginManager pluginManager;
     public Utils utils;
-    public MenuListener menuListener;
     public CastingListener castingListener;
     public CraftingListener craftingListener;
-    public EnchantingListener enchantingListener;
     public EntityListener entityListener;
     public InventoryListener inventoryListener;
     public void onEnable(){
         saveDefaultConfig();
         mageSpellsManager = new MageSpellsManager();
         pluginManager = new PluginManager();
-        alchemyManager = new AlchemyManager();
 
         utils = new Utils(this);
         logger.info("Initilizing MageSpells_Remastered");
         pluginManager.linkAll(this);
         mageSpellsManager.linkAll(this);
-        alchemyManager.linkAll(this);
         if(!pluginManager.InitilizePlugin()){
             Bukkit.getPluginManager().disablePlugin(this);
         }else{
             mageSpellsManager.InitilizePlugin();
-            registerEvents(this, new MenuListener(alchemyManager), new CastingListener(mageSpellsManager), new CraftingListener(mageSpellsManager),
-                    new EntityListener(mageSpellsManager), new EnchantingListener(mageSpellsManager), new InventoryListener(mageSpellsManager), new PlayerHandler(mageSpellsManager));
+            registerEvents(this, new GUIHandler(mageSpellsManager), new CastingListener(mageSpellsManager), new CraftingListener(mageSpellsManager),
+                   new EntityListener(mageSpellsManager), new InventoryListener(mageSpellsManager), new PlayerHandler(mageSpellsManager));
             for(Player player : Bukkit.getOnlinePlayers()){
                 if(player.hasPermission("magespells.mage")) {
                     PlayerObject playerObject = pluginManager.playerConfig.loadPlayerData(player.getUniqueId());
@@ -68,7 +62,12 @@ public class Main extends JavaPlugin {
             Bukkit.getServer().getPluginManager().registerEvents(listener, plugin);
         }
     }
-
+    public static MageSpellsManager getMageSpellsManager(){
+        return mageSpellsManager;
+    }
+    public static PluginManager getPluginManager(){
+        return pluginManager;
+    }
     /**TODO: Create File structure
      * On startup Create folders-- export files 100%
      * Load all configs 100% -Messages
@@ -105,9 +104,10 @@ public class Main extends JavaPlugin {
      * Disable Wand Bag - Done
      * Cast Cast Command as OP - DONE
      * On-Hit command - DONE
-     * admin control feature
+     * Crafting issue - DONE
+     * admin control feature - Later
      * Fix enabled enable
-     * Fix Sprial
+     * Fix Sprial - Found issue, cant resolve --???? WHY THE FUCK NOT
      *
      * TODO: Add more options for custom item
      * TODO: Particle effects changes

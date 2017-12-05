@@ -54,12 +54,14 @@ public class Spiral implements SpellEffect{
             }
             double angleportion = ((360/(1+spirals))*PI)/180;
             for (int i = 1; i < spirals+1; i++) {
-                Spiral spellEffect = new Spiral();
-                spellEffect.setStartingAngle(angleportion*i);
-                spellEffect.setActiveSpell(MageSpellsAPI.cloneActiveSpellObject(activeSpellObject));
-                spellEffect.setInitialLocation(spelllocation.clone());
-                spellEffect.setInitialVector(spelllocation.getDirection().clone().multiply(.01 * activeSpellObject.getSpellSpeed()));
-                MageSpellsAPI.shootSpell(spellEffect);
+                if(angleportion != 0) {
+                    Spiral spellEffect = new Spiral();
+                    spellEffect.setStartingAngle(angleportion * i);
+                    spellEffect.setActiveSpell(MageSpellsAPI.cloneActiveSpellObject(activeSpellObject));
+                    spellEffect.setInitialLocation(spelllocation.clone());
+                    spellEffect.setInitialVector(spelllocation.getDirection().clone().multiply(.01 * activeSpellObject.getSpellSpeed()));
+                    MageSpellsAPI.shootSpell(spellEffect);
+                }
             }
         }
     }
@@ -91,19 +93,21 @@ z(θ)=c3+rcos(θ)a3+rsin(θ)b3
     }
     public Location plotSpellPoint(){
         int radius = 1;
-        try {
+        /*try {
             if(activeSpellObject.getVariables().size()  >=2) {
                 String var = activeSpellObject.getVariables().get(1);
                 radius = Integer.parseInt(var);
             }
         } catch (NumberFormatException ex) {
 
-        }
+        }*/
         double increment = (1/PI)/(radius/2);
         double x = spelllocation.getX() + radius*Math.cos(angle)*normal.getX() + radius*Math.sin(angle)*normal2.getX();
         double y = spelllocation.getY() + radius*Math.cos(angle)*normal.getY() + radius*Math.sin(angle)*normal2.getY();
         double z = spelllocation.getZ() + radius*Math.cos(angle)*normal.getZ() + radius*Math.sin(angle)*normal2.getZ();
         angle += increment;//Increment angle
+        //System.out.println("X: " + x + " Y: " + y + " Z: " + z);
+        //System.out.println(new Location(spelllocation.getWorld(), x, y, z));
         return new Location(spelllocation.getWorld(),x,y,z);
     }
     public void auraEndingSequence(){

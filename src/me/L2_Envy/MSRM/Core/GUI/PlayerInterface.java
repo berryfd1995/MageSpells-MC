@@ -41,7 +41,7 @@ public class PlayerInterface {
         }
         inv.setItem(5, mageSpellsManager.main.utils.getItemStack("PAPER", ChatColor.BLUE +"Mage Stats"));
         inv.setItem(6, mageSpellsManager.main.utils.getItemStack("ENCHANTMENT_TABLE", ChatColor.BLUE +"Binding Menu"));
-        inv.setItem(7, mageSpellsManager.main.utils.getItemStack("BARRIER"/*"BREWING_STAND_ITEM"*/, ChatColor.GREEN + "COMING SOON"));
+        //inv.setItem(7, mageSpellsManager.main.utils.getItemStack("BARRIER"/*"BREWING_STAND_ITEM"*/, ChatColor.GREEN + "COMING SOON"));
         return inv;
     }
 }

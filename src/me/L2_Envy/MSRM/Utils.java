@@ -1,6 +1,7 @@
 package me.L2_Envy.MSRM;
 
 import me.L2_Envy.MSRM.Core.Objects.CustomItemObject;
+import me.L2_Envy.MSRM.PluginManager.Refrences.ItemNames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -18,7 +20,7 @@ import java.util.*;
  */
 public class Utils {
     private Main main;
-    public ArrayList<CustomItemObject> customitems;
+    public static ArrayList<CustomItemObject> customitems;
     public Utils(Main main){
         this.main = main;
         customitems = new ArrayList<>();
@@ -26,7 +28,7 @@ public class Utils {
     public void addCustomItemObject(CustomItemObject customItemObject){
         customitems.add(customItemObject);
     }
-    public String colorize(String s) {
+    public static String colorize(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
     public Player getOnlinePlayerFromName(String name){
@@ -67,11 +69,11 @@ public class Utils {
         }
         return null;
     }
-    public ItemStack getItemStack(String item){
+    public static ItemStack getItemStack(String item){
         //Check Custom Items first!!!
         ItemStack itemStack = null;
         for(CustomItemObject customItemObject : customitems) {
-            if(item.equalsIgnoreCase(customItemObject.getItemname().toLowerCase())) {
+            if(item.toLowerCase().equalsIgnoreCase(customItemObject.getItemname().toLowerCase())) {
                 itemStack = customItemObject.getCustomitem();
             }
         }
@@ -98,7 +100,7 @@ public class Utils {
         itemStack.setAmount(amount);
         return itemStack;
     }
-    public ItemStack getItemStack(String item, String displayname){
+    public static ItemStack getItemStack(String item, String displayname){
         ItemStack itemStack =  getItemStack(item);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(colorize(displayname));
@@ -106,7 +108,7 @@ public class Utils {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
-    public ItemStack getItemStack(String item, String displayname, String lore){
+    public static ItemStack getItemStack(String item, String displayname, String lore){
         ItemStack itemStack =  getItemStack(item);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(colorize(displayname));
@@ -122,11 +124,59 @@ public class Utils {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
-    public ItemStack getItemStack(String item, String displayname, String lore, int amount){
+    public static ItemStack getItemStack(String item, String displayname, String lore, int amount){
         ItemStack itemStack =  getItemStack(item,displayname,lore);
         itemStack.setAmount(amount);
         return itemStack;
     }
+/*    public ShapedRecipe loadRecipie2(String[] materials, ItemStack result) {
+        ShapedRecipe recipe = new ShapedRecipe(result);
+        try {
+            Field field = ShapedRecipe.class.getDeclaredField("ingredients");
+            field.setAccessible(true);
+            Map<Character, ItemStack> symMap = (Map<Character, ItemStack>) field.get(recipe);
+            char[] symbols = {'!', '@', '#', '$', '%', '^', '&', '*', '('};
+            for (String mat : materials) {
+                ItemStack item = getItemStack(mat);
+                MaterialData materialData = item.getData();
+                char symToUse = '!';
+
+                if (symMap.values().contains(item)) {
+                    // Use same char symbol if it is already there
+                    for(Character character : symMap.keySet()){
+                        if(symMap.get(character).equals(item)){
+                            symToUse = character;
+                            break;
+                        }
+                    }
+                } else {
+                    // If not find a new one to use
+                    for (char c : symbols) {
+                        if (!symMap.containsKey(c)) {
+                            if (item.getType() == Material.AIR) {
+                                symToUse = ' ';
+                            } else {
+                                symToUse = c;
+                            }
+                            break;
+                        }
+                    }
+                    symMap.put(symToUse, item);
+                }
+            }
+            field.set(recipe, symMap);
+
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        main.getServer().addRecipe(recipe);
+        return recipe;
+    }*/
+
+
+
     public ShapedRecipe loadRecipie(String[] materials, ItemStack result) {
         String row1 = "";
         String row2 = "";
@@ -178,11 +228,34 @@ public class Utils {
         // Set all ingredients
         for (ItemStack i : symMap.keySet()) {
             if (i.getType() != Material.AIR) {
-                recipe.setIngredient(symMap.get(i), i.getType());
+                recipe.setIngredient(symMap.get(i), i.getData());
             }
         }
         main.getServer().addRecipe(recipe);
         return recipe;
+    }
+    public boolean compareMatrixes(ItemStack[] matrix1, ItemStack[] matrix2){
+        for(int i = 0; i < 9; i++){
+            ItemStack itemStack1 = matrix1[i];
+            ItemStack itemStack2 = matrix2[i];
+            if(itemStack1.hasItemMeta() && itemStack2.hasItemMeta()){
+                if(!itemStack1.getItemMeta().equals(itemStack2.getItemMeta())){
+                    return false;
+                }
+            }else if(itemStack1.hasItemMeta() || itemStack2.hasItemMeta()){
+                return false;
+            }
+            if(itemStack1.getType() != itemStack2.getType()){
+                return false;
+            }
+            if(!itemStack1.getEnchantments().equals(itemStack2.getEnchantments())){
+                return false;
+            }
+            if(itemStack1.getDurability() != itemStack2.getDurability()){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

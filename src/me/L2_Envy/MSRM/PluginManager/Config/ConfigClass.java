@@ -133,7 +133,7 @@ public class ConfigClass {
             main.mageSpellsManager.spellLearningManager.setEnablelearning(enabledlearning);
             main.mageSpellsManager.spellLearningManager.setEnableSpellBookLearning(enableSpellBookLearning);
             main.mageSpellsManager.wandManager.setEnableWandLearning(wandlearning);
-            main.mageSpellsManager.wandBag.setEnabled(enablewandbag);
+            main.mageSpellsManager.setWandbagenabled(enablewandbag);
             boolean usercreatesteam = config.getBoolean("Settings.TeamSettings.UserCreatesTeam");
             main.mageSpellsManager.teamManager.setUsercreatesteam(usercreatesteam);
             //Mana
