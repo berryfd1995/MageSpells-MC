@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class MainMenu extends UserInterface {
-    private static int[] FORMAT = {0,1,2,3,4,5,6,7,8};
+    private static final int[] FORMAT = {0,1,2,3,4,5,6,7,8};
     public MainMenu(Player player){
         super(player);
     }
@@ -54,7 +54,7 @@ public class MainMenu extends UserInterface {
     public void chooseIndex(int slot) {
         switch (slot){
             case 2:
-                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new WandListMenu(getPlayer()));
+                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new WandListMenu(getPlayer(), 0));
                 break;
             case 3:
                 Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new SpellListMenu(getPlayer(), 0));
@@ -68,7 +68,7 @@ public class MainMenu extends UserInterface {
                 Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new PlayerMenu(getPlayer()));
                 break;
             case 6:
-                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new SpellBindingMenu(getPlayer()));
+                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new SpellBindingMenu(getPlayer(), 0));
                 break;
             default:
                 return;

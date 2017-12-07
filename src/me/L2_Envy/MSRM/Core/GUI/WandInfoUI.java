@@ -58,13 +58,6 @@ public class WandInfoUI {
         Inventory inventory = Bukkit.createInventory(null,54, ChatColor.BLUE + "Wand: " + wandObject.getDisplayname());
         if(mageSpellsManager.mageManager.isMage(player)){
             PlayerObject playerObject = mageSpellsManager.mageManager.getMage(player.getUniqueId());
-            //Setup inventory
-            /*
-                -compatible wands
-                -spell info like damage, armour piercing
-                -effects
-                -
-             */
             ItemStack[] contents = new ItemStack[54];
             for(int i = 0; i <6; i++){
                 for(int j = 0; j < 9; j++){

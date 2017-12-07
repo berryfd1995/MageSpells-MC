@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 
 public class SpellListMenu extends UserInterface{
-    private int[][] FORMAT = {{1,0,0,0,0,0,0,0,0},
+    private static int[][] FORMAT = {{1,0,0,0,0,0,0,0,0},
                             {0,0,0,0,0,0,0,0,0},
                             {0,0,0,0,0,0,0,0,2}};
     private int page;
@@ -86,8 +86,6 @@ public class SpellListMenu extends UserInterface{
                                         spellObject.getLore() + lore
                                                 + "/&4This spell is currently unavaliable!");
                             }
-                        }else{
-
                         }
                         break;
                     case 1:
@@ -105,6 +103,7 @@ public class SpellListMenu extends UserInterface{
 
     @Override
     public void chooseIndex(int slot) {
+        //we need to check for access to the spell
         switch(slot){
             case 0:
                 Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new SpellListMenu(getPlayer(),page--));
@@ -117,7 +116,7 @@ public class SpellListMenu extends UserInterface{
                 break;
         }
     }
-    public void getSpellsOnPage(){
+    private void getSpellsOnPage(){
         int startIndex = page * 25;
         int endIndex = startIndex + 24;
         if(endIndex >= Main.mageSpellsManager.spellManager.getSpellObjects().size()){
@@ -127,7 +126,7 @@ public class SpellListMenu extends UserInterface{
         ArrayList<SpellObject> spellCollection = new ArrayList<>(Main.mageSpellsManager.spellManager.getSpellObjects().subList(startIndex,endIndex));
         spellObjects = spellCollection.toArray(new SpellObject[spellCollection.size()]);
     }
-    public int getMaxPages(){
+    private int getMaxPages(){
         ArrayList<SpellObject> spellCollection = Main.mageSpellsManager.spellManager.getSpellObjects();
         if(spellCollection.size() > 0){
             return (spellCollection.size() / 25) + (spellCollection.size() % 25 > 0 ? 1 : 0);
