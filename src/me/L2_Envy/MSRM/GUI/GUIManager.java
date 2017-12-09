@@ -40,4 +40,12 @@ public class GUIManager {
             playerUserInterfaceHashMap.get(player).close();
         }
     }
+    public boolean hasProtectionModeEnabled(Player player){
+        if(inInterface(player)){
+            return playerUserInterfaceHashMap.get(player).hasProtection();
+        }
+        //Not in my interface, so who knows if he does. Not me
+        return false;
+    }
+
 }

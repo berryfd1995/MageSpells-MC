@@ -74,8 +74,8 @@ public class CommandMenu implements CommandExecutor{
                                                 }
                                                 break;
                                             case "menu":
-                                                pluginManager.main.mageSpellsManager.playerInterface.openPlayerInterface(player);
-                                                //Main.getMageSpellsManager().guiManager.openUserInterface(player, new MainMenu(player));
+                                                //pluginManager.main.mageSpellsManager.playerInterface.openPlayerInterface(player);
+                                                Main.getMageSpellsManager().guiManager.openUserInterface(player, new MainMenu(player));
                                                 break;
                                             case "stats":
                                                 pluginManager.main.mageSpellsManager.mageStats.openMageStats(player);

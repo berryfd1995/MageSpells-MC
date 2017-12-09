@@ -144,7 +144,28 @@ public class WandInfoMenu extends UserInterface {
 
     @Override
     public void chooseIndex(int slot) {
-
+        if(getPlayer().hasPermission("magespells.admin")) {
+            switch (slot) {
+                case 39:
+                    getPlayer().getInventory().addItem(wandObject.getWandItemStack());
+                    break;
+                case 40:
+                    Main.getMageSpellsManager().spellLearningManager.learnWand(Main.getMageSpellsManager().mageManager.getMage(getPlayer().getUniqueId()), wandObject);
+                    getPlayer().sendMessage(ChatColor.GREEN + "You have learned the wand: " + wandObject.getDisplayname());
+                    break;
+                case 41:
+                    for (WandObject wandObject : Main.getMageSpellsManager().wandManager.getWandObjects()) {
+                        Main.getMageSpellsManager().spellLearningManager.learnWand(Main.getMageSpellsManager().mageManager.getMage(getPlayer().getUniqueId()), wandObject);
+                    }
+                    getPlayer().sendMessage(ChatColor.GREEN + "You have learned all wands!");
+                    break;
+            }
+        }
+        switch (slot){
+            case 43:
+                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(),new WandListMenu(getPlayer(), 0));
+                break;
+        }
     }
     private boolean canSee(PlayerObject playerObject, Player player, WandObject wandObject){
         return (playerObject.getLevel() >= wandObject.getRequiredleveltouse() || !Main.getMageSpellsManager().levelingManager.isLevelingEnabled())

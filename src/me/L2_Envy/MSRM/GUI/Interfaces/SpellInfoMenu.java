@@ -1,5 +1,6 @@
 package me.L2_Envy.MSRM.GUI.Interfaces;
 
+import me.L2_Envy.MSRM.Core.MageSpellsManager;
 import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
@@ -247,7 +248,28 @@ public class SpellInfoMenu extends UserInterface {
 
     @Override
     public void chooseIndex(int slot) {
-
+        if(getPlayer().hasPermission("magespells.admin")) {
+            switch (slot) {
+                case 39:
+                    getPlayer().getInventory().addItem(spellObject.getSpellbook());
+                    break;
+                case 40:
+                    Main.getMageSpellsManager().spellLearningManager.learnSpell(Main.getMageSpellsManager().mageManager.getMage(getPlayer().getUniqueId()), spellObject);
+                    getPlayer().sendMessage(ChatColor.GREEN + "You have learned the spell: " + spellObject.getDisplayname());
+                    break;
+                case 41:
+                    for (SpellObject spellObject : Main.getMageSpellsManager().spellManager.getSpellObjects()) {
+                        Main.getMageSpellsManager().spellLearningManager.learnSpell(Main.getMageSpellsManager().mageManager.getMage(getPlayer().getUniqueId()), spellObject);
+                    }
+                    getPlayer().sendMessage(ChatColor.GREEN + "You have learned all spells!");
+                    break;
+            }
+        }
+        switch (slot){
+            case 43:
+                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(),new SpellListMenu(getPlayer(), 0));
+                break;
+        }
     }
     private boolean canSee(PlayerObject playerObject, Player player, SpellObject spellObject){
         return ((playerObject.getLevel() >= spellObject.getRequiredLevelToCast() || !Main.getMageSpellsManager().levelingManager.isLevelingEnabled())

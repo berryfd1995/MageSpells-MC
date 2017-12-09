@@ -31,7 +31,9 @@ public class GUIHandler implements Listener{
                 int slot = event.getSlot();
                 if(guiManager.inInterface(player)) {
                     guiManager.selectSlot(player, slot);
-                    event.setCancelled(true);
+                    if(guiManager.hasProtectionModeEnabled(player)) {
+                        event.setCancelled(true);
+                    }
                 }
         }
     }
@@ -47,7 +49,9 @@ public class GUIHandler implements Listener{
     public void otherOption(InventoryDragEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (guiManager.inInterface(player)) {
-            event.setCancelled(true);
+            if(guiManager.hasProtectionModeEnabled(player)) {
+                event.setCancelled(true);
+            }
         }
     }
     private void checkAction(InventoryClickEvent event, InventoryAction action) {

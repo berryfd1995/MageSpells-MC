@@ -9,6 +9,7 @@ import me.L2_Envy.MSRM.Core.Objects.PlayerObject;
 import me.L2_Envy.MSRM.Core.Objects.SpellObject;
 import me.L2_Envy.MSRM.Core.Objects.WandObject;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -28,6 +29,7 @@ public class CastingManager {
     public void link(MageSpellsManager mageSpellsManager){
         this.mageSpellsManager = mageSpellsManager;
     }
+
     public void castSpell(Player player, PlayerObject playerObject, SpellObject spellObject, WandObject wandObject){
         if(!playerObject.isOnCooldown()&&playerObject.isReadytocast() && !playerObject.isCharging() &&
                 (!mageSpellsManager.levelingManager.isLevelingEnabled() ||(playerObject.getLevel() >= spellObject.getRequiredLevelToCast() &&

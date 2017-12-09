@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import static me.L2_Envy.MSRM.GUI.Interfaces.SpellBindingMenu.Stage.SPELL_SELECTION;
+
 public class MainMenu extends UserInterface {
     private static final int[] FORMAT = {0,1,2,3,4,5,6,7,8};
     public MainMenu(Player player){
@@ -68,7 +70,7 @@ public class MainMenu extends UserInterface {
                 Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new PlayerMenu(getPlayer()));
                 break;
             case 6:
-                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new SpellBindingMenu(getPlayer(), 0));
+                Main.getMageSpellsManager().guiManager.openUserInterface(getPlayer(), new SpellBindingMenu(getPlayer(), SPELL_SELECTION));
                 break;
             default:
                 return;
